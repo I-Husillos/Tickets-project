@@ -46,6 +46,13 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::get('tickets', [AdminController::class, 'manageTickets'])->name('admin.manage.tickets');
     Route::get('tickets/{ticket}', [AdminController::class, 'viewTicket'])->name('admin.view.ticket');
 
+    //Rutas de administración de usuarios y administradores
+    Route::get('/admin/users', [AdminController::class, 'showAdminManageDashboard'])->name('admin.users.index');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+    Route::delete('/admin/admins/{id}', [AdminController::class, 'destroyAdmin'])->name('admin.admins.destroy');
+
+    
+
     Route::get('types', [TypesController::class, 'index'])->name('admin.types.index');
     Route::get('types/create', [TypesController::class, 'create'])->name('admin.types.create');
     Route::post('types', [TypesController::class, 'store'])->name('admin.types.store');

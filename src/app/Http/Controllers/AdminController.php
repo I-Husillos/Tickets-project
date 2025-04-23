@@ -203,7 +203,16 @@ class AdminController extends Controller
         return view('backoffice.admin.tickets.assignedticketsview', compact('assignedTickets'));
     }
 
+
+    public function showAdminManageDashboard()
+    {
+        $users = User::all();
+        $admins = Admin::all();
+
+        return view('backoffice.admin.managedashboard' , compact('users', 'admins'));
+    }
     
+
 
 
     public function logout()
