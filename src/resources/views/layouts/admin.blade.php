@@ -15,7 +15,7 @@
     <div class="sidebar">
         <h4>Admin Panel</h4>
         <hr class="bg-light mx-3">
-        <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+        <!-- <a href="{{ route('admin.dashboard') }}">Dashboard</a> -->
         <a href="{{ route('admin.manage.tickets') }}">Gestionar Tickets</a>
         <a href="{{ route('admin.types.index') }}">Tipos dTickets</a>
         <a href="{{ route('admin.users.index') }}">Usuarios y Admins</a>
