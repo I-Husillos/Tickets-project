@@ -1,8 +1,8 @@
-@extends('layouts.frontoffice')
+@extends('layouts.admin')
 
 @section('title', 'Crear Tipo de Ticket')
 
-@section('content')
+@section('admincontent')
 <div class="container mt-4">
     <h2>Crear Nuevo Tipo</h2>
 

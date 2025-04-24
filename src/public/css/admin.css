@@ -7,6 +7,7 @@ body {
 }
 
 .sidebar {
+    position: fixed;
     width: 250px;
     background-color: #001f83;
     color: white;
@@ -27,11 +28,12 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #495057;
+    background-color: #004f83;
 }
 
 .main-content {
+    margin-left: 270px;
+    padding: 2rem 2rem;
     flex: 1;
-    padding: 2rem;
     background-color: #f8f9fa;
 }

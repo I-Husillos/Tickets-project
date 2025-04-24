@@ -1,15 +1,15 @@
-@extends('layouts.frontoffice')
+@extends('layouts.admin')
 
 @section('title', 'Gestionar Tickets')
 
-@section('content')
+@section('admincontent')
 <div class="container mt-5">
     <h2 class="text-center">Lista de Tickets</h2>
     <div class="d-flex justify-content-end mt-4">
-        <form method="POST" action="{{ route('admin.logout') }}">
+        <!-- <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
-        </form>
+        </form> -->
     </div>
     <form method="GET" action="{{ route('admin.manage.tickets') }}" class="mt-4">
         <div class="form-row">
@@ -91,15 +91,10 @@
     <div class="d-flex justify-content-center mt-4">
         {{ $tickets->links('pagination::bootstrap-4') }}
     </div>
-    <a href="{{ route('admin.notifications') }}" class="btn btn-warning">
-        Notificaciones 
-        @if (Auth::user()->unreadNotifications->count() > 0)
-            <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
-        @endif
-    </a>
-    <div class="text-center mt-4">
+
+    <!-- <div class="text-center mt-4">
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Volver al menú de principal</a>
-    </div>
+    </div> -->
 </div>
 
 @endsection

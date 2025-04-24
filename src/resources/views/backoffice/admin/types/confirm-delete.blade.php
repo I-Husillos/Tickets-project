@@ -1,10 +1,10 @@
-@extends('layouts.frontoffice')
+@extends('layouts.admin')
 
 @section('title', 'Confirmar Eliminación')
 
-@section('content')
+@section('admincontent')
 <div class="container mt-5" >
-    <h2>⚠ Confirmar Eliminación</h2>
+    <h2>Confirmar Eliminación</h2>
 
     <p>¿Estás seguro de que deseas eliminar el tipo <strong>"{{ $type->name }}"</strong>?</p>
 

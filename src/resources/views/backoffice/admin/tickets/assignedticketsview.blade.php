@@ -1,9 +1,11 @@
-@extends('layouts.frontoffice')
+@extends('layouts.admin')
 
 @section('title', 'Tickets Asignados')
 
-@section('content')
-    <h1>Tickets Asignados</h1>
+@section('admincontent')
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Tickets Asignados</h1>
     
     <form method="GET" action="{{ route('admin.show.assigned.tickets') }}" class="mt-4">
         <div class="form-row">
@@ -69,7 +71,8 @@
         {{ $assignedTickets->links('pagination::bootstrap-4') }}
     </div>
 
-    <div class="text-center mt-4">
+    <!-- <div class="text-center mt-4">
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Volver al menú de principal</a>
-    </div>
+    </div> -->
+</div>
 @endsection

@@ -84,12 +84,6 @@ class AdminController extends Controller
     }
 
 
-    // public function manageUsers()
-    // {
-    //     $users = User::all();
-    //     return view('backoffice.admin.manageusers', compact('users'));
-    // }
-
 
     public function filterTickets(Request $request)
     {
@@ -203,15 +197,151 @@ class AdminController extends Controller
         return view('backoffice.admin.tickets.assignedticketsview', compact('assignedTickets'));
     }
 
-
-    public function showAdminManageDashboard()
+    public function showManageDashboard()
     {
-        $users = User::all();
-        $admins = Admin::all();
+        return view('backoffice.admin.management.managedashboard');
+    }
 
-        return view('backoffice.admin.managedashboard' , compact('users', 'admins'));
+    public function showListUsers()
+    {
+        $users = User::paginate(10, ['*'], 'users_pagination');
+
+        return view('backoffice.admin.management.listusers' , compact('users'));
     }
     
+    public function showListAdmins()
+    {
+        $admins = Admin::paginate(10, ['*'], 'admins_pagination');
+
+        return view('backoffice.admin.management.listadmins' , compact('admins'));
+    }
+
+    public function deleteUser(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
+    }
+
+    public function deleteAdmin(Admin $admin)
+    {
+        $admin->delete();
+
+        return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador eliminado correctamente.');
+    }
+    
+
+    public function showAddDashboard()
+    {
+        return view('backoffice.admin.management.adddashboard');
+    }
+
+
+
+    public function createUser()
+    {
+        return view('backoffice.admin.management.createFormUser');
+    }
+
+    public function createAdmin()
+    {
+        return view('backoffice.admin.management.createFormAdmin');
+    }
+
+    public function storeUser()
+    {
+        $request = request();
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'Usuario creado correctamente.');
+    }
+
+    public function storeAdmin()
+    {
+        $request = request();
+        $admin = new Admin();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = Hash::make($request->password);
+        $admin->superadmin = $request->superadmin ? true : false;
+        $admin->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'Administrador creado correctamente.');
+    }
+
+
+
+
+    public function confirmDeleteUser(User $user)
+    {
+        return view('backoffice.admin.management.confirm-delete-user', compact('user'));
+    }
+
+    public function confirmDeleteUserPost(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
+    }
+
+
+    public function confirmDeleteAdmin(Admin $admin)
+    {
+        return view('backoffice.admin.management.confirm-delete-admin', compact('admin'));
+    }
+
+    public function confirmDeleteAdminPost(Admin $admin)
+    {
+        $admin->delete();
+
+        return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador eliminado correctamente.');
+    }
+
+
+    public function editUser(User $user)
+    {
+        return view('backoffice.admin.management.editFormUser', compact('user'));
+    }
+
+
+
+    public function editAdmin(Admin $admin)
+    {
+        return view('backoffice.admin.management.editFormAdmin', compact('admin'));
+    }
+
+
+
+    public function updateUser(User $user)
+    {
+        $request = request();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario actualizado correctamente.');
+    }
+
+
+    public function updateAdmin(Admin $admin)
+    {
+        $request = request();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        if ($request->filled('password')) {
+            $admin->password = Hash::make($request->password);
+        }
+        $admin->save();
+
+        return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador actualizado correctamente.');
+    }
 
 
 

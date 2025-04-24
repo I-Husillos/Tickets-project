@@ -1,11 +1,8 @@
-@extends('layouts.frontoffice')
+@extends('layouts.admin')
 
 @section('title', 'Types de Tickets - Administrador')
 
-@section('content')
-
-
-@section('content')
+@section('admincontent')
 <div class="container mt-4">
     <h2>Listado de Tipos de Ticket</h2>
 
@@ -29,21 +26,16 @@
                     <td>{{ $type->name }}</td>
                     <td>{{ $type->description }}</td>
                     <td>
-                        <a href="{{ route('admin.types.edit', $type) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('admin.types.destroy', $type) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('admin.types.confirmDelete', $type->id) }}" class="btn btn-danger btn-sm">
-                                Eliminar
-                            </a>
-                        </form>
+                        <a href="{{ route('admin.types.confirmDelete', $type->id) }}" class="btn btn-danger btn-sm">
+                            Eliminar
+                        </a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <div class="text-center mt-4">
+    <!-- <div class="text-center mt-4">
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Volver al menú de principal</a>
-    </div>
+    </div> -->
 </div>
 @endsection

@@ -47,9 +47,29 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::get('tickets/{ticket}', [AdminController::class, 'viewTicket'])->name('admin.view.ticket');
 
     //Rutas de administración de usuarios y administradores
-    Route::get('/admin/users', [AdminController::class, 'showAdminManageDashboard'])->name('admin.users.index');
-    Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
-    Route::delete('/admin/admins/{id}', [AdminController::class, 'destroyAdmin'])->name('admin.admins.destroy');
+    Route::get('/admin/users', [AdminController::class, 'showManageDashboard'])->name('admin.users.index');
+    Route::get('/admin/list/users', [AdminController::class, 'showListUsers'])->name('admin.dashboard.list.users');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::get('/admin/list/admins', [AdminController::class, 'showListAdmins'])->name('admin.dashboard.list.admins');
+    Route::delete('/admin/admins/{admin}', [AdminController::class, 'deleteAdmin'])->name('admin.admins.delete');
+    Route::get('/admin/users/dashboard', [AdminController::class, 'showAddDashboard'])->name('admin.dashboard.add');
+    
+    Route::get('/admin/users/create', [AdminController::class, 'createUser'])->name('admin.users.create');
+    Route::post('/admin/users', [AdminController::class, 'storeUser'])->name('admin.users.store');
+    Route::get('/admin/admins/create', [AdminController::class, 'createAdmin'])->name('admin.admins.create');
+    Route::post('/admin/admins', [AdminController::class, 'storeAdmin'])->name('admin.admins.store');
+
+    Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::patch('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::get('/admin/admins/{admin}/edit', [AdminController::class, 'editAdmin'])->name('admin.admins.edit');
+    Route::patch('/admin/admins/{admin}', [AdminController::class, 'updateAdmin'])->name('admin.admins.update');
+    
+    Route::get('/admin/users/{user}/confirm-delete', [AdminController::class, 'confirmDeleteUser'])->name('admin.users.confirmDelete');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'confirmDeleteUserPost'])->name('admin.users.destroy');
+    Route::get('/admin/admins/{admin}/confirm-delete', [AdminController::class, 'confirmDeleteAdmin'])->name('admin.admins.confirmDelete');
+    Route::delete('/admin/admins/{admin}', [AdminController::class, 'confirmDeleteAdminPost'])->name('admin.admins.destroy');
+    
+
 
     
 
