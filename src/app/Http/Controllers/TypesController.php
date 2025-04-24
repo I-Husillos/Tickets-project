@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
+use App\Models\EventHistory;
 use Illuminate\Http\Request;use Illuminate\Validation\Rule;
 
 
@@ -30,6 +32,12 @@ class TypesController
         ]);
 
         Type::create($validated);
+
+        EventHistory::create([
+            'event_type' => 'Registro',
+            'description' => 'Nuevo tipo de ticket creado',
+            'user' => Auth::guard('admin')->user()->name,
+        ]);
 
         return redirect()->route('admin.types.index')->with('success', 'Tipo creado con éxito.');
     }

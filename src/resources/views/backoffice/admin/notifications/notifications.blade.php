@@ -1,8 +1,8 @@
-@extends('layouts.frontoffice')
+@extends('layouts.admin')
 
 @section('title', 'Notificaciones')
 
-@section('content')
+@section('admincontent')
 <div class="container mt-5">
     <h2 class="text-center">Notificaciones</h2>
 

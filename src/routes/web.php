@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\TypesController;
+use Illuminate\Routing\RouteAction;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'showOptions']) -> name('login');
@@ -99,6 +100,8 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::delete('comments/{comment}', [CommentController::class, 'deleteComment'])->name('admin.delete.comment');
     Route::get('tickets/{ticket}/comments', [CommentController::class, 'viewComments'])->name('admin.view.comments');
 
+
+    Route::get('/admin/history/events', [AdminController::class, 'indexEventHistory'])->name('admin.history.events');
     
     // Ruta de cierre de sesión
     Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');

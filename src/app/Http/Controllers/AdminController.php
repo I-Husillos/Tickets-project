@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Type;
+use App\Models\EventHistory;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Notifications\TicketStatusChanged;
+use Illuminate\Console\Scheduling\Event;
+use Illuminate\Container\Attributes\Auth as AttributesAuth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -143,6 +146,12 @@ class AdminController extends Controller
         $admin = Auth::guard('admin')->user();
         $ticket->user->notify(new TicketStatusChanged($ticket, $admin));
 
+        EventHistory::create([
+            'event_type' => 'Actualización',
+            'description' => 'El ticket ' . $ticket->id . ' ha sido actualizado',
+            'user' => $admin,
+        ]);
+
         if($admin->superadmin) {
             return redirect()->route('admin.manage.tickets')->with('success', 'Ticket actualizado correctamente.');
         }else{
@@ -220,6 +229,12 @@ class AdminController extends Controller
     {
         $user->delete();
 
+        EventHistory::create([
+            'event_type' => 'Eliminación',
+            'description' => 'El usuario ' . $user->name . ' ha sido eliminado',
+            Auth::guard('admin')->user()->name,
+        ]);
+
         return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
     }
 
@@ -257,8 +272,15 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        EventHistory::create([
+            'event_type' => 'Registro',
+            'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido registrado',
+            Auth::guard('admin')->user()->name,
+        ]);
+
         return redirect()->route('admin.users.index')->with('success', 'Usuario creado correctamente.');
     }
+
 
     public function storeAdmin()
     {
@@ -269,6 +291,12 @@ class AdminController extends Controller
         $admin->password = Hash::make($request->password);
         $admin->superadmin = $request->superadmin ? true : false;
         $admin->save();
+
+        EventHistory::create([
+            'event_type' => 'Registro',
+            'description' => 'El administrador con email ' . $admin->email . ' y nombre ' . $admin->name . ' ha sido registrado',
+            Auth::guard('admin')->user()->name,
+        ]);
 
         return redirect()->route('admin.users.index')->with('success', 'Administrador creado correctamente.');
     }
@@ -285,6 +313,12 @@ class AdminController extends Controller
     {
         $user->delete();
 
+        EventHistory::create([
+            'event_type' => 'Eliminación',
+            'description' => 'El usuario ' . $user->name . ' ha sido eliminado',
+            Auth::guard('admin')->user()->name,
+        ]);
+
         return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
     }
 
@@ -297,6 +331,12 @@ class AdminController extends Controller
     public function confirmDeleteAdminPost(Admin $admin)
     {
         $admin->delete();
+
+        EventHistory::create([
+            'event_type' => 'Eliminación',
+            'description' => 'El administrador ' . $admin->name . ' ha sido eliminado',
+            Auth::guard('admin')->user()->name,
+        ]);
 
         return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador eliminado correctamente.');
     }
@@ -326,6 +366,12 @@ class AdminController extends Controller
         }
         $user->save();
 
+        EventHistory::create([
+            'event_type' => 'Actualización',
+            'description' => 'El usuario ' . $user->name . ' ha sido actualizado',
+            Auth::guard('admin')->user()->name,
+        ]);
+
         return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario actualizado correctamente.');
     }
 
@@ -339,6 +385,12 @@ class AdminController extends Controller
             $admin->password = Hash::make($request->password);
         }
         $admin->save();
+
+        EventHistory::create([
+            'event_type' => 'Actualización',
+            'description' => 'El administrador ' . $admin->name . ' ha sido actualizado',
+            Auth::guard('admin')->user()->name,
+        ]);
 
         return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador actualizado correctamente.');
     }

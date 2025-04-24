@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Ticket;
+use App\Models\EventHistory;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
@@ -61,6 +62,13 @@ class UserController
         $validated['password'] = Hash::make($validated['password']);
 
         $user = User::create($validated);
+
+
+        EventHistory::create([
+            'event_type' => 'Registro',
+            'description' => 'Nuevo usuario registrado',
+            'user' => $validated['name'],
+        ]);
 
         Auth::guard('user')->login($user);
 

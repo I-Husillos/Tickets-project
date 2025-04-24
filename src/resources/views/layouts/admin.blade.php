@@ -40,6 +40,12 @@
                 <a href="{{ route('admin.manage.tickets') }}">Gestionar Tickets</a>
             @endif
         <a href="{{ route('admin.show.assigned.tickets') }}">Tickets Asignados</a>
+        <a href="{{ route('admin.notifications') }}" class="d-block text-white">
+            Notificaciones 
+            @if (Auth::user()->unreadNotifications->count() > 0)
+                <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+            @endif
+        </a>
 
         <form method="POST" action="{{ route('admin.logout') }}" class="mt-4 px-3">
             @csrf
