@@ -7,7 +7,7 @@
     <h1 class="text-center mb-4">Historial de Eventos</h1>
 
     <!-- Formulario de filtrado de eventos -->
-    <form method="GET" action="{{ route('admin.history.index') }}">
+    <form method="GET" action="{{ route('admin.history.events') }}">
         <div class="row">
             <div class="col-md-4">
                 <label for="event_type">Tipo de Evento</label>
@@ -38,22 +38,24 @@
                     <th>Fecha</th>
                 </tr>
             </thead>
-            <tbody>
+            @if(isset($events) && $events->count())
                 @foreach($events as $event)
                     <tr>
                         <td>{{ $event->event_type }}</td>
                         <td>{{ $event->description }}</td>
-                        <td>{{ $event->user }}</td>
+                        <td>{{ $event->user->id }}</td>
                         <td>{{ $event->created_at }}</td>
                     </tr>
                 @endforeach
+            @else
+                <tr>
+                    <td colspan="4">No hay eventos disponibles.</td>
+                </tr>
+            @endif
             </tbody>
         </table>
     </div>
 
-    <!-- Paginación -->
-    <div class="d-flex justify-content-center">
-        {{ $events->links() }}
-    </div>
+
 </div>
 @endsection

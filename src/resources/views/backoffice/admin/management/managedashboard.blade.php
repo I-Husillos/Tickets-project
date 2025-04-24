@@ -57,34 +57,12 @@
                 <div class="card-body">
                     <h5 class="card-title">Historial de Cambios en el Sistema</h5>
                     <p class="card-text">Accede al historial de cambios realizados en el sistema.</p>
-                    <a href="{{ route('admin.history.system') }}" class="btn btn-light">Ver Historial de Cambios</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Enlace a otras secciones -->
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-secondary">
-                <div class="card-body">
-                    <h5 class="card-title">Otras Secciones</h5>
-                    <p class="card-text">Accede a secciones adicionales del sistema.</p>
-                    <a href="{{ route('admin.settings') }}" class="btn btn-light">Configuraciones</a>
+                    <a href="{{ route('admin.history.events') }}" class="btn btn-light">Ver Historial de Cambios</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Acciones rápidas -->
-    <div class="mt-5">
-        <h4>Acciones rápidas</h4>
-        <a href="{{ route('admin.dashboard.list.users') }}" class="btn btn-outline-primary m-2">Ver Usuarios</a>
-        <a href="{{ route('admin.dashboard.list.admins') }}" class="btn btn-outline-primary m-2">Ver Administradores</a>
-    </div>
 
-    <!-- Crear nuevo usuario y admin -->
-    <div class="mt-2">
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary m-2">Crear Usuario</a>
-        <a href="{{ route('admin.admins.create') }}" class="btn btn-success m-2">Crear Admin</a>
-    </div>
 </div>
 @endsection

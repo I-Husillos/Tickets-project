@@ -21,7 +21,7 @@
         <hr class="bg-light mx-3">
         <a href="{{ route('admin.users.index') }}" 
         class="d-block text-white {{ str_starts_with($routeName, 'admin.dashboard.list.') ? 'fw-bold text-decoration-underline' : '' }}">
-            Usuarios y Admins
+            Panel de Control
         </a>
             @if (Auth::guard('admin')->user()->superadmin)
                 @if (str_starts_with($routeName, 'admin.dashboard.list.'))

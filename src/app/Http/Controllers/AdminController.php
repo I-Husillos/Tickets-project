@@ -232,7 +232,7 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Eliminación',
             'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido eliminado',
-            Auth::guard('admin')->user()->name,
+            'user' => Auth::guard('admin')->user()->name,
         ]);
 
         return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
@@ -275,7 +275,7 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Registro',
             'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido registrado',
-            Auth::guard('admin')->user()->name,
+            'user' => Auth::guard('admin')->user()->name,
         ]);
 
         return redirect()->route('admin.users.index')->with('success', 'Usuario creado correctamente.');
@@ -295,7 +295,7 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Registro',
             'description' => 'El administrador con email ' . $admin->email . ' y nombre ' . $admin->name . ' ha sido registrado',
-            Auth::guard('admin')->user()->name,
+            'user' => Auth::guard('admin')->user()->name,
         ]);
 
         return redirect()->route('admin.users.index')->with('success', 'Administrador creado correctamente.');
@@ -316,7 +316,7 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Eliminación',
             'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido eliminado',
-            Auth::guard('admin')->user()->name,
+            'user' => Auth::guard('admin')->user()->name,
         ]);
 
         return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
@@ -335,7 +335,7 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Eliminación',
             'description' => 'El administrador ' . $admin->name . ' ha sido eliminado',
-            Auth::guard('admin')->user()->name,
+            'user' => Auth::guard('admin')->user()->name,
         ]);
 
         return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador eliminado correctamente.');
@@ -369,7 +369,7 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Actualización',
             'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido actualizado',
-            Auth::guard('admin')->user()->name,
+            'user' => Auth::guard('admin')->user()->name,
         ]);
 
         return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario actualizado correctamente.');
@@ -389,10 +389,17 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Actualización',
             'description' => 'El administrador con email ' . $admin->email . ' y nombre ' . $admin->name . ' ha sido actualizado',
-            Auth::guard('admin')->user()->name,
+            'user' => Auth::guard('admin')->user()->name,
         ]);
 
         return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador actualizado correctamente.');
+    }
+
+
+    public function indexEventHistory()
+    {
+        $eventHistory = EventHistory::query()->paginate(10);
+        return view('backoffice.admin.management.eventHistory.index', compact('eventHistory'));
     }
 
 

@@ -7,6 +7,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Comment;
+use App\Models\EventHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,13 @@ class CommentController
             'author_id' => Auth::id(),
             'author_type' => Auth::user() instanceof Admin ? Admin::class : User::class,
             'message' => $validated['message'],
+        ]);
+
+
+        EventHistory::create([
+            'event_type' => 'Comentario',
+            'description' => 'Se ha agregado un nuevo comentario en tu ticket.',
+            'user' => $author->name,
         ]);
 
         if ($author instanceof Admin && $ticket->user) {

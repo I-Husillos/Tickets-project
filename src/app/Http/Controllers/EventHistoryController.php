@@ -8,28 +8,13 @@ use Illuminate\Container\Attributes\Auth;
 
 class EventHistoryController
 {
-    public function indexEventHistory($request)
+    public function indexEventHistory(Request $request)
     {
         $eventHistory = EventHistory::query();
+        
+        $events = $eventHistory->paginate(10);
 
-        if($request->filled('user'))
-        {
-            $eventHistory->where('user_id', $request->user);
-        }
-
-        if($request->filled('event_type'))
-        {
-            $eventHistory->where('event_type', $request->event_type);
-        }
-
-        if($request->filled('date'))
-        {
-            $eventHistory->whereDate('created_at', $request->date);
-        }
-
-        $eventHistory = $eventHistory->paginate(10);
-
-        return view('eventHistory.index', compact('eventHistory'));
+        return view('backoffice.admin.management.eventHistory.index', compact('events'));
     }
 
 

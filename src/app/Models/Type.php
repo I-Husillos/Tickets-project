@@ -21,3 +21,4 @@ class Type extends Model
         return $this->hasMany(Ticket::class);
     }
 }
+
