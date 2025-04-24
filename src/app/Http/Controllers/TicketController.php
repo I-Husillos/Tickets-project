@@ -123,6 +123,7 @@ class TicketController
         return redirect()->route('admin.manage.tickets')->with('success', 'Ticket cerrado.');
     }
 
+    
     public function reopenTicket(Ticket $ticketId)
     {
         $ticketId->update(['status' => 'in_progress']);

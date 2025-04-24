@@ -148,7 +148,7 @@ class AdminController extends Controller
 
         EventHistory::create([
             'event_type' => 'Actualización',
-            'description' => 'El ticket ' . $ticket->id . ' ha sido actualizado',
+            'description' => 'El ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' ha sido actualizado',
             'user' => $admin,
         ]);
 
@@ -231,7 +231,7 @@ class AdminController extends Controller
 
         EventHistory::create([
             'event_type' => 'Eliminación',
-            'description' => 'El usuario ' . $user->name . ' ha sido eliminado',
+            'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido eliminado',
             Auth::guard('admin')->user()->name,
         ]);
 
@@ -315,7 +315,7 @@ class AdminController extends Controller
 
         EventHistory::create([
             'event_type' => 'Eliminación',
-            'description' => 'El usuario ' . $user->name . ' ha sido eliminado',
+            'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido eliminado',
             Auth::guard('admin')->user()->name,
         ]);
 
@@ -368,7 +368,7 @@ class AdminController extends Controller
 
         EventHistory::create([
             'event_type' => 'Actualización',
-            'description' => 'El usuario ' . $user->name . ' ha sido actualizado',
+            'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido actualizado',
             Auth::guard('admin')->user()->name,
         ]);
 
@@ -388,7 +388,7 @@ class AdminController extends Controller
 
         EventHistory::create([
             'event_type' => 'Actualización',
-            'description' => 'El administrador ' . $admin->name . ' ha sido actualizado',
+            'description' => 'El administrador con email ' . $admin->email . ' y nombre ' . $admin->name . ' ha sido actualizado',
             Auth::guard('admin')->user()->name,
         ]);
 
