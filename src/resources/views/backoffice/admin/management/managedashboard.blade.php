@@ -1,68 +1,152 @@
 @extends('layouts.admin')
 
-@section('title', 'Panel de Control')
+@section('title', 'Panel de Administración')
 
 @section('admincontent')
 <div class="container mt-5">
-
-    <!-- Mensaje de éxito -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <h1 class="text-center mb-4">Panel de Control</h1>
 
-    <!-- Resumen de actividades -->
-    <div class="row">
-        <!-- Historial de Tickets -->
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-info">
+    <p class="text-center">Bienvenido, {{ Auth::guard('admin')->user()->name }}</p>
+
+    <!-- Accesos directos -->
+    <div class="row text-center mb-4">
+        @if ($isSuperAdmin)
+            <!-- Acceso solo para Superadmin -->
+            <div class="col-md-3 mb-3">
+                <div class="card text-white bg-dark shadow rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Crear Usuario</h5>
+                        <a href="{{ route('admin.users.create') }}" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card text-white bg-primary shadow rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Crear Admin</h5>
+                        <a href="{{ route('admin.admins.create') }}" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <!-- Acceso para Admins Regulares -->
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-info shadow rounded-4">
                 <div class="card-body">
-                    <h5 class="card-title">Historial de Tickets</h5>
-                    <p class="card-text">Accede al historial de tickets creados por los usuarios.</p>
-                    <a href="{{ route('admin.manage.tickets') }}" class="btn btn-light">Ver Tickets</a>
+                    <h5 class="card-title">Ver Mis Tickets</h5>
+                    <a href="{{ route('admin.show.assigned.tickets') }}" class="stretched-link"></a>
                 </div>
             </div>
         </div>
-
-        <!-- Historial de Usuarios -->
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-success">
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-secondary shadow rounded-4">
                 <div class="card-body">
-                    <h5 class="card-title">Historial de Usuarios</h5>
-                    <p class="card-text">Consulta el historial de usuarios registrados.</p>
-                    <a href="{{ route('admin.dashboard.list.users') }}" class="btn btn-light">Ver Usuarios</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Historial de Administradores -->
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-warning">
-                <div class="card-body">
-                    <h5 class="card-title">Historial de Administradores</h5>
-                    <p class="card-text">Consulta el historial de administradores registrados.</p>
-                    <a href="{{ route('admin.dashboard.list.admins') }}" class="btn btn-light">Ver Administradores</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Historial de Cambios en el Sistema -->
-    <div class="row">
-        <div class="col-md-4 mb-3">
-            <div class="card text-white bg-primary">
-                <div class="card-body">
-                    <h5 class="card-title">Historial de Cambios en el Sistema</h5>
-                    <p class="card-text">Accede al historial de cambios realizados en el sistema.</p>
-                    <a href="{{ route('admin.history.events') }}" class="btn btn-light">Ver Historial de Cambios</a>
+                    <h5 class="card-title">Historial de Eventos</h5>
+                    <a href="{{ route('admin.history.events') }}" class="stretched-link"></a>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="row text-center mb-4">
+        <div class="col-md-3 mb-4">
+            <div class="card bg-light shadow rounded-4 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Usuarios Registrados</h5>
+                    <h2 class="card-text text-shadow">{{ $totalUsers }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-light shadow rounded-4 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Administradores</h5>
+                    <h2 class="card-text text-primary">{{ $totalAdmins }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-light shadow rounded-4 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Tickets Totales</h5>
+                    <h2 class="card-text text-warning">{{ $totalTickets }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-light shadow rounded-4 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Tickets Pendientes</h5>
+                    <h2 class="card-text text-danger">{{ $pendingTickets }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-light shadow rounded-4 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Tickets Resueltos</h5>
+                    <h2 class="card-text text-success">{{ $resolvedTickets }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 
+
+    <!-- Últimos eventos (Reducir tamaño) -->
+    <div class="card shadow mb-4 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h5 class="mb-0">Últimos Eventos</h5>
+        </div>
+        <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+            @if($recentEvents->count())
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="sticky-top bg-primary text-white">
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($recentEvents as $event)
+                                <tr>
+                                    <td>{{ $event->event_type }}</td>
+                                    <td>{{ $event->description }}</td>
+                                    <td>{{ $event->user }}</td>
+                                    <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-muted">No hay eventos recientes.</p>
+            @endif
+        </div>
+    </div>
+
+
+    <!-- Notificaciones Recientes -->
+    <div class="card shadow mb-4 rounded-4">
+        <div class="card-header bg-info text-white rounded-top-4">
+            <h5 class="mb-0">Notificaciones Recientes</h5>
+        </div>
+        <div class="card-body">
+            @if($recentNotifications->count())
+                <ul class="list-group">
+                    @foreach($recentNotifications as $notification)
+                        <li class="list-group-item">
+                            {{ $notification->data['message'] }} <small class="text-muted">({{ $notification->created_at->diffForHumans() }})</small>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p class="text-muted">No hay notificaciones recientes.</p>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection

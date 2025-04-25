@@ -17,7 +17,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Acciones</th>
+                <th style="text-align: center;">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -26,16 +26,18 @@
                     <td>{{ $type->name }}</td>
                     <td>{{ $type->description }}</td>
                     <td>
-                        <a href="{{ route('admin.types.confirmDelete', $type->id) }}" class="btn btn-danger btn-sm">
-                            Eliminar
-                        </a>
+                        <div class="text-center">
+                            <a href="{{ route('admin.types.confirmDelete', $type->id) }}" class="btn btn-danger btn-sm">
+                                Eliminar
+                            </a>
+                            <a href="{{ route('admin.types.edit', $type->id) }}" class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+                        </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <!-- <div class="text-center mt-4">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Volver al menú de principal</a>
-    </div> -->
 </div>
 @endsection

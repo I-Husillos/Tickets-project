@@ -10,6 +10,7 @@ use App\Models\EventHistory;
 use App\Notifications\TicketClosed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Notifications\TicketCreatedNotification;
 use Illuminate\Console\Scheduling\Event;
@@ -99,43 +100,95 @@ class TicketController
         EventHistory::create([
             'event_type' => 'Actualización',
             'description' => 'Estado del ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' actualizado',
-            'user' => Auth::guard('user')->user()->name,
+            'user' => Auth::guard('user')->user(),
         ]);
 
         return redirect()->route('user.tickets.index')->with('success', 'Estado del ticket actualizado.');
     }
 
 
+
+    
     public function closeTicket(Request $request, Ticket $ticketId)
     {
-        $ticketId->update(['status' => 'closed']);
+        if ($ticketId->status !== 'closed') {
+            $ticketId->update(['status' => 'closed']);
 
-        $admin = Auth::guard('admin')->user();
+            // Pasamos el objeto Admin completo al Job
+            SendNotifications::dispatch($ticketId->id, 'closed', Auth::guard('admin')->user());
 
-        EventHistory::create([
-            'event_type' => 'Actualización',
-            'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
-            'user' => $admin->name,
-        ]);
-        
-        SendNotifications::dispatch($ticketId->id, 'closed', $admin->id);
+            EventHistory::create([
+                'event_type' => 'Actualización',
+                'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
+                'user' => Auth::guard('admin')->user()->name,
+            ]);
+        }
 
         return redirect()->route('admin.manage.tickets')->with('success', 'Ticket cerrado.');
     }
 
-    
+
+
     public function reopenTicket(Ticket $ticketId)
     {
-        $ticketId->update(['status' => 'in_progress']);
+        if ($ticketId->status === 'closed') 
+        {
+            $ticketId->update(['status' => 'in_progress']);
 
-        EventHistory::create([
-            'event_type' => 'Actualización',
-            'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' reabierto',
-            'user' => Auth::guard('user')->user()->name,
-        ]);
+            SendNotifications::dispatch($ticketId->id, 'reopened', Auth::guard('user')->user());
+
+            EventHistory::create([
+                'event_type' => 'Actualización',
+                'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' reabierto',
+                'user' => Auth::guard('user')->user()->name,
+            ]);
+        }
+        
 
         return redirect()->route('admin.manage.tickets')->with('success', 'Ticket reabierto.');
     }
 
+
 }
 
+
+
+
+
+
+
+    // public function closeTicket(Request $request, Ticket $ticketId)
+    // {
+    //     $ticketId->update(['status' => 'closed']);
+
+    //     $admin = Auth::guard('admin')->user();
+
+    //     EventHistory::create([
+    //         'event_type' => 'Actualización',
+    //         'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
+    //         'user' => $admin->name,
+    //     ]);
+        
+    //     SendNotifications::dispatch($ticketId->id, 'closed', $admin->id);
+
+    //     return redirect()->route('admin.manage.tickets')->with('success', 'Ticket cerrado.');
+    // }
+
+
+
+    
+    
+    // public function reopenTicket(Ticket $ticketId)
+    // {
+    //     $ticketId->update(['status' => 'in_progress']);
+
+    //     EventHistory::create([
+    //         'event_type' => 'Actualización',
+    //         'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' reabierto',
+    //         'user' => Auth::guard('user')->user()->name,
+    //     ]);
+
+    //     SendNotifications::dispatch($ticketId->id, 'reopened', Auth::guard('user')->user());
+
+    //     return redirect()->route('admin.manage.tickets')->with('success', 'Ticket reabierto.');
+    // }

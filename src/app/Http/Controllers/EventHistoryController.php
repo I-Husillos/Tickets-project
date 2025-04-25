@@ -41,7 +41,7 @@ class EventHistoryController
         EventHistory::create([
             'event_type' => $request->event_type,
             'description' => $request->description,
-            'user_id' => Auth::user()->name,
+            'user' => $request->user,
         ]);
     }
 }

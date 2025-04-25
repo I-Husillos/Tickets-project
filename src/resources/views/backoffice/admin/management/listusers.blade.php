@@ -50,10 +50,8 @@
         {{ $users->links('pagination::bootstrap-4') }}
     </div>
 
-    
-<!-- 
     <div class="mt-4">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Volver al Panel</a>
-    </div> -->
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Volver a la lista de Usuarios</a>
+    </div>
 </div>
 @endsection

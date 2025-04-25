@@ -10,6 +10,9 @@ use App\Notifications\TicketCreatedNotification;
 use App\Notifications\TicketCommented;
 use App\Notifications\TicketStatusChanged;
 use App\Notifications\TicketClosed;
+use App\Notifications\TicketReopened;
+use Illuminate\Support\Facades\Log;
+
 
 
 class SendNotifications implements ShouldQueue
@@ -29,6 +32,7 @@ class SendNotifications implements ShouldQueue
     {
         $this->ticket = $ticketId;
         $this->type = $type;
+        $this->extraData = $extraData;
 
         if ($type === 'commented' || $type === 'user_commented') {
             $this->comment = $extraData;
@@ -44,10 +48,14 @@ class SendNotifications implements ShouldQueue
      */
     public function handle(): void
     {
+        Log::info("ID del ticket recibido: {$this->ticket}");
         $ticket = $this->ticket instanceof Ticket ? $this->ticket->load(['user', 'admin']): Ticket::with(['user', 'admin'])->find($this->ticket);
 
+
+        $admin = is_int($this->actor) ? Admin::find($this->actor) : $this->actor;
+
         if (!$ticket) {
-            \Log::warning("Ticket no encontrado: {$this->ticket}");
+            Log::warning("Ticket no encontrado: {$this->ticket}");
             return;
         }
 
@@ -83,22 +91,32 @@ class SendNotifications implements ShouldQueue
                 }
                 break;
 
-            case 'closed':
-                // Verificar si el usuario está relacionado con el ticket antes de notificar
-                if ($ticket->user) {
-                    // Verificar si $this->actor no es null
-                    if ($this->actor) {
-                        $ticket->user->notify(new TicketClosed($ticket, $this->actor));
-                    } else {
-                        // Si no hay actor, puedes decidir cómo manejarlo.
-                        // Puedes loguear un error, asignar un valor por defecto o notificar de otra manera.
-                        Log::error('No actor provided for TicketClosed notification');
+                case 'closed':
+                    if ($ticket->user) {
+                        // Obtener el administrador asociado al ticket
+                        $admin = $ticket->admin; // Asumiendo que el ticket tiene una relación con un admin
+                
+                        if ($admin) {
+                            // Si el ticket tiene un admin asociado, enviamos la notificación
+                            $ticket->user->notify(new TicketClosed($ticket, $admin));
+                        } else {
+                            // Si no hay administrador, logueamos un error o manejamos el caso
+                            Log::warning("No admin found for ticket: {$ticket->id}");
+                            // Aquí puedes decidir si notificar a los administradores generales o tomar otra acción
+                        }
                     }
+                    break;
+                
+        
+            case 'reopened':
+                // Agregar notificación para el ticket reabierto
+                if ($ticket->user) {
+                    $ticket->user->notify(new TicketReopened($ticket, $admin));
                 }
                 break;
-
+        
             default:
-                \Log::warning("Tipo de notificación desconocido: {$this->type}");
+                Log::warning("Tipo de notificación desconocido: {$this->type}");
                 break;
         }
     }

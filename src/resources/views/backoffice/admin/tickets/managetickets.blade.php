@@ -67,23 +67,22 @@
                 <td>{{ $ticket->comments->count() }}</td>
                 <td>{{ $ticket->admin ? $ticket->admin->name : 'Sin Asignar' }}</td>
                 <td>
-                    <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm">Ver Acciones</a>
+                    <div class="text-center">
+                        <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm me-3">Ver Acciones</a>
+                        @if ($ticket->status === 'closed')
+                            <form method="POST" action="{{ route('admin.reopen.ticket', $ticket->id) }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-success btn-sm">Reabrir ticket</button>
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('admin.close.ticket', $ticket->id) }}" class="d-inline">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-danger btn-sm">Cerrar</button>
+                            </form>
+                        @endif
+                    </div>
                 </td>
-                @if ($ticket->status === 'closed')
-                    <td>
-                        <form method="POST" action="{{ route('admin.reopen.ticket', $ticket->id) }}">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm">Reabrir ticket</button>
-                        </form>
-                    </td>
-                @else
-                    <td>
-                        <form method="POST" action="{{ route('admin.close.ticket', $ticket->id) }}">
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">Cerrar</button>
-                        </form>
-                    </td>
-                @endif
             </tr>
             @endforeach
         </tbody>
@@ -92,9 +91,6 @@
         {{ $tickets->links('pagination::bootstrap-4') }}
     </div>
 
-    <!-- <div class="text-center mt-4">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Volver al menú de principal</a>
-    </div> -->
 </div>
 
 @endsection

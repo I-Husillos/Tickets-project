@@ -45,7 +45,7 @@
                 <th>Prioridad</th>
                 <th>Tipo</th>
                 <th>Comentarios</th>
-                <th>Acciones</th>
+                <th style="text-align: center;">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -71,8 +71,5 @@
         {{ $assignedTickets->links('pagination::bootstrap-4') }}
     </div>
 
-    <!-- <div class="text-center mt-4">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Volver al menú de principal</a>
-    </div> -->
 </div>
 @endsection

@@ -43,8 +43,9 @@
                     <tr>
                         <td>{{ $event->event_type }}</td>
                         <td>{{ $event->description }}</td>
-                        <td>{{ $event->user->id }}</td>
+                        <td>{{ $event->user}}</td>
                         <td>{{ $event->created_at }}</td>
+
                     </tr>
                 @endforeach
             @else
@@ -54,6 +55,9 @@
             @endif
             </tbody>
         </table>
+    </div>
+    <div class="mt-4">
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Volver a la lista de Usuarios</a>
     </div>
 
 

@@ -20,7 +20,7 @@ class TicketStatusChanged extends Notification
     public function __construct($ticket, $admin)
     {
         $this->ticket = $ticket;
-        $this->admin = $admin;
+        $this->admin = $admin->first();
     }
 
     /**
@@ -59,7 +59,7 @@ class TicketStatusChanged extends Notification
             'message' => 'El estado de tu ticket ha sido actualizado por el admin ' . $this->admin->name,
             'priority' => $this->ticket->priority,
             'status' => $this->ticket->status,
-            'updated_by' => $this->admin->name,
+            'updated_by' => $this->admin,
         ];
     }
 }

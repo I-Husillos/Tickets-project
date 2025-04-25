@@ -30,7 +30,8 @@ class CommentController
 
         EventHistory::create([
             'event_type' => 'Comentario',
-            'description' => 'Se ha agregado un nuevo comentario en tu ticket.',
+            'description' => 'Se ha agregado un nuevo comentario al ticket con id ' . $ticket->id . ' por el usuario con email '
+            . Auth::user()->email . ' y nombre ' . Auth::user()->name,
             'user' => $author->name,
         ]);
 
@@ -38,7 +39,10 @@ class CommentController
             SendNotifications::dispatch($ticket->id, 'commented', $comment);
         } elseif ($author instanceof User && $ticket->admin) {
             SendNotifications::dispatch($ticket->id, 'user_commented', $comment);
-        }        
+        } elseif ($author instanceof User) {
+            SendNotifications::dispatch($ticket->id, 'user_commented', $comment);
+        }
+        
 
         return redirect()->back()->with('success', 'Comentario agregado correctamente.');
     }

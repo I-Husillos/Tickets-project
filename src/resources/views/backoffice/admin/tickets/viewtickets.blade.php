@@ -128,13 +128,13 @@
                 </div>
 
 
-        <!-- <div class="text-center mt-5">
+        <div class="text-center mt-5">
             @if(Auth::guard('admin')->user()->superadmin)
                 <a href="{{ route('admin.manage.tickets') }}" class="btn btn-secondary">Volver al menú de principal</a>
             @else
                 <a href="{{ route('admin.show.assigned.tickets') }}" class="btn btn-secondary">Volver al menú de principal</a>
             @endif
-        </div> -->
+        </div>
     </div>
 </div>
 @endsection

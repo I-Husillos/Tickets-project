@@ -33,8 +33,5 @@
         </div>
     @endif
 
-    <div class="text-center mt-4">
-        <a href="{{ route('admin.manage.tickets') }}" class="btn btn-secondary">Volver a la gestión de tickets</a>
-    </div>
 </div>
 @endsection

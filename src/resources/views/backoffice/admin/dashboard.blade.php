@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard - Administrador')
 
-@section('content')
+@section('admincontent')
 <div class="container mt-5">
     <h1 class="text-center">Panel de Administrador</h1>
     <p class="text-center">Bienvenido, {{ Auth::guard('admin')->user()->name }}</p>

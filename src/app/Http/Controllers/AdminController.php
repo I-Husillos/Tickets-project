@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendNotifications;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Type;
@@ -25,18 +26,18 @@ class AdminController extends Controller
         return view('frontoffice.auth.adminform');
     }
 
-    public function dashboard()
-    {
-        $admin = Auth::guard('admin')->user();
+    // public function dashboard()
+    // {
+    //     $admin = Auth::guard('admin')->user();
 
-        $isSuperAdmin = $admin->superadmin;
+    //     $isSuperAdmin = $admin->superadmin;
 
-        $notifications = $admin->notifications;
+    //     $notifications = $admin->notifications;
         
-        $tickets = Ticket::all();
+    //     $tickets = Ticket::all();
         
-        return view('backoffice.admin.dashboard', compact('tickets', 'notifications', 'isSuperAdmin'));
-    }
+    //     return view('backoffice.admin.dashboard', compact('tickets', 'notifications', 'isSuperAdmin'));
+    // }
 
 
     public function login(Request $request)
@@ -50,7 +51,7 @@ class AdminController extends Controller
         $credentials = $request->only('email','password');;
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin.dashboard')->with('success', 'Inicio de sesión exitoso.');
+            return redirect()->route('admin.users.index')->with('success', 'Inicio de sesión exitoso.');
         }
 
         return back()->with('error', 'Correo o contraseña incorrectos.');
@@ -144,7 +145,8 @@ class AdminController extends Controller
         $ticket->save();
 
         $admin = Auth::guard('admin')->user();
-        $ticket->user->notify(new TicketStatusChanged($ticket, $admin));
+
+        SendNotifications::dispatch($ticket->id, 'status_changed', $admin);
 
         EventHistory::create([
             'event_type' => 'Actualización',
@@ -208,8 +210,29 @@ class AdminController extends Controller
 
     public function showManageDashboard()
     {
-        return view('backoffice.admin.management.managedashboard');
+        
+        $totalUsers = \App\Models\User::count();
+        $totalAdmins = \App\Models\Admin::count();
+        $totalTickets = \App\Models\Ticket::count();
+        $pendingTickets = \App\Models\Ticket::where('status', 'pendiente')->count();
+        $resolvedTickets = \App\Models\Ticket::where('status', 'resuelto')->count();
+
+        $recentEvents = \App\Models\EventHistory::latest()->take(5)->get();
+
+        $recentNotifications = Auth::guard('admin')->user()->unreadNotifications->take(5);
+
+        $admin = Auth::guard('admin')->user();
+        $isSuperAdmin = $admin->superadmin;
+
+        $assignedTickets = Ticket::where('admin_id', $admin->id);
+
+        return view('backoffice.admin.management.managedashboard', compact(
+            'totalUsers', 'totalAdmins', 'totalTickets', 'pendingTickets', 'resolvedTickets', 'recentEvents', 'recentNotifications', 'isSuperAdmin', 'assignedTickets'
+            ,'assignedTickets'
+        ));
     }
+
+    
 
     public function showListUsers()
     {
@@ -396,12 +419,6 @@ class AdminController extends Controller
     }
 
 
-    public function indexEventHistory()
-    {
-        $eventHistory = EventHistory::query()->paginate(10);
-        return view('backoffice.admin.management.eventHistory.index', compact('eventHistory'));
-    }
-
 
 
     public function logout()
@@ -410,4 +427,3 @@ class AdminController extends Controller
         return redirect()->route('admin.login');
     }
 }
-
