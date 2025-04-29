@@ -55,7 +55,11 @@ class TicketClosed extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'type' => 'close',
+            'ticket_id' => $this->ticket->id,
+            'title' => $this->ticket->title,
+            'message' => 'El ticket ha sido cerrado por el administrador ' . $this->admin->name . '.',
+            'created_by' => $this->admin->name,
         ];
     }
 }

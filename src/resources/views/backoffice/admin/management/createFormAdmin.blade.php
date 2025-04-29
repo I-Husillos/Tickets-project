@@ -46,7 +46,7 @@
         <button type="submit" class="btn btn-success">Crear Administrador</button>
     </form>
     <div class="mt-4">
-        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Volver a la lista de Usuarios</a>
+        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">Volver a la lista de Usuarios</a>
     </div>
 </div>
 @endsection

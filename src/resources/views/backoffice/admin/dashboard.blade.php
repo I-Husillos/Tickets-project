@@ -17,7 +17,7 @@
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <a href="{{ route('admin.manage.tickets') }}" class="btn btn-success">Gestionar Tickets</a>
                 <a href="{{ route('admin.types.index') }}" class="btn btn-info">Tipos de Tickets</a>
-                <a href="{{ route('admin.users.index') }}" class="btn btn-warning">Usuarios y Admins</a>
+                <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-warning">Usuarios y Admins</a>
             </div>
         </div>
     @endif

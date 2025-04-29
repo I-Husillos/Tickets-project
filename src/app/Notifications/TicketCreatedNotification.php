@@ -50,7 +50,7 @@ class TicketCreatedNotification extends Notification
         return [
             'ticket_id' => $this->ticket->id,
             'title' => $this->ticket->title,
-            'message'     => 'Se ha creado un nuevo ticket.',
+            'message'     => 'Se ha creado un nuevo ticket con el título: ' . $this->ticket->title . ' por el usuario: ' . $this->ticket->user->name,
             'created_by'  => $this->ticket->user->name,
             'priority'    => $this->ticket->priority,
             'type'        => $this->ticket->type,

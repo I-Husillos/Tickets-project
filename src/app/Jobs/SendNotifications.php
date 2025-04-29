@@ -11,7 +11,9 @@ use App\Notifications\TicketCommented;
 use App\Notifications\TicketStatusChanged;
 use App\Notifications\TicketClosed;
 use App\Notifications\TicketReopened;
+use DebugBar\DebugBar;
 use Illuminate\Support\Facades\Log;
+
 
 
 
@@ -48,7 +50,6 @@ class SendNotifications implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::info("ID del ticket recibido: {$this->ticket}");
         $ticket = $this->ticket instanceof Ticket ? $this->ticket->load(['user', 'admin']): Ticket::with(['user', 'admin'])->find($this->ticket);
 
 
@@ -88,30 +89,40 @@ class SendNotifications implements ShouldQueue
                 // Verificar si el usuario está relacionado con el ticket antes de notificar
                 if ($ticket->user) {
                     $ticket->user->notify(new TicketStatusChanged($ticket, $this->extraData));
+                } else {
+                    Log::warning("No admin found for ticket: {$ticket->id}. Notifying all admins.");
+                    // Si no hay admin asociado, notificar a todos los administradores
+                    $admins = Admin::all();
+                    foreach ($admins as $admin) {
+                        $admin->notify(new TicketClosed($ticket, $this->extraData));
+                    }
+                }
+                break;
+            
+            case 'closed':
+                if ($ticket->user) {
+                    $ticket->user->notify(new TicketClosed($ticket, $this->extraData));
+                } else {
+                    Log::warning("No admin found for ticket: {$ticket->id}. Notifying all admins.");
+                    // Si no hay admin asociado, notificar a todos los administradores
+                    $admins = Admin::all();
+                    foreach ($admins as $admin) {
+                        $admin->notify(new TicketClosed($ticket, $this->extraData));
+                    }
                 }
                 break;
 
-                case 'closed':
-                    if ($ticket->user) {
-                        // Obtener el administrador asociado al ticket
-                        $admin = $ticket->admin; // Asumiendo que el ticket tiene una relación con un admin
-                
-                        if ($admin) {
-                            // Si el ticket tiene un admin asociado, enviamos la notificación
-                            $ticket->user->notify(new TicketClosed($ticket, $admin));
-                        } else {
-                            // Si no hay administrador, logueamos un error o manejamos el caso
-                            Log::warning("No admin found for ticket: {$ticket->id}");
-                            // Aquí puedes decidir si notificar a los administradores generales o tomar otra acción
-                        }
-                    }
-                    break;
-                
-        
             case 'reopened':
-                // Agregar notificación para el ticket reabierto
+
                 if ($ticket->user) {
-                    $ticket->user->notify(new TicketReopened($ticket, $admin));
+                    $ticket->user->notify(new TicketReopened($ticket, $this->extraData));
+                } else {
+                    Log::warning("No admin found for ticket: {$ticket->id}. Notifying all admins.");
+                    // Si no hay admin asociado, notificar a todos los administradores
+                    $admins = Admin::all();
+                    foreach ($admins as $admin) {
+                        $admin->notify(new TicketClosed($ticket, $this->extraData));
+                    }
                 }
                 break;
         

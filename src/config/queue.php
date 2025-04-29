@@ -72,15 +72,17 @@ return [
             'after_commit' => false,
         ],
 
-    ],
-    
-    'queues' => [
         'notifications' => [
             'driver' => 'redis',
             'connection' => 'default',
             'queue' => 'notifications',
             'retry_after' => 90,
-        ],
+        ],  
+
+    ],
+    
+    'queues' => [
+        
     ],
 
     'jobs' => [

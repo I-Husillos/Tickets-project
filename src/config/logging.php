@@ -54,7 +54,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => ['single', 'debugbar'],
             'ignore_exceptions' => false,
         ],
 
@@ -63,6 +63,12 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
+        ],
+
+        'debugbar' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/debugbar.log'),
+            'level' => 'debug', // Cambiar si necesitas un nivel diferente
         ],
 
         'daily' => [

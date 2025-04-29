@@ -53,7 +53,7 @@
 
                     <!-- Si tiene info del que actualizó -->
                     @isset($notification->data['name'])
-                        <p><strong>Actualizado por:</strong> {{ $notification->data[name]}}</p>
+                        <p><strong>Actualizado por:</strong> {{ $notification->data['name']}}</p>
                     @endisset
 
                     <!-- Fecha -->

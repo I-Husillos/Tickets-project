@@ -16,6 +16,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\DatabaseNotification;
 
 class AdminController extends Controller
 {
@@ -25,19 +26,6 @@ class AdminController extends Controller
     {
         return view('frontoffice.auth.adminform');
     }
-
-    // public function dashboard()
-    // {
-    //     $admin = Auth::guard('admin')->user();
-
-    //     $isSuperAdmin = $admin->superadmin;
-
-    //     $notifications = $admin->notifications;
-        
-    //     $tickets = Ticket::all();
-        
-    //     return view('backoffice.admin.dashboard', compact('tickets', 'notifications', 'isSuperAdmin'));
-    // }
 
 
     public function login(Request $request)
@@ -51,7 +39,7 @@ class AdminController extends Controller
         $credentials = $request->only('email','password');;
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin.users.index')->with('success', 'Inicio de sesión exitoso.');
+            return redirect()->route('admin.manage.dashboard')->with('success', 'Inicio de sesión exitoso.');
         }
 
         return back()->with('error', 'Correo o contraseña incorrectos.');
@@ -151,7 +139,7 @@ class AdminController extends Controller
         EventHistory::create([
             'event_type' => 'Actualización',
             'description' => 'El ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' ha sido actualizado',
-            'user' => $admin,
+            'user' => $admin->name,
         ]);
 
         if($admin->superadmin) {
@@ -164,11 +152,23 @@ class AdminController extends Controller
     
 
 
-    public function showNotifications()
+    public function showNotifications(Request $request)
     {
-        $admin = Auth::user();
+        $admin = Auth::guard('admin')->user();
+        $query = DatabaseNotification::where('notifiable_id', $admin->id)->where('notifiable_type', get_class($admin));
 
-        $notifications = $admin->notifications;
+        if($request->filled('type'))
+        {
+            $type = $request->type;
+
+            if ($type === 'ticket') {
+                $query->where('data->message', 'Se ha creado un nuevo ticket.');
+            } elseif ($type === 'comment') {
+                $query->where('data->type', 'comment');
+            }
+        }
+        
+        $notifications = $query->get();
 
 
         return view('backoffice.admin.notifications.notifications', compact('notifications'));
@@ -301,7 +301,7 @@ class AdminController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('admin.manage.dashboard')->with('success', 'Usuario creado correctamente.');
     }
 
 
@@ -321,7 +321,7 @@ class AdminController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'Administrador creado correctamente.');
+        return redirect()->route('admin.manage.dashboard')->with('success', 'Administrador creado correctamente.');
     }
 
 

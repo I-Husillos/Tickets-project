@@ -15,16 +15,16 @@
             <div class="col-md-3 mb-3">
                 <div class="card text-white bg-dark shadow rounded-4">
                     <div class="card-body">
-                        <h5 class="card-title">Crear Usuario</h5>
-                        <a href="{{ route('admin.users.create') }}" class="stretched-link"></a>
+                        <h5 class="card-title">Administrar usuairos</h5>
+                        <a href="{{ route('admin.dashboard.list.users') }}" class="stretched-link"></a>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card text-white bg-primary shadow rounded-4">
                     <div class="card-body">
-                        <h5 class="card-title">Crear Admin</h5>
-                        <a href="{{ route('admin.admins.create') }}" class="stretched-link"></a>
+                        <h5 class="card-title">Administrar admins</h5>
+                        <a href="{{ route('admin.dashboard.list.admins') }}" class="stretched-link"></a>
                     </div>
                 </div>
             </div>

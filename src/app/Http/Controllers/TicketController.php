@@ -111,16 +111,17 @@ class TicketController
     
     public function closeTicket(Request $request, Ticket $ticketId)
     {
+        $admin = Auth::guard('admin')->user();
         if ($ticketId->status !== 'closed') {
             $ticketId->update(['status' => 'closed']);
 
             // Pasamos el objeto Admin completo al Job
-            SendNotifications::dispatch($ticketId->id, 'closed', Auth::guard('admin')->user());
+            SendNotifications::dispatch($ticketId->id, 'closed', $admin);
 
             EventHistory::create([
                 'event_type' => 'Actualización',
                 'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
-                'user' => Auth::guard('admin')->user()->name,
+                'user' => $admin->name,
             ]);
         }
 
@@ -131,16 +132,19 @@ class TicketController
 
     public function reopenTicket(Ticket $ticketId)
     {
+        $admin = Auth::guard('admin')->user();
+        $user = Auth::guard('user')->user();
         if ($ticketId->status === 'closed') 
         {
             $ticketId->update(['status' => 'in_progress']);
 
-            SendNotifications::dispatch($ticketId->id, 'reopened', Auth::guard('user')->user());
+            
+            SendNotifications::dispatch($ticketId->id, 'reopened', $admin);
 
             EventHistory::create([
                 'event_type' => 'Actualización',
                 'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' reabierto',
-                'user' => Auth::guard('user')->user()->name,
+                'user' => $user->name,
             ]);
         }
         
@@ -155,40 +159,3 @@ class TicketController
 
 
 
-
-
-    // public function closeTicket(Request $request, Ticket $ticketId)
-    // {
-    //     $ticketId->update(['status' => 'closed']);
-
-    //     $admin = Auth::guard('admin')->user();
-
-    //     EventHistory::create([
-    //         'event_type' => 'Actualización',
-    //         'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
-    //         'user' => $admin->name,
-    //     ]);
-        
-    //     SendNotifications::dispatch($ticketId->id, 'closed', $admin->id);
-
-    //     return redirect()->route('admin.manage.tickets')->with('success', 'Ticket cerrado.');
-    // }
-
-
-
-    
-    
-    // public function reopenTicket(Ticket $ticketId)
-    // {
-    //     $ticketId->update(['status' => 'in_progress']);
-
-    //     EventHistory::create([
-    //         'event_type' => 'Actualización',
-    //         'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' reabierto',
-    //         'user' => Auth::guard('user')->user()->name,
-    //     ]);
-
-    //     SendNotifications::dispatch($ticketId->id, 'reopened', Auth::guard('user')->user());
-
-    //     return redirect()->route('admin.manage.tickets')->with('success', 'Ticket reabierto.');
-    // }

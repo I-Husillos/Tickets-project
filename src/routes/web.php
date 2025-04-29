@@ -61,7 +61,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::get('tickets/{ticket}/comments', [CommentController::class, 'viewComments'])->name('admin.view.comments');
 
     //Gestión de Usuarios
-    Route::get('/admin/users', [AdminController::class, 'showManageDashboard'])->name('admin.users.index');
+    Route::get('/admin/users', [AdminController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
     Route::get('/admin/list/users', [AdminController::class, 'showListUsers'])->name('admin.dashboard.list.users');
     Route::get('/admin/users/dashboard', [AdminController::class, 'showAddDashboard'])->name('admin.dashboard.add');
 
@@ -114,7 +114,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::get('tickets/{ticket}', [AdminController::class, 'viewTicket'])->name('admin.view.ticket');
 
     //Rutas de administración de usuarios y administradores
-    Route::get('/admin/users', [AdminController::class, 'showManageDashboard'])->name('admin.users.index');
+    Route::get('/admin/users', [AdminController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
     Route::get('/admin/list/users', [AdminController::class, 'showListUsers'])->name('admin.dashboard.list.users');
     Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
     Route::get('/admin/list/admins', [AdminController::class, 'showListAdmins'])->name('admin.dashboard.list.admins');

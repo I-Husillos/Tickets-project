@@ -19,7 +19,7 @@
     <div class="sidebar">
         <h4>Admin Panel</h4>
         <hr class="bg-light mx-3">
-        <a href="{{ route('admin.users.index') }}" 
+        <a href="{{ route('admin.manage.dashboard') }}" 
         class="d-block text-white {{ str_starts_with($routeName, 'admin.dashboard.list.') ? 'fw-bold text-decoration-underline' : '' }}">
             Panel de Control
         </a>
