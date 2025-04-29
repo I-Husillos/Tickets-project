@@ -40,6 +40,7 @@
                 <a href="{{ route('admin.manage.tickets') }}">Gestionar Tickets</a>
             @endif
         <a href="{{ route('admin.show.assigned.tickets') }}">Tickets Asignados</a>
+        <a href="{{ route('admin.history.events') }}">Historial de eventos</a>
         <a href="{{ route('admin.notifications') }}" class="d-block text-white">
             Notificaciones 
             @if (Auth::user()->unreadNotifications->count() > 0)
