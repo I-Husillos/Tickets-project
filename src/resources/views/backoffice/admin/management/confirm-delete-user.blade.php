@@ -8,7 +8,7 @@
 
     <p>¿Estás seguro de que deseas eliminar el usuario <strong>"{{ $user->name }}"</strong>?</p>
 
-    <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+    <form method="POST" action="{{ route('admin.users.confirmDelete', $user->id) }}">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">Sí, eliminar</button>
@@ -16,3 +16,4 @@
     </form>
 </div>
 @endsection
+
