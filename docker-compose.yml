@@ -18,6 +18,7 @@ services:
       - "${DOCKER_PHP_PORT}:80"
     volumes:
       - ./src:/var/www/html
+      - ./.docker/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
     networks:
       - ${DOCKER_NETWORK}
   servicecomposer:
