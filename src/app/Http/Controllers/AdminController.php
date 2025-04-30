@@ -241,32 +241,19 @@ class AdminController extends Controller
         return view('backoffice.admin.management.listusers' , compact('users'));
     }
     
-    public function showListAdmins()
+    public function showListAdmins(Request $request)
     {
-        $admins = Admin::paginate(10, ['*'], 'admins_pagination');
-
-        return view('backoffice.admin.management.listadmins' , compact('admins'));
+        $query = Admin::query();
+    
+        if ($request->has('superadmin') && $request->superadmin !== '') {
+            $query->where('superadmin', $request->superadmin);
+        }
+    
+        $admins = $query->paginate(10, ['*'], 'admins_pagination')->appends($request->query());
+    
+        return view('backoffice.admin.management.listadmins', compact('admins'));
     }
-
-    public function deleteUser(User $user)
-    {
-        $user->delete();
-
-        EventHistory::create([
-            'event_type' => 'Eliminación',
-            'description' => 'El usuario con email ' . $user->email . ' y nombre ' . $user->name . ' ha sido eliminado',
-            'user' => Auth::guard('admin')->user()->name,
-        ]);
-
-        return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
-    }
-
-    public function deleteAdmin(Admin $admin)
-    {
-        $admin->delete();
-
-        return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador eliminado correctamente.');
-    }
+    
     
 
     public function showAddDashboard()
@@ -377,7 +364,7 @@ class AdminController extends Controller
         return view('backoffice.admin.management.editFormAdmin', compact('admin'));
     }
 
-
+    
 
     public function updateUser(User $user)
     {

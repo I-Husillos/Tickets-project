@@ -59,7 +59,7 @@
                     <td>{{ ucfirst($ticket->type) }}</td>
                     <td>{{ $ticket->comments->count() }}</td>
                     <td>
-                        <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm">Ver y Editar</a>
                     </td>
                 </tr>
             @endforeach

@@ -69,11 +69,10 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::post('/admin/users', [AdminController::class, 'storeUser'])->name('admin.users.store');
 
     Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
-    Route::patch('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::put('/admin/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
 
     Route::get('/admin/users/{user}/confirm-delete', [AdminController::class, 'confirmDeleteUser'])->name('admin.users.confirmDelete');
     Route::delete('/admin/users/{user}', [AdminController::class, 'confirmDeleteUserPost'])->name('admin.users.destroy');
-    Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 
     //Gestión de Administradores
     Route::get('/admin/list/admins', [AdminController::class, 'showListAdmins'])->name('admin.dashboard.list.admins');
@@ -82,11 +81,10 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::post('/admin/admins', [AdminController::class, 'storeAdmin'])->name('admin.admins.store');
 
     Route::get('/admin/admins/{admin}/edit', [AdminController::class, 'editAdmin'])->name('admin.admins.edit');
-    Route::patch('/admin/admins/{admin}', [AdminController::class, 'updateAdmin'])->name('admin.admins.update');
+    Route::put('/admin/admins/{admin}', [AdminController::class, 'updateAdmin'])->name('admin.admins.update');
 
     Route::get('/admin/admins/{admin}/confirm-delete', [AdminController::class, 'confirmDeleteAdmin'])->name('admin.admins.confirmDelete');
     Route::delete('/admin/admins/{admin}', [AdminController::class, 'confirmDeleteAdminPost'])->name('admin.admins.destroy');
-    Route::delete('/admin/admins/{admin}', [AdminController::class, 'deleteAdmin'])->name('admin.admins.delete');
 
     //Gestión de Tipos de Ticket
     Route::get('types', [TypesController::class, 'index'])->name('admin.types.index');

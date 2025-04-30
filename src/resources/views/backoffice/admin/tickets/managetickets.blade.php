@@ -68,7 +68,7 @@
                 <td>{{ $ticket->admin ? $ticket->admin->name : 'Sin Asignar' }}</td>
                 <td>
                     <div class="text-center">
-                        <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm me-3">Ver Acciones</a>
+                        <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm me-3">Ver y Editar</a>
                         @if ($ticket->status === 'closed')
                             <form method="POST" action="{{ route('admin.reopen.ticket', $ticket->id) }}" class="d-inline">
                                 @csrf

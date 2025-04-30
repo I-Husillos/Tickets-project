@@ -7,9 +7,6 @@
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
     @endif
 
@@ -28,6 +25,24 @@
             <i class="fas fa-user-shield"></i> Crear Nuevo Administrador
         </a>
     </div>
+
+    <form method="GET" action="{{ route('admin.dashboard.list.admins') }}" class="mb-4">
+        <div class="form-row align-items-center">
+            <div class="col-md-4">
+                <select name="superadmin" class="form-control">
+                    <option value="">-- Filtrar por rol --</option>
+                    <option value="1" {{ request('superadmin') === '1' ? 'selected' : '' }}>Superadministradores</option>
+                    <option value="0" {{ request('superadmin') === '0' ? 'selected' : '' }}>Administradores normales</option>
+                </select>
+            </div>
+            <div class="col-md-auto">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <a href="{{ route('admin.dashboard.list.admins') }}" class="btn btn-secondary">Limpiar filtro</a>
+            </div>
+
+        </div>
+    </form>
+
 
     <div class="card shadow rounded-4">
         <div class="card-body">

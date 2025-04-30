@@ -6,7 +6,7 @@
 <div class="container mt-5" >
     <h2>Confirmar Eliminación de administrador</h2>
 
-    <p>¿Estás seguro de que deseas eliminar el usuario <strong>"{{ $admin->name }}"</strong>?</p>
+    <p>¿Estás seguro de que deseas eliminar el admin <strong>"{{ $admin->name }}"</strong>?</p>
 
     <form method="POST" action="{{ route('admin.admins.destroy', $admin->id) }}">
         @csrf
