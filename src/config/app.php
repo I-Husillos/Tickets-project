@@ -68,8 +68,11 @@ return [
     'timezone' => 'UTC',
 
 
-    'provider' => [
+    'providers' => [
         Barryvdh\Debugbar\ServiceProvider::class,
+
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
     ],
 
     /*
