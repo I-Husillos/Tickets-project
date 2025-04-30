@@ -9,6 +9,7 @@ class AuthServiceProvider extends ServiceProvider
 
     protected $policies = [
             
+        
     ];
     
     /**
