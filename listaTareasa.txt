@@ -1,0 +1,46 @@
+lista de tareas:
+- supervisor
+- requests
+- policies 
+- gates
+-
+-
+-
+-
+-
+- visualizar plantilla https://adminlte.io/
+- que las notificaciones se vea no a traves de un boton abajo, sino que sea como un icono arriaba en la 
+  esquina 
+- includes
+- barra de navegación mas accesible al usuario
+- personalizar menu de login de usuarios para que sea por ejmplo un una parte a la izquierda donde se 
+ muestre infrmacion de que es la app o lo que se puede hacer y a la derecha los campos para ingresar
+- confirmar contraseña en vista añadir admin y user
+- ticket resueltos en panel de control
+- filtrar ticket por pendientes y resueltos para asignar, solo actuar sobre tickets solo asignados
+- comentarios confirmación visual, eliminar solo los comentarios añadidos por el mismo
+- validaciones
+- includes en Blade
+- políticas
+- idiomas
+- prefijo url que cumpla idioma
+- request
+- revisar que no se puedan ingresar datos atraves de la herramienta de desarrollo para inyectar datos y
+  que por ejempplo esos datos si son tipos que se guarde en dos tablas, etc, laravel debe hacerlo y 
+  en las tablas deben ser
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- config laravel listado
+- 
+- 
+- 
+- 
+
+
+
+
