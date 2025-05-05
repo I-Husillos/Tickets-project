@@ -10,39 +10,24 @@ use App\Models\Comment;
 use App\Models\EventHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Services\CommentService;
 
 class CommentController
 {
+    protected $commentService;
+
+    public function __construct(CommentService $commentService)
+    {
+        $this->commentService = $commentService;
+    }
+
     public function addComment(Request $request, Ticket $ticket)
     {
         $validated = $request->validate([
             'message' => 'required|string|max:1000',
         ]);
 
-        $author = Auth::user();
-
-        $comment = $ticket->comments()->create([
-            'author_id' => Auth::id(),
-            'author_type' => Auth::user() instanceof Admin ? Admin::class : User::class,
-            'message' => $validated['message'],
-        ]);
-
-
-        EventHistory::create([
-            'event_type' => 'Comentario',
-            'description' => 'Se ha agregado un nuevo comentario al ticket con id ' . $ticket->id . ' por el usuario con email '
-            . Auth::user()->email . ' y nombre ' . Auth::user()->name,
-            'user' => $author->name,
-        ]);
-
-        if ($author instanceof Admin && $ticket->user) {
-            SendNotifications::dispatch($ticket->id, 'commented', $comment);
-        } elseif ($author instanceof User && $ticket->admin) {
-            SendNotifications::dispatch($ticket->id, 'user_commented', $comment);
-        } elseif ($author instanceof User) {
-            SendNotifications::dispatch($ticket->id, 'user_commented', $comment);
-        }
-        
+        $this->commentService->addComment($ticket, $validated['message']);
 
         return redirect()->back()->with('success', 'Comentario agregado correctamente.');
     }

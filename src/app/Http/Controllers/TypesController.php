@@ -6,10 +6,18 @@ use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EventHistory;
 use Illuminate\Http\Request;use Illuminate\Validation\Rule;
+use App\Services\TypeService;
 
 
 class TypesController
 {
+    protected $typeService;
+
+    public function __construct(TypeService $typeService)
+    {
+        $this->typeService = $typeService;
+    }
+
     public function index()
     {
         $types = Type::all();
@@ -31,13 +39,7 @@ class TypesController
             'name.required' => 'El campo nombre es obligatorio.',
         ]);
 
-        Type::create($validated);
-
-        EventHistory::create([
-            'event_type' => 'Registro',
-            'description' => 'Nuevo tipo de ticket creado',
-            'user' => Auth::guard('admin')->user()->name,
-        ]);
+        $this->typeService->createType($validated);
 
         return redirect()->route('admin.types.index')->with('success', 'Tipo creado con éxito.');
     }
@@ -57,16 +59,15 @@ class TypesController
             'name.required' => 'El campo nombre es obligatorio.',
         ]);
 
-        $validated['name'] = ucfirst(strtolower($validated['name']));
-
-        $type->update($validated);
+        $this->typeService->updateType($type, $validated);
 
         return redirect()->route('admin.types.index')->with('success', 'Tipo actualizado con éxito.');
     }
 
+
     public function destroy(Type $type)
     {
-        $type->delete();
+        $this->typeService->deleteType($type);
 
         return redirect()->route('admin.types.index')->with('success', 'Tipo eliminado con éxito.');
     }
@@ -77,3 +78,4 @@ class TypesController
     }
 
 }
+
