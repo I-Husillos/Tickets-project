@@ -40,3 +40,20 @@
 2025-04-30 12:59:59,447 INFO waiting for laravel-queue, php-server to die
 2025-04-30 12:59:59,451 WARN stopped: php-server (terminated by SIGTERM)
 2025-04-30 13:00:00,458 WARN stopped: laravel-queue (terminated by SIGTERM)
+2025-05-05 06:55:50,882 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2025-05-05 06:55:50,886 INFO RPC interface 'supervisor' initialized
+2025-05-05 06:55:50,886 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2025-05-05 06:55:50,888 INFO supervisord started with pid 1
+2025-05-05 06:55:51,896 INFO spawned: 'laravel-queue' with pid 7
+2025-05-05 06:55:51,898 INFO spawned: 'php-server' with pid 8
+2025-05-05 06:55:51,929 WARN exited: laravel-queue (exit status 255; not expected)
+2025-05-05 06:55:52,936 INFO spawned: 'laravel-queue' with pid 9
+2025-05-05 06:55:52,938 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-05-05 06:55:52,962 WARN exited: laravel-queue (exit status 255; not expected)
+2025-05-05 06:55:54,970 INFO spawned: 'laravel-queue' with pid 10
+2025-05-05 06:55:55,020 WARN exited: laravel-queue (exit status 255; not expected)
+2025-05-05 06:55:58,028 INFO spawned: 'laravel-queue' with pid 11
+2025-05-05 06:55:58,056 WARN exited: laravel-queue (exit status 255; not expected)
+2025-05-05 06:55:59,058 INFO gave up: laravel-queue entered FATAL state, too many start retries too quickly
+2025-05-05 06:58:54,408 INFO reaped unknown pid 33 (exit status 0)
+2025-05-05 07:07:06,382 INFO reaped unknown pid 51 (exit status 0)
