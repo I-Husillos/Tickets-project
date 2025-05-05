@@ -11,33 +11,38 @@ use App\Notifications\TicketClosed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-
+use App\Services\TicketService;
+use Illuminate\Support\Facades\Gate;
+use App\Policies\TicketPolicy;
 use App\Notifications\TicketCreatedNotification;
 use Illuminate\Console\Scheduling\Event;
+use App\Http\Controllers\Controller;
 
-class TicketController
+class TicketController extends Controller
 {
-    protected $ticket;
+    protected $ticketService;
 
-    public function __construct(Ticket $ticket)
+    public function __construct(TicketService $ticketService)
     {
-        $this->ticket = $ticket;
+        $this->ticketService = $ticketService;
     }
 
 
     public function showAll()
     {
-        $tickets = Ticket::where('user_id', Auth::id())->latest()->paginate(5);
+        $this->authorize('view', Ticket::class);
+
+        $tickets = Ticket::all();
         return view('backoffice.user.tickets.index', compact('tickets'));
     }
 
 
-    public function create()
+    public function showCreateForm()
     {
         return view('backoffice.user.tickets.create');
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -70,11 +75,9 @@ class TicketController
 
     public function show(Ticket $ticket)
     {
-        $ticket = Ticket::with('comments.author')->find($ticket->id);
+        $this->authorize('view', $ticket);
 
-        if ($ticket->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $ticket->load('comments');
 
         return view('backoffice.user.tickets.show', compact('ticket'));
     }
@@ -89,19 +92,18 @@ class TicketController
 
     public function validateResolution(Request $request, Ticket $ticket)
     {
-        if ($ticket->user_id !== Auth::id()) {
-            abort(403, 'No tienes permiso para modificar este ticket.');
-        }
+        $this->authorize('update', $ticket);
 
         $status = $request->input('status') === 'resolved' ? 'resolved' : 'pending';
-        
-        $ticket->update(['status' => $status]);
-
-        EventHistory::create([
-            'event_type' => 'Actualización',
-            'description' => 'Estado del ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' actualizado',
-            'user' => Auth::guard('user')->user(),
-        ]);
+        $user = Auth::guard('user')->user();
+    
+        $this->ticketService->updateStatus(
+            $ticket,
+            $status,
+            'Actualización',
+            'Ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" actualizado a "' . $status . '"',
+            $user
+        );
 
         return redirect()->route('user.tickets.index')->with('success', 'Estado del ticket actualizado.');
     }
@@ -111,20 +113,20 @@ class TicketController
     
     public function closeTicket(Request $request, Ticket $ticketId)
     {
+        $this->authorize('update', $ticketId);
+
         $admin = Auth::guard('admin')->user();
-        if ($ticketId->status !== 'closed') {
-            $ticketId->update(['status' => 'closed']);
 
-            // Pasamos el objeto Admin completo al Job
-            SendNotifications::dispatch($ticketId->id, 'closed', $admin);
-
-            EventHistory::create([
-                'event_type' => 'Actualización',
-                'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
-                'user' => $admin->name,
-            ]);
+        if($ticketId->status !== 'closed')
+        {
+            $this->ticketService->updateStatus(
+                $ticketId,
+                'closed',
+                'Actualización',
+                'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
+                $admin
+            );
         }
-
         return redirect()->route('admin.manage.tickets')->with('success', 'Ticket cerrado.');
     }
 
@@ -132,22 +134,18 @@ class TicketController
 
     public function reopenTicket(Ticket $ticketId)
     {
+        $this->authorize('update', $ticketId);
+
         $admin = Auth::guard('admin')->user();
-        $user = Auth::guard('user')->user();
-        if ($ticketId->status === 'closed') 
-        {
-            $ticketId->update(['status' => 'in_progress']);
 
-            
-            SendNotifications::dispatch($ticketId->id, 'reopened', $admin);
-
-            EventHistory::create([
-                'event_type' => 'Actualización',
-                'description' => 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' reabierto',
-                'user' => $user->name,
-            ]);
-        }
-        
+        $this->ticketService->updateStatus(
+            $ticketId,
+            'new',
+            'Actualización',
+            'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' abierto',
+            $admin,
+            'reopened'
+        );
 
         return redirect()->route('admin.manage.tickets')->with('success', 'Ticket reabierto.');
     }

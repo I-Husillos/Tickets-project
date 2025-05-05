@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendNotifications;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Type;
@@ -10,7 +9,6 @@ use App\Models\EventHistory;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Notifications\TicketStatusChanged;
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Container\Attributes\Auth as AttributesAuth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Routing\Controller;
@@ -18,219 +16,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\DatabaseNotification;
 
+use App\Http\Requests\UpdateUserRequest;
+use App\Services\UserService;
+
 class AdminController extends Controller
 {
     Use Notifiable;      
 
-    public function showLoginForm()
+    protected $userService;
+
+    public function __construct(UserService $userService)
     {
-        return view('frontoffice.auth.adminform');
-    }
-
-
-    public function login(Request $request)
-    {
-
-        $validated = $request->validate([
-            'email' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
-        ]);
-
-        $credentials = $request->only('email','password');;
-
-        if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin.manage.dashboard')->with('success', 'Inicio de sesión exitoso.');
-        }
-
-        return back()->with('error', 'Correo o contraseña incorrectos.');
-    
-    }
-
-
-
-    public function viewTicket(Ticket $ticket)
-    {
-        $admins = Admin::all();
-        $ticketTypes = Type::all();
-
-        return view('backoffice.admin.tickets.viewtickets', compact('ticket', 'admins', 'ticketTypes'));
-    }
-    
-
-    public function manageTickets(Request $request)
-    {
-        $query = Ticket::query();
-
-        if($request->filled('status'))
-        {
-            $query->where('status',$request->status);
-        }
-
-        if ($request->filled('priority')) {
-            $query->where('priority', $request->priority);
-        }
-
-        $tickets = $query->paginate(5);
-
-        return view('backoffice.admin.tickets.managetickets', compact('tickets'));
-    }
-
-
-
-    public function filterTickets(Request $request)
-    {
-        $query = Ticket::query();
-
-        if($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        if($request->filled('priority')){
-            $query->where('priority', $request->priority);
-        }
-
-        if($request->filled('type')){
-            $query->where('type', $request->type);
-        }
-
-        $tickets = $query->get();
-        return view('backoffice.admin.managetickets', compact('tickets'));
-    }
-
-
-
-    public function updateTicketStatus(Request $request, Ticket $ticket)
-    {
-        $validated = $request->validate([
-            'status' => 'required|in:new,in_progress,pending,resolved,closed,cancelled',
-            'priority' => 'nullable|in:low,medium,high,critical',
-            'type' => 'nullable|string|max:255',
-            'assigned_to' => 'nullable|exists:admins,id',
-        ]);
-
-        // Asignación del admin
-        if (isset($validated['assigned_to'])) {
-            $ticket->admin_id = $validated['assigned_to'];
-        }
-
-        // Verifica y crea tipo si no existe
-        if (!empty($validated['type'])) {
-            $typeName = $validated['type'];
-
-            $existingType = \App\Models\Type::where('name', $typeName)->first();
-
-            if (!$existingType) {
-                \App\Models\Type::create(['name' => $typeName]);
-            }
-
-            $ticket->type = $typeName;
-        }
-
-        // Otras actualizaciones
-        $ticket->status = $validated['status'];
-        $ticket->priority = $validated['priority'] ?? $ticket->priority;
-
-        $ticket->save();
-
-        $admin = Auth::guard('admin')->user();
-
-        SendNotifications::dispatch($ticket->id, 'status_changed', $admin);
-
-        EventHistory::create([
-            'event_type' => 'Actualización',
-            'description' => 'El ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' ha sido actualizado',
-            'user' => $admin->name,
-        ]);
-
-        if($admin->superadmin) {
-            return redirect()->route('admin.manage.tickets')->with('success', 'Ticket actualizado correctamente.');
-        }else{
-            return redirect()->route('admin.show.assigned.tickets')->with('success', 'Ticket actualizado correctamente.');
-        }
-    }
+        $this->userService = $userService;
+    }    
 
     
 
-
-    public function showNotifications(Request $request)
-    {
-        $admin = Auth::guard('admin')->user();
-        $query = DatabaseNotification::where('notifiable_id', $admin->id)->where('notifiable_type', get_class($admin));
-
-        if($request->filled('type'))
-        {
-            $type = $request->type;
-
-            if ($type === 'ticket') {
-                $query->where('data->message', 'Se ha creado un nuevo ticket.');
-            } elseif ($type === 'comment') {
-                $query->where('data->type', 'comment');
-            }
-        }
-        
-        $notifications = $query->get();
-
-
-        return view('backoffice.admin.notifications.notifications', compact('notifications'));
-    }
-
-
-    public function markAsRead($notificationId)
-    {
-        $admin = Auth::guard('admin')->user();
-
-        $notification = $admin->notifications->find($notificationId);
-
-        if ($notification) {
-            $notification->markAsRead();
-        }
-
-        return redirect()->route('admin.notifications');
-    }
-
-
-    public function showAssignedTickets(Request $request)
-    {
-        $admin = Auth::guard('admin')->user();
-
-        $query = Ticket::where('admin_id', $admin->id);
-
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        if ($request->filled('priority')) {
-            $query->where('priority', $request->priority);
-        }
-
-        $assignedTickets = $query->paginate(5);
-
-        return view('backoffice.admin.tickets.assignedticketsview', compact('assignedTickets'));
-    }
-
-    public function showManageDashboard()
-    {
-        
-        $totalUsers = \App\Models\User::count();
-        $totalAdmins = \App\Models\Admin::count();
-        $totalTickets = \App\Models\Ticket::count();
-        $pendingTickets = \App\Models\Ticket::where('status', 'pendiente')->count();
-        $resolvedTickets = \App\Models\Ticket::where('status', 'resuelto')->count();
-
-        $recentEvents = \App\Models\EventHistory::latest()->take(5)->get();
-
-        $recentNotifications = Auth::guard('admin')->user()->unreadNotifications->take(5);
-
-        $admin = Auth::guard('admin')->user();
-        $isSuperAdmin = $admin->superadmin;
-
-        $assignedTickets = Ticket::where('admin_id', $admin->id);
-
-        return view('backoffice.admin.management.managedashboard', compact(
-            'totalUsers', 'totalAdmins', 'totalTickets', 'pendingTickets', 'resolvedTickets', 'recentEvents', 'recentNotifications', 'isSuperAdmin', 'assignedTickets'
-            ,'assignedTickets'
-        ));
-    }
+    
 
     
 
@@ -255,12 +57,6 @@ class AdminController extends Controller
     }
     
     
-
-    public function showAddDashboard()
-    {
-        return view('backoffice.admin.management.adddashboard');
-    }
-
 
 
     public function createUser()
@@ -408,9 +204,4 @@ class AdminController extends Controller
 
 
 
-    public function logout()
-    {
-        Auth::guard('admin')->logout();
-        return redirect()->route('admin.login');
-    }
 }

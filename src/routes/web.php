@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EventHistoryController;
 use App\Http\Controllers\TypesController;
+use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use Illuminate\Routing\RouteAction;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +21,10 @@ Route::post('register', [UserController::class, 'register']);
 
 
 Route::middleware('auth:user')->prefix('user')->group(function() {
+    //Gestión de Tickets
     Route::get('tickets', [TicketController::class, 'showAll'])->name('user.tickets.index');
-    Route::get('tickets/create', [TicketController::class, 'create']) -> name('user.tickets.create');
-    Route::post('tickets', [TicketController::class, 'store']) -> name('user.tickets.store');
+    Route::get('tickets/create', [TicketController::class, 'showCreateForm']) -> name('user.tickets.create');
+    Route::post('tickets', [TicketController::class, 'create']) -> name('user.tickets.store');
     Route::get('tickets/{ticket}', [TicketController::class, 'show']) -> name('user.tickets.show');
     Route::post('tickets/{ticket}/comment', [CommentController::class, 'addComment'])->name('ticket.add.comment');
 
@@ -37,14 +40,20 @@ Route::middleware('auth:user')->prefix('user')->group(function() {
 
 
 
-Route::get('/admin/login', [AdminController::class, 'showLoginForm']) -> name('admin.login');
-Route::post('/admin/login', [AdminController::class, 'login']) -> name('admin.login.submit');
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm']) -> name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::post('/admin/logout', [AdminAuthController::class, 'logout']) -> name('admin.logout');
+
 
 Route::middleware('auth:admin')->prefix('admin')->group(function() {
 
-
-    //Autenticación
-    Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
+    // Route::prefix('tickets')->controller(AdminTicketController::class)->group(function () {
+    //     Route::get('/', 'manageTickets')->name('admin.manage.tickets');
+    //     Route::get('/assigned', 'showAssignedTickets')->name('admin.show.assigned.tickets');
+    //     Route::get('/{ticket}', 'viewTicket')->name('admin.view.ticket');
+    //     Route::patch('/{ticket}/update', 'updateTicketStatus')->name('admin.update.ticket');
+    //     Route::post('/{ticket}/assign', 'assignTicket')->name('admin.assign.ticket');
+    // });
 
     //Gestión de Tickets
     Route::get('tickets', [AdminController::class, 'manageTickets'])->name('admin.manage.tickets');
@@ -61,7 +70,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::get('tickets/{ticket}/comments', [CommentController::class, 'viewComments'])->name('admin.view.comments');
 
     //Gestión de Usuarios
-    Route::get('/admin/users', [AdminController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
+    Route::get('/admin/users', [AdminDashboardController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
     Route::get('/admin/list/users', [AdminController::class, 'showListUsers'])->name('admin.dashboard.list.users');
     Route::get('/admin/users/dashboard', [AdminController::class, 'showAddDashboard'])->name('admin.dashboard.add');
 
