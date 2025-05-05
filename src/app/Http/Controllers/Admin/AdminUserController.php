@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\EventHistory;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,12 +27,15 @@ class AdminUserController extends Controller
     }
 
 
-    public function storeUser()
+    public function storeUser(StoreUserRequest $request)
     {
-        $request = request();
+        $data = $request->validated();
+
         $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
+
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        
         $user->password = Hash::make($request->password);
         $user->save();
 
@@ -66,11 +72,12 @@ class AdminUserController extends Controller
         return view('backoffice.admin.management.editFormUser', compact('user'));
     }
 
-    public function updateUser(User $user)
+    public function updateUser(UpdateUserRequest $request, User $user)
     {
-        $request = request();
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $data = $request->validated();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
@@ -85,3 +92,4 @@ class AdminUserController extends Controller
         return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario actualizado correctamente.');
     }
 }
+

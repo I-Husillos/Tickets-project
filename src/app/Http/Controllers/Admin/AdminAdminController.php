@@ -8,7 +8,10 @@ use App\Models\Admin;
 use App\Models\EventHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\StoreAdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Contracts\Cache\Store;
 
 class AdminAdminController extends Controller
 {
@@ -30,14 +33,17 @@ class AdminAdminController extends Controller
         return view('backoffice.admin.management.createFormAdmin');
     }
 
-    public function storeAdmin()
+    public function storeAdmin(StoreAdminRequest $request)
     {
-        $request = request();
+        $data = $request->validated();
+
         $admin = new Admin();
-        $admin->name = $request->name;
-        $admin->email = $request->email;
+
+        $admin->name = $data['name'];
+        $admin->email = $data['email'];
+
         $admin->password = Hash::make($request->password);
-        $admin->superadmin = $request->superadmin ? true : false;
+        $admin->superadmin = $request->boolean('superadmin');
         $admin->save();
 
         EventHistory::create([
@@ -75,14 +81,20 @@ class AdminAdminController extends Controller
     }
 
 
-    public function updateAdmin(Admin $admin)
+    public function updateAdmin(UpdateUserRequest $request, Admin $admin)
     {
-        $request = request();
-        $admin->name = $request->name;
-        $admin->email = $request->email;
+        $data = $request->validated();
+        
+        $admin->name = $data['name'];
+        $admin->email = $data['email'];
+
+
         if ($request->filled('password')) {
             $admin->password = Hash::make($request->password);
         }
+
+        $admin->superadmin = $request->boolean('superadmin');
+
         $admin->save();
 
         EventHistory::create([
