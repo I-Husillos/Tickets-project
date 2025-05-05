@@ -106,3 +106,4 @@ class AdminAdminController extends Controller
         return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador actualizado correctamente.');
     }
 }
+
