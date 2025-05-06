@@ -9,11 +9,22 @@
         @csrf
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
+            <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}">
         </div>
+        @error('email')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
         <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" id="password" name="password" class="form-control" required>
+            <input type="password" id="password" name="password" class="form-control">
+
+            @error('password')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary w-100 mt-3">Iniciar Sesión</button>
     </form>

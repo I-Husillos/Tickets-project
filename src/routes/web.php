@@ -73,7 +73,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
     Route::get('tickets/{ticket}/comments', [CommentController::class, 'viewComments'])->name('admin.view.comments');
 
     //Gestión de Usuarios
-    Route::get('/admin/users', [AdminUserController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
+    Route::get('/admin/users', [AdminDashboardController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
     Route::get('/admin/list/users', [AdminUserController::class, 'showListUsers'])->name('admin.dashboard.list.users');
     Route::get('/admin/users/dashboard', [AdminUserController::class, 'showAddDashboard'])->name('admin.dashboard.add');
 

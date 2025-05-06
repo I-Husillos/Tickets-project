@@ -22,22 +22,22 @@
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="name" name="name" required value="{{ old('name') }}">
+            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" name="email" required value="{{ old('email') }}">
+            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="password" name="password">
         </div>
 
         <div class="mb-3">
             <label for="superadmin" class="form-label">¿Es Superadmin?</label>
-            <select class="form-select" id="superadmin" name="superadmin" required>
+            <select class="form-select" id="superadmin" name="superadmin">
                 <option value="1" {{ old('superadmin') == '1' ? 'selected' : '' }}>Sí</option>
                 <option value="0" {{ old('superadmin') == '0' ? 'selected' : '' }}>No</option>
             </select>

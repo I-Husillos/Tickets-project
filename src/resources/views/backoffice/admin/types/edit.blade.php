@@ -22,12 +22,12 @@
 
         <div class="form-group mt-3">
             <label for="name">Nombre</label>
-            <input type="text" name="name" class="form-control" required value="{{ old('name', $type->name) }}">
+            <input type="text" name="name" class="form-control" value="{{ old('name', $type->name) }}">
         </div>
 
         <div class="form-group mt-3">
             <label for="description">Descripción</label>
-            <input type="text" name="description" class="form-control" required value="{{ old('description', $type->description) }}">
+            <input type="text" name="description" class="form-control" value="{{ old('description', $type->description) }}">
         </div>
 
         <div class="mt-2">

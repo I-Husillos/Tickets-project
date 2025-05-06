@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Auth\Access\Response;
 
 class TicketPolicy
@@ -35,9 +36,9 @@ class TicketPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Ticket $ticket)
+    public function update(Admin $admin, Ticket $ticket)
     {
-        return $user->id === $ticket->user_id || $user->id === $ticket->admin_id;
+        return $admin->superadmin || $ticket->admin_id === $admin->id;
     }
 
     /**
@@ -48,10 +49,19 @@ class TicketPolicy
         return $user->id === $ticket->admin_id;
     }
 
-    public function comment(User $user, Ticket $ticket)
+    public function comment($user, Ticket $ticket)
     {
-        return $user->id === $ticket->user_id || $user->id === $ticket->admin_id;
+        if ($user instanceof Admin) {
+            return true;
+        }
+
+        if ($user instanceof User) {
+            return $user->id === $ticket->user_id || $user->id === $ticket->admin_id;
+        }
+
+        return false;
     }
+
 
     /**
      * Determine whether the user can restore the model.

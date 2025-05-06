@@ -81,7 +81,7 @@ class AdminAdminController extends Controller
     }
 
 
-    public function updateAdmin(UpdateUserRequest $request, Admin $admin)
+    public function updateAdmin(UpdateAdminRequest $request, Admin $admin)
     {
         $data = $request->validated();
         

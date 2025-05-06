@@ -39,9 +39,7 @@
                     name="message" 
                     class="form-control" 
                     rows="4" 
-                    placeholder="Escribe tu comentario aquí..." 
-                    required
-                ></textarea>
+                    placeholder="Escribe tu comentario aquí..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Añadir Comentario</button>
         </form>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminRequest extends FormRequest
+class StoreCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,17 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        $admin = $this->route('admin');
-
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins,email,' . $admin->id,
-            'password' => 'nullable|string|min:3|confirmed',
-            'superadmin' => 'boolean',
+            'message' => 'required|string|max:1000',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'message.required' => 'El mensaje es obligatorio.',
+            'message.string' => 'El mensaje debe ser una cadena de texto.',
+            'message.max' => 'El mensaje no puede tener más de 1000 caracteres.',
         ];
     }
 }

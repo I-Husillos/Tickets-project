@@ -17,6 +17,7 @@ use App\Policies\TicketPolicy;
 use App\Notifications\TicketCreatedNotification;
 use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTicketRequest;
 
 class TicketController extends Controller
 {
@@ -30,9 +31,9 @@ class TicketController extends Controller
 
     public function showAll()
     {
-        $this->authorize('view', Ticket::class);
+        $this->authorize('viewAny', Ticket::class);
 
-        $tickets = Ticket::all();
+        $tickets = Ticket::paginate(10);
         return view('backoffice.user.tickets.index', compact('tickets'));
     }
 
@@ -42,15 +43,11 @@ class TicketController extends Controller
         return view('backoffice.user.tickets.create');
     }
 
-    public function create(Request $request)
+    public function create(StoreTicketRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'type' => 'required|in:bug,improvement,request',
-            'priority' => 'required|in:low,medium,high,critical',
-            'status' => 'required|in:new,in_progress,pending,resolved,closed'
-        ]);
+        $this->authorize('create', Ticket::class);
+
+        $validated = $request->validated();
 
         $validated['user_id'] = auth('user')->id();
 

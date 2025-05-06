@@ -18,6 +18,7 @@
                 <li class="list-group-item"><strong>Fecha de la última Actualización:</strong> {{ $ticket->updated_at->format('d/m/Y') }}</li>
             </ul>
         </div>
+        @can('update', $ticket)
         <div class="col-md-6">
             <form action="{{ route('admin.update.ticket', $ticket->id) }}" method="POST">
                 @csrf
@@ -80,6 +81,7 @@
                 
             </form>
         </div>
+        @endcan
 
         <div class="form-group mt-4">
                 <h4>Comentarios</h4>
@@ -103,11 +105,13 @@
                                         <td>{{ $comment->created_at->format('d/m/Y H:i') }}</td>
                                         <td>
                                             {{-- Botón para eliminar comentario --}}
-                                            <form method="POST" action="{{ route('admin.delete.comment', $comment->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                            </form>
+                                            @can('delete', $comment)
+                                                <form method="POST" action="{{ route('admin.delete.comment', $comment->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
@@ -115,18 +119,19 @@
                         </table>
                     @endif
 
+                    @can('comment', $ticket)
                     <div class="form-group">
                         <h5>Añadir un Comentario</h5>
-                            <form method="POST" action="{{ route('admin.add.comment', $ticket->id) }}">
-                                @csrf
-                                <div class="form-group">
-                                    <textarea name="message" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-3">Añadir Comentario</button>
-                            </form>
+                        <form method="POST" action="{{ route('admin.add.comment', $ticket->id) }}">
+                            @csrf
+                            <div class="form-group">
+                                <textarea name="message" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Añadir Comentario</button>
+                        </form>
                     </div>
+                    @endcan
                 </div>
-
 
         <div class="text-center mt-5">
             @if(Auth::guard('admin')->user()->superadmin)

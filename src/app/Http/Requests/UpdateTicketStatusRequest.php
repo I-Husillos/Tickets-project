@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminRequest extends FormRequest
+class UpdateTicketStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,11 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        $admin = $this->route('admin');
-
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins,email,' . $admin->id,
-            'password' => 'nullable|string|min:3|confirmed',
-            'superadmin' => 'boolean',
+            'status' => 'required|in:new,in_progress,pending,resolved,closed,cancelled',
+            'priority' => 'nullable|in:low,medium,high,critical',
+            'type' => 'nullable|string|max:255',
+            'assigned_to' => 'nullable|exists:admins,id',
         ];
     }
 }

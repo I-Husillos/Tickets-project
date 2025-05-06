@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminRequest extends FormRequest
+class StoreTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,17 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        $admin = $this->route('admin');
-
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins,email,' . $admin->id,
-            'password' => 'nullable|string|min:3|confirmed',
-            'superadmin' => 'boolean',
+            'name' => 'required|string|max:255|unique:types,name',
+            'description' => 'nullable|string|max:255',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.unique' => 'Ya existe un tipo con ese nombre.',
+            'name.required' => 'El campo nombre es obligatorio.',
         ];
     }
 }

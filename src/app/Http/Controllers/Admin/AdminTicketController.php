@@ -9,6 +9,7 @@ use App\Models\Admin;
 use App\Models\Type;
 use App\Jobs\SendNotifications;
 use App\Models\EventHistory;
+use App\Http\Requests\UpdateTicketStatusRequest;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -65,14 +66,11 @@ class AdminTicketController extends Controller
 
 
 
-    public function updateTicketStatus(Request $request, Ticket $ticket)
+    public function updateTicketStatus(UpdateTicketStatusRequest $request, Ticket $ticket)
     {
-        $validated = $request->validate([
-            'status' => 'required|in:new,in_progress,pending,resolved,closed,cancelled',
-            'priority' => 'nullable|in:low,medium,high,critical',
-            'type' => 'nullable|string|max:255',
-            'assigned_to' => 'nullable|exists:admins,id',
-        ]);
+        $this->authorize('update', $ticket);
+        
+        $validated = $request->validated();
 
         // Asignación del admin
         if (isset($validated['assigned_to'])) {

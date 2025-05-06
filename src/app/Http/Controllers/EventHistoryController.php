@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\EventHistory;
 use Illuminate\Container\Attributes\Auth;
 use App\Services\EventHistoryService;
+use App\Http\Requests\StoreEventHistoryRequest;;
 
 class EventHistoryController
 {
@@ -25,13 +26,9 @@ class EventHistoryController
     }
 
 
-    public function storeHistory(Request $request)
+    public function storeHistory(StoreEventHistoryRequest $request)
     {
-        $validated = $request->validate([
-            'event_type' => 'required',
-            'user' => 'required',
-            'date' => 'required',
-        ]);
+        $validated = $request->validated();
 
         $this->eventHistoryService->store($validated);
 

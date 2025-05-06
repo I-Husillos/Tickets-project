@@ -12,12 +12,12 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" name="name" value="{{ old('name', $admin->name) }}" required>
+            <input type="text" class="form-control" name="name" value="{{ old('name', $admin->name) }}">
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" name="email" value="{{ old('email', $admin->email) }}" required>
+            <input type="email" class="form-control" name="email" value="{{ old('email', $admin->email) }}">
         </div>
 
         <div class="mb-3">

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterUserRequest;
 
 use App\Models\User;
 use App\Models\EventHistory;
@@ -18,14 +20,8 @@ class UserAuthController extends Controller
     }
 
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-
-        $validated = $request->validate([
-            'email' => 'required|string|max:255',
-            'password' => 'required|string',
-        ]);
-
         $credentials = $request->only('email','password');
 
         if(Auth::guard('user') -> attempt($credentials))
@@ -43,17 +39,9 @@ class UserAuthController extends Controller
     }
 
 
-    public function register(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|confirmed',
-        ], [
-            'email.unique' => 'Este correo ya está registrado. Por favor, inicia sesión o usa otro correo.',
-            'password.confirmed' => 'Las contraseñas no coinciden.',
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-        ]);
+        $validated = $request->validated();
         
 
         $validated['password'] = Hash::make($validated['password']);

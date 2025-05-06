@@ -23,12 +23,12 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userId = $this->route('user'); // Obtener el ID del usuario de la ruta
+        $userId = $this->route('user')->id; // Obtener el ID del usuario de la ruta
 
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $userId,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:3|confirmed',
         ];
     }
 }

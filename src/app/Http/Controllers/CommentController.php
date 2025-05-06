@@ -11,8 +11,10 @@ use App\Models\EventHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Services\CommentService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCommentRequest;
 
-class CommentController
+class CommentController extends Controller
 {
     protected $commentService;
 
@@ -21,15 +23,20 @@ class CommentController
         $this->commentService = $commentService;
     }
 
-    public function addComment(Request $request, Ticket $ticket)
+    public function addComment(StoreCommentRequest $request, Ticket $ticket)
     {
-        $validated = $request->validate([
-            'message' => 'required|string|max:1000',
-        ]);
+        $this->authorize('comment', $ticket);
+        $validated = $request->validated();
 
         $this->commentService->addComment($ticket, $validated['message']);
 
-        return redirect()->back()->with('success', 'Comentario agregado correctamente.');
+
+        if (auth('admin')->check()) {
+            return redirect()->route('admin.manage.tickets')->with('success', 'Comentario agregado correctamente.');
+        }
+
+
+        return redirect()->route('user.tickets.index')->with('success', 'Comentario agregado correctamente.');
     }
 
     public function viewComments(Ticket $ticket)
@@ -42,6 +49,8 @@ class CommentController
 
     public function deleteComment(Comment $comment)
     {
+        $this->authorize('delete', $comment);
+        
         $comment->delete();
 
         return redirect()->back()->with('success', 'Comentario eliminado correctamente.');

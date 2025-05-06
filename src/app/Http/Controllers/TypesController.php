@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\EventHistory;
 use Illuminate\Http\Request;use Illuminate\Validation\Rule;
 use App\Services\TypeService;
+use App\Http\Requests\StoreTypeRequest;
+use App\Http\Requests\UpdateTypeRequest;
 
 
 class TypesController
@@ -29,15 +31,9 @@ class TypesController
         return view('backoffice.admin.types.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreTypeRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:types,name',
-            'description' => 'nullable|string|max:255',
-        ],[
-            'name.unique' => 'Ya existe un tipo con ese nombre.',
-            'name.required' => 'El campo nombre es obligatorio.',
-        ]);
+        $validated = $request->validated();
 
         $this->typeService->createType($validated);
 
@@ -49,15 +45,9 @@ class TypesController
         return view('backoffice.admin.types.edit', compact('type'));
     }
 
-    public function update(Request $request, Type $type)
+    public function update(UpdateTypeRequest $request, Type $type)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:types,name,' . $type->id,
-            'description' => 'nullable|string|max:255',
-        ],[
-            'name.unique' => 'Ya existe un tipo con ese nombre.',
-            'name.required' => 'El campo nombre es obligatorio.',
-        ]);
+        $validated = $request->validated();
 
         $this->typeService->updateType($type, $validated);
 

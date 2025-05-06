@@ -15,9 +15,7 @@
                 id="title" 
                 name="title" 
                 class="form-control" 
-                value="{{ old('title') }}" 
-                required
-            >
+                value="{{ old('title') }}">
         </div>
         
         <div class="form-group mt-3">
@@ -25,9 +23,7 @@
             <textarea 
                 id="description" 
                 name="description" 
-                class="form-control" 
-                required
-            >{{ old('description') }}</textarea>
+                class="form-control">{{ old('description') }}</textarea>
         </div>
         
         <div class="form-group mt-3">
@@ -35,9 +31,7 @@
             <select 
                 id="type" 
                 name="type" 
-                class="form-control" 
-                required
-            >
+                class="form-control">
                 <option value="bug" {{ old('type') === 'bug' ? 'selected' : '' }}>Bug</option>
                 <option value="improvement" {{ old('type') === 'improvement' ? 'selected' : '' }}>Mejora</option>
                 <option value="request" {{ old('type') === 'request' ? 'selected' : '' }}>Solicitud</option>
@@ -49,9 +43,7 @@
             <select 
                 id="priority" 
                 name="priority" 
-                class="form-control" 
-                required
-            >
+                class="form-control">
                 <option value="low" {{ old('priority') === 'low' ? 'selected' : '' }}>Baja</option>
                 <option value="medium" {{ old('priority') === 'medium' ? 'selected' : '' }}>Media</option>
                 <option value="high" {{ old('priority') === 'high' ? 'selected' : '' }}>Alta</option>

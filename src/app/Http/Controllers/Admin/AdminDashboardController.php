@@ -16,8 +16,8 @@ class AdminDashboardController extends Controller
         $totalUsers = \App\Models\User::count();
         $totalAdmins = \App\Models\Admin::count();
         $totalTickets = \App\Models\Ticket::count();
-        $pendingTickets = \App\Models\Ticket::where('status', 'pendiente')->count();
-        $resolvedTickets = \App\Models\Ticket::where('status', 'resuelto')->count();
+        $pendingTickets = \App\Models\Ticket::where('status', 'pending')->count();
+        $resolvedTickets = \App\Models\Ticket::where('status', 'resolved')->count();
 
         $recentEvents = \App\Models\EventHistory::latest()->take(5)->get();
 

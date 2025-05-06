@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminRequest extends FormRequest
+class RegisterUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,19 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        $admin = $this->route('admin');
-
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins,email,' . $admin->id,
-            'password' => 'nullable|string|min:3|confirmed',
-            'superadmin' => 'boolean',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|confirmed|min:3',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.unique' => 'Este correo ya está registrado. Por favor, inicia sesión o usa otro correo.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ];
     }
 }
