@@ -49,6 +49,7 @@ class TicketPolicy
         return $user->id === $ticket->admin_id;
     }
 
+    //modificar para que este en la policy de comment
     public function comment($user, Ticket $ticket)
     {
         if ($user instanceof Admin) {
