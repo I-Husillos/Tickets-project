@@ -10,7 +10,7 @@
         
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Introduce tu correo">
+            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Introduce tu correo">
 
             @error('email')
                 <div class="invalid-feedback">
@@ -21,12 +21,12 @@
         
         <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Introduce tu contraseña">
+            <input type="password" id="password" name="password" class="form-control @error('email') is-invalid @enderror" placeholder="Introduce tu contraseña">
             @error('password')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
-            @enderror
+            @enderror   
         </div>
 
         <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>

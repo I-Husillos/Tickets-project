@@ -56,8 +56,11 @@
             </tbody>
         </table>
     </div>
+    <div class="d-flex justify-content-center mt-4">
+        {{ $events->links('pagination::bootstrap-4') }}
+    </div>
     <div class="mt-4">
-        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">Volver a la lista de Usuarios</a>
+        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">Volver al Panel de Control</a>
     </div>
 
 

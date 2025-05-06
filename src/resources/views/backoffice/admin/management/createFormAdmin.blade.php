@@ -8,13 +8,7 @@
 
     <!-- Mostrar mensajes de error de validación -->
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+        <div class="alert alert-danger">Error al crear al administrador</div>
     @endif
 
     <!-- Formulario para crear el administrador -->
@@ -22,25 +16,46 @@
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+            @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
+            @error('email')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
+            @error('password')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label for="superadmin" class="form-label">¿Es Superadmin?</label>
-            <select class="form-select" id="superadmin" name="superadmin">
-                <option value="1" {{ old('superadmin') == '1' ? 'selected' : '' }}>Sí</option>
+            <select class="form-select @error('superadmin') is-invalid @enderror" id="superadmin" name="superadmin">
+                <option value="">Seleccione una opción</option>
                 <option value="0" {{ old('superadmin') == '0' ? 'selected' : '' }}>No</option>
+                <option value="1" {{ old('superadmin') == '1' ? 'selected' : '' }}>Sí</option>
             </select>
+            @error('superadmin')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-success">Crear Administrador</button>

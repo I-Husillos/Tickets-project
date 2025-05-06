@@ -5,17 +5,23 @@
 @section('content')
 <div class="container mt-5">
     <h2>Crear Nuevo Ticket</h2>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">Error al mandar el formulario</div>
+    @endif
+
+
     <form method="POST" action="{{ route('user.tickets.store') }}">
         @csrf
         
         <div class="form-group mt-3">
             <label for="title">Título</label>
-            <input 
-                type="text" 
-                id="title" 
-                name="title" 
-                class="form-control" 
-                value="{{ old('title') }}">
+            <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
+                @error('title')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
         </div>
         
         <div class="form-group mt-3">
@@ -51,18 +57,14 @@
             </select>
         </div>
         
-        <input 
-            type="hidden" 
-            name="status" 
-            value="new"
-        >
+        <input type="hidden" name="status" value="new">
 
-        <button 
-            type="submit" 
-            class="btn btn-success mt-4"
-        >
+        <button type="submit" class="btn btn-success mt-4">
             Crear Ticket
         </button>
     </form>
+    <div class="mt-3">
+        <a href="{{ route('user.tickets.index') }}" class="btn btn-secondary">Cancelar</a>
+    </div>
 </div>
 @endsection

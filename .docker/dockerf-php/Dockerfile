@@ -12,16 +12,15 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libssl-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install gd pdo pdo_mysql ctype fileinfo zip && \
-    rm -rf /var/lib/apt/lists/*
-
-
-
-RUN docker-php-ext-install \
+    docker-php-ext-install \
+    gd \
     pdo \
     pdo_mysql \
     ctype \
-    fileinfo
+    fileinfo \
+    zip \
+    bcmath && \
+    rm -rf /var/lib/apt/lists/*
 
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
@@ -30,6 +29,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 
 RUN apt-get update && apt-get install -y supervisor
+
+
 
 COPY ./src /var/www/html
 

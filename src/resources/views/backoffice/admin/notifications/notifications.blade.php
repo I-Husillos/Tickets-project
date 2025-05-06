@@ -31,8 +31,8 @@
                     list-group-item-secondary 
                 @else
                     list-group-item-primary 
-                @endif
-            ">
+                @endif"
+            >
                 <strong>{{ $notification->data['message'] }}</strong><br>
 
                 <!-- Si es cambio de estado -->
@@ -63,5 +63,8 @@
         @endforeach
     </div>
     @endif
+    <div class="d-flex justify-content-center mt-4">
+        {{ $notifications->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

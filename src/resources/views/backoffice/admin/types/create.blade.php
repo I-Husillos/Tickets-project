@@ -7,23 +7,18 @@
     <h2>Crear Nuevo Tipo</h2>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+        <div class="alert alert-danger">Error al crear el tipo</div>
     @endif
 
     <form action="{{ route('admin.types.store') }}" method="POST">
         @csrf
-
         <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
             @error('name')
-                <div class="invalid-feedback">{{ $message }}</div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
             @enderror
         </div>
 
