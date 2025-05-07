@@ -25,8 +25,7 @@ class LanguageMiddleware
             App::setLocale('es'); // Aplica el idioma por defecto (español)
         }
 
-
-        if(session()->has('locale')){ // Verifica si hay un idioma guardado
+        if(session()->has('locale')){ // Verifica si hay un¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ idioma guardado
             App::setLocale(session()->get('locale')); // Aplica el idioma
         }
         return $next($request); // Continúa con la solicitud

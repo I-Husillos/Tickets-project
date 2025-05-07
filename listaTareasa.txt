@@ -13,6 +13,7 @@ lista de tareas:
 - que las notificaciones se vea no a traves de un boton abajo, sino que sea como un icono arriaba en la 
   esquina 
 - includes
+- batman sin capa
 - barra de navegación mas accesible al usuario
 - personalizar menu de login de usuarios para que sea por ejmplo un una parte a la izquierda donde se 
  muestre infrmacion de que es la app o lo que se puede hacer y a la derecha los campos para ingresar
