@@ -3,7 +3,8 @@ lista de tareas:
 - requests
 - policies 
 - gates
--
+- idiomas
+- url amigable
 -
 -
 -
@@ -21,13 +22,11 @@ lista de tareas:
 - comentarios confirmación visual, eliminar solo los comentarios añadidos por el mismo
 - validaciones
 - includes en Blade
-- políticas
-- idiomas
 - prefijo url que cumpla idioma
 - request
 - revisar que no se puedan ingresar datos atraves de la herramienta de desarrollo para inyectar datos y
   que por ejempplo esos datos si son tipos que se guarde en dos tablas, etc, laravel debe hacerlo y 
-  en las tablas deben ser
+  en las tablas deben ser fijos
 - 
 - 
 - 
@@ -39,8 +38,9 @@ lista de tareas:
 - 
 - 
 - 
-- 
 
 
 
 
+hacer una url amigable, que tenga el prefijo dependiendo del idioma y que la url esté o en castllano
+o en inglés dependiendo del idioma

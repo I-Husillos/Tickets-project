@@ -1,10 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Editar Tipo de Ticket')
+{{-- Título de la página para editar, obtenido de traducción --}}
+@section('title', __('general.admin_types.edit_title'))
 
 @section('admincontent')
-<div class="container mt-4 ">
-    <h2>Editar Tipo: {{ $type->name }}</h2>
+<div class="container mt-4">
+    <!-- Título del formulario de edición, usando parámetro para el nombre -->
+    <h2>{{ __('general.admin_types.edit_heading', ['name' => $type->name]) }}</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -21,20 +23,21 @@
         @method('PATCH')
 
         <div class="form-group mt-3">
-            <label for="name">Nombre</label>
+            <label for="name">{{ __('general.admin_types.name') }}</label>
             <input type="text" name="name" class="form-control" value="{{ old('name', $type->name) }}">
         </div>
 
         <div class="form-group mt-3">
-            <label for="description">Descripción</label>
+            <label for="description">{{ __('general.admin_types.description') }}</label>
             <input type="text" name="description" class="form-control" value="{{ old('description', $type->description) }}">
         </div>
 
         <div class="mt-2">
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-            <a href="{{ route('admin.types.index') }}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">{{ __('general.admin_types.update') }}</button>
+            <a href="{{ route('admin.types.index') }}" class="btn btn-secondary">
+                {{ __('general.admin_types.cancel') }}
+            </a>
         </div>
-        
     </form>
 </div>
 @endsection

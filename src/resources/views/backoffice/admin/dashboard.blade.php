@@ -1,32 +1,48 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard - Administrador')
+{{-- Se define el título de la página usando la traducción de “Dashboard - Administrador” --}}
+@section('title', __('general.admin_dashboard.dashboard_title'))
 
 @section('admincontent')
 <div class="container mt-5">
-    <h1 class="text-center">Panel de Administrador</h1>
-    <p class="text-center">Bienvenido, {{ Auth::guard('admin')->user()->name }}</p>
+    <!-- Se muestra el título principal del dashboard -->
+    <h1 class="text-center">{{ __('general.admin_dashboard.panel_admin') }}</h1>
+    
+    <!-- Se muestra el saludo, concatenando la traducción "Bienvenido" con el nombre del usuario -->
+    <p class="text-center">{{ __('general.admin_dashboard.welcome') }}, {{ Auth::guard('admin')->user()->name }}</p>
+    
     <div class="d-flex justify-content-end mt-4">
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
-            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+            <!-- Botón de cierre de sesión con traducción -->
+            <button type="submit" class="btn btn-danger">
+                {{ __('general.admin_dashboard.logout') }}
+            </button>
         </form>
     </div>
+    
     @if ($isSuperAdmin)
         <div class="mt-5">
             <div class="d-flex flex-wrap justify-content-center gap-3">
-                <a href="{{ route('admin.manage.tickets') }}" class="btn btn-success">Gestionar Tickets</a>
-                <a href="{{ route('admin.types.index') }}" class="btn btn-info">Tipos de Tickets</a>
-                <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-warning">Usuarios y Admins</a>
+                <!-- Enlaces del dashboard para administradores super, cada uno con su propia traducción -->
+                <a href="{{ route('admin.manage.tickets') }}" class="btn btn-success">
+                    {{ __('general.admin_dashboard.manage_tickets') }}
+                </a>
+                <a href="{{ route('admin.types.index') }}" class="btn btn-info">
+                    {{ __('general.admin_dashboard.ticket_types') }}
+                </a>
+                <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-warning">
+                    {{ __('general.admin_dashboard.users_and_admins') }}
+                </a>
             </div>
         </div>
     @endif
     
     <div class="mt-5 text-center">
-        <a href="{{ route('admin.show.assigned.tickets') }}" class="btn btn-primary btn-lg">Tickets Asignados</a>
+        <!-- Botón para ir a “Tickets Asignados”, traducido -->
+        <a href="{{ route('admin.show.assigned.tickets') }}" class="btn btn-primary btn-lg">
+            {{ __('general.admin_dashboard.assigned_tickets') }}
+        </a>
     </div>
-
 </div>
 @endsection
-
-

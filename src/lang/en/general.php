@@ -1,0 +1,379 @@
+<?php
+
+return [
+    'admin_sidebar' => [
+        'title_admin_panel'    => 'Admin Panel',
+        'panel_control'        => 'Control Panel',
+        'ver_usuarios'         => 'View Users',
+        'ver_admins'           => 'View Admins',
+        'tipos_de_tickets'     => 'Ticket Types',
+        'gestionar_tickets'    => 'Manage Tickets',
+        'tickets_asignados'    => 'Assigned Tickets',
+        'historial_eventos'    => 'Event History',
+        'notificaciones'       => 'Notifications',
+        'cerrar_sesion'        => 'Log Out',
+    ],
+
+    // Traducciones específicas para el dashboard
+    'admin_dashboard' => [
+        'dashboard_title'    => 'Dashboard - Administrator',
+        'panel_admin'        => 'Admin Panel',
+        'welcome'            => 'Welcome',
+        'logout'             => 'Log Out',
+        'manage_tickets'     => 'Manage Tickets',
+        'ticket_types'       => 'Ticket Types',
+        'users_and_admins'   => 'Users and Admins',
+        'assigned_tickets'   => 'Assigned Tickets',
+    ],
+
+    // Otras traducciones…
+    'admin_types' => [
+        'page_title'             => 'Ticket Types - Administrator',
+        'list_title'             => 'Ticket Types List',
+        'new_type'               => '+ New Type',
+        'name'                   => 'Name',
+        'description'            => 'Description',
+        'actions'                => 'Actions',
+        'delete'                 => 'Delete',
+        'edit'                   => 'Edit',
+        'edit_title'             => 'Edit Ticket Type',
+        'edit_heading'           => 'Edit Type: :name',
+        'update'                 => 'Update',
+        'cancel'                 => 'Cancel',
+        'create_title'           => 'Create Ticket Type',
+        'create_heading'         => 'Create New Type',
+        'save'                   => 'Save',
+        'create_error'           => 'Error creating type',
+        'confirm_deletion_title' => 'Confirm Deletion',
+        'confirm_deletion_heading' => 'Confirm Deletion',
+        'confirm_deletion_message' => 'Are you sure you want to delete the type ":name"?',
+        'confirm_deletion_yes'   => 'Yes, delete',
+    ],
+
+    'admin_ticket_details' => [
+        'page_title'        => 'Ticket Details',
+        'ticket_details'    => 'Ticket Details #:ticket_id',
+        'title_label'       => 'Title:',
+        'description_label' => 'Description:',
+        'status_label'      => 'Status:',
+        'priority_label'    => 'Priority:',
+        'type_label'        => 'Type:',
+        'assigned_to_label' => 'Assigned to:',
+        'sin_asignar'       => 'Unassigned',
+        'created_at_label'  => 'Creation Date:',
+        'updated_at_label'  => 'Last Update Date:',
+        'select_option'     => 'Select...',
+        'save_changes'      => 'Save Changes',
+
+        'comments'          => 'Comments',
+        'no_comments'       => 'There are no comments for this ticket.',
+        'author'            => 'Author',
+        'message'           => 'Message',
+        'date'              => 'Date',
+        'actions'           => 'Actions',
+        'delete'            => 'Delete',
+
+        'add_comment_heading' => 'Add a Comment',
+        'comment_placeholder' => 'Write your comment here...',
+        'add_comment'         => 'Add Comment',
+
+        'back_to_menu'      => 'Back to main menu',
+    ],
+
+    'admin_ticket_manage' => [
+        'page_title'         => 'Manage Tickets',
+        'list_title'         => 'Tickets List',
+        'status_filter'      => 'Status',
+        'status_new'         => 'New',
+        'status_in_progress' => 'In Progress',
+        'status_resolved'    => 'Resolved',
+        'status_closed'      => 'Closed',
+        'status_cancelled'   => 'Cancelled',
+        'priority_filter'    => 'Priority',
+        'priority_low'       => 'Low',
+        'priority_medium'    => 'Medium',
+        'priority_high'      => 'High',
+        'priority_critical'  => 'Critical',
+        'filter_button'      => 'Filter',
+        'table_id'           => 'ID',
+        'table_title'        => 'Title',
+        'table_status'       => 'Status',
+        'table_priority'     => 'Priority',
+        'table_type'         => 'Type',
+        'table_comments'     => 'Comments',
+        'table_assigned_to'  => 'Assigned to',
+        'table_actions'      => 'Actions',
+        'view_edit'          => 'View & Edit',
+        'reopen_ticket'      => 'Reopen Ticket',
+        'close_ticket'       => 'Close',
+        'sin_asignar'        => 'Unassigned',
+    ],
+
+
+    'admin_assigned_tickets' => [
+        'page_title'            => 'Assigned Tickets',
+        'title'                 => 'Assigned Tickets',
+        'status_filter'         => 'Status',
+        'status_new'            => 'New',
+        'status_in_progress'    => 'In Progress',
+        'status_resolved'       => 'Resolved',
+        'status_closed'         => 'Closed',
+        'status_cancelled'      => 'Cancelled',
+        'priority_filter'       => 'Priority',
+        'priority_low'          => 'Low',
+        'priority_medium'       => 'Medium',
+        'priority_high'         => 'High',
+        'priority_critical'     => 'Critical',
+        'filter_button'         => 'Filter',
+        'table_id'              => 'ID',
+        'table_title'           => 'Title',
+        'table_description'     => 'Description',
+        'table_status'          => 'Status',
+        'table_priority'        => 'Priority',
+        'table_type'            => 'Type',
+        'table_comments'        => 'Comments',
+        'table_actions'         => 'Actions',
+        'view_edit'             => 'View & Edit',
+        // Puedes agregar más claves según necesites...
+    ],
+
+    // Notifications
+    'admin_notifications' => [
+        'page_title'         => 'Notifications',
+        'header'             => 'Notifications',
+        'no_notifications'   => 'You have no notifications.',
+        'filter_placeholder' => '-- Filter by type --',
+        'option_ticket'      => 'Ticket Created',
+        'option_comment'     => 'Comment Added',
+        'filter_button'      => 'Filter',
+        'status_label'       => 'Status:',
+        'author_label'       => 'Author:',
+        'comment_label'      => 'Comment:',
+        'mark_as_read'       => 'Mark as Read',
+    ],
+
+    // Dashboard (Administrator)
+    'admin_dashboard' => [
+        'page_title'           => 'Administration Panel',
+        'control_panel'        => 'Control Panel',
+        'welcome_message'      => 'Welcome, :name',
+        'direct_access_title'  => 'Quick Access',
+        'superadmin_manage_users'  => 'Manage Users',
+        'superadmin_manage_admins' => 'Manage Admins',
+        'regular_view_tickets' => 'View My Tickets',
+        'regular_event_history'=> 'Event History',
+        
+        // Statistics
+        'registered_users'     => 'Registered Users',
+        'admins'               => 'Administrators',
+        'total_tickets'        => 'Total Tickets',
+        'pending_tickets'      => 'Pending Tickets',
+        'resolved_tickets'     => 'Resolved Tickets',
+        
+        // Latest Events
+        'latest_events_card_title'        => 'Latest Events',
+        'latest_events_none'              => 'No recent events.',
+        'latest_events_table_type'        => 'Type',
+        'latest_events_table_description' => 'Description',
+        'latest_events_table_user'        => 'User',
+        'latest_events_table_date'        => 'Date',
+        
+        // Recent Notifications
+        'recent_notifications_card_title' => 'Recent Notifications',
+        'recent_notifications_none'       => 'No recent notifications.',
+    ],
+
+    // User Management
+    'admin_users' => [
+        'page_title'         => 'User Management',
+        'list_title'         => 'User List',
+        'create_button'      => 'Create New User',
+        'registered_users'   => 'Registered Users',
+        'table_name'         => 'Name',
+        'table_email'        => 'Email',
+        'table_actions'      => 'Actions',
+        'edit'               => 'Edit',
+        'delete'             => 'Delete',
+        'no_users'           => 'No registered users.',
+        'back_to_dashboard'  => 'Back to Control Panel',
+    ],
+
+    // Administrator Management
+    'admin_admins' => [
+        'page_title'         => 'Administrator Management',
+        'list_title'         => 'Admin List',
+        'create_button'      => 'Create New Administrator',
+        'registered_admins'  => 'Registered Administrators',
+        'table_name'         => 'Name',
+        'table_email'        => 'Email',
+        'table_actions'      => 'Actions',
+        'edit'               => 'Edit',
+        'delete'             => 'Delete',
+        'no_admins'          => 'No registered administrators.',
+        'filter_placeholder' => '-- Filter by role --',
+        'option_superadmin'  => 'Super Administrators',
+        'option_regular'     => 'Regular Administrators',
+        'filter_button'      => 'Filter',
+        'clear_filter'       => 'Clear filter',
+        'back_to_dashboard'  => 'Back to Control Panel',
+    ],
+
+
+    // For editing a user
+    'admin_edit_user' => [
+        'page_title'             => 'Edit User',
+        'heading'                => 'Edit User',
+        'label_name'             => 'Name',
+        'label_email'            => 'Email',
+        'label_password'         => 'New Password (optional)',
+        'password_help'          => 'Leave blank if you do not wish to change the password.',
+        'label_password_confirm' => 'Confirm New Password',
+        'password_confirm_help'  => 'If you entered a new password, please confirm it here.',
+        'update_button'          => 'Update',
+        'cancel_button'          => 'Cancel',
+    ],
+
+    // For editing an administrator
+    'admin_edit_admin' => [
+        'page_title'              => 'Edit Administrator',
+        'heading'                 => 'Edit Administrator',
+        'label_name'              => 'Name',
+        'label_email'             => 'Email',
+        'label_password'          => 'New Password (optional)',
+        'password_help'           => 'Leave blank if you do not wish to change it.',
+        'label_password_confirm'  => 'Confirm New Password',
+        'password_confirm_help'   => 'If you entered a new password, please confirm it here.',
+        'checkbox_superadmin'     => 'Superadmin',
+        'update_button'           => 'Update',
+        'cancel_button'           => 'Cancel',
+    ],
+
+    // For creating a user
+    'admin_create_user' => [
+        'page_title'             => 'Create User',
+        'heading'                => 'Create New User',
+        'error_message'          => 'Error creating user',
+        'label_name'             => 'Name',
+        'label_email'            => 'Email',
+        'label_password'         => 'Password',
+        'label_password_confirm' => 'Confirm Password',
+        'create_button'          => 'Create User',
+        'back_button'            => 'Back to User List',
+    ],
+
+    // For creating an administrator
+    'admin_create_admin' => [
+        'page_title'             => 'Create Administrator',
+        'heading'                => 'Create New Administrator',
+        'error_message'          => 'Error creating administrator',
+        'label_name'             => 'Name',
+        'label_email'            => 'Email',
+        'label_password'         => 'Password',
+        'label_superadmin'       => 'Is Superadmin?',
+        'select_placeholder'     => 'Select an option',
+        'option_no'              => 'No',
+        'option_yes'             => 'Yes',
+        'create_button'          => 'Create Administrator',
+        'back_button'            => 'Back to User List',
+    ],
+
+    // For confirming user deletion
+    'admin_delete_user' => [
+        'page_title'     => 'Confirm User Deletion',
+        'heading'        => 'Confirm User Deletion',
+        'confirmation'   => 'Are you sure you want to delete user ":name"?',
+        'confirm_button' => 'Yes, delete',
+        'cancel_button'  => 'Cancel',
+    ],
+
+    // For confirming administrator deletion
+    'admin_delete_admin' => [
+        'page_title'     => 'Confirm Administrator Deletion',
+        'heading'        => 'Confirm Administrator Deletion',
+        'confirmation'   => 'Are you sure you want to delete administrator ":name"?',
+        'confirm_button' => 'Yes, delete',
+        'cancel_button'  => 'Cancel',
+    ],
+
+    // For event history
+    'admin_history_events' => [
+        'page_title'  => 'Event History',
+        'heading'     => 'Event History',
+        'filter'      => [
+            'label_event_type' => 'Event Type',
+            'label_date'       => 'Date',
+            'label_user'       => 'User',
+            'filter_button'    => 'Filter',
+        ],
+        'table'       => [
+            'header_event_type' => 'Event Type',
+            'header_description'=> 'Description',
+            'header_user'       => 'User',
+            'header_date'       => 'Date',
+            'no_events'         => 'No events available.',
+        ],
+        'back_button' => 'Back to Control Panel',
+    ],
+
+    // Frontoffice translations remain as before
+    'frontoffice' => [
+        'layout' => [
+            'page_title' => 'Ticket System',
+            'header'     => 'Welcome to the Ticket System',
+            'footer'     => 'Ticket System © :year',
+        ],
+
+        'tech_panel' => [
+            'title'         => 'Technician Panel',
+            'welcome'       => 'Welcome, :name',
+            'logout'        => 'Log Out',
+            'recent_notifications' => 'Recent Notifications',
+            'no_notifications'     => 'You have no notifications.',
+            'created_by'    => 'Created by',
+            'all_tickets'   => 'All Tickets',
+            'no_tickets'    => 'There are no tickets at the moment.',
+            'table'         => [
+                'id'        => 'ID',
+                'title'     => 'Title',
+                'status'    => 'Status',
+                'priority'  => 'Priority',
+                'created_by'=> 'Created by',
+                'date'      => 'Date',
+                'actions'   => 'Actions',
+            ],
+            'unassigned'    => 'Unassigned',
+            'view'          => 'View',
+        ],
+
+        'auth' => [
+            'register' => [
+                'title'                 => 'Register',
+                'heading'               => 'Register',
+                'label_name'            => 'Name',
+                'label_email'           => 'Email',
+                'label_password'        => 'Password',
+                'label_password_confirm'=> 'Confirm Password',
+                'submit'                => 'Register',
+                'back_to_home'          => 'Back to Home',
+            ],
+            'login' => [
+                'title'         => 'Log In',
+                'heading'       => 'Log In',
+                'label_email'   => 'Email',
+                'label_password'=> 'Password',
+                'submit'        => 'Log In',
+                'no_account'    => "Don't have an account?",
+                'register_here' => 'Register here',
+            ],
+            'admin_login' => [
+                'title'            => 'Admin Log In',
+                'heading'          => 'Log in as Administrator',
+                'label_email'      => 'Email',
+                'placeholder_email'=> 'Enter your email',
+                'label_password'   => 'Password',
+                'placeholder_password' => 'Enter your password',
+                'submit'           => 'Log In',
+            ],
+        ],
+    ],
+];

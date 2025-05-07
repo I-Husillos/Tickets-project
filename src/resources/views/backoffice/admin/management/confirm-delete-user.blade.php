@@ -1,19 +1,18 @@
 @extends('layouts.admin')
 
-@section('title', 'Confirmar Eliminación Usuario')
+@section('title', __('general.admin_delete_user.page_title'))
 
 @section('admincontent')
-<div class="container mt-5" >
-    <h2>Confirmar Eliminación de usuario</h2>
+<div class="container mt-5">
+    <h2>{{ __('general.admin_delete_user.heading') }}</h2>
 
-    <p>¿Estás seguro de que deseas eliminar el usuario <strong>"{{ $user->name }}"</strong>?</p>
+    <p>{{ __('general.admin_delete_user.confirmation', ['name' => $user->name]) }}</p>
 
     <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
-        <a href="{{ route('admin.dashboard.list.users') }}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-danger">{{ __('general.admin_delete_user.confirm_button') }}</button>
+        <a href="{{ route('admin.dashboard.list.users') }}" class="btn btn-secondary">{{ __('general.admin_delete_user.cancel_button') }}</a>
     </form>
 </div>
 @endsection
-

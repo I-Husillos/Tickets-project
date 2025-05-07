@@ -1,25 +1,34 @@
 @extends('layouts.admin')
 
-@section('title', 'Notificaciones')
+{{-- Se establece el título de la página mediante la traducción --}}
+@section('title', __('general.admin_notifications.page_title'))
 
 @section('admincontent')
 <div class="container mt-5">
-    <h2 class="text-center">Notificaciones</h2>
+    <!-- Encabezado -->
+    <h2 class="text-center">{{ __('general.admin_notifications.header') }}</h2>
 
     @if ($notifications->isEmpty())
-        <p>No tienes notificaciones.</p>
+        <p>{{ __('general.admin_notifications.no_notifications') }}</p>
     @else
     <form method="GET" action="{{ route('admin.notifications') }}" class="mb-4">
         <div class="form-row">
             <div class="col-md-4">
                 <select name="type" class="form-control">
-                    <option value="">-- Filtrar por tipo --</option>
-                    <option value="ticket" {{ request('type') == 'ticket' ? 'selected' : '' }}>Ticket creado</option>
-                    <option value="comment" {{ request('type') == 'comment' ? 'selected' : '' }}>Comentario añadido</option>
+                    <!-- Opción por defecto -->
+                    <option value="">{{ __('general.admin_notifications.filter_placeholder') }}</option>
+                    <option value="ticket" {{ request('type') == 'ticket' ? 'selected' : '' }}>
+                        {{ __('general.admin_notifications.option_ticket') }}
+                    </option>
+                    <option value="comment" {{ request('type') == 'comment' ? 'selected' : '' }}>
+                        {{ __('general.admin_notifications.option_comment') }}
+                    </option>
                 </select>
             </div>
             <div class="col-md-">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary">
+                    {{ __('general.admin_notifications.filter_button') }}
+                </button>
             </div>
         </div>
     </form>
@@ -35,19 +44,28 @@
             >
                 <strong>{{ $notification->data['message'] }}</strong><br>
 
-                <!-- Si es cambio de estado -->
+                <!-- Si existe el estado en la data de la notificación -->
                 @isset($notification->data['status'])
-                <p><strong>Estado:</strong> {{ ucfirst($notification->data['status']) }}</p>
+                    <p>
+                        <strong>{{ __('general.admin_notifications.status_label') }}</strong>
+                        {{ ucfirst($notification->data['status']) }}
+                    </p>
                 @endisset
 
-                <!-- Si tiene autor -->
+                <!-- Si existe un autor -->
                 @isset($notification->data['author'])
-                <p><strong>Autor:</strong> {{ $notification->data['author'] }}</p>
+                    <p>
+                        <strong>{{ __('general.admin_notifications.author_label') }}</strong>
+                        {{ $notification->data['author'] }}
+                    </p>
                 @endisset
 
-                <!-- Si tiene contenido del comentario -->
+                <!-- Si existe un comentario -->
                 @isset($notification->data['comment'])
-                <p><strong>Comentario:</strong> "{{ $notification->data['comment'] }}"</p>
+                    <p>
+                        <strong>{{ __('general.admin_notifications.comment_label') }}</strong>
+                        "{{ $notification->data['comment'] }}"
+                    </p>
                 @endisset
 
                 <small>{{ $notification->created_at->format('d/m/Y H:i') }}</small>
@@ -56,7 +74,9 @@
                     <form action="{{ route('admin.notifications.read', $notification->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('PATCH')
-                        <button type="submit" class="btn btn-sm btn-outline-secondary float-right">Marcar como leída</button>
+                        <button type="submit" class="btn btn-sm btn-outline-secondary float-right">
+                            {{ __('general.admin_notifications.mark_as_read') }}
+                        </button>
                     </form>
                 @endif
             </a>

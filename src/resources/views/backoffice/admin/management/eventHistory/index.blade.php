@@ -1,28 +1,29 @@
 @extends('layouts.admin')
 
-@section('title', 'Historial de Eventos')
+@section('title', __('general.admin_history_events.page_title'))
 
 @section('admincontent')
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Historial de Eventos</h1>
+    <!-- Encabezado principal -->
+    <h1 class="text-center mb-4">{{ __('general.admin_history_events.heading') }}</h1>
 
     <!-- Formulario de filtrado de eventos -->
     <form method="GET" action="{{ route('admin.history.events') }}">
         <div class="row">
             <div class="col-md-4">
-                <label for="event_type">Tipo de Evento</label>
+                <label for="event_type">{{ __('general.admin_history_events.filter.label_event_type') }}</label>
                 <input type="text" name="event_type" class="form-control" value="{{ request()->event_type }}">
             </div>
             <div class="col-md-4">
-                <label for="date">Fecha</label>
+                <label for="date">{{ __('general.admin_history_events.filter.label_date') }}</label>
                 <input type="date" name="date" class="form-control" value="{{ request()->date }}">
             </div>
             <div class="col-md-4">
-                <label for="user">Usuario</label>
+                <label for="user">{{ __('general.admin_history_events.filter.label_user') }}</label>
                 <input type="text" name="user" class="form-control" value="{{ request()->user }}">
             </div>
             <div class="col-md-12 mt-3">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary">{{ __('general.admin_history_events.filter.filter_button') }}</button>
             </div>
         </div>
     </form>
@@ -32,37 +33,39 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Tipo de Evento</th>
-                    <th>Descripción</th>
-                    <th>Usuario</th>
-                    <th>Fecha</th>
+                    <th>{{ __('general.admin_history_events.table.header_event_type') }}</th>
+                    <th>{{ __('general.admin_history_events.table.header_description') }}</th>
+                    <th>{{ __('general.admin_history_events.table.header_user') }}</th>
+                    <th>{{ __('general.admin_history_events.table.header_date') }}</th>
                 </tr>
             </thead>
-            @if(isset($events) && $events->count())
-                @foreach($events as $event)
+            <tbody>
+                @if(isset($events) && $events->count())
+                    @foreach($events as $event)
+                        <tr>
+                            <td>{{ $event->event_type }}</td>
+                            <td>{{ $event->description }}</td>
+                            <td>{{ $event->user }}</td>
+                            <td>{{ $event->created_at }}</td>
+                        </tr>
+                    @endforeach
+                @else
                     <tr>
-                        <td>{{ $event->event_type }}</td>
-                        <td>{{ $event->description }}</td>
-                        <td>{{ $event->user}}</td>
-                        <td>{{ $event->created_at }}</td>
-
+                        <td colspan="4">{{ __('general.admin_history_events.table.no_events') }}</td>
                     </tr>
-                @endforeach
-            @else
-                <tr>
-                    <td colspan="4">No hay eventos disponibles.</td>
-                </tr>
-            @endif
+                @endif
             </tbody>
         </table>
     </div>
+
+    <!-- Paginación -->
     <div class="d-flex justify-content-center mt-4">
         {{ $events->links('pagination::bootstrap-4') }}
     </div>
+
+    <!-- Botón para regresar al Panel de Control -->
     <div class="mt-4">
-        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">Volver al Panel de Control</a>
+        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">{{ __('general.admin_history_events.back_button') }}</a>
     </div>
-
-
 </div>
 @endsection

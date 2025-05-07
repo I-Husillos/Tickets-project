@@ -1,23 +1,28 @@
 @extends('layouts.admin')
 
-@section('title', 'Types de Tickets - Administrador')
+{{-- Se define el título de la página usando la clave de traducción --}}
+@section('title', __('general.admin_types.page_title'))
 
 @section('admincontent')
 <div class="container mt-4">
-    <h2 class="text-center">Listado de Tipos de Ticket</h2>
+    <!-- Título del listado -->
+    <h2 class="text-center">{{ __('general.admin_types.list_title') }}</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('admin.types.create') }}" class="btn btn-primary mb-3">+ Nuevo Tipo</a>
+    <!-- Botón para crear un nuevo tipo, traducido -->
+    <a href="{{ route('admin.types.create') }}" class="btn btn-primary mb-3">
+        {{ __('general.admin_types.new_type') }}
+    </a>
 
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th style="text-align: center;">Acciones</th>
+                <th>{{ __('general.admin_types.name') }}</th>
+                <th>{{ __('general.admin_types.description') }}</th>
+                <th style="text-align: center;">{{ __('general.admin_types.actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -28,10 +33,10 @@
                     <td>
                         <div class="text-center">
                             <a href="{{ route('admin.types.confirmDelete', $type->id) }}" class="btn btn-danger btn-sm">
-                                Eliminar
+                                {{ __('general.admin_types.delete') }}
                             </a>
                             <a href="{{ route('admin.types.edit', $type->id) }}" class="btn btn-warning btn-sm">
-                                Editar
+                                {{ __('general.admin_types.edit') }}
                             </a>
                         </div>
                     </td>
