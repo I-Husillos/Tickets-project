@@ -10,7 +10,7 @@
     <h1 class="text-center mb-4">{{ __('general.admin_assigned_tickets.title') }}</h1>
     
     <!-- Formulario de filtrado -->
-    <form method="GET" action="{{ route('admin.show.assigned.tickets') }}" class="mt-4">
+    <form method="GET" action="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}" class="mt-4">
         <div class="form-row">
             <div class="col">
                 <select name="status" class="form-control">
@@ -85,7 +85,7 @@
                     <td>{{ $ticket->comments->count() }}</td>
                     <td>
                         <!-- Botón para ver y editar -->
-                        <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm">
+                        <a href="{{ route('admin.view.ticket', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}" class="btn btn-info btn-sm">
                             {{ __('general.admin_assigned_tickets.view_edit') }}
                         </a>
                     </td>

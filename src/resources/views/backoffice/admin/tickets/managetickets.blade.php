@@ -11,7 +11,7 @@
         <!-- Se ha comentado el formulario de logout, por lo que no se requiere traducción -->
     </div>
     <!-- Formulario de filtro -->
-    <form method="GET" action="{{ route('admin.manage.tickets') }}" class="mt-4">
+    <form method="GET" action="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="mt-4">
         <div class="form-row">
             <div class="col">
                 <select name="status" class="form-control">
@@ -73,18 +73,18 @@
                 <td>{{ $ticket->admin ? $ticket->admin->name : __('general.admin_ticket_manage.sin_asignar') }}</td>
                 <td>
                     <div class="text-center">
-                        <a href="{{ route('admin.view.ticket', $ticket->id) }}" class="btn btn-info btn-sm me-3">
+                        <a href="{{ route('admin.view.ticket', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}" class="btn btn-info btn-sm me-3">
                             {{ __('general.admin_ticket_manage.view_edit') }}
                         </a>
                         @if ($ticket->status === 'closed')
-                            <form method="POST" action="{{ route('admin.reopen.ticket', $ticket->id) }}" class="d-inline">
+                            <form method="POST" action="{{ route('admin.reopen.ticket', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}" class="d-inline">
                                 @csrf
                                 <button type="submit" class="btn btn-success btn-sm">
                                     {{ __('general.admin_ticket_manage.reopen_ticket') }}
                                 </button>
                             </form>
                         @else
-                            <form method="POST" action="{{ route('admin.close.ticket', $ticket->id) }}" class="d-inline">
+                            <form method="POST" action="{{ route('admin.close.ticket', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}" class="d-inline">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit" class="btn btn-danger btn-sm">

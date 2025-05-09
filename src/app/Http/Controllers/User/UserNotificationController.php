@@ -21,13 +21,13 @@ class UserNotificationController extends Controller
             $query->where('data->type', $request->type);
         }
         
-        $notifications = $query->get();
+        $notifications = $query->orderBy('created_at', 'desc')->paginate(10);
 
 
         return view('backoffice.user.notifications.viewnotifications', compact('notifications'));
     }
 
-    public function markAsRead($notificationId)
+    public function markAsRead($locale, $notificationId)
     {
         $user = Auth::guard('user')->user();
         
@@ -37,6 +37,8 @@ class UserNotificationController extends Controller
             $notification->markAsRead();
         }
 
-        return redirect()->route('user.notifications');
+        return redirect()->route('user.notifications', ['locale' => $locale]);
     }
 }
+
+

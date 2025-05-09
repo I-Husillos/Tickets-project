@@ -18,6 +18,7 @@ use App\Notifications\TicketCreatedNotification;
 use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTicketRequest;
+use Dotenv\Util\Str;
 
 class TicketController extends Controller
 {
@@ -31,9 +32,12 @@ class TicketController extends Controller
 
     public function showAll()
     {
-        $this->authorize('viewAny', Ticket::class);
+        $this->authorize('index', Ticket::class);
 
-        $tickets = Ticket::paginate(10);
+        $user = Auth::guard('user')->user();
+
+        $tickets = $user->tickets()->orderBy('created_at', 'desc')->paginate(10);
+
         return view('backoffice.user.tickets.index', compact('tickets'));
     }
 
@@ -66,12 +70,14 @@ class TicketController extends Controller
 
 
 
-        return redirect()->route('user.tickets.index')->with('success', 'Ticket creado con éxito.');
+        return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', 'Ticket creado con éxito.');
     }
 
 
-    public function show(Ticket $ticket)
+    public function show(String $locale,Ticket $ticket)
     {
+        Log::info('Ticket recibido:', ['ticket' => $ticket]);
+
         $this->authorize('view', $ticket);
 
         $ticket->load('comments');
@@ -97,39 +103,39 @@ class TicketController extends Controller
         $this->ticketService->updateStatus(
             $ticket,
             $status,
-            'Actualización',
+            $user,
             'Ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" actualizado a "' . $status . '"',
-            $user
         );
 
-        return redirect()->route('user.tickets.index')->with('success', 'Estado del ticket actualizado.');
+        return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', 'Estado del ticket actualizado.');
     }
 
 
 
     
-    public function closeTicket(Request $request, Ticket $ticketId)
+    public function closeTicket(String $locale,Ticket $ticketId)
     {
         $this->authorize('update', $ticketId);
 
         $admin = Auth::guard('admin')->user();
+
 
         if($ticketId->status !== 'closed')
         {
             $this->ticketService->updateStatus(
                 $ticketId,
                 'closed',
-                'Actualización',
+                $admin,
                 'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
-                $admin
             );
         }
-        return redirect()->route('admin.manage.tickets')->with('success', 'Ticket cerrado.');
+
+        return redirect()->route('admin.manage.tickets', ['locale' => $locale])->with('success', 'Ticket cerrado.');
     }
 
 
 
-    public function reopenTicket(Ticket $ticketId)
+    public function reopenTicket(String $locale,Ticket $ticketId)
     {
         $this->authorize('update', $ticketId);
 
@@ -137,14 +143,12 @@ class TicketController extends Controller
 
         $this->ticketService->updateStatus(
             $ticketId,
-            'new',
-            'Actualización',
-            'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' abierto',
+            'reopened',
             $admin,
-            'reopened'
+            'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' abierto',
         );
 
-        return redirect()->route('admin.manage.tickets')->with('success', 'Ticket reabierto.');
+        return redirect()->route('admin.manage.tickets', ['locale' => $locale])->with('success', 'Ticket reabierto.');
     }
 
 

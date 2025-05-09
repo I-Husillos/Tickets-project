@@ -25,36 +25,37 @@
         </div>
 
         <hr class="bg-light mx-3">
-        <a href="{{ route('admin.manage.dashboard') }}" 
+        <!-- route('register', ['locale' => app()->getLocale()]) --> 
+        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" 
         class="d-block text-white {{ str_starts_with($routeName, 'admin.dashboard.list.') ? 'fw-bold text-decoration-underline' : '' }}">
             {{ __('general.admin_sidebar.panel_control') }}
         </a>
             @if (Auth::guard('admin')->user()->superadmin)
                 @if (str_starts_with($routeName, 'admin.dashboard.list.'))
                         <div class="ps-3 mt-1">
-                            <a href="{{ route('admin.dashboard.list.users') }}"
+                            <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}"
                             class="d-block text-white {{ $routeName === 'admin.dashboard.list.users' ? 'fw-bold' : '' }}">
                                 {{ __('general.admin_sidebar.ver_usuarios') }}
                             </a>
-                            <a href="{{ route('admin.dashboard.list.admins') }}"
+                            <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}"
                             class="d-block text-white {{ $routeName === 'admin.dashboard.list.admins' ? 'fw-bold' : '' }}">
                                 {{ __('general.admin_sidebar.ver_admins') }}
                             </a>
                         </div>
                     @endif
-                <a href="{{ route('admin.types.index') }}">{{ __('general.admin_sidebar.tipos_de_tickets') }}</a>
-                <a href="{{ route('admin.manage.tickets') }}">{{ __('general.admin_sidebar.gestionar_tickets') }}</a>
+                <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.tipos_de_tickets') }}</a>
+                <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.gestionar_tickets') }}</a>
             @endif
-        <a href="{{ route('admin.show.assigned.tickets') }}">{{ __('general.admin_sidebar.tickets_asignados') }}</a>
-        <a href="{{ route('admin.history.events') }}">{{ __('general.admin_sidebar.historial_eventos') }}</a>
-        <a href="{{ route('admin.notifications') }}" class="d-block text-white">
+        <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.tickets_asignados') }}</a>
+        <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.historial_eventos') }}</a>
+        <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="d-block text-white">
             {{ __('general.admin_sidebar.notificaciones') }} 
             @if (Auth::user()->unreadNotifications->count() > 0)
                 <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
             @endif
         </a>
 
-        <form method="POST" action="{{ route('admin.logout') }}" class="mt-4 px-3">
+        <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}" class="mt-4 px-3">
             @csrf
             <button class="btn btn-danger w-100">{{ __('general.admin_sidebar.cerrar_sesion') }}</button>
         </form>

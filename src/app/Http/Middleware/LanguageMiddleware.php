@@ -16,22 +16,50 @@ class LanguageMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->segment(1); // Obtiene el segmento de la URL
-        $availableLanguages = ['es', 'en']; // Idiomas disponibles
+        $locale = $request->segment(1); // Primer segmento (es/en)
+        $availableLanguages = ['es', 'en'];
 
-        if(in_array($locale, $availableLanguages)){ // Verifica si el idioma es válido
-            App::setLocale($locale); // Aplica el idioma
-        }else{
-            App::setLocale('es'); // Aplica el idioma por defecto (español)
+        // 1. Validación del idioma**
+        if (!in_array($locale, $availableLanguages)) {
+            $locale = 'es'; // Idioma por defecto
+            $newUrl = "/$locale" . $request->getPathInfo();
+            $query = $request->getQueryString();
+
+            // Si hay query params, se agregan al final
+            if ($query) {
+                $newUrl .= "?" . $query;
+            }
+
+            // Redirección a la URL con prefijo de idioma**
+            return redirect($newUrl);
         }
 
-        if(session()->has('locale')){ // Verifica si hay un¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ idioma guardado
-            App::setLocale(session()->get('locale')); // Aplica el idioma
+        // Establecer el idioma de la aplicación**
+        App::setLocale($locale);
+        session(['locale' => $locale]);
+
+        $segments = $request->segments();
+        $translatedSegments = [];
+
+        foreach ($segments as $index => $segment) {
+            if ($index === 0) {
+                // El primer segmento es el idioma, no se traduce
+                $translatedSegments[] = $segment;
+            } else {
+                // Se intenta traducir, si no se encuentra se queda igual
+                $translation = __("routes.$segment", [], $locale);
+                $translatedSegments[] = ($translation !== "routes.$segment") ? $translation : $segment;
+            }
         }
-        return $next($request); // Continúa con la solicitud
+
+        $newPath = implode('/', $translatedSegments);
+        if ($newPath !== $request->path()) {
+            return redirect()->to($newPath);
+        }
+
+        return $next($request);
+        
     }
 }
-
-
 
 

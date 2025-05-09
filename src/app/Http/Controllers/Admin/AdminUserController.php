@@ -45,15 +45,15 @@ class AdminUserController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.manage.dashboard')->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('admin.manage.dashboard', ['locale' => app()->getLocale()])->with('success', 'Usuario creado correctamente.');
     }
 
-    public function confirmDeleteUser(User $user)
+    public function confirmDeleteUser(String $locale, User $user)
     {
         return view('backoffice.admin.management.confirm-delete-user', compact('user'));
     }
 
-    public function confirmDeleteUserPost(User $user)
+    public function confirmDeleteUserPost(String $locale, User $user)
     {
         $user->delete();
 
@@ -63,11 +63,11 @@ class AdminUserController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario eliminado correctamente.');
+        return redirect()->route('admin.dashboard.list.users', ['locale' => $locale])->with('success', 'Usuario eliminado correctamente.');
     }
 
 
-    public function editUser(User $user)
+    public function editUser(String $locale, User $user)
     {
         return view('backoffice.admin.management.editFormUser', compact('user'));
     }

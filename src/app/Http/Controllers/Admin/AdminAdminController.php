@@ -33,7 +33,7 @@ class AdminAdminController extends Controller
         return view('backoffice.admin.management.createFormAdmin');
     }
 
-    public function storeAdmin(StoreAdminRequest $request)
+    public function storeAdmin(StoreAdminRequest $request, String $locale)
     {
         $data = $request->validated();
 
@@ -52,7 +52,7 @@ class AdminAdminController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.manage.dashboard')->with('success', 'Administrador creado correctamente.');
+        return redirect()->route('admin.manage.dashboard', ['locale' => $locale])->with('success', 'Administrador creado correctamente.');
     }
 
 
@@ -75,13 +75,13 @@ class AdminAdminController extends Controller
         return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador eliminado correctamente.');
     }
 
-    public function editAdmin(Admin $admin)
+    public function editAdmin(String $locale, Admin $admin)
     {
         return view('backoffice.admin.management.editFormAdmin', compact('admin'));
     }
 
 
-    public function updateAdmin(UpdateAdminRequest $request, Admin $admin)
+    public function updateAdmin(UpdateAdminRequest $request, String $locale, Admin $admin)
     {
         $data = $request->validated();
         
@@ -103,7 +103,7 @@ class AdminAdminController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador actualizado correctamente.');
+        return redirect()->route('admin.dashboard.list.admins', ['locale' => $locale])->with('success', 'Administrador actualizado correctamente.');
     }
 }
 

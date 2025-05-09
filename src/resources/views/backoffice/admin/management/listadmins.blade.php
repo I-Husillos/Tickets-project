@@ -21,12 +21,12 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="text-center mb-0">{{ __('general.admin_admins.list_title') }}</h1>
-        <a href="{{ route('admin.admins.create') }}" class="btn btn-primary shadow rounded-4">
+        <a href="{{ route('admin.admins.create', ['locale' => app()->getLocale()]) }}" class="btn btn-primary shadow rounded-4">
             <i class="fas fa-user-shield"></i> {{ __('general.admin_admins.create_button') }}
         </a>
     </div>
 
-    <form method="GET" action="{{ route('admin.dashboard.list.admins') }}" class="mb-4">
+    <form method="GET" action="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="mb-4">
         <div class="form-row align-items-center">
             <div class="col-md-4">
                 <select name="superadmin" class="form-control">
@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-auto">
                 <button type="submit" class="btn btn-primary">{{ __('general.admin_admins.filter_button') }}</button>
-                <a href="{{ route('admin.dashboard.list.admins') }}" class="btn btn-secondary">{{ __('general.admin_admins.clear_filter') }}</a>
+                <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_admins.clear_filter') }}</a>
             </div>
         </div>
     </form>
@@ -61,10 +61,10 @@
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
                                 <td>
-                                    <a href="{{ route('admin.admins.edit', $admin->id) }}" class="btn btn-warning btn-sm rounded-4">
+                                    <a href="{{ route('admin.admins.edit', ['locale' => app()->getLocale(), 'admin' => $admin->id]) }}" class="btn btn-warning btn-sm rounded-4">
                                         <i class="fas fa-edit"></i> {{ __('general.admin_admins.edit') }}
                                     </a>
-                                    <a href="{{ route('admin.admins.confirmDelete', $admin->id) }}" class="btn btn-danger btn-sm rounded-4">
+                                    <a href="{{ route('admin.admins.confirmDelete', ['locale' => app()->getLocale(), 'admin' => $admin->id]) }}" class="btn btn-danger btn-sm rounded-4">
                                         <i class="fas fa-trash-alt"></i> {{ __('general.admin_admins.delete') }}
                                     </a>
                                 </td>
@@ -85,7 +85,7 @@
     </div>
 
     <div class="mt-4 text-center">
-        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary rounded-4 shadow">
+        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary rounded-4 shadow">
             <i class="fas fa-arrow-left"></i> {{ __('general.admin_admins.back_to_dashboard') }}
         </a>
     </div>

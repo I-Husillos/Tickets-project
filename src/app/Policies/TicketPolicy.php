@@ -17,6 +17,11 @@ class TicketPolicy
         return true;
     }
 
+    public function index(User $user): bool
+    {
+        return true;
+    }
+
     /**
      * Determine whether the user can view the model.
      */

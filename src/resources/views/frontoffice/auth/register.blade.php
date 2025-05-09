@@ -5,7 +5,18 @@
 @section('content')
 <div class="container mt-5">
     <h2 class="text-center text-primary">{{ __('general.frontoffice.auth.register.heading') }}</h2>
-    <form method="POST" action="{{ route('register') }}" class="mt-4">
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('register', ['locale' => app()->getLocale()]) }}" class="mt-4">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('general.frontoffice.auth.register.label_name') }}</label>
@@ -27,17 +38,9 @@
     </form>
 
     <div class="text-center mt-4">
-        <a href="{{ route('login') }}" class="btn btn-secondary">{{ __('general.frontoffice.auth.register.back_to_home') }}</a>
+        <a href="{{ route('login', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.frontoffice.auth.register.back_to_home') }}</a>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
 </div>
 @endsection

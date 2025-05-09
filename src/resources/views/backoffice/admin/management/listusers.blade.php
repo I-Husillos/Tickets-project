@@ -23,7 +23,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="text-center mb-0">{{ __('general.admin_users.list_title') }}</h1>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success shadow rounded-4">
+        <a href="{{ route('admin.users.create', ['locale' => app()->getLocale()]) }}" class="btn btn-success shadow rounded-4">
             <i class="fas fa-user-plus"></i> {{ __('general.admin_users.create_button') }}
         </a>
     </div>
@@ -47,10 +47,10 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning btn-sm rounded-4">
+                                    <a href="{{ route('admin.users.edit', ['locale' => app()->getLocale(), 'user' => $user->id]) }}" class="btn btn-warning btn-sm rounded-4">
                                         <i class="fas fa-edit"></i> {{ __('general.admin_users.edit') }}
                                     </a>
-                                    <a href="{{ route('admin.users.confirmDelete', $user->id) }}" class="btn btn-danger btn-sm rounded-4">
+                                    <a href="{{ route('admin.users.confirmDelete', ['locale' => app()->getLocale(), 'user' => $user->id]) }}" class="btn btn-danger btn-sm rounded-4">
                                         <i class="fas fa-trash-alt"></i> {{ __('general.admin_users.delete') }}
                                     </a>
                                 </td>
@@ -71,7 +71,7 @@
     </div>
 
     <div class="mt-4 text-center">
-        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary rounded-4 shadow">
+        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary rounded-4 shadow">
             <i class="fas fa-arrow-left"></i> {{ __('general.admin_users.back_to_dashboard') }}
         </a>
     </div>

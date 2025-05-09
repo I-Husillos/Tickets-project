@@ -32,7 +32,7 @@ class AdminNotificationController extends Controller
     }
 
 
-    public function markAsRead($notificationId)
+    public function markAsRead($locale, $notificationId)
     {
         $admin = Auth::guard('admin')->user();
 
@@ -42,6 +42,6 @@ class AdminNotificationController extends Controller
             $notification->markAsRead();
         }
 
-        return redirect()->route('admin.notifications');
+        return redirect()->route('admin.notifications', ['locale' => $locale]);
     }
 }

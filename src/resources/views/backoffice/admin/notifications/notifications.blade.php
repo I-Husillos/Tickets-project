@@ -11,7 +11,7 @@
     @if ($notifications->isEmpty())
         <p>{{ __('general.admin_notifications.no_notifications') }}</p>
     @else
-    <form method="GET" action="{{ route('admin.notifications') }}" class="mb-4">
+    <form method="GET" action="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="mb-4">
         <div class="form-row">
             <div class="col-md-4">
                 <select name="type" class="form-control">
@@ -35,7 +35,7 @@
 
     <div class="list-group mt-4">
         @foreach ($notifications as $notification)
-            <a href="{{ route('admin.view.ticket', $notification->data['ticket_id']) }}" class="list-group-item list-group-item-action
+            <a href="{{ route('admin.view.ticket', ['locale' => app()->getLocale(), 'ticket' => $notification->data['ticket_id']]) }}" class="list-group-item list-group-item-action
                 @if ($notification->read_at) 
                     list-group-item-secondary 
                 @else
@@ -71,7 +71,7 @@
                 <small>{{ $notification->created_at->format('d/m/Y H:i') }}</small>
 
                 @if (!$notification->read_at)
-                    <form action="{{ route('admin.notifications.read', $notification->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('admin.notifications.read', ['locale' => app()->getLocale(), 'notificationId' => $notification->id]) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="btn btn-sm btn-outline-secondary float-right">

@@ -12,15 +12,15 @@ class EventHistoryService
 
 
         if (!empty($filters['event_type'])) {
-            $query->where('event_type', 'like', '%' . $query['event_type'] . '%');
+            $query->where('event_type', 'like', '%' . $filters['event_type'] . '%');
         }
 
         if (!empty($filters['user'])) {
-            $query->where('user', 'like', '%' . $query['user'] . '%');
+            $query->where('user', 'like', '%' . $filters['user'] . '%');
         }
 
         if (!empty($filters['date'])) {
-            $query->whereDate('created_at', $query['date']);
+            $query->whereDate('created_at', $filters['date']);
         }
 
         return $query->paginate(10);

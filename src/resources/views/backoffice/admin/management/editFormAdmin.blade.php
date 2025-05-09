@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <h2>{{ __('general.admin_edit_admin.heading') }}</h2>
 
-    <form method="POST" action="{{ route('admin.admins.update', $admin->id) }}">
+    <form method="POST" action="{{ route('admin.admins.update', ['admin' => $admin->id, 'locale' => app()->getLocale()]) }}">
         @csrf
         @method('PUT')
 
@@ -39,7 +39,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">{{ __('general.admin_edit_admin.update_button') }}</button>
-        <a href="{{ route('admin.dashboard.list.admins') }}" class="btn btn-secondary">{{ __('general.admin_edit_admin.cancel_button') }}</a>
+        <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_edit_admin.cancel_button') }}</a>
     </form>
 </div>
 @endsection

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminTicketController extends Controller
 {
-    public function viewTicket(Ticket $ticket)
+    public function viewTicket(String $locale, Ticket $ticket)
     {
         $admins = Admin::all();
         $ticketTypes = Type::all();
@@ -66,7 +66,7 @@ class AdminTicketController extends Controller
 
 
 
-    public function updateTicketStatus(UpdateTicketStatusRequest $request, Ticket $ticket)
+    public function updateTicketStatus(String $locale, UpdateTicketStatusRequest $request, Ticket $ticket)
     {
         $this->authorize('update', $ticket);
         
@@ -107,9 +107,9 @@ class AdminTicketController extends Controller
         ]);
 
         if($admin->superadmin) {
-            return redirect()->route('admin.manage.tickets')->with('success', 'Ticket actualizado correctamente.');
+            return redirect()->route('admin.manage.tickets', ['locale' => $locale])->with('success', 'Ticket actualizado correctamente.');
         }else{
-            return redirect()->route('admin.show.assigned.tickets')->with('success', 'Ticket actualizado correctamente.');
+            return redirect()->route('admin.show.assigned.tickets', ['locale' => $locale])->with('success', 'Ticket actualizado correctamente.');
         }
     }
 

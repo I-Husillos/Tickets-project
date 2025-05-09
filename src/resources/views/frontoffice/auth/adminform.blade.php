@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mt-5">
     <h2 class="text-center text-primary">{{ __('general.frontoffice.auth.admin_login.heading') }}</h2>
-    <form action="{{ route('admin.login') }}" method="POST" class="mt-4">
+    <form action="{{ route('admin.login', ['locale' => app()->getLocale()]) }}" method="POST" class="mt-4">
         @csrf
         
         <div class="mb-3">
@@ -16,7 +16,7 @@
                     {{ $message }}
                 </div>
             @enderror
-        </div>
+        </div>  
         
         <div class="mb-3">
             <label for="password" class="form-label">{{ __('general.frontoffice.auth.admin_login.label_password') }}</label>

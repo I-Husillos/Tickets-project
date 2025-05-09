@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.types.store') }}" method="POST">
+    <form action="{{ route('admin.types.store', ['locale' => app()->getLocale()]) }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="name">{{ __('general.admin_types.name') }}</label>
@@ -32,7 +32,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">{{ __('general.admin_types.save') }}</button>
-        <a href="{{ route('admin.types.index') }}" class="btn btn-secondary">
+        <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">
             {{ __('general.admin_types.cancel') }}
         </a>
     </form>

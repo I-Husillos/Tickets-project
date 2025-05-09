@@ -19,7 +19,7 @@
                 <div class="card text-white bg-dark shadow rounded-4">
                     <div class="card-body">
                         <h5 class="card-title">{{ __('general.admin_dashboard.superadmin_manage_users') }}</h5>
-                        <a href="{{ route('admin.dashboard.list.users') }}" class="stretched-link"></a>
+                        <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="card text-white bg-primary shadow rounded-4">
                     <div class="card-body">
                         <h5 class="card-title">{{ __('general.admin_dashboard.superadmin_manage_admins') }}</h5>
-                        <a href="{{ route('admin.dashboard.list.admins') }}" class="stretched-link"></a>
+                        <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <div class="card text-white bg-info shadow rounded-4">
                 <div class="card-body">
                     <h5 class="card-title">{{ __('general.admin_dashboard.regular_view_tickets') }}</h5>
-                    <a href="{{ route('admin.show.assigned.tickets') }}" class="stretched-link"></a>
+                    <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
             <div class="card text-white bg-secondary shadow rounded-4">
                 <div class="card-body">
                     <h5 class="card-title">{{ __('general.admin_dashboard.regular_event_history') }}</h5>
-                    <a href="{{ route('admin.history.events') }}" class="stretched-link"></a>
+                    <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
                 </div>
             </div>
         </div>

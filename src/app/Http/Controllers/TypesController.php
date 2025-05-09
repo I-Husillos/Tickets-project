@@ -9,7 +9,7 @@ use Illuminate\Http\Request;use Illuminate\Validation\Rule;
 use App\Services\TypeService;
 use App\Http\Requests\StoreTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
-
+use Dotenv\Util\Str;
 
 class TypesController
 {
@@ -40,18 +40,18 @@ class TypesController
         return redirect()->route('admin.types.index')->with('success', 'Tipo creado con éxito.');
     }
 
-    public function edit(Type $type)
+    public function edit(String $locale, Type $type)
     {
         return view('backoffice.admin.types.edit', compact('type'));
     }
 
-    public function update(UpdateTypeRequest $request, Type $type)
+    public function update(UpdateTypeRequest $request, Type $type, String $locale)
     {
         $validated = $request->validated();
 
         $this->typeService->updateType($type, $validated);
 
-        return redirect()->route('admin.types.index')->with('success', 'Tipo actualizado con éxito.');
+        return redirect()->route('admin.types.index', ['locale' => $locale])->with('success', 'Tipo actualizado con éxito.');
     }
 
 
@@ -62,7 +62,7 @@ class TypesController
         return redirect()->route('admin.types.index')->with('success', 'Tipo eliminado con éxito.');
     }
 
-    public function confirmDelete(Type $type)
+    public function confirmDelete(String $locale, Type $type)
     {
         return view('backoffice.admin.types.confirm-delete', compact('type'));
     }

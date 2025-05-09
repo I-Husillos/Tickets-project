@@ -8,7 +8,7 @@
     <h1 class="text-center mb-4">{{ __('general.admin_history_events.heading') }}</h1>
 
     <!-- Formulario de filtrado de eventos -->
-    <form method="GET" action="{{ route('admin.history.events') }}">
+    <form method="GET" action="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}">
         <div class="row">
             <div class="col-md-4">
                 <label for="event_type">{{ __('general.admin_history_events.filter.label_event_type') }}</label>
@@ -65,7 +65,7 @@
 
     <!-- Botón para regresar al Panel de Control -->
     <div class="mt-4">
-        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">{{ __('general.admin_history_events.back_button') }}</a>
+        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_history_events.back_button') }}</a>
     </div>
 </div>
 @endsection

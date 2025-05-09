@@ -45,3 +45,7 @@ lista de tareas:
 
 hacer una url amigable, que tenga el prefijo dependiendo del idioma y que la url esté o en castllano
 o en inglés dependiendo del idioma
+
+buenos días, siguiendo la documentacion de lravel: https://laravel.com/docs/12.x y otras funtes de información, además de razonar posibles soluciones, necesito en un proyecto de laravel, el poder hacer que las url sean amigables, que tengan un prefijo es/en y que apartir de ahí sean en el idioma correspondiente, ya sea inglés o español, puedes ayudarme explicandome cada paso, por que, su trasfondo, etc, que soy nuevo en laravel
+
+https://copilot.microsoft.com/shares/N79nPe8jcNVD2HkUiufC1

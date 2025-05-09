@@ -10,7 +10,7 @@
         <div class="alert alert-danger">{{ __('general.admin_create_user.error_message') }}</div>
     @endif
 
-    <form action="{{ route('admin.users.store') }}" method="POST">
+    <form action="{{ route('admin.users.store', ['locale' => app()->getLocale()]) }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('general.admin_create_user.label_name') }}</label>
@@ -47,7 +47,7 @@
         <button type="submit" class="btn btn-primary">{{ __('general.admin_create_user.create_button') }}</button>
     </form>
     <div class="mt-4">
-        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">{{ __('general.admin_create_user.back_button') }}</a>
+        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_create_user.back_button') }}</a>
     </div>
 </div>
 @endsection

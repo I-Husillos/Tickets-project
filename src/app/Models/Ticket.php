@@ -19,6 +19,8 @@ class Ticket extends Model
         'resolved_at'
     ];
 
+    protected $primaryKey = 'id';
+
 
 
     public function user()

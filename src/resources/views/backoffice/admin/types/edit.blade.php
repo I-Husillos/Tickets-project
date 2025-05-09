@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.types.update', $type) }}" method="POST">
+    <form action="{{ route('admin.types.update', ['type' => $type->id, 'locale' => app()->getLocale()]) }}" method="POST">
         @csrf
         @method('PATCH')
 
@@ -34,7 +34,7 @@
 
         <div class="mt-2">
             <button type="submit" class="btn btn-primary">{{ __('general.admin_types.update') }}</button>
-            <a href="{{ route('admin.types.index') }}" class="btn btn-secondary">
+            <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">
                 {{ __('general.admin_types.cancel') }}
             </a>
         </div>

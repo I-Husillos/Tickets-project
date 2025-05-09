@@ -1,4 +1,13 @@
 <div class="language-switcher">
-    <a href="{{ route('change.language', 'es') }}" class="text-light me-2" style="text-decoration: underline;">Español</a>
-    <a href="{{ route('change.language', 'en') }}" class="text-light" style="text-decoration: underline;">English</a>
+    @foreach($allowedLocales as $lang)
+        @if($lang === $currentLocale)
+            <span class="text-light me-2" style="text-decoration:underline;">{{ strtoupper($lang) }}</span>
+        @else
+        <a href="{{ route('change.language', ['locale' => $lang, 'targetLocale' => $lang]) }}"
+            class="text-light me-2" style="text-decoration:underline;">
+            {{ $lang === 'es' ? 'Español' : 'English' }}
+        </a>
+        @endif
+    @endforeach
 </div>
+

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Services\CommentService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
+use PhpParser\Node\Expr\Cast\String_;
 
 class CommentController extends Controller
 {
@@ -23,7 +24,7 @@ class CommentController extends Controller
         $this->commentService = $commentService;
     }
 
-    public function addComment(StoreCommentRequest $request, Ticket $ticket)
+    public function addComment(StoreCommentRequest $request, String $locale, Ticket $ticket,)
     {
         $this->authorize('comment', $ticket);
         $validated = $request->validated();
@@ -32,11 +33,11 @@ class CommentController extends Controller
 
 
         if (auth('admin')->check()) {
-            return redirect()->route('admin.manage.tickets')->with('success', 'Comentario agregado correctamente.');
+            return redirect()->route('admin.manage.tickets', ['locale' => $locale])->with('success', 'Comentario agregado correctamente.');
         }
 
 
-        return redirect()->route('user.tickets.index')->with('success', 'Comentario agregado correctamente.');
+        return redirect()->route('user.tickets.index', ['locale' => $locale])->with('success', 'Comentario agregado correctamente.');
     }
 
     public function viewComments(Ticket $ticket)
@@ -47,7 +48,7 @@ class CommentController extends Controller
 
 
 
-    public function deleteComment(Comment $comment)
+    public function deleteComment(String $locale, Comment $comment)
     {
         $this->authorize('delete', $comment);
         

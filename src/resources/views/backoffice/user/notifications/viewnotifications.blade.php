@@ -9,7 +9,7 @@
     @if ($notifications->isEmpty())
         <p>No tienes notificaciones.</p>
     @else
-    <form method="GET" action="{{ route('user.notifications') }}" class="mb-4">
+    <form method="GET" action="{{ route('user.notifications', ['locale' => app()->getLocale()]) }}" class="mb-4">
         <div class="form-row">
             <div class="col-md-4">
             <select name="type" class="form-control">
@@ -26,7 +26,7 @@
 
         <div class="list-group mt-4">
             @foreach ($notifications as $notification)
-                <a href="{{ route('user.tickets.show', $notification->data['ticket_id']) }}" class="list-group-item list-group-item-action
+                <a href="{{ route('user.tickets.show', ['ticket' => $notification->data['ticket_id'], 'locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action
                     @if ($notification->read_at) 
                         list-group-item-light 
                     @else
@@ -61,7 +61,7 @@
 
                     <!-- Marcar como leído -->
                     @if (!$notification->read_at)
-                        <form action="{{ route('user.notifications.read', $notification->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('user.notifications.read', ['id' => $notification->id, 'locale' => app()->getLocale()]) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')
                             <button type="submit" class="btn btn-sm btn-outline-secondary float-right">Marcar como leída</button>
@@ -72,10 +72,15 @@
                 </a>
             @endforeach
         </div>
+        @if ($notifications->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                {{ $notifications->links('pagination::bootstrap-4') }}
+            </div>
+        @endif
     @endif
 
     <div class="text-center mt-4">
-        <a href="{{ route('user.tickets.index') }}" class="btn btn-secondary">Volver a mis tickets</a>
+        <a href="{{ route('user.tickets.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">Volver a mis tickets</a>
     </div>
 </div>
 @endsection

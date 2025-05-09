@@ -11,7 +11,7 @@
     @endif
 
 
-    <form method="POST" action="{{ route('user.tickets.store') }}">
+    <form method="POST" action="{{ route('user.tickets.store', ['locale' => app()->getLocale()]) }}">
         @csrf
         
         <div class="form-group mt-3">
@@ -64,7 +64,7 @@
         </button>
     </form>
     <div class="mt-3">
-        <a href="{{ route('user.tickets.index') }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('user.tickets.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">Cancelar</a>
     </div>
 </div>
 @endsection

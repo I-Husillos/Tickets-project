@@ -12,7 +12,7 @@
     <p class="text-center">{{ __('general.admin_dashboard.welcome') }}, {{ Auth::guard('admin')->user()->name }}</p>
     
     <div class="d-flex justify-content-end mt-4">
-        <form method="POST" action="{{ route('admin.logout') }}">
+        <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}">
             @csrf
             <!-- Botón de cierre de sesión con traducción -->
             <button type="submit" class="btn btn-danger">
@@ -25,13 +25,13 @@
         <div class="mt-5">
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <!-- Enlaces del dashboard para administradores super, cada uno con su propia traducción -->
-                <a href="{{ route('admin.manage.tickets') }}" class="btn btn-success">
+                <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="btn btn-success">
                     {{ __('general.admin_dashboard.manage_tickets') }}
                 </a>
-                <a href="{{ route('admin.types.index') }}" class="btn btn-info">
+                <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}" class="btn btn-info">
                     {{ __('general.admin_dashboard.ticket_types') }}
                 </a>
-                <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-warning">
+                <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-warning">
                     {{ __('general.admin_dashboard.users_and_admins') }}
                 </a>
             </div>

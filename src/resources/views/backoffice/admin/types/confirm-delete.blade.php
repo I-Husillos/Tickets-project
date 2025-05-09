@@ -11,13 +11,13 @@
     <!-- Mensaje de confirmación, se pasa el nombre del tipo como parámetro -->
     <p>{{ __('general.admin_types.confirm_deletion_message', ['name' => $type->name]) }}</p>
 
-    <form method="POST" action="{{ route('admin.types.destroy', $type->id) }}">
+    <form method="POST" action="{{ route('admin.types.destroy', ['type' => $type->id, 'locale' => app()->getLocale()]) }}">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">
             {{ __('general.admin_types.confirm_deletion_yes') }}
         </button>
-        <a href="{{ route('admin.types.index') }}" class="btn btn-secondary">
+        <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">
             {{ __('general.admin_types.cancel') }}
         </a>
     </form>

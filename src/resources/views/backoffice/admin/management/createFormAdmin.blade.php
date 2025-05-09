@@ -10,7 +10,7 @@
         <div class="alert alert-danger">{{ __('general.admin_create_admin.error_message') }}</div>
     @endif
 
-    <form action="{{ route('admin.admins.store') }}" method="POST">
+    <form action="{{ route('admin.admins.store', ['locale' => app()->getLocale()]) }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('general.admin_create_admin.label_name') }}</label>
@@ -37,6 +37,14 @@
         </div>
 
         <div class="mb-3">
+            <label for="password_confirmation" class="form-label">{{ __('general.admin_create_user.label_password_confirm') }}</label>
+            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password_confirmation" name="password_confirmation">
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label for="superadmin" class="form-label">{{ __('general.admin_create_admin.label_superadmin') }}</label>
             <select class="form-select @error('superadmin') is-invalid @enderror" id="superadmin" name="superadmin">
                 <option value="">{{ __('general.admin_create_admin.select_placeholder') }}</option>
@@ -51,7 +59,7 @@
         <button type="submit" class="btn btn-success">{{ __('general.admin_create_admin.create_button') }}</button>
     </form>
     <div class="mt-4">
-        <a href="{{ route('admin.manage.dashboard') }}" class="btn btn-secondary">{{ __('general.admin_create_admin.back_button') }}</a>
+        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_create_admin.back_button') }}</a>
     </div>
 </div>
 @endsection

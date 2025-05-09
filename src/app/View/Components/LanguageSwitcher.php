@@ -8,12 +8,16 @@ use Illuminate\View\Component;
 
 class LanguageSwitcher extends Component
 {
+    public $currentLocale;
+    public $allowedLocales;
+    
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
+        $this->currentLocale = app()->getLocale();
+        $this->allowedLocales = ['es', 'en'];
     }
 
     /**

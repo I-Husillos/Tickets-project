@@ -13,7 +13,7 @@
     @endif
 
     <!-- Botón para crear un nuevo tipo, traducido -->
-    <a href="{{ route('admin.types.create') }}" class="btn btn-primary mb-3">
+    <a href="{{ route('admin.types.create', ['locale' => app()->getLocale()]) }}" class="btn btn-primary mb-3">
         {{ __('general.admin_types.new_type') }}
     </a>
 
@@ -32,10 +32,10 @@
                     <td>{{ $type->description }}</td>
                     <td>
                         <div class="text-center">
-                            <a href="{{ route('admin.types.confirmDelete', $type->id) }}" class="btn btn-danger btn-sm">
+                            <a href="{{ route('admin.types.confirmDelete', ['locale' => app()->getLocale(), 'type' => $type->id]) }}" class="btn btn-danger btn-sm">
                                 {{ __('general.admin_types.delete') }}
                             </a>
-                            <a href="{{ route('admin.types.edit', $type->id) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ route('admin.types.edit', ['locale' => app()->getLocale(), 'type' => $type->id]) }}" class="btn btn-warning btn-sm">
                                 {{ __('general.admin_types.edit') }}
                             </a>
                         </div>

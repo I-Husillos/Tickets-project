@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mt-5">
     <h2 class="text-center text-primary">{{ __('general.frontoffice.auth.login.heading') }}</h2>
-    <form method="POST" action="{{ route('login') }}" class="mt-4">
+    <form method="POST" action="{{ route('login', ['locale' => app()->getLocale()]) }}" class="mt-4">
         @csrf
         <div class="mb-3">
             <label for="email" class="form-label">{{ __('general.frontoffice.auth.login.label_email') }}</label>
@@ -29,7 +29,7 @@
     </form>
 
     <div class="text-center mt-3">
-        <p>{{ __('general.frontoffice.auth.login.no_account') }} <a href="{{ route('register') }}">{{ __('general.frontoffice.auth.login.register_here') }}</a></p>
+        <p>{{ __('general.frontoffice.auth.login.no_account') }} <a href="{{ route('register', ['locale' => app()->getLocale()]) }}">{{ __('general.frontoffice.auth.login.register_here') }}</a></p>
     </div>
 
     @if(session('error'))

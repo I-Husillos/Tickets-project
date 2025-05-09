@@ -39,7 +39,7 @@
         </div>
         @can('update', $ticket)
         <div class="col-md-6">
-            <form action="{{ route('admin.update.ticket', $ticket->id) }}" method="POST">
+            <form action="{{ route('admin.update.ticket', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}" method="POST">
                 @csrf
                 @method('PATCH')
 
@@ -126,7 +126,7 @@
                                 <td>
                                     {{-- Botón para eliminar comentario --}}
                                     @can('delete', $comment)
-                                        <form method="POST" action="{{ route('admin.delete.comment', $comment->id) }}">
+                                        <form method="POST" action="{{ route('admin.delete.comment', ['comment' => $comment->id, 'locale' => app()->getLocale()]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">
@@ -144,7 +144,7 @@
             @can('comment', $ticket)
             <div class="form-group">
                 <h5>{{ __('general.admin_ticket_details.add_comment_heading') }}</h5>
-                <form method="POST" action="{{ route('admin.add.comment', $ticket->id) }}">
+                <form method="POST" action="{{ route('admin.add.comment', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}">
                     @csrf
                     <div class="form-group">
                         <textarea name="message" class="form-control" rows="4"
@@ -160,11 +160,11 @@
 
         <div class="text-center mt-5">
             @if(Auth::guard('admin')->user()->superadmin)
-                <a href="{{ route('admin.manage.tickets') }}" class="btn btn-secondary">
+                <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">
                     {{ __('general.admin_ticket_details.back_to_menu') }}
                 </a>
             @else
-                <a href="{{ route('admin.show.assigned.tickets') }}" class="btn btn-secondary">
+                <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">
                     {{ __('general.admin_ticket_details.back_to_menu') }}
                 </a>
             @endif
