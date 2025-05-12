@@ -26,7 +26,8 @@ class UserAuthController extends Controller
 
         if(Auth::guard('user') -> attempt($credentials))
         {
-            return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', 'Inicio de sesión exitoso.');
+            $locale = session('locale');
+            return redirect()->route('user.tickets.index', ['locale' => $locale])->with('success', 'Inicio de sesión exitoso.');
         }
 
         return back()->with('error', 'Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.');

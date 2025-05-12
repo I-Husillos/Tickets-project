@@ -1,6 +1,7 @@
 <?php
 
 return [
+    // Rutas para usuarios
     'user' => 'usuario',
     'login' => 'iniciar-sesion',
     'register' => 'registrarse',
@@ -13,15 +14,18 @@ return [
     'read_notification' => 'marcar-leida',
     'change_language' => 'cambiar-idioma',
 
+    // Rutas para administradores
     'admin' => 'administrador',
     'dashboard' => 'panel-de-control',
-    'update'    => 'actualizar',
-    'close'     => 'cerrar',
-    'reopen'    => 'reabrir',
-    'assign'    => 'asignar',
-    'assigned'  => 'asignados',
+    'update_status' => 'actualizar-estado',
+    'update' => 'actualizar',
+    'list' => 'listar',
+    'close' => 'cerrar',
+    'reopen' => 'reabrir',
+    'assign' => 'asignar',
+    'assigned' => 'asignados',
     'users' => 'listado-de-usuarios',
-    'admins' => 'litado-de-administradores',
+    'admins' => 'listado-de-administradores',
     'create' => 'crear',
     'edit' => 'editar',
     'confirm_delete' => 'confirmar-eliminacion',
@@ -29,9 +33,5 @@ return [
     'types' => 'tipos',
     'comment' => 'comentario',
     'comments' => 'comentarios',
-
-
+    'read' => 'leida',
 ];
-
-
-

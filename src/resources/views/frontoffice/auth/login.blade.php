@@ -5,6 +5,10 @@
 @section('content')
 <div class="container mt-5">
     <h2 class="text-center text-primary">{{ __('general.frontoffice.auth.login.heading') }}</h2>
+
+
+
+
     <form method="POST" action="{{ route('login', ['locale' => app()->getLocale()]) }}" class="mt-4">
         @csrf
         <div class="mb-3">

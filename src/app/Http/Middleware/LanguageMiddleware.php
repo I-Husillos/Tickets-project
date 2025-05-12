@@ -1,65 +1,41 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class LanguageMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->segment(1); // Primer segmento (es/en)
+        $locale = $request->segment(1); // Idioma desde la URL
+        
+        
         $availableLanguages = ['es', 'en'];
 
-        // 1. Validación del idioma**
+        // Si la ruta es "change-language", no sobreescribimos el idioma
+        if ($request->routeIs('change.language')) {
+            return $next($request); // Continuar sin modificar el idioma
+        }
+
         if (!in_array($locale, $availableLanguages)) {
-            $locale = 'es'; // Idioma por defecto
-            $newUrl = "/$locale" . $request->getPathInfo();
-            $query = $request->getQueryString();
-
-            // Si hay query params, se agregan al final
-            if ($query) {
-                $newUrl .= "?" . $query;
-            }
-
-            // Redirección a la URL con prefijo de idioma**
-            return redirect($newUrl);
+            $defaultLocale = 'es';
+            return redirect("/$defaultLocale" . $request->getPathInfo());
         }
 
-        // Establecer el idioma de la aplicación**
-        App::setLocale($locale);
-        session(['locale' => $locale]);
-
-        $segments = $request->segments();
-        $translatedSegments = [];
-
-        foreach ($segments as $index => $segment) {
-            if ($index === 0) {
-                // El primer segmento es el idioma, no se traduce
-                $translatedSegments[] = $segment;
-            } else {
-                // Se intenta traducir, si no se encuentra se queda igual
-                $translation = __("routes.$segment", [], $locale);
-                $translatedSegments[] = ($translation !== "routes.$segment") ? $translation : $segment;
-            }
-        }
-
-        $newPath = implode('/', $translatedSegments);
-        if ($newPath !== $request->path()) {
-            return redirect()->to($newPath);
+        if ($locale !== Session::get('locale')) {
+            // Session::put('locale', $locale);
+            App::setLocale($locale);
+            Log::info("Idioma actualizado en sesión y Laravel: " . Session::get('locale'));
         }
 
         return $next($request);
-        
     }
+
+
+
 }
-
-

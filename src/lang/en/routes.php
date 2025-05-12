@@ -6,22 +6,24 @@ return [
     'register' => 'register',
     'logout' => 'logout',
     'create_ticket' => 'create-ticket',
-    'show_ticket' => 'show-ticket',
+    'show_ticket'  => 'show-ticket',
     'add_comment' => 'add-comment',
     'validate_ticket' => 'validate-ticket',
-    'notifications' => 'notifications',
+    'notifications'  => 'notifications',
     'read_notification' => 'mark-as-read',
-    'change_language' => 'change-language',
+    'change_language'  => 'change-language',
 
     'admin' => 'admin',
     'dashboard' => 'dashboard',
+    'update_status' => 'update-status',
     'update' => 'update',
+    'list' => 'list',
     'close' => 'close',
     'reopen' => 'reopen',
     'assign' => 'assign',
     'assigned' => 'assigned',
     'users' => 'list-of-users',
-    'admins' => 'list-of-admins',
+    'admins'  => 'list-of-admins',
     'create' => 'create',
     'edit' => 'edit',
     'confirm_delete' => 'confirm-delete',
@@ -29,8 +31,5 @@ return [
     'types' => 'types',
     'comment' => 'comment',
     'comments' => 'comments',
-
-
+    'read' => 'read',
 ];
-
-

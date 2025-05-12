@@ -5,8 +5,9 @@ lista de tareas:
 - gates
 - idiomas
 - url amigable
--
--
+- adminlte 
+- instalar con npm gestor de paquetes de node
+webpack
 -
 -
 - visualizar plantilla https://adminlte.io/
