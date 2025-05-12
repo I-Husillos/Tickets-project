@@ -14,11 +14,11 @@ class LanguageController extends Controller
     {
         Log::info("Idioma recibido en switchLanguage() antes de procesar: " . $targetLocale);
 
+        
 
         $allowedLocales = ['es', 'en'];
 
         Log::info("Idiomas permitidos: " . $allowedLocales[0] . ", " . $allowedLocales[1]);
-
 
         Session::put('locale', $targetLocale);
         session()->save();
@@ -32,6 +32,8 @@ class LanguageController extends Controller
         $previousUrl = url()->previous(); 
         $currentLocale = app()->getLocale();
 
+        Log::warning("URL anterior: " . $previousUrl);
+        Log::warning("Idioma actual: " . $currentLocale);
 
 
 

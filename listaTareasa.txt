@@ -5,9 +5,13 @@ lista de tareas:
 - gates
 - idiomas
 - url amigable
+tag canocical
 - adminlte 
 - instalar con npm gestor de paquetes de node
 webpack
+vite
+
+investigar webpack y vite
 -
 -
 - visualizar plantilla https://adminlte.io/

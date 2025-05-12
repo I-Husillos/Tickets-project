@@ -3,12 +3,12 @@
     @if($lang === $currentLocale)
         <span class="text-light me-2" style="text-decoration:underline;">{{ strtoupper($lang) }}</span>
     @else
-        <a href="{{ url(app()->getLocale() . '/' . __('routes.change_language') . '/' . $lang) }}">
-
+        <a href="{{ route('change.language', ['locale' => app()->getLocale(), 'targetLocale' => $lang]) }}">
             {{ $lang === 'es' ? 'Español' : 'English' }}
         </a>
 
 
+        dd(route('change.language', ['locale' => app()->getLocale(), 'targetLocale' => $lang]));
     @endif
 
 @endforeach

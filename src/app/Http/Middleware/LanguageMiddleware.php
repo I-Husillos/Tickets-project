@@ -30,7 +30,6 @@ class LanguageMiddleware
         if ($locale !== Session::get('locale')) {
             // Session::put('locale', $locale);
             App::setLocale($locale);
-            Log::info("Idioma actualizado en sesión y Laravel: " . Session::get('locale'));
         }
 
         return $next($request);

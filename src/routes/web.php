@@ -27,6 +27,8 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
     $locale = request()->segment(1); // Obtener el idioma desde la URL
 
+    
+
     $routes = trans('routes', [], $locale); // Cargar traducciones en el idioma correcto
     Route::get($routes['change_language'] . '/{targetLocale}', [LanguageController::class, 'switchLanguage'])->name('change.language');
 
