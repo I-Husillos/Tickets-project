@@ -55,10 +55,10 @@
     <!-- Estadísticas -->
     <div class="row text-center mb-4">
         <div class="col-md-3 mb-4">
-            <div class="card bg-light shadow rounded-4 h-100">
-                <div class="card-body">
-                    <h5 class="card-title text-muted">{{ __('general.admin_dashboard.registered_users') }}</h5>
-                    <h2 class="card-text text-shadow">{{ $totalUsers }}</h2>
+            <div class="card card-widget widget-user-2">
+                <div class="widget-user-header bg-info">
+                    <h5 class="widget-user-username">{{ __('general.admin_dashboard.registered_users') }}</h5>
+                    <h2 class="widget-user-desc">{{ $totalUsers }}</h2>
                 </div>
             </div>
         </div>
