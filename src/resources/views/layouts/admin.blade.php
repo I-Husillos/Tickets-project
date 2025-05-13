@@ -10,6 +10,9 @@
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
+    <link rel="canonical" href="{{ url()->current() }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <!-- Se obtiene el nombre de la ruta actual para aplicar estilos condicionales -->

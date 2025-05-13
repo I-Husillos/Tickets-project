@@ -4,7 +4,10 @@ lista de tareas:
 - policies 
 - gates
 - idiomas
-- url amigable
+
+
+
+- url amigable      <--------- falta selector de idiomas
 tag canocical
 
 

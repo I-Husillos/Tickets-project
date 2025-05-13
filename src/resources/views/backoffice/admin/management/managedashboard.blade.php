@@ -16,7 +16,7 @@
         @if ($isSuperAdmin)
             {{-- Acceso solo para Superadmin --}}
             <div class="col-md-3 mb-3">
-                <div class="card text-white bg-dark shadow rounded-4">
+                <div class="card bg-gradient-dark">
                     <div class="card-body">
                         <h5 class="card-title">{{ __('general.admin_dashboard.superadmin_manage_users') }}</h5>
                         <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
