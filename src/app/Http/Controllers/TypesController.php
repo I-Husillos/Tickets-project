@@ -35,9 +35,10 @@ class TypesController
     {
         $validated = $request->validated();
 
+        $locale = app()->getLocale();
         $this->typeService->createType($validated);
 
-        return redirect()->route('admin.types.index')->with('success', 'Tipo creado con éxito.');
+        return redirect()->route('admin.types.index', ['locale' => $locale])->with('success', 'Tipo creado con éxito.');
     }
 
     public function edit(String $locale, Type $type)
@@ -45,7 +46,7 @@ class TypesController
         return view('backoffice.admin.types.edit', compact('type'));
     }
 
-    public function update(UpdateTypeRequest $request, Type $type, String $locale)
+    public function update(String $locale, UpdateTypeRequest $request, Type $type)
     {
         $validated = $request->validated();
 
@@ -55,11 +56,11 @@ class TypesController
     }
 
 
-    public function destroy(Type $type)
+    public function destroy(String $locale, Type $type)
     {
         $this->typeService->deleteType($type);
 
-        return redirect()->route('admin.types.index')->with('success', 'Tipo eliminado con éxito.');
+        return redirect()->route('admin.types.index', ['locale' => $locale])->with('success', 'Tipo eliminado con éxito.');
     }
 
     public function confirmDelete(String $locale, Type $type)

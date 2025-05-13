@@ -6,6 +6,7 @@ return [
     'login' => 'iniciar-sesion',
     'register' => 'registrarse',
     'logout' => 'cerrar-sesion',
+    'tickets' => 'tickets',
     'create_ticket' => 'crear-ticket',
     'show_ticket' => 'ver-ticket',
     'add_comment' => 'agregar-comentario',

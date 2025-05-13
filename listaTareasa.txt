@@ -6,6 +6,10 @@ lista de tareas:
 - idiomas
 - url amigable
 tag canocical
+
+
+
+
 - adminlte 
 - instalar con npm gestor de paquetes de node
 webpack

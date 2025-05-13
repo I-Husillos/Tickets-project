@@ -12,37 +12,49 @@ class LanguageController extends Controller
 
     public function switchLanguage($targetLocale)
     {
-        Log::info("Idioma recibido en switchLanguage() antes de procesar: " . $targetLocale);
-
-        
-
         $allowedLocales = ['es', 'en'];
-
-        Log::info("Idiomas permitidos: " . $allowedLocales[0] . ", " . $allowedLocales[1]);
-
+    
+        if (!in_array($targetLocale, $allowedLocales)) {
+            $targetLocale = 'es';
+        }
+    
         Session::put('locale', $targetLocale);
         session()->save();
-        Log::warning("Idioma actualizado en sesión y Laravel: " . Session::get('locale'));
-
-
-        App::setLocale($targetLocale);
-        
-
-        // Obtenemos la URL anterior y reemplazamos el prefijo
-        $previousUrl = url()->previous(); 
-        $currentLocale = app()->getLocale();
-
-        Log::warning("URL anterior: " . $previousUrl);
-        Log::warning("Idioma actual: " . $currentLocale);
-
-
-
-        $newUrl = str_replace("/$currentLocale", "/$targetLocale", $previousUrl);
-
     
-
+        App::setLocale($targetLocale);
+    
+        // Obtenemos la URL anterior y analizamos su estructura
+        $previousUrl = url()->previous();
+        $parsedUrl = parse_url($previousUrl);
+        $path = $parsedUrl['path'] ?? '/';
+    
+        // Descomponemos los segmentos de la URL
+        $segments = explode('/', trim($path, '/'));
+    
+        // Si el primer segmento es un idioma permitido, lo reemplazamos
+        if (isset($segments[0]) && in_array($segments[0], $allowedLocales)) {
+            $segments[0] = $targetLocale;
+        } else {
+            array_unshift($segments, $targetLocale);
+        }
+    
+        // Construimos el nuevo path asegurando el reemplazo correcto
+        $newPath = '/' . implode('/', $segments);
+    
+        // Reconstruimos la nueva URL correctamente
+        $newUrl = ($parsedUrl['scheme'] ?? 'http') . '://' . 
+                  ($parsedUrl['host'] ?? 'localhost') . 
+                  (isset($parsedUrl['port']) ? ':' . $parsedUrl['port'] : '') . 
+                  $newPath;
+    
+        Log::info('URL anterior completa: ' . $previousUrl);
+        Log::info('Segmentos extraídos: ' . implode(', ', $segments));
+        Log::info('Primer segmento modificado: ' . ($segments[0] ?? 'N/A'));
+        Log::info('Nueva URL generada: ' . $newUrl);
+    
         return redirect($newUrl);
     }
+    
 
 
     

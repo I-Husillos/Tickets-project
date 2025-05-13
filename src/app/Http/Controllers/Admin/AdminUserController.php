@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\EventHistory;
+use Dotenv\Util\Str;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -72,7 +73,7 @@ class AdminUserController extends Controller
         return view('backoffice.admin.management.editFormUser', compact('user'));
     }
 
-    public function updateUser(UpdateUserRequest $request, User $user)
+    public function updateUser(String $locale, UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
         $user->name = $data['name'];
@@ -89,7 +90,7 @@ class AdminUserController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.dashboard.list.users')->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('admin.dashboard.list.users', ['locale' => $locale])->with('success', 'Usuario actualizado correctamente.');
     }
 }
 

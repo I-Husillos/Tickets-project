@@ -5,6 +5,7 @@ return [
     'login' => 'login',
     'register' => 'register',
     'logout' => 'logout',
+    'tickets' => 'tickets',
     'create_ticket' => 'create-ticket',
     'show_ticket'  => 'show-ticket',
     'add_comment' => 'add-comment',
