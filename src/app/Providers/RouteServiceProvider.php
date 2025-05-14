@@ -37,13 +37,18 @@ class RouteServiceProvider extends ServiceProvider
 
             $methods = ['index', 'show', 'create', 'edit', 'destroy', 'update', 'store'];
 
-            $translatedSegments = array_map(function ($segment) use ($alternateLocale, $methods) {
+            $translatedSegments = array_map(function ($segment) use ($alternateLocale , $methods) {
                 if (in_array($segment, $methods)) {
                     return $segment;
                 }
-                return trans("routes.$segment", [], $alternateLocale) ?: $segment;
+                return trans("routes.$segment", [], $alternateLocale);
             }, $segments);
 
+            for($i = 0; $i < count($translatedSegments); $i++) {
+                if (end($translatedSegments) === $methods[0]) {
+                    array_pop($translatedSegments);
+                }
+            }
 
 
             $translatedRoute = implode('/', $translatedSegments);

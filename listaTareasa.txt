@@ -66,21 +66,23 @@ https://copilot.microsoft.com/shares/N79nPe8jcNVD2HkUiufC1
 views composers y su implicacion en los servicios
 
 
-traducir no nombres de las rutas ni segmentos de las rutas, las propias rutas
-
-
-url completas, por ejmplo:
-
-return [
-  "admin" => [
-    "dashboard" => [
-      "users"=>[
-        "index"
-        "edit"=>"{userid}/",
-        "delete"=>"{userid}",
-      ]
+sintaxis doc
+ejemplo de traduccion:
+'tickets' => [
+        'tickets' =>
+        [
+            'create' => 'tickets/crear',
+            'show' => 'tickets/{ticket}',
+        ]
     ],
-  ],
-];
+    'users' => [
+        'tickets' =>
+        [
+            'create' => 'usuarios/crear',
+            'show' => 'usuarios/{user}',
+        ]
+    ],
 
 
+
+serializacion (bbdd)
