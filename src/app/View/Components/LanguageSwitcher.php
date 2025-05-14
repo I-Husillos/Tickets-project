@@ -17,7 +17,6 @@ class LanguageSwitcher extends Component
     public function __construct()
     {
         $this->currentLocale = app()->getLocale();
-        $this->allowedLocales = ['es', 'en'];
     }
 
     /**

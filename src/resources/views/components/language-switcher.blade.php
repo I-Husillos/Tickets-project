@@ -1,9 +1,8 @@
-@foreach($allowedLocales as $lang)
-    @if($lang === $currentLocale)
-        <span class="text-light me-2" style="text-decoration:underline;">{{ strtoupper($lang) }}</span>
-    @else
-        <a href="{{ route('change.language', ['locale' => $currentLocale, 'targetLocale' => $lang]) }}">
-            {{ $lang === 'es' ? 'Español' : 'English' }}
-        </a>
-    @endif
-@endforeach
+<span class="active">{{ $currentLocale }}</span>
+<a href="{{ $alternateUrl }}">{{ $alternateLocale }}</a>
+
+
+<!-- 
+<span class="active">en</span>
+<a href="pagina en canostella">es</a> 
+-->

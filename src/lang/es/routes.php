@@ -1,7 +1,6 @@
 <?php
 
 return [
-    // Rutas para usuarios
     'user' => 'usuario',
     'login' => 'iniciar-sesion',
     'register' => 'registrarse',
@@ -14,8 +13,6 @@ return [
     'notifications' => 'notificaciones',
     'read_notification' => 'marcar-leida',
     'change_language' => 'cambiar-idioma',
-
-    // Rutas para administradores
     'admin' => 'administrador',
     'dashboard' => 'panel-de-control',
     'update_status' => 'actualizar-estado',
@@ -36,3 +33,5 @@ return [
     'comments' => 'comentarios',
     'read' => 'leida',
 ];
+
+

@@ -11,6 +11,12 @@
 <div class="container mt-5">
     <h2 class="text-center">{{ __('frontoffice.tickets.list_title') }}</h2>
     
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ route('user.tickets.create', ['locale' => app()->getLocale(), 'username' => Auth::user()->id]) }}" class="btn btn-success">
+            {{ __('frontoffice.tickets.create_button') }}
+        </a>
+    </div>
+
 
     <div class="mt-5">
         @if ($tickets->isEmpty())

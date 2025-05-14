@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 class LanguageMiddleware
 {
@@ -14,14 +15,9 @@ class LanguageMiddleware
     {
         $locale = $request->segment(1); // Idioma desde la URL
         
-        
         $availableLanguages = ['es', 'en'];
 
-        // Si la ruta es "change-language", no sobreescribimos el idioma
-        if ($request->routeIs('change.language')) {
-            return $next($request); // Continuar sin modificar el idioma
-        }
-
+        
         if (!in_array($locale, $availableLanguages)) {
             $defaultLocale = 'es';
             return redirect("/$defaultLocale" . $request->getPathInfo());
@@ -32,9 +28,10 @@ class LanguageMiddleware
             App::setLocale($locale);
         }
 
+
         return $next($request);
     }
 
-
-
 }
+
+

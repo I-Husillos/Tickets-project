@@ -24,7 +24,7 @@
         <h4>{{ __('general.admin_sidebar.title_admin_panel') }}</h4>
 
         <div class="mb-3">
-            <x-language-switcher />
+            <x-language-switcher :alternativeUrl="$alternativeUrl" :currentLocale="$currentLocale" :altLocale="$altLocale"/>
         </div>
 
         <hr class="bg-light mx-3">

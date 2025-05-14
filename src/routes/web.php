@@ -30,8 +30,6 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     
 
     $routes = trans('routes', [], $locale); // Cargar traducciones en el idioma correcto
-    Route::get($routes['change_language'] . '/{targetLocale}', [LanguageController::class, 'switchLanguage'])->name('change.language');
-
     Route::get('/', [HomeController::class, 'showOptions'])->name('home');
 
     Route::get($routes['login'], [UserAuthController::class, 'showLoginForm'])->name('login');
@@ -40,12 +38,12 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     Route::post($routes['register'], [UserAuthController::class, 'register']);
 
     Route::middleware('auth:user')->prefix($routes['user'])->group(function () use ($routes) {
-        Route::get('tickets', [TicketController::class, 'showAll'])->name('user.tickets.index');
-        Route::get('tickets/create', [TicketController::class, 'showCreateForm'])->name('user.tickets.create');
-        Route::post('tickets', [TicketController::class, 'create'])->name('user.tickets.store');
-        Route::get('tickets/{ticket}', [TicketController::class, 'show'])->name('user.tickets.show');
+        Route::get($routes['tickets'], [TicketController::class, 'showAll'])->name('user.tickets.index');
+        Route::get($routes['tickets'] . '/' . $routes['create'], [TicketController::class, 'showCreateForm'])->name('user.tickets.create');
+        Route::post($routes['tickets'], [TicketController::class, 'create'])->name('user.tickets.store');
+        Route::get($routes['tickets'] . '/{ticket}', [TicketController::class, 'show'])->name('user.tickets.show');
 
-        Route::post('tickets/{ticket}/comment', [CommentController::class, 'addComment'])->name('ticket.add.comment');
+        Route::post($routes['tickets'] . '/{ticket}/' . $routes['comment'], [CommentController::class, 'addComment'])->name('ticket.add.comment');
         Route::post('tickets/{ticket}/validate', [TicketController::class, 'validateResolution'])->name('user.tickets.validate');
 
         Route::get($routes['notifications'], [UserNotificationController::class, 'showNotificationsView'])->name('user.notifications');
@@ -54,9 +52,6 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::post($routes['logout'], [UserAuthController::class, 'logOut'])->name('logout');
     });
         
-
-
-
 
     Route::get($routes['admin'] . '/' . $routes['login'], [AdminAuthController::class, 'showLoginForm']) -> name('admin.login');
     Route::post($routes['admin'] . '/' . $routes['login'], [AdminAuthController::class, 'login']);

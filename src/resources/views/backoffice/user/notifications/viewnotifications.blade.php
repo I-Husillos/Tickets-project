@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="text-center">Mis Notificaciones</h2>
+    <h2 class="text-center">{{ __('frontoffice.notifications_title') }}</h2>
 
     @if ($notifications->isEmpty())
         <p>No tienes notificaciones.</p>
@@ -13,13 +13,13 @@
         <div class="form-row">
             <div class="col-md-4">
             <select name="type" class="form-control">
-                <option value="">-- Filtrar por tipo --</option>
-                <option value="status" {{ request('type') == 'status' ? 'selected' : '' }}>Cambio de estado</option>
-                <option value="comment" {{ request('type') == 'comment' ? 'selected' : '' }}>Comentario añadido</option>
+                <option value="">-- {{ __('frontoffice.filter_by_type') }} --</option>
+                <option value="status" {{ request('type') == 'status' ? 'selected' : '' }}>{{ __('frontoffice.filter_by_change_status') }}</option>
+                <option value="comment" {{ request('type') == 'comment' ? 'selected' : '' }}>{{ __('frontoffice.filter_by_add_comment') }}</option>
             </select>
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary">{{ __('frontoffice.filter') }}</button>
             </div>
         </div>
     </form>
@@ -38,17 +38,17 @@
 
                     <!-- Si es cambio de estado -->
                     @isset($notification->data['status'])
-                        <p><strong>Nuevo estado:</strong> {{ ucfirst($notification->data['status']) }}</p>
+                        <p><strong>{{ __('frontoffice.tickets.new_status') }}:</strong> {{ ucfirst($notification->data['status']) }}</p>
                     @endisset
 
                     <!-- Si tiene autor -->
                     @isset($notification->data['author'])
-                        <p><strong>Autor:</strong> {{ $notification->data['author'] }}</p>
+                        <p><strong>{{ __('frontoffice.tickets.author') }}:</strong> {{ $notification->data['author'] }}</p>
                     @endisset
 
                     <!-- Si tiene contenido del comentario -->
                     @isset($notification->data['comment'])
-                        <p><strong>Comentario:</strong> "{{ $notification->data['comment'] }}"</p>
+                        <p><strong>{{ __('frontoffice.tickets.comment') }}:</strong> "{{ $notification->data['comment'] }}"</p>
                     @endisset
 
                     <!-- Si tiene info del que actualizó -->
@@ -57,17 +57,17 @@
                     @endisset
 
                     <!-- Fecha -->
-                    <small>Recibido: {{ $notification->created_at->format('d/m/Y H:i') }}</small>
+                    <small>{{ __('frontoffice.received_at') }}: {{ $notification->created_at->format('d/m/Y H:i') }}</small>
 
                     <!-- Marcar como leído -->
                     @if (!$notification->read_at)
                         <form action="{{ route('user.notifications.read', ['id' => $notification->id, 'locale' => app()->getLocale()]) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" class="btn btn-sm btn-outline-secondary float-right">Marcar como leída</button>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary float-right">{{ __('frontoffice.mark_as_read') }}</button>
                         </form>
                     @else
-                        <span class="badge badge-success float-right">Leído</span>
+                        <span class="badge badge-success float-right">{{ __('frontoffice.readed') }}</span>
                     @endif
                 </a>
             @endforeach
@@ -80,7 +80,7 @@
     @endif
 
     <div class="text-center mt-4">
-        <a href="{{ route('user.tickets.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">Volver a mis tickets</a>
+        <a href="{{ route('user.tickets.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('frontoffice.tickets.return_to_ticket_list') }}</a>
     </div>
 </div>
 @endsection

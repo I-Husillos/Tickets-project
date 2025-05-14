@@ -43,8 +43,6 @@ class LanguageController extends Controller
 
         return redirect($newUrl);
     }
-
-
     
 }
 

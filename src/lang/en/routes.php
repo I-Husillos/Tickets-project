@@ -13,7 +13,6 @@ return [
     'notifications'  => 'notifications',
     'read_notification' => 'mark-as-read',
     'change_language'  => 'change-language',
-
     'admin' => 'admin',
     'dashboard' => 'dashboard',
     'update_status' => 'update-status',
