@@ -9,7 +9,6 @@
         <!-- Archivo de estilos personalizados -->
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
-        @vite('resources/css/app.css')
 
         <link rel="canonical" href="{{ url()->current() }}">
     </head>

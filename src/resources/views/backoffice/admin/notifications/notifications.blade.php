@@ -71,7 +71,7 @@
                 <small>{{ $notification->created_at->format('d/m/Y H:i') }}</small>
 
                 @if (!$notification->read_at)
-                    <form action="{{ route('admin.notifications.read', ['locale' => app()->getLocale(), 'notificationId' => $notification->id]) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('admin.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="btn btn-sm btn-outline-secondary float-right">

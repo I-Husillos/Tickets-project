@@ -79,7 +79,7 @@
     </a>
 
     <div class="d-flex justify-content-end mt-4">
-        <form method="POST" action="{{ route('logout', ['locale' => app()->getLocale(), 'username' => Auth::user()->id]) }}">
+        <form method="POST" action="{{ route('user.logout', ['locale' => app()->getLocale(), 'username' => Auth::user()->id]) }}">
             @csrf
             <button type="submit" class="btn btn-danger">{{ __('frontoffice.logout') }}</button>
         </form>

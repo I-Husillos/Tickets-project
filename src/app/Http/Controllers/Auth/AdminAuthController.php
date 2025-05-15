@@ -24,7 +24,7 @@ class AdminAuthController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
             Log::info('Login exitoso para: ' . $credentials['email']);
-            return redirect()->route('admin.dashboard', ['locale' => app()->getLocale()])->with('success', 'Inicio de sesión exitoso.');
+            return redirect()->route('admin.manage.dashboard', ['locale' => app()->getLocale()])->with('success', 'Inicio de sesión exitoso.');
         }
     
         Log::error('Login fallido para: ' . $credentials['email']);

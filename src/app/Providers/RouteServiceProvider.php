@@ -31,36 +31,30 @@ class RouteServiceProvider extends ServiceProvider
             $alternateLocale = $currentLocale == 'es' ? 'en' : 'es';
 
             $currentRouteName = Route::currentRouteName();
+
             // dd($currentRouteName);
 
-            $segments = explode('.', $currentRouteName); // Dividir la ruta en segmentos
+            // $segments = explode('.', $currentRouteName); // Dividir la ruta en segmentos
 
-            $methods = ['index', 'show', 'create', 'edit', 'destroy', 'update', 'store'];
-
-            $translatedSegments = array_map(function ($segment) use ($alternateLocale , $methods) {
-                if (in_array($segment, $methods)) {
-                    return $segment;
-                }
-                return trans("routes.$segment", [], $alternateLocale);
-            }, $segments);
-
-            for($i = 0; $i < count($translatedSegments); $i++) {
-                if (end($translatedSegments) === $methods[0]) {
-                    array_pop($translatedSegments);
-                }
-            }
+            // $translatedSegments = array_map(function ($segment) use ($alternateLocale) {
+            //     return trans("routes.$segment", [], $alternateLocale);
+            // }, $segments);
 
 
-            $translatedRoute = implode('/', $translatedSegments);
+
+            $translatedRoute = trans("routes.$currentRouteName", [], $alternateLocale);
+
+            
             $alternateUrl = url("/$alternateLocale/$translatedRoute");
-
+            
+            //dd("routes.$currentRouteName", $alternateLocale, $translatedRoute, $alternateUrl);
+            
             $view->with([
                 'currentLocale' => $currentLocale,
                 'alternateLocale' => $alternateLocale,
                 'alternateUrl' => $alternateUrl
             ]);
 
-            // dd($currentLocale, $alternateLocale, $currentRouteName, $translatedRoute, $alternateUrl);
         });
     }
     

@@ -86,3 +86,86 @@ ejemplo de traduccion:
 
 
 serializacion (bbdd)
+
+
+
+
+//     'home' => '/',
+//     'user' => 'usuario',
+//     'login' => 'iniciar-sesion',
+//     'register' => 'registrarse',
+//     'logout' => 'cerrar-sesion',
+//     'user.tickets' => [
+//         'index' => 'tickets',
+//         'create' => 'crear',
+//         'show' => 'mostrar/{ticket}',
+//         'comment' => 'agregar-comentario',
+//         'validate' => 'validar',
+//     ],
+
+//     'admin' => 'administrador',
+//     'login' => 'iniciar-sesion',
+//     'logout' => 'cerrar-sesion',
+//     'dashboard' => 'panel-de-control',
+//     'assigned' => 'asignados',
+    
+//     'tickets' => [
+//         'index' => 'tickets',
+//         'view' => 'ver/{ticket}',
+//         'update_status' => 'actualizar-estado',
+//         'close' => '{ticket}/cerrar',
+//         'reopen' => '{ticket}/reabrir',
+//         'assign' => '{ticket}/asignar',
+//     ],
+
+//     'comments' => [
+//         'index' => 'comentarios',
+//         'add' => 'agregar',
+//         'delete' => 'eliminar',
+//         'view' => 'ver',
+//     ],
+
+//     'users' => [
+//         'index' => 'usuarios',
+//         'create' => 'crear',
+//         'store' => 'almacenar',
+//         'edit' => 'editar',
+//         'update' => 'actualizar',
+//         'confirm_delete' => 'confirmar-eliminacion',
+//         'destroy' => 'eliminar',
+//     ],
+
+//     'admins' => [
+//         'list' => 'listado',
+//         'create' => 'crear',
+//         'store' => 'almacenar',
+//         'edit' => 'editar',
+//         'update' => 'actualizar',
+//         'confirm_delete' => 'confirmar-eliminacion',
+//         'destroy' => 'eliminar',
+//     ],
+
+//     'types' => [
+//         'index' => 'tipos',
+//         'create' => 'crear',
+//         'store' => 'almacenar',
+//         'edit' => 'editar',
+//         'update' => 'actualizar',
+//         'confirm_delete' => 'confirmar-eliminacion',
+//         'destroy' => 'eliminar',
+//     ],
+
+
+//     'notifications' => [
+//         'index' => 'notificaciones',
+//         'read' => 'notificaciones/{id}/marcar-leida',
+//     ],
+
+//     'history' => [
+//         'events' => 'historial/eventos',
+//     ],
+
+
+
+
+        <!--@vite('resources/css/app.css')-->

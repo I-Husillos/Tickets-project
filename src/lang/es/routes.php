@@ -1,81 +1,118 @@
 <?php
 
 return [
-    'home' => '/',
-    'user' => 'usuario',
-    'login' => 'iniciar-sesion',
-    'register' => 'registrarse',
-    'logout' => 'cerrar-sesion',
-    'user.tickets' => [
-        'index' => 'tickets',
-        'create' => 'crear',
-        'show' => 'mostrar/{ticket}',
-        'comment' => 'agregar-comentario',
-        'validate' => 'validar',
-    ],
-    'notifications' => 'notificaciones',
-    'notifications.read' => 'notificaciones/{id}/marcar-leida',
+        'home' => '/',
+        'user' => 'usuario',
+        'login' => 'iniciar-sesion',
+        'register' => 'registrarse',
+        'user.logout' => 'cerrar-sesion',
 
-    'admin' => 'administrador',
-    'login' => 'iniciar-sesion',
-    'logout' => 'cerrar-sesion',
-    'dashboard' => 'panel-de-control',
-    'assigned' => 'asignados',
-    
-    'tickets' => [
-        'index' => 'tickets',
-        'view' => 'ver/{ticket}',
-        'update_status' => 'actualizar-estado',
-        'close' => 'cerrar',
-        'reopen' => 'reabrir',
-        'assign' => 'asignar',
-    ],
+        'user.tickets.index' => 'usuario/tickets/lista',
+        'user.tickets.create' => 'usuario/tickets/crear',
+        'user.tickets.store' => 'usuario/tickets/almacenar',
+        'user.tickets.show' => 'usuario/tickets/mostrar/{ticket}',
+        'user.tickets.comment' => 'usuario/tickets/agregar-comentario/{ticket}',
+        'user.tickets.validate' => 'usuario/tickets/validar',
 
-    'comments' => [
-        'index' => 'comentarios',
-        'comment' => 'comentario',
-        'delete' => 'eliminar',
-        'view' => 'ver',
-    ],
+        'user.notifications' => 'usuario/notificaciones',
+        'user.notifications.read' => 'usuario/notificaciones/marcar-leida/{notification}',
 
-    'users' => [
-        'index' => 'usuarios',
-        'create' => 'crear',
-        'store' => 'almacenar',
-        'edit' => 'editar',
-        'update' => 'actualizar',
-        'confirm_delete' => 'confirmar-eliminacion',
-        'destroy' => 'eliminar',
-    ],
+        //administrador
+        'admin.login' => 'administrador/iniciar-sesion',
+        'admin.logout' => 'administrador/cerrar-sesion',
+        '/' => 'panel-control',
+        'admin.manage.dashboard' => 'administrador/panel-control',
 
-    'admins' => [
-        'list' => 'listado',
-        'create' => 'crear',
-        'store' => 'almacenar',
-        'edit' => 'editar',
-        'update' => 'actualizar',
-        'confirm_delete' => 'confirmar-eliminacion',
-        'destroy' => 'eliminar',
-    ],
+        // Tickets
+        'admin.show.assigned.tickets' => 'administrador/tickets/asignados',
+        'admin.tickets.update_status' => 'administrador/tickets/actualizar-estado/{ticket}',
+        'admin.tickets.close' => 'administrador/tickets/cerrar/{ticket}',
+        'admin.tickets.reopen' => 'administrador/tickets/reabrir/{ticket}',
+        'admin.tickets.assign' => 'administrador/tickets/asignar/{ticket}',
+        'admin.manage.tickets' => 'administrador/tickets/lista',
+        'admin.view.ticket' => 'administrador/tickets/mostrar/{ticket}',
 
-    'types' => [
-        'index' => 'tipos',
-        'create' => 'crear',
-        'store' => 'almacenar',
-        'edit' => 'editar',
-        'update' => 'actualizar',
-        'confirm_delete' => 'confirmar-eliminacion',
-        'destroy' => 'eliminar',
-    ],
 
-    'notifications' => [
-        'index' => 'notificaciones',
-        'read' => 'marcar-leida',
-    ],
+        // Users
+        'admin.dashboard.list.users' => 'administrador/usuarios/lista',
+        'admin.users.add_dashboard' => 'administrador/usuarios/dashboard',
+        'admin.users.create' => 'administrador/usuarios/crear',
+        'admin.users.store' => 'administrador/usuarios/guardar',
+        'admin.users.edit' => 'administrador/usuarios/editar/{user}',
+        'admin.users.confirm_delete' => 'administrador/usuarios/confirmar-eliminar/{user}',
 
-    'history' => [
-        'events' => 'historial/eventos',
-    ],
+
+        // Comments
+        'admin.comments.add' => 'administrador/comentarios/agregar',
+        'admin.comments.delete' => 'administrador/comentarios/eliminar/{comment}',
+        'admin.comments.view' => 'administrador/comentarios/ver/{ticket}',
+
+
+        // Admins
+        'admin.admins.list' => 'administrador/administradores/lista',
+        'admin.admins.list' => 'administrador/administradores/lista',
+        'admin.admins.create' => 'administrador/administradores/crear',
+        'admin.admins.edit' => 'administrador/administradores/editar/{admin}',
+        'admin.admins.confirm_delete' => 'administrador/administradores/confirmar-eliminar/{admin}',
+
+
+        // Types
+        'admin.types.index' => 'administrador/tipos',
+        'admin.types.create' => 'administrador/tipos/crear',
+        'admin.types.edit' => 'administrador/tipos/editar/{type}',
+        'admin.types.store' => 'administrador/tipos/guardar',
+        'admin.types.confirm_delete' => 'administrador/tipos/confirmar-eliminar/{type}',
+        'admin.types.update' => 'administrador/tipos/actualizar/{type}',
+
+
+        // Notifications
+        'admin.notifications' => 'administrador/notificaciones',
+        'admin.notifications.read' => 'administrador/notificaciones/marcar-leida/{notification}',
+
+
+        // History
+        'admin.history.events' => 'administrador/historial/eventos',
+
+    ];
+
+
+
+        // 'add.comment' => 'agregar-comentario',
+        // 'delete.comment' => 'eliminar-comentario',
+        // 'view.comments' => 'comentarios',
+        
+        // 'dashboard.list.users' => 'usuarios',
+        // 'dashboard.add' => 'agregar-tablero',
+        // 'users.create' => 'crear',
+        // 'users.store' => 'guardar',
+        // 'users.edit' => 'editar/{user}',
+        // 'users.update' => 'actualizar/{user}',
+        // 'users.confirmDelete' => 'confirmar-eliminacion/{user}',
+        // 'users.destroy' => 'eliminar/{user}',
+        
+        // 'dashboard.list.admins' => 'administradores',
+        // 'admins.create' => 'crear',
+        // 'admins.store' => 'guardar',
+        // 'admins.edit' => 'editar/{admin}',
+        // 'admins.update' => 'actualizar/{admin}',
+        // 'admins.confirmDelete' => 'confirmar-eliminacion/{admin}',
+        // 'admins.destroy' => 'eliminar/{admin}',
+        
+        // 'types.index' => 'tipos',
+        // 'types.create' => 'crear',
+        // 'types.store' => 'guardar',
+        // 'types.edit' => 'editar/{type}',
+        // 'types.update' => 'actualizar/{type}',
+        // 'types.destroy' => 'eliminar/{type}',
+        // 'types.confirmDelete' => 'confirmar-eliminacion/{type}',
+        
+        // 'notifications' => 'notificaciones',
+        // 'notifications.read' => 'notificaciones/{id}/marcar-leida',
+        
+        // 'history.events' => 'historial/eventos',
+
+
+
 
 //     'user' => 'usuario',
 //     'login' => 'iniciar-sesion',
@@ -116,6 +153,3 @@ return [
 //     'comment' => 'comentario',
 //     'comments' => 'comentarios',
 //     'read' => 'leida',
-];
-
-

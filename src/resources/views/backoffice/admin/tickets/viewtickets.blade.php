@@ -126,7 +126,7 @@
                                 <td>
                                     {{-- Botón para eliminar comentario --}}
                                     @can('delete', $comment)
-                                        <form method="POST" action="{{ route('admin.delete.comment', ['comment' => $comment->id, 'locale' => app()->getLocale()]) }}">
+                                        <form method="POST" action="{{ route('admin.comments.delete', ['comment' => $comment->id, 'locale' => app()->getLocale()]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">
@@ -144,7 +144,7 @@
             @can('comment', $ticket)
             <div class="form-group">
                 <h5>{{ __('general.admin_ticket_details.add_comment_heading') }}</h5>
-                <form method="POST" action="{{ route('admin.add.comment', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}">
+                <form method="POST" action="{{ route('admin.comments.add', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}">
                     @csrf
                     <div class="form-group">
                         <textarea name="message" class="form-control" rows="4"

@@ -24,7 +24,7 @@ class CommentController extends Controller
         $this->commentService = $commentService;
     }
 
-    public function addComment(StoreCommentRequest $request, String $locale, Ticket $ticket,)
+    public function addComment(StoreCommentRequest $request, String $locale, Ticket $ticket)
     {
         $this->authorize('comment', $ticket);
         $validated = $request->validated();
