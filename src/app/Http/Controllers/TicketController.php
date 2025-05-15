@@ -113,20 +113,20 @@ class TicketController extends Controller
 
 
     
-    public function closeTicket(String $locale,Ticket $ticketId)
+    public function closeTicket(String $locale,Ticket $ticket)
     {
-        $this->authorize('update', $ticketId);
+        $this->authorize('update', $ticket);
 
         $admin = Auth::guard('admin')->user();
 
 
-        if($ticketId->status !== 'closed')
+        if($ticket->status !== 'closed')
         {
             $this->ticketService->updateStatus(
-                $ticketId,
+                $ticket,
                 'closed',
                 $admin,
-                'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' cerrado',
+                'Ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' cerrado',
             );
         }
 
@@ -135,17 +135,17 @@ class TicketController extends Controller
 
 
 
-    public function reopenTicket(String $locale,Ticket $ticketId)
+    public function reopenTicket(String $locale,Ticket $ticket)
     {
-        $this->authorize('update', $ticketId);
+        $this->authorize('update', $ticket);
 
         $admin = Auth::guard('admin')->user();
 
         $this->ticketService->updateStatus(
-            $ticketId,
-            'reopened',
+            $ticket,
+            'pending',
             $admin,
-            'Ticket con id ' . $ticketId->id . ' con el título ' . $ticketId->title . ' abierto',
+            'Ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' abierto',
         );
 
         return redirect()->route('admin.manage.tickets', ['locale' => $locale])->with('success', 'Ticket reabierto.');
