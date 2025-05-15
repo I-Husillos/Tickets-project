@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Flex container to push footer to the bottom */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content takes the remaining space */
+main {
+    flex: 1;
+}
+
+/* Footer styling */
+.main-footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-footer {
+        font-size: 0.9rem;
+    }
+}

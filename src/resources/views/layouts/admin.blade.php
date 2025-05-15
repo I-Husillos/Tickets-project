@@ -11,6 +11,8 @@
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
+    @vite('resources/js/app.js')
+
     <link rel="canonical" href="{{ url()->current() }}">
 </head>
 <body>

@@ -9,6 +9,12 @@
         <!-- Archivo de estilos personalizados -->
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
+        <!-- AdminLTE CSS -->
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+
+
 
         <link rel="canonical" href="{{ url()->current() }}">
     </head>
@@ -27,10 +33,12 @@
         </main>
 
 
-        <footer class="bg-light text-center py-4">
-            <div class="container">
-                <p class="mb-0">{{ __('general.frontoffice.layout.footer', ['year' => date('Y')]) }}</p>
+        
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.2
             </div>
+            <strong>&copy; {{ date('Y') }} - Gestión de Tickets.</strong> Todos los derechos reservados.
         </footer>
     </body>
 </html>
