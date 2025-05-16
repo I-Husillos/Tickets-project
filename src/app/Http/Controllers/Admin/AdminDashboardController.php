@@ -28,7 +28,7 @@ class AdminDashboardController extends Controller
 
         $assignedTickets = Ticket::where('admin_id', $admin->id);
 
-        return view('backoffice.admin.management.managedashboard', compact(
+        return view('admin.management.managedashboard', compact(
             'totalUsers', 'totalAdmins', 'totalTickets', 'pendingTickets', 'resolvedTickets', 'recentEvents', 'recentNotifications', 'isSuperAdmin', 'assignedTickets'
             ,'assignedTickets'
         ));
@@ -36,6 +36,6 @@ class AdminDashboardController extends Controller
 
     public function showAddDashboard()
     {
-        return view('backoffice.admin.management.adddashboard');
+        return view('admin.management.adddashboard');
     }
 }

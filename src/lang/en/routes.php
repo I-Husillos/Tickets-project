@@ -7,8 +7,14 @@ return [
         'register' => 'register',
         'user.logout' => 'logout',
 
+        'user.tickets.search' => 'user/tickets/search',
+
+        'user.dashboard' => 'user/dashboard',
+
         'user.tickets.index' => 'user/tickets/list',
         'user.tickets.create' => 'user/tickets/create',
+        'user.tickets.edit' => 'user/tickets/edit/{ticket}',
+        'user.tickets.update' => 'user/tickets/update/{ticket}',
         'user.tickets.store' => 'user/tickets/store',
         'user.tickets.show' => 'user/tickets/show/{ticket}',
         'user.tickets.comment' => 'user/tickets/add-comment/{ticket}',

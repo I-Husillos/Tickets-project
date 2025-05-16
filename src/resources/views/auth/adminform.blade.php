@@ -1,4 +1,4 @@
-@extends('layouts.frontoffice')
+@extends('layouts.user')
 
 @section('title', __('general.frontoffice.auth.admin_login.title'))
 

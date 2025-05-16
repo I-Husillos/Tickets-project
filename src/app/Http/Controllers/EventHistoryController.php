@@ -22,7 +22,7 @@ class EventHistoryController
         $filters = $request->only(['event_type', 'user', 'date']);
         $events = $this->eventHistoryService->filterEvents($filters);
 
-        return view('backoffice.admin.management.eventHistory.index', compact('events'));
+        return view('admin.management.eventHistory.index', compact('events'));
     }
 
 

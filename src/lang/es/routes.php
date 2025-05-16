@@ -7,8 +7,14 @@ return [
         'register' => 'registrarse',
         'user.logout' => 'cerrar-sesion',
 
+        'user.tickets.search' => 'usuario/tickets/buscar',
+
+        'user.dashboard' => 'usuario/panel-control',
+
         'user.tickets.index' => 'usuario/tickets/lista',
         'user.tickets.create' => 'usuario/tickets/crear',
+        'user.tickets.edit' => 'usuario/tickets/editar/{ticket}',
+        'user.tickets.update' => 'usuario/tickets/actualizar/{ticket}',
         'user.tickets.store' => 'usuario/tickets/almacenar',
         'user.tickets.show' => 'usuario/tickets/mostrar/{ticket}',
         'user.tickets.comment' => 'usuario/tickets/agregar-comentario/{ticket}',

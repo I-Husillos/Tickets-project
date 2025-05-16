@@ -25,12 +25,12 @@ class AdminAdminController extends Controller
     
         $admins = $query->paginate(10, ['*'], 'admins_pagination')->appends($request->query());
     
-        return view('backoffice.admin.management.listadmins', compact('admins'));
+        return view('admin.management.listadmins', compact('admins'));
     }
 
     public function createAdmin()
     {
-        return view('backoffice.admin.management.createFormAdmin');
+        return view('admin.management.createFormAdmin');
     }
 
     public function storeAdmin(StoreAdminRequest $request, String $locale)
@@ -58,7 +58,7 @@ class AdminAdminController extends Controller
 
     public function confirmDeleteAdmin(Admin $admin)
     {
-        return view('backoffice.admin.management.confirm-delete-admin', compact('admin'));
+        return view('admin.management.confirm-delete-admin', compact('admin'));
     }
 
 
@@ -77,7 +77,7 @@ class AdminAdminController extends Controller
 
     public function editAdmin(String $locale, Admin $admin)
     {
-        return view('backoffice.admin.management.editFormAdmin', compact('admin'));
+        return view('admin.management.editFormAdmin', compact('admin'));
     }
 
 

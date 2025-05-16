@@ -1,4 +1,4 @@
-@extends('layouts.frontoffice')
+@extends('layouts.user')
 
 @section('title', 'Mis Notificaciones')
 

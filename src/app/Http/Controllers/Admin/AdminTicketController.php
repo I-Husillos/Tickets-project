@@ -20,7 +20,7 @@ class AdminTicketController extends Controller
         $admins = Admin::all();
         $ticketTypes = Type::all();
 
-        return view('backoffice.admin.tickets.viewtickets', compact('ticket', 'admins', 'ticketTypes'));
+        return view('admin.tickets.viewtickets', compact('ticket', 'admins', 'ticketTypes'));
     }
     
 
@@ -39,7 +39,7 @@ class AdminTicketController extends Controller
 
         $tickets = $query->paginate(5);
 
-        return view('backoffice.admin.tickets.managetickets', compact('tickets'));
+        return view('admin.tickets.managetickets', compact('tickets'));
     }
 
 
@@ -61,7 +61,7 @@ class AdminTicketController extends Controller
         }
 
         $tickets = $query->get();
-        return view('backoffice.admin.managetickets', compact('tickets'));
+        return view('admin.managetickets', compact('tickets'));
     }
 
 
@@ -129,6 +129,6 @@ class AdminTicketController extends Controller
 
         $assignedTickets = $query->paginate(5);
 
-        return view('backoffice.admin.tickets.assignedticketsview', compact('assignedTickets'));
+        return view('admin.tickets.assignedticketsview', compact('assignedTickets'));
     }
 }

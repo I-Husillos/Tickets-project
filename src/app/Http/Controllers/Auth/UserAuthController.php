@@ -16,7 +16,7 @@ class UserAuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('frontoffice.auth.login');
+        return view('auth.login');
     }
 
 
@@ -36,7 +36,7 @@ class UserAuthController extends Controller
 
     public function showRegisterForm()
     {
-        return view('frontoffice.auth.register');
+        return view('auth.register');
     }
 
 

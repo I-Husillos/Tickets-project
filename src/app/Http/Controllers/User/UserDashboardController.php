@@ -14,6 +14,6 @@ class UserDashboardController extends Controller
 
         $tickets = $user->tickets;
 
-        return view('frontoffice.dashboard', compact('tickets'));
+        return view('user.dashboard', compact('tickets'));
     }
 }

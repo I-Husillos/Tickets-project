@@ -23,12 +23,12 @@ class TypesController
     public function index()
     {
         $types = Type::all();
-        return view('backoffice.admin.types.index', compact('types'));
+        return view('admin.types.index', compact('types'));
     }
 
     public function create()
     {
-        return view('backoffice.admin.types.create');
+        return view('admin.types.create');
     }
 
     public function store(StoreTypeRequest $request)
@@ -43,7 +43,7 @@ class TypesController
 
     public function edit(String $locale, Type $type)
     {
-        return view('backoffice.admin.types.edit', compact('type'));
+        return view('admin.types.edit', compact('type'));
     }
 
     public function update(String $locale, UpdateTypeRequest $request, Type $type)
@@ -65,7 +65,7 @@ class TypesController
 
     public function confirmDelete(String $locale, Type $type)
     {
-        return view('backoffice.admin.types.confirm-delete', compact('type'));
+        return view('admin.types.confirm-delete', compact('type'));
     }
 
 }

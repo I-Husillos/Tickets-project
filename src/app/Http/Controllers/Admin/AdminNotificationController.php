@@ -28,7 +28,7 @@ class AdminNotificationController extends Controller
         $notifications = $query->paginate(5);
 
 
-        return view('backoffice.admin.notifications.notifications', compact('notifications'));
+        return view('admin.notifications.notifications', compact('notifications'));
     }
 
 

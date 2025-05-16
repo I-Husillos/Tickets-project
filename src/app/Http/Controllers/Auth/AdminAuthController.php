@@ -14,7 +14,7 @@ class AdminAuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('frontoffice.auth.adminform');
+        return view('auth.adminform');
     }
 
 

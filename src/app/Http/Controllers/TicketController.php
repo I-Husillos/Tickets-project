@@ -18,6 +18,8 @@ use App\Notifications\TicketCreatedNotification;
 use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTicketRequest;
+use App\Http\Requests\SearchTicketRequest;
+use App\Http\Requests\UpdateDataTicketRequest;
 use Dotenv\Util\Str;
 
 class TicketController extends Controller
@@ -29,6 +31,15 @@ class TicketController extends Controller
         $this->ticketService = $ticketService;
     }
 
+    public function search(SearchTicketRequest $request)
+    {
+        $query = $request->input('query');
+
+        $tickets = Ticket::where('title', 'like', '%' . $query . '%')->paginate(10);
+
+        return view('user.tickets.index', compact('tickets'));
+    }
+
 
     public function showAll()
     {
@@ -38,13 +49,13 @@ class TicketController extends Controller
 
         $tickets = $user->tickets()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('backoffice.user.tickets.index', compact('tickets'));
+        return view('user.tickets.index', compact('tickets'));
     }
 
 
     public function showCreateForm()
     {
-        return view('backoffice.user.tickets.create');
+        return view('user.tickets.create');
     }
 
     public function create(StoreTicketRequest $request)
@@ -82,7 +93,7 @@ class TicketController extends Controller
 
         $ticket->load('comments');
 
-        return view('backoffice.user.tickets.show', compact('ticket'));
+        return view('user.tickets.show', compact('ticket'));
     }
 
 
@@ -110,6 +121,20 @@ class TicketController extends Controller
         return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', 'Estado del ticket actualizado.');
     }
 
+
+    public function edit($locale, Ticket $ticket)
+    {
+        app()->setLocale($locale);
+        return view('user.tickets.edit', compact('ticket'));
+    }
+
+
+    public function update(UpdateDataTicketRequest $request, String $locale, Ticket $ticket)
+    {
+        $ticket->update($request->validated());
+
+        return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', __('frontoffice.tickets.updated_success'));
+    }
 
 
     

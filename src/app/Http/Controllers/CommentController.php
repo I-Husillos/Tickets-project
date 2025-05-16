@@ -43,7 +43,7 @@ class CommentController extends Controller
     public function viewComments(Ticket $ticket)
     {
         $comments = $ticket->comments()->with('author')->get();
-        return view('backoffice.comments.index', compact('comments', 'ticket'));
+        return view('.comments.index', compact('comments', 'ticket'));
     }
 
 

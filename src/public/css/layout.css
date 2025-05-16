@@ -17,11 +17,11 @@ main {
 }
 
 /* Footer styling */
-.main-footer {
+.main-footer2 {
     background-color: #f8f9fa;
     text-align: center;
     padding: 15px 0;
-    margin-top: auto;
+    position: absolute;
     width: 100%;
     border-top: 1px solid #e0e0e0;
 }

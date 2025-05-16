@@ -24,7 +24,7 @@ class UserNotificationController extends Controller
         $notifications = $query->orderBy('created_at', 'desc')->paginate(10);
 
 
-        return view('backoffice.user.notifications.viewnotifications', compact('notifications'));
+        return view('user.notifications.viewnotifications', compact('notifications'));
     }
 
     public function markAsRead($locale, $notificationId)

@@ -19,12 +19,12 @@ class AdminUserController extends Controller
     {
         $users = User::paginate(10, ['*'], 'users_pagination');
 
-        return view('backoffice.admin.management.listusers' , compact('users'));
+        return view('admin.management.listusers' , compact('users'));
     }
 
     public function createUser()
     {
-        return view('backoffice.admin.management.createFormUser');
+        return view('admin.management.createFormUser');
     }
 
 
@@ -51,7 +51,7 @@ class AdminUserController extends Controller
 
     public function confirmDeleteUser(String $locale, User $user)
     {
-        return view('backoffice.admin.management.confirm-delete-user', compact('user'));
+        return view('admin.management.confirm-delete-user', compact('user'));
     }
 
     public function confirmDeleteUserPost(String $locale, User $user)
@@ -70,7 +70,7 @@ class AdminUserController extends Controller
 
     public function editUser(String $locale, User $user)
     {
-        return view('backoffice.admin.management.editFormUser', compact('user'));
+        return view('admin.management.editFormUser', compact('user'));
     }
 
     public function updateUser(String $locale, UpdateUserRequest $request, User $user)

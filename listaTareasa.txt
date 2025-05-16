@@ -169,3 +169,74 @@ serializacion (bbdd)
 
 
         <!--@vite('resources/css/app.css')-->
+
+
+
+
+
+
+    <div class="sidebar">
+        <h4>{{ __('general.admin_sidebar.title_admin_panel') }}</h4>
+
+        <div class="mb-3">
+            <x-language-switcher/>
+        </div>
+
+        <hr class="bg-light mx-3">
+        <!-- route('register', ['locale' => app()->getLocale()]) --> 
+        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" 
+        class="d-block text-white {{ str_starts_with($routeName, 'admin.dashboard.list.') ? 'fw-bold text-decoration-underline' : '' }}">
+            {{ __('general.admin_sidebar.panel_control') }}
+        </a>
+            @if (Auth::guard('admin')->user()->superadmin)
+                @if (str_starts_with($routeName, 'admin.dashboard.list.'))
+                        <div class="ps-3 mt-1">
+                            <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}"
+                            class="d-block text-white {{ $routeName === 'admin.dashboard.list.users' ? 'fw-bold' : '' }}">
+                                {{ __('general.admin_sidebar.ver_usuarios') }}
+                            </a>
+                            <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}"
+                            class="d-block text-white {{ $routeName === 'admin.dashboard.list.admins' ? 'fw-bold' : '' }}">
+                                {{ __('general.admin_sidebar.ver_admins') }}
+                            </a>
+                        </div>
+                    @endif
+                <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.tipos_de_tickets') }}</a>
+                <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.gestionar_tickets') }}</a>
+            @endif
+        <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.tickets_asignados') }}</a>
+        <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.historial_eventos') }}</a>
+        <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="d-block text-white">
+            {{ __('general.admin_sidebar.notificaciones') }} 
+            @if (Auth::user()->unreadNotifications->count() > 0)
+                <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+            @endif
+        </a>
+
+        <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}" class="mt-4 px-3">
+            @csrf
+            <button class="btn btn-danger w-100">{{ __('general.admin_sidebar.cerrar_sesion') }}</button>
+        </form>
+    </div>
+
+    <div class="main-content">
+        @yield('admincontent')
+    </div>
+
+
+
+
+
+
+
+    bien, actualmente estoy desarrollando una aplicación de gestión de tickets para una empresa, dicha aplicación está compuesta por dos partes una para los usuarios y otra para los administradores, los cuales pueden ser superadmins o no administradores normales, o que condiciona a la apariencia y a las funcionalidades dentro de la aplicación, en esta aplicación basicamente lo que se puede lograr son la creacón de tickets por parte de usuarios, así como el poder a ñadir comentarios para dar más información a los administradores y poder cerrar sesión, al mismo tiempo que pueden iniciar sesión o registrarse, por la parte de los administradores, estos puedes ver y gestionar los usuarios y administradores registrados en la acplicación, asi como los tickets totales registrados en la aplicación o el los tickets asignados a dicho ticket, dicho se de paso el administrador puede asignarlos a los administradores presentes en la aplicación, esta funcion solo es disponible para los superadmins poder cerrarlos, editar sus campos, estado, prioridad, etc y reabrirlos, así como presenciar un historial de eventos que han ocurrido en la aplicación, ya sea la cración de un tickets, el cambio de estado de un ticket, etc, aunque algunas de estas funcionalidades estan reserbadass a los superadmins, además de que hay notificaciones las cuales se envias a admins o users depednindo de las acciones que se realicen en la aplicación, al mismo tiempo que todos los usuarios normales o admins pueden cambiar el idioma de la acplicaión a ingles o español.
+Sabiendo este resumen general de la aplicación, quiero reestructurar las vistas de mi aplicación, me gustaría saber sabiendo que tengo adminlte instalado en mi proyecto, que puedo agregar para mejorar la experiencia de usuario (UX) en mi aplicación, como por ejemplo donde han de ir las notificaciones, el cerrar sesión, donde debe ir el buscador en un menu lateral, etc, explicane antes de ponernos en detalle con la apliación y sus vistas, sobre la UX, que es por que es importane en el desarrollo web y demás, quiero saberlo todo absolutamente todo, como si me lo tienes que decir en varios mensajes, busca la información que creas conveniente, quiero informarme antes de pasar a la accion con la aplicacion, lo quiero saber todo lo que es esencial, basico y principal en la ux en el desarrollo web
+
+
+
+<header class="bg-primary text-white py-3">
+                <div class="container">
+                    <h1 class="text-center">{{ __('general.frontoffice.layout.header') }}</h1>
+                    <x-language-switcher />
+                </div>
+            </header>

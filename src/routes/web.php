@@ -14,6 +14,7 @@ use App\Http\Controllers\User\UserNotificationController;
 use App\Http\Controllers\Admin\AdminEventHistoryController;
 use App\Http\Controllers\Admin\AdminAdminController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Routing\RouteAction;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +41,15 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     Route::middleware('auth:user')->group(function () use ($routes) {
         Route::post($routes['user.logout'], [UserAuthController::class, 'logOut'])->name('user.logout');
 
+        Route::get($routes['user.tickets.search'], [TicketController::class, 'search'])->name('user.tickets.search');
+
+        Route::get($routes['user.dashboard'], [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('user.dashboard');
+
+
         Route::get($routes['user.tickets.index'], [TicketController::class, 'showAll'])->name('user.tickets.index');
         Route::get($routes['user.tickets.create'], [TicketController::class, 'showCreateForm'])->name('user.tickets.create');
+        Route::get($routes['user.tickets.edit'], [TicketController::class, 'edit'])->name('user.tickets.edit');
+        Route::put($routes['user.tickets.update'], [TicketController::class, 'update'])->name('user.tickets.update');
         Route::post($routes['user.tickets.store'], [TicketController::class, 'create'])->name('user.tickets.store');
         Route::get($routes['user.tickets.show'], [TicketController::class, 'show'])->name('user.tickets.show');
 
