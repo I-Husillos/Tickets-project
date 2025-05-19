@@ -41,9 +41,11 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     Route::middleware('auth:user')->group(function () use ($routes) {
         Route::post($routes['user.logout'], [UserAuthController::class, 'logOut'])->name('user.logout');
 
-        Route::get($routes['user.tickets.search'], [TicketController::class, 'search'])->name('user.tickets.search');
 
         Route::get($routes['user.dashboard'], [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('user.dashboard');
+
+        Route::get($routes['user.tickets.search'], [TicketController::class, 'search'])->name('user.tickets.search');
+
 
 
         Route::get($routes['user.tickets.index'], [TicketController::class, 'showAll'])->name('user.tickets.index');

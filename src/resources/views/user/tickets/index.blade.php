@@ -65,6 +65,9 @@
                 </div>
             @endif
         @endif
+        <a href="{{ route('user.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary mt-3">
+            {{ __('frontoffice.dashboard.return_to_user_dashboard') }}
+        </a>
     </div>
 </div>
 @endsection

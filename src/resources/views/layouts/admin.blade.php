@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', __('Panel de Administración'))</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    @vite('resources/js/app.js')
 
     <!-- AdminLTE -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
@@ -14,12 +14,61 @@
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
-    @vite('resources/js/app.js')
 
     <link rel="canonical" href="{{ url()->current() }}">
 </head>
 <body>
     <!-- Se obtiene el nombre de la ruta actual para aplicar estilos condicionales -->
+    @php
+        $routeName = Route::currentRouteName();
+    @endphp
+
+    <div class="wrapper">
+        <!-- Navbar -->
+        @include('components.navbar')
+
+                
+        <!-- Sidebar -->
+        @include('components.sidebar')
+
+
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @yield('admincontent')
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="{{str_replace('_', '-', app()->getLocale())}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', __('Panel de Administración'))</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
+    @vite('resources/js/app.js')
+
+    <link rel="canonical" href="{{ url()->current() }}">
+</head>
+<body>
     @php
         $routeName = Route::currentRouteName();
     @endphp
@@ -32,7 +81,6 @@
         </div>
 
         <hr class="bg-light mx-3">
-        <!-- route('register', ['locale' => app()->getLocale()]) --> 
         <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" 
         class="d-block text-white {{ str_starts_with($routeName, 'admin.dashboard.list.') ? 'fw-bold text-decoration-underline' : '' }}">
             {{ __('general.admin_sidebar.panel_control') }}
@@ -73,3 +121,4 @@
     </div>
 </body>
 </html>
+-->

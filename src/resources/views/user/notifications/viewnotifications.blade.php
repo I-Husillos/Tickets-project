@@ -61,7 +61,7 @@
 
                     <!-- Marcar como leído -->
                     @if (!$notification->read_at)
-                        <form action="{{ route('user.notifications.read', ['id' => $notification->id, 'locale' => app()->getLocale()]) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('user.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')
                             <button type="submit" class="btn btn-sm btn-outline-secondary float-right">{{ __('frontoffice.mark_as_read') }}</button>
@@ -78,9 +78,5 @@
             </div>
         @endif
     @endif
-
-    <div class="text-center mt-4">
-        <a href="{{ route('user.tickets.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('frontoffice.tickets.return_to_ticket_list') }}</a>
-    </div>
 </div>
 @endsection
