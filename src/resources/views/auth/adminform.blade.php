@@ -10,7 +10,7 @@
         
         <div class="mb-3">
             <label for="email" class="form-label">{{ __('general.frontoffice.auth.admin_login.label_email') }}</label>
-            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('general.frontoffice.auth.admin_login.placeholder_email') }}">
+            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="example@domain.com">
             @error('email')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -20,7 +20,7 @@
         
         <div class="mb-3">
             <label for="password" class="form-label">{{ __('general.frontoffice.auth.admin_login.label_password') }}</label>
-            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('general.frontoffice.auth.admin_login.placeholder_password') }}">
+            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="********">
             @error('password')
                 <div class="invalid-feedback">
                     {{ $message }}

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProfileController extends Controller
+class AdminProfileController extends Controller
 {
     public function showProfile($locale)
     {
         app()->setLocale($locale);
-        $user = Auth::guard('user')->user();
+        $user = Auth::guard('admin')->user();
 
-        return view('user.profile', compact('user'));
+        return view('admin.profile', compact('user'));
     }
+
 }

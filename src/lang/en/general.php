@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     'admin_sidebar' => [
         'title_admin_panel'    => 'Admin Panel',
         'panel_control'        => 'Control Panel',
@@ -189,6 +190,9 @@ return [
         'list_title'         => 'User List',
         'create_button'      => 'Create New User',
         'registered_users'   => 'Registered Users',
+        'search_placeholder' => 'Search by name or email...',
+        'search_button'      => 'Search',
+        'showing_results'    => 'Showing :count user(s)',
         'table_name'         => 'Name',
         'table_email'        => 'Email',
         'table_actions'      => 'Actions',
@@ -200,6 +204,15 @@ return [
 
     // Administrator Management
     'admin_admins' => [
+        'advanced_search' => 'Advanced Search',
+        'search_label' => 'Search by name',
+        'filter_label' => 'Filter by admin type',
+        'search_placeholder' => 'Enter a name...',
+        'filter_placeholder' => 'Filter by type...',
+        'option_superadmin' => 'Super Administrator',
+        'option_regular' => 'Regular Administrator',
+        'filter_button' => 'Apply filter',
+        'clear_filter' => 'Clear filters',
         'page_title'         => 'Administrator Management',
         'list_title'         => 'Admin List',
         'create_button'      => 'Create New Administrator',

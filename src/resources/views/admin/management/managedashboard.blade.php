@@ -4,7 +4,7 @@
 @section('title', __('general.admin_dashboard.page_title'))
 
 @section('admincontent')
-<div class="container mt-5">
+<div class="container">
     {{-- Título principal del panel de control --}}
     <h1 class="text-center mb-4">{{ __('general.admin_dashboard.control_panel') }}</h1>
 
@@ -12,74 +12,91 @@
     <p class="text-center">{{ __('general.admin_dashboard.welcome_message', ['name' => Auth::guard('admin')->user()->name]) }}</p>
 
     <!-- Accesos directos -->
-    <div class="row text-center mb-4">
+    <div class="row">
         @if ($isSuperAdmin)
             {{-- Acceso solo para Superadmin --}}
-            <div class="col-md-3 mb-3">
-                <div class="card bg-gradient-dark">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('general.admin_dashboard.superadmin_manage_users') }}</h5>
-                        <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $totalUsers }}</h3>
+                        <p>{{ __('general.admin_dashboard.registered_users') }}</p>
                     </div>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="small-box-footer">
+                        {{ __('general.admin_dashboard.superadmin_manage_users') }} <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <div class="card text-white bg-primary shadow rounded-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('general.admin_dashboard.superadmin_manage_admins') }}</h5>
-                        <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-secondary">
+                    <div class="inner">
+                        <h3>{{ $totalAdmins }}</h3>
+                        <p>{{ __('general.admin_dashboard.admins') }}</p>
                     </div>
+                    <div class="icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="small-box-footer">
+                        {{ __('general.admin_dashboard.superadmin_manage_admins') }} <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
+            <!-- Acceso directo a tickets asignados -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ $totalTickets }}</h3>
+                        <p>Tickets asignados</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}" class="small-box-footer">
+                        Adminisrar tickets asignados<i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Acceso directo a tickets totales -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>{{ $totalTickets }}</h3>
+                        <p>{{ __('general.admin_dashboard.total_tickets') }}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="small-box-footer">
+                        Adminisrar tickets <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Acceso directo a historial de eventos -->
+            <!-- <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>25</h3>
+                        <p>Historial de eventos</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="small-box-footer">
+                        Ver historial de eventos <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div> -->
+             
         @endif
 
-        {{-- Acceso para Admins Regulares --}}
-        <div class="col-md-3 mb-3">
-            <div class="card text-white bg-info shadow rounded-4">
-                <div class="card-body">
-                    <h5 class="card-title">{{ __('general.admin_dashboard.regular_view_tickets') }}</h5>
-                    <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card text-white bg-secondary shadow rounded-4">
-                <div class="card-body">
-                    <h5 class="card-title">{{ __('general.admin_dashboard.regular_event_history') }}</h5>
-                    <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Estadísticas -->
     <div class="row text-center mb-4">
         <div class="col-md-3 mb-4">
-            <div class="card card-widget widget-user-2">
-                <div class="widget-user-header bg-info">
-                    <h5 class="widget-user-username">{{ __('general.admin_dashboard.registered_users') }}</h5>
-                    <h2 class="widget-user-desc">{{ $totalUsers }}</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card bg-light shadow rounded-4 h-100">
-                <div class="card-body">
-                    <h5 class="card-title text-muted">{{ __('general.admin_dashboard.admins') }}</h5>
-                    <h2 class="card-text text-primary">{{ $totalAdmins }}</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card bg-light shadow rounded-4 h-100">
-                <div class="card-body">
-                    <h5 class="card-title text-muted">{{ __('general.admin_dashboard.total_tickets') }}</h5>
-                    <h2 class="card-text text-warning">{{ $totalTickets }}</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card bg-light shadow rounded-4 h-100">
+            <div class="card card-outline card-info elevation-2">
                 <div class="card-body">
                     <h5 class="card-title text-muted">{{ __('general.admin_dashboard.pending_tickets') }}</h5>
                     <h2 class="card-text text-danger">{{ $pendingTickets }}</h2>
@@ -87,7 +104,7 @@
             </div>
         </div>
         <div class="col-md-3 mb-4">
-            <div class="card bg-light shadow rounded-4 h-100">
+            <div class="card card-outline card-info elevation-2">
                 <div class="card-body">
                     <h5 class="card-title text-muted">{{ __('general.admin_dashboard.resolved_tickets') }}</h5>
                     <h2 class="card-text text-success">{{ $resolvedTickets }}</h2>

@@ -1,40 +1,59 @@
 <!DOCTYPE html>
 <html lang="{{str_replace('_', '-', app()->getLocale())}}"> <!-- Se obtiene el idioma activo de la aplicación de forma dinámica -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', __('Panel de Administración'))</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@yield('title', __('Panel de Administración'))</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- AdminLTE -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        @vite('resources/js/app.js', 'resources/css/app.css')
 
-    @vite('resources/js/app.js', 'resources/css/app.css')
+        <link rel="canonical" href="{{ url()->current() }}">
+    </head>
 
-    <link rel="canonical" href="{{ url()->current() }}">
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Navbar -->
-        @include('components.navbar')
+    <body class="hold-transition sidebar-mini" style="height: auto;">
+        <div class="wrapper">
+            <!-- Navbar -->
+            @include('components.navbar')
+                        
+            <!-- Sidebar -->
+            @include('components.admin-sidebar')
+              
 
-                    
-        <!-- Sidebar -->
-        @include('components.sidebar')
-
-        <div class="content-wrapper">
-            <section class="content">
-                @yield('admincontent')
-            </section>
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0">@yield('title', __('general.frontoffice.layout.page_title'))</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <!-- Breadcrumbs -->
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">@yield('title', __('general.frontoffice.layout.page_title'))</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main content -->
+                <section class="content">
+                    @yield('admincontent')
+                </section>
+            </div>
+            <!-- Footer -->
+            <footer class="main-footer">
+                <div class="float-right d-none d-sm-block">
+                    <b>Versión</b> 3.2
+                </div>
+                <strong>&copy; {{ date('Y') }} - Mi Aplicación.</strong> Todos los derechos reservados.
+            </footer>
         </div>
-                
-    </div>
-</body>
+    </body>
 </html>
 
 

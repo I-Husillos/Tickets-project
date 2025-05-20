@@ -22,6 +22,24 @@ class AdminUserController extends Controller
         return view('admin.management.listusers' , compact('users'));
     }
 
+    public function filterUsers(Request $request)
+    {
+        $query = User::query();
+
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $users = $query->paginate(10)->appends($request->query());
+
+        return view('admin.management.listusers', compact('users'));
+    }
+
+
+
     public function createUser()
     {
         return view('admin.management.createFormUser');

@@ -30,6 +30,7 @@ return [
         'admin.logout' => 'administrador/cerrar-sesion',
         '/' => 'panel-control',
         'admin.manage.dashboard' => 'administrador/panel-control',
+        'admin.profile' => 'administrador/perfil',  
 
         // Tickets
         'admin.show.assigned.tickets' => 'administrador/tickets/asignados',
@@ -43,6 +44,7 @@ return [
 
         // Users
         'admin.dashboard.list.users' => 'administrador/usuarios/lista',
+        'admin.filter.users' => 'administrador/usuarios/filtrar',
         'admin.users.add_dashboard' => 'administrador/usuarios/dashboard',
         'admin.users.create' => 'administrador/usuarios/crear',
         'admin.users.store' => 'administrador/usuarios/guardar',

@@ -235,78 +235,87 @@ Sabiendo este resumen general de la aplicación, quiero reestructurar las vistas
 
 
 
-<!DOCTYPE html>
-<html lang="{{str_replace('_', '-', app()->getLocale())}}"> <!-- Se obtiene el idioma activo de la aplicación de forma dinámica -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', __('Panel de Administración'))</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- AdminLTE -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
-    @vite('resources/js/app.js')
 
-    <link rel="canonical" href="{{ url()->current() }}">
-</head>
-<body>
-    <!-- Se obtiene el nombre de la ruta actual para aplicar estilos condicionales -->
-    @php
-        $routeName = Route::currentRouteName();
-    @endphp
 
+<!-- resources/views/layouts/partials/admin_sidebar.blade.php -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand -->
+    <a href="{{ route('admin.dashboard', ['locale' => app()->getLocale()]) }}" class="brand-link">
+        <span class="brand-text font-weight-light">Panel Admin</span>
+    </a>
+
+    <!-- Sidebar -->
     <div class="sidebar">
-        <h4>{{ __('general.admin_sidebar.title_admin_panel') }}</h4>
-
-        <div class="mb-3">
-            <x-language-switcher/>
+        <!-- User Panel -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="info">
+                <a href="#" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
+            </div>
         </div>
 
-        <hr class="bg-light mx-3">
-        <!-- route('register', ['locale' => app()->getLocale()]) --> 
-        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" 
-        class="d-block text-white {{ str_starts_with($routeName, 'admin.dashboard.list.') ? 'fw-bold text-decoration-underline' : '' }}">
-            {{ __('general.admin_sidebar.panel_control') }}
-        </a>
-            @if (Auth::guard('admin')->user()->superadmin)
-                @if (str_starts_with($routeName, 'admin.dashboard.list.'))
-                        <div class="ps-3 mt-1">
-                            <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}"
-                            class="d-block text-white {{ $routeName === 'admin.dashboard.list.users' ? 'fw-bold' : '' }}">
-                                {{ __('general.admin_sidebar.ver_usuarios') }}
-                            </a>
-                            <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}"
-                            class="d-block text-white {{ $routeName === 'admin.dashboard.list.admins' ? 'fw-bold' : '' }}">
-                                {{ __('general.admin_sidebar.ver_admins') }}
-                            </a>
-                        </div>
-                    @endif
-                <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.tipos_de_tickets') }}</a>
-                <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.gestionar_tickets') }}</a>
-            @endif
-        <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.tickets_asignados') }}</a>
-        <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}">{{ __('general.admin_sidebar.historial_eventos') }}</a>
-        <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="d-block text-white">
-            {{ __('general.admin_sidebar.notificaciones') }} 
-            @if (Auth::user()->unreadNotifications->count() > 0)
-                <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
-            @endif
-        </a>
+        <!-- Language Switch -->
+        <x-language-switcher class="px-3" />
 
-        <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}" class="mt-4 px-3">
-            @csrf
-            <button class="btn btn-danger w-100">{{ __('general.admin_sidebar.cerrar_sesion') }}</button>
-        </form>
-    </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
+                <li class="nav-item">
+                    <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
 
-    <div class="main-content">
-        @yield('admincontent')
+                @if(Auth::guard('admin')->user()->superadmin)
+                    <li class="nav-item">
+                        <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Usuarios</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                            <i class="nav-icon fas fa-user-shield"></i>
+                            <p>Admins</p>
+                        </a>
+                    </li>
+                @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                        <i class="nav-icon fas fa-ticket-alt"></i>
+                        <p>Tickets</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                        <i class="nav-icon fas fa-bell"></i>
+                        <p>
+                            Notificaciones
+                            @php $count = Auth::user()->unreadNotifications->count(); @endphp
+                            @if ($count > 0)
+                                <span class="right badge badge-danger">{{ $count }}</span>
+                            @endif
+                        </p>
+                    </a>
+                </li>
+
+                <!-- Logout -->
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}">
+                        @csrf
+                        <button class="nav-link btn btn-link text-left text-white">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Cerrar sesión</p>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
     </div>
-</body>
-</html>
+</aside>

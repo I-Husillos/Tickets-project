@@ -11,8 +11,8 @@
             <!-- Font Awesome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-            <!-- Estilos personalizados -->
-            <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+            <!-- Canonical -->
+            <link rel="canonical" href="{{ url()->current() }}">
 
         </head>
 
@@ -27,7 +27,7 @@
                 @include('components.sidebar')
                 
                 
-                <div class="content-wrapper">
+                <div class="content-wrapper"  style="min-height: 100vh; border: 2px dashed red;">
                     <div class="content-header">
                         <div class="container-fluid">
                             <div class="row mb-2">
@@ -48,22 +48,16 @@
                     <section class="content">
                         @yield('content')
                     </section>
-
-                
-                    
-                        <!-- Footer -->
-                    <!-- <footer class="main-footer">
-                        <div class="float-right d-none d-sm-block">
-                            <b>Versión</b> 3.2
-                        </div>
-                        <strong>&copy; {{ date('Y') }} - Mi Aplicación.</strong> Todos los derechos reservados.
-                    </footer> -->
-                
                 </div>
                 
-
+                <!-- Footer -->
+                <footer class="main-footer">
+                    <div class="float-right d-none d-sm-block">
+                        <b>Versión</b> 3.2
+                    </div>
+                    <strong>&copy; {{ date('Y') }} - Mi Aplicación.</strong> Todos los derechos reservados.
+                </footer>
             </div>
         </body>
-        
     </html>
 

@@ -4,14 +4,14 @@
 @section('title', __('general.admin_dashboard.dashboard_title'))
 
 @section('admincontent')
-<div class="container mt-5">
+<div class="container min-vh-100 d-flex flex-column justify-content-center">
     <!-- Se muestra el título principal del dashboard -->
     <h1 class="text-center">{{ __('general.admin_dashboard.panel_admin') }}</h1>
     
     <!-- Se muestra el saludo, concatenando la traducción "Bienvenido" con el nombre del usuario -->
     <p class="text-center">{{ __('general.admin_dashboard.welcome') }}, {{ Auth::guard('admin')->user()->name }}</p>
     
-    <div class="d-flex justify-content-end mt-4">
+    <div class="d-flex justify-content-end">
         <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}">
             @csrf
             <!-- Botón de cierre de sesión con traducción -->
@@ -22,7 +22,7 @@
     </div>
     
     @if ($isSuperAdmin)
-        <div class="mt-5">
+        <div class="mt-4">
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <!-- Enlaces del dashboard para administradores super, cada uno con su propia traducción -->
                 <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="btn btn-success">
@@ -38,7 +38,7 @@
         </div>
     @endif
     
-    <div class="mt-5 text-center">
+    <div class="ext-center">
         <!-- Botón para ir a “Tickets Asignados”, traducido -->
         <a href="{{ route('admin.show.assigned.tickets') }}" class="btn btn-primary btn-lg">
             {{ __('general.admin_dashboard.assigned_tickets') }}

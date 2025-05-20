@@ -1,6 +1,9 @@
 <?php
 
 return [
+
+
+
     'admin_sidebar' => [
         'title_admin_panel'    => 'Admin Panel',
         'panel_control'        => 'Panel de Control',
@@ -12,6 +15,7 @@ return [
         'historial_eventos'    => 'Historial de eventos',
         'notificaciones'       => 'Notificaciones',
         'cerrar_sesion'        => 'Cerrar Sesión',
+        'tickets'              => 'Tickets',
     ],
 
     // Traducciones específicas para el dashboard
@@ -157,6 +161,7 @@ return [
         'control_panel'                      => 'Panel de Control',
         'welcome_message'                    => 'Bienvenido, :name',
         'direct_access_title'                => 'Accesos directos',
+        'superadmin_manage_all_users'        => 'Administrar todos los usuarios',
         'superadmin_manage_users'            => 'Administrar usuarios',
         'superadmin_manage_admins'           => 'Administrar admins',
         'regular_view_tickets'               => 'Ver Mis Tickets',
@@ -187,6 +192,9 @@ return [
         'list_title'         => 'Lista de Usuarios',
         'create_button'      => 'Crear Nuevo Usuario',
         'registered_users'   => 'Usuarios Registrados',
+        'search_placeholder' => 'Buscar por nombre o email...',
+        'search_button'      => 'Buscar',
+        'showing_results'    => 'Mostrando :count usuario(s)',
         'table_name'         => 'Nombre',
         'table_email'        => 'Email',
         'table_actions'      => 'Acciones',
@@ -198,6 +206,15 @@ return [
 
     // Para la gestión de administradores
     'admin_admins' => [
+        'advanced_search' => 'Búsqueda avanzada',
+        'search_label' => 'Buscar por nombre',
+        'filter_label' => 'Tipo de administrador',
+        'search_placeholder' => 'Ingrese un nombre...',
+        'filter_placeholder' => 'Filtrar por tipo...',
+        'option_superadmin' => 'Superadministrador',
+        'option_regular' => 'Administrador regular',
+        'filter_button' => 'Aplicar filtro',
+        'clear_filter' => 'Limpiar filtros',
         'page_title'          => 'Gestión de Administradores',
         'list_title'          => 'Lista de Administradores',
         'create_button'       => 'Crear Nuevo Administrador',

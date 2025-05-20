@@ -31,6 +31,7 @@ return [
         'admin.logout' => 'admin/logout',
         '/' => 'dashboard',
         'admin.manage.dashboard' => 'admin/dashboard',
+        'admin.profile' => 'admin/profile',
 
         // Tickets
         'admin.show.assigned.tickets' => 'admin/tickets/assigned',
@@ -43,6 +44,7 @@ return [
 
         // Users
         'admin.dashboard.list.users' => 'admin/users/list',
+        'admin.filter.users' => 'admin/users/filter',
         'admin.users.add_dashboard' => 'admin/users/dashboard',
         'admin.users.create' => 'admin/users/create',
         'admin.users.store' => 'admin/users/store',

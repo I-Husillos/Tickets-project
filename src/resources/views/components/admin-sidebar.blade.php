@@ -1,78 +1,100 @@
-<!-- resources/views/layouts/partials/admin_sidebar.blade.php -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand -->
-    <a href="{{ route('admin.dashboard', ['locale' => app()->getLocale()]) }}" class="brand-link">
-        <span class="brand-text font-weight-light">Panel Admin</span>
+    <a href="{{ route('user.dashboard', ['locale' => app()->getLocale()]) }}" class="brand-link text-center">
+        <span class="brand-text font-weight-light">Gestor de Tickets</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- User Panel -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
+        <!-- Opcional: Usuario autenticado -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">  
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
+                <a href="{{ route('user.show.profile', ['locale' => app()->getLocale()]) }}" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
-        <!-- Language Switch -->
-        <x-language-switcher class="px-3" />
-
-        <!-- Sidebar Menu -->
+        <!-- Menú lateral -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+
+                {{-- DASHBOARD --}}
                 <li class="nav-item">
-                    <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
+                    <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.manage.dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>{{ __('general.admin_sidebar.title_admin_panel') }}</p>
                     </a>
                 </li>
 
+                {{-- USUARIOS Y ADMINISTRADORES (Solo Superadmin) --}}
                 @if(Auth::guard('admin')->user()->superadmin)
+                    <li class="nav-header">{{ __('general.admin_dashboard.superadmin_manage_all_users') }}</li>
+
                     <li class="nav-item">
-                        <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                        <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.dashboard.list.users') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
-                            <p>Usuarios</p>
+                            <p>{{ __('general.admin_dashboard.superadmin_manage_users') }}</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                        <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.dashboard.list.admins') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user-shield"></i>
-                            <p>Admins</p>
+                            <p>{{ __('general.admin_dashboard.superadmin_manage_admins') }}</p>
                         </a>
                     </li>
                 @endif
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="nav-link">
+                
+                {{-- GESTIÓN DE TICKETS --}}
+                <li class="nav-header">{{ __('general.admin_sidebar.tickets') }}</li>
+                <li class="nav-item has-treeview {{ request()->is('*tickets*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('*tickets*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-ticket-alt"></i>
-                        <p>Tickets</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="nav-link">
-                        <i class="nav-icon fas fa-bell"></i>
                         <p>
-                            Notificaciones
-                            @php $count = Auth::user()->unreadNotifications->count(); @endphp
-                            @if ($count > 0)
-                                <span class="right badge badge-danger">{{ $count }}</span>
-                            @endif
+                            {{ __('general.admin_sidebar.gestionar_tickets') }}
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview ps-3">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.manage.tickets') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('general.frontoffice.tech_panel.all_tickets') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.show.assigned.tickets') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ __('general.admin_sidebar.tickets_asignados') }}</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
-                <!-- Logout -->
+                {{-- NOTIFICACIONES --}}
+                <li class="nav-header">{{ __('general.admin_sidebar.notificaciones') }}</li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.notifications') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-bell"></i>
+                        <p>{{ __('general.admin_notifications.page_title') }}</p>
+                    </a>
+                </li>
+
+                {{-- CERRAR SESIÓN --}}
                 <li class="nav-item">
                     <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}">
                         @csrf
                         <button class="nav-link btn btn-link text-left text-white">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p>Cerrar sesión</p>
+                            <p>{{ __('frontoffice.logout') }}</p>
                         </button>
                     </form>
                 </li>
+
             </ul>
         </nav>
     </div>
 </aside>
+
+
+

@@ -16,8 +16,9 @@ use App\Http\Controllers\Admin\AdminAdminController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Routing\RouteAction;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
@@ -50,7 +51,7 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['user.tickets.search'], [TicketController::class, 'search'])->name('user.tickets.search');
 
 
-        Route::get($routes['user.show.profile'], [ProfileController::class, 'showProfile'])->name('user.show.profile');
+        Route::get($routes['user.show.profile'], [UserProfileController::class, 'showProfile'])->name('user.show.profile');
 
         Route::get($routes['user.tickets.index'], [TicketController::class, 'showAll'])->name('user.tickets.index');
         Route::get($routes['user.tickets.create'], [TicketController::class, 'showCreateForm'])->name('user.tickets.create');
@@ -77,6 +78,8 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
         Route::get('/', [AdminDashboardController::class, 'showManageDashboard'])->name('admin.dashboard');
 
+        Route::get($routes['admin.profile'], [AdminProfileController::class, 'showProfile'])->name('admin.profile');
+
         Route::get($routes['admin.manage.dashboard'], [AdminDashboardController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
 
 
@@ -100,6 +103,7 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         
         
         Route::get($routes['admin.dashboard.list.users'], [AdminUserController::class, 'showListUsers'])->name('admin.dashboard.list.users');
+        Route::get($routes['admin.filter.users'], [AdminUserController::class, 'filterUsers'])->name('admin.filter.users');
         Route::get($routes['admin.users.add_dashboard'], [AdminUserController::class, 'showAddDashboard'])->name('admin.dashboard.add');
         Route::get($routes['admin.users.create'], [AdminUserController::class, 'createUser'])->name('admin.users.create');
         Route::post($routes['admin.users.store'], [AdminUserController::class, 'storeUser'])->name('admin.users.store');

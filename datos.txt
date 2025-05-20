@@ -119,3 +119,4 @@ nvm install node  # Última versión de Node
 
 npm run dev
 
+php artisan db:seed --class=UserSeeder
