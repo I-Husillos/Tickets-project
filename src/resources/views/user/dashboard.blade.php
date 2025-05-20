@@ -3,7 +3,7 @@
 @section('title', __('frontoffice.dashboard.title'))
 
 @section('content')
-<div class="container mt-5">
+<div class="container">
     
     <!-- Resumen General -->
     <div class="row">
@@ -39,11 +39,16 @@
         <div class="card-body">
             <ul class="list-group">
                 @foreach ($latestTickets as $ticket)
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>{{ $ticket->title }}</span>
-                        <a href="{{ route('user.tickets.show', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}" class="btn btn-sm btn-primary">
-                            {{ __('frontoffice.dashboard.view_ticket') }}
-                        </a>
+                    <li class="list-group-item d-flex justify-content-between">
+                    <span>{{ $ticket->title }}</span>
+                        <div class="d-flex align-items-center">
+                            <a href="{{ route('user.tickets.show', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ route('user.tickets.edit', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}" class="btn btn-sm btn-warning">
+                            <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
                     </li>
                 @endforeach
             </ul>

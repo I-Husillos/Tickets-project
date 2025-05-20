@@ -3,7 +3,7 @@
 @section('title', 'Mis Notificaciones')
 
 @section('content')
-<div class="container mt-5">
+<div class="container   ">
     <h2 class="text-center">{{ __('frontoffice.notifications_title') }}</h2>
 
     @if ($notifications->isEmpty())

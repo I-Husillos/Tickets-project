@@ -16,9 +16,12 @@ use App\Http\Controllers\Admin\AdminAdminController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Routing\RouteAction;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+
 
 
 Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
@@ -47,11 +50,12 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['user.tickets.search'], [TicketController::class, 'search'])->name('user.tickets.search');
 
 
+        Route::get($routes['user.show.profile'], [ProfileController::class, 'showProfile'])->name('user.show.profile');
 
         Route::get($routes['user.tickets.index'], [TicketController::class, 'showAll'])->name('user.tickets.index');
         Route::get($routes['user.tickets.create'], [TicketController::class, 'showCreateForm'])->name('user.tickets.create');
         Route::get($routes['user.tickets.edit'], [TicketController::class, 'edit'])->name('user.tickets.edit');
-        Route::put($routes['user.tickets.update'], [TicketController::class, 'update'])->name('user.tickets.update');
+        Route::patch($routes['user.tickets.update'], [TicketController::class, 'update'])->name('user.tickets.update');
         Route::post($routes['user.tickets.store'], [TicketController::class, 'create'])->name('user.tickets.store');
         Route::get($routes['user.tickets.show'], [TicketController::class, 'show'])->name('user.tickets.show');
 

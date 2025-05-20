@@ -1,10 +1,10 @@
 @extends('layouts.user')
 
-@section('title', __('frontoffice.tickets.edit_title'))
+@section('title', __('frontoffice.tickets.edit'))
 
 @section('content')
-<div class="container mt-5">
-    <h2>{{ __('frontoffice.tickets.edit_title') }}</h2>
+<div class="container">
+    <h2>{{ __('frontoffice.tickets.edit') }}</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger">

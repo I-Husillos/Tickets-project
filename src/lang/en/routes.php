@@ -7,6 +7,8 @@ return [
         'register' => 'register',
         'user.logout' => 'logout',
 
+        'user.show.profile' => 'user/profile',
+
         'user.tickets.search' => 'user/tickets/search',
 
         'user.dashboard' => 'user/dashboard',

@@ -9,6 +9,8 @@ return [
 
         'user.tickets.search' => 'usuario/tickets/buscar',
 
+        'user.show.profile' => 'usuario/mostrar-perfil',
+        
         'user.dashboard' => 'usuario/panel-control',
 
         'user.tickets.index' => 'usuario/tickets/lista',

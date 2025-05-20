@@ -12,7 +12,16 @@
     <!-- Iconos de la Derecha -->
     <ul class="navbar-nav ml-auto">
         <!-- Cambiar idioma -->
-         
+        @include('components.language-switcher')
+
+        <!-- Perfil -->
+         <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.show.profile', ['locale' => app()->getLocale()]) }}" class="d-block text-white">
+                <i class="fas fa-user"></i>
+            </a>
+        </li>
+
+
          
         <!-- Notificaciones -->
         <li class="nav-item dropdown">

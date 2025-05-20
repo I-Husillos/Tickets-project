@@ -3,7 +3,7 @@
 @section('title', __('frontoffice.tickets.create_new_ticket'))
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h3>{{ __('frontoffice.tickets.create_new_ticket') }}</h3>
