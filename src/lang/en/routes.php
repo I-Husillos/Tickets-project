@@ -49,6 +49,7 @@ return [
         'admin.users.create' => 'admin/users/create',
         'admin.users.store' => 'admin/users/store',
         'admin.users.edit' => 'admin/users/edit/{user}',
+        'admin.users.update' => 'admin/users/update/{user}',
         'admin.users.confirm_delete' => 'admin/users/confirm-delete/{user}',
 
         // Comments
@@ -57,10 +58,13 @@ return [
         'admin.comments.view' => 'admin/comments/view/{ticket}',
 
         // Admins
-        'admin.admins.list' => 'admin/admins/list',
+        'admin.dashboard.list.admins' => 'admin/admins/list',
+        'admin.filter.admins' => 'admin/admins/filter',
         'admin.admins.create' => 'admin/admins/create',
         'admin.admins.edit' => 'admin/admins/edit/{admin}',
+        'admin.admins.update' => 'admin/admins/update/{admin}',
         'admin.admins.confirm_delete' => 'admin/admins/confirm-delete/{admin}',
+        'admin.admins.destroy' => 'admin/admins/destroy/{admin}',
 
         // Types
         'admin.types.index' => 'admin/types',
@@ -73,6 +77,8 @@ return [
         // Notifications
         'admin.notifications' => 'admin/notifications',
         'admin.notifications.read' => 'admin/notifications/mark-read/{notification}',
+        'admin.notifications.markAllAsRead' => 'admin/notifications/mark-all-as-read',
+        'admin.notifications.show' => 'admin/notifications/show/{notification}',
 
         // History
         'admin.history.events' => 'admin/history/events',

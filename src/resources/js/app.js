@@ -10,3 +10,4 @@ import 'admin-lte/dist/js/adminlte.min.js'; // Importa AdminLTE
 
 import './navbar';
 import './sidebar-toggle.js';
+import './notifications.js'

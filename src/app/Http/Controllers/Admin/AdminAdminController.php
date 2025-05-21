@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\EventHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Services\FilterUsersService;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -15,15 +16,31 @@ use Illuminate\Contracts\Cache\Store;
 
 class AdminAdminController extends Controller
 {
+    private $filterUsersService;
+
+    public function __construct(FilterUsersService $filterUsersService)
+    {
+        $this->filterUsersService = $filterUsersService;
+    }
+
     public function showListAdmins(Request $request)
+    {
+        $admins = $this->filterUsersService->filter($request, Admin::class);
+        return view('admin.management.listadmins', compact('admins'));
+    }
+
+    public function filterAdmins(Request $request)
     {
         $query = Admin::query();
     
-        if ($request->has('superadmin') && $request->superadmin !== '') {
-            $query->where('superadmin', $request->superadmin);
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%");
+            });
         }
     
-        $admins = $query->paginate(10, ['*'], 'admins_pagination')->appends($request->query());
+        $admins = $query->paginate(10)->appends($request->query());
     
         return view('admin.management.listadmins', compact('admins'));
     }
@@ -52,17 +69,17 @@ class AdminAdminController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.manage.dashboard', ['locale' => $locale])->with('success', 'Administrador creado correctamente.');
+        return redirect()->route('admin.admins.list', ['locale' => $locale])->with('success', 'Administrador creado correctamente.');
     }
 
 
-    public function confirmDeleteAdmin(Admin $admin)
+    public function confirmDeleteAdmin(String $locale, Admin $admin)
     {
         return view('admin.management.confirm-delete-admin', compact('admin'));
     }
 
 
-    public function confirmDeleteAdminPost(Admin $admin)
+    public function confirmDeleteAdminPost(String $locale, Admin $admin)
     {
         $admin->delete();
 
@@ -72,7 +89,7 @@ class AdminAdminController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.dashboard.list.admins')->with('success', 'Administrador eliminado correctamente.');
+        return redirect()->route('admin.dashboard.list.admins', ['locale' => $locale])->with('success', 'Administrador eliminado correctamente.');
     }
 
     public function editAdmin(String $locale, Admin $admin)

@@ -4,6 +4,7 @@
 
 @section('admincontent')
 <div class="container mt-5">
+    
 
     {{-- Alertas de éxito o error --}}
     @if(session('success'))
@@ -34,6 +35,7 @@
         </a>
     </div>
 
+    {{-- Filtro de busqueda --}}
     <form method="GET" action="{{ route('admin.filter.users', ['locale' => app()->getLocale()]) }}" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" value="{{ request('search') }}" class="form-control rounded-start-4" placeholder="{{ __('general.admin_users.search_placeholder') }}">
@@ -103,11 +105,11 @@
         </div>
     </div>
 
-    {{-- Botón volver --}}
+    <!-- {{-- Botón volver --}}
     <div class="mt-4 text-center">
         <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary rounded-4 shadow">
             <i class="fas fa-arrow-left"></i> {{ __('general.admin_users.back_to_dashboard') }}
         </a>
-    </div>
+    </div> -->
 </div>
 @endsection

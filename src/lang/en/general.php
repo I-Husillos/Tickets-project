@@ -1,7 +1,8 @@
 <?php
 
 return [
-
+    'home' => 'Home',
+    
     'admin_sidebar' => [
         'title_admin_panel'    => 'Admin Panel',
         'panel_control'        => 'Control Panel',
@@ -13,6 +14,8 @@ return [
         'historial_eventos'    => 'Event History',
         'notificaciones'       => 'Notifications',
         'cerrar_sesion'        => 'Log Out',
+        'types'                => 'Types',
+        'manage_ticket_types'  => 'Manage Ticket Types',
     ],
 
     // Traducciones específicas para el dashboard
@@ -52,6 +55,7 @@ return [
     ],
 
     'admin_ticket_details' => [
+        'edit_ticket'       => 'Edit Ticket',
         'page_title'        => 'Ticket Details',
         'ticket_details'    => 'Ticket Details #:ticket_id',
         'title_label'       => 'Title:',
@@ -82,6 +86,7 @@ return [
     ],
 
     'admin_ticket_manage' => [
+        'showing_results'    => 'Showing :count ticket(s)',
         'page_title'         => 'Manage Tickets',
         'list_title'         => 'Tickets List',
         'status_filter'      => 'Status',
@@ -151,6 +156,10 @@ return [
         'author_label'       => 'Author:',
         'comment_label'      => 'Comment:',
         'mark_as_read'       => 'Mark as Read',
+        'mark_all_as_read' => 'Mark All as Read',
+        'read'               => 'Read',
+        'unread'             => 'Unread',
+        'view_button'        => 'View',
     ],
 
     // Dashboard (Administrator)

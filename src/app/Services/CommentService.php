@@ -13,12 +13,12 @@ use App\Models\Admin;
 
 class CommentService
 {
-    public function addComment(Ticket $ticket, String $message)
+    public function addComment(Ticket $ticket, string $message)
     {
         $author = Auth::user();
         
         $comment = $ticket->comments()->create([
-            'ticket_id' => $ticket->id,
+            'ticket_id' => $ticket,
             'author_id' => Auth::id(),
             'author_type' => Auth::user() instanceof Admin ? Admin::class : User::class,
             'message' => $message,

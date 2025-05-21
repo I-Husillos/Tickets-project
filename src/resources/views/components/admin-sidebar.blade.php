@@ -42,6 +42,14 @@
                             <p>{{ __('general.admin_dashboard.superadmin_manage_admins') }}</p>
                         </a>
                     </li>
+                    {{-- Tipos de Tickets --}}
+                    <li class="nav-header">{{ __('general.admin_sidebar.types') }}</li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.types.index', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.manage.ticket.types') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-ticket-alt"></i>
+                            <p>{{ __('general.admin_sidebar.manage_ticket_types') }}</p>
+                        </a>
+                    </li>
                 @endif
 
                 
@@ -77,6 +85,15 @@
                     <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.notifications') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bell"></i>
                         <p>{{ __('general.admin_notifications.page_title') }}</p>
+                    </a>
+                </li>
+
+                {{-- Historial de Eventos --}}
+                <li class="nav-header">{{ __('general.admin_sidebar.historial_eventos') }}</li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.history.events') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-history"></i>
+                        <p>{{ __('general.admin_history_events.page_title') }}</p>
                     </a>
                 </li>
 

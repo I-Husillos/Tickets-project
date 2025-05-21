@@ -8,11 +8,11 @@
 
     <p>{{ __('general.admin_delete_admin.confirmation', ['name' => $admin->name]) }}</p>
 
-    <form method="POST" action="{{ route('admin.admins.destroy', $admin->id) }}">
+    <form method="POST" action="{{ route('admin.admins.destroy', ['admin' => $admin->id, 'locale' => app()->getLocale()]) }}">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">{{ __('general.admin_delete_admin.confirm_button') }}</button>
-        <a href="{{ route('admin.dashboard.list.admins') }}" class="btn btn-secondary">{{ __('general.admin_delete_admin.cancel_button') }}</a>
+        <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_delete_admin.cancel_button') }}</a>
     </form>
 </div>
 @endsection

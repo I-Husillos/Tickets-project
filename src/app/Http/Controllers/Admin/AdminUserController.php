@@ -12,9 +12,18 @@ use Dotenv\Util\Str;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Services\FilterUsersService;
 
 class AdminUserController extends Controller
 {
+    private $filterUsersService;
+
+    public function __construct(FilterUsersService $filterUsersService)
+    {
+        $this->filterUsersService = $filterUsersService;
+    }
+
+    
     public function showListUsers()
     {
         $users = User::paginate(10, ['*'], 'users_pagination');
@@ -24,17 +33,7 @@ class AdminUserController extends Controller
 
     public function filterUsers(Request $request)
     {
-        $query = User::query();
-
-        if ($search = $request->input('search')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('email', 'LIKE', "%{$search}%");
-            });
-        }
-
-        $users = $query->paginate(10)->appends($request->query());
-
+        $users = $this->filterUsersService->filter($request, User::class);
         return view('admin.management.listusers', compact('users'));
     }
 
@@ -64,7 +63,7 @@ class AdminUserController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
-        return redirect()->route('admin.manage.dashboard', ['locale' => app()->getLocale()])->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('admin.dashboard.list.users', ['locale' => app()->getLocale()])->with('success', 'Usuario creado correctamente.');
     }
 
     public function confirmDeleteUser(String $locale, User $user)

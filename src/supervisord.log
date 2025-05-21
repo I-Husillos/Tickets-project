@@ -299,3 +299,16 @@
 2025-05-20 11:41:08,748 INFO spawned: 'php-server' with pid 8
 2025-05-20 11:41:09,913 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2025-05-20 11:41:09,913 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-05-20 12:59:11,033 WARN received SIGQUIT indicating exit request
+2025-05-20 12:59:11,050 INFO waiting for laravel-queue, php-server to die
+2025-05-20 12:59:11,052 WARN stopped: php-server (terminated by SIGTERM)
+2025-05-20 12:59:12,057 WARN stopped: laravel-queue (terminated by SIGTERM)
+2025-05-21 06:00:43,834 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2025-05-21 06:00:43,842 INFO RPC interface 'supervisor' initialized
+2025-05-21 06:00:43,843 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2025-05-21 06:00:43,845 INFO supervisord started with pid 1
+2025-05-21 06:00:44,848 INFO spawned: 'laravel-queue' with pid 7
+2025-05-21 06:00:44,851 INFO spawned: 'php-server' with pid 8
+2025-05-21 06:00:46,023 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-05-21 06:00:46,024 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-05-21 12:26:14,676 INFO reaped unknown pid 59 (exit status 0)

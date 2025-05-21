@@ -1,9 +1,7 @@
 <?php
 
 return [
-
-
-
+    'home' => 'Inicio',
     'admin_sidebar' => [
         'title_admin_panel'    => 'Admin Panel',
         'panel_control'        => 'Panel de Control',
@@ -16,6 +14,8 @@ return [
         'notificaciones'       => 'Notificaciones',
         'cerrar_sesion'        => 'Cerrar Sesión',
         'tickets'              => 'Tickets',
+        'types'                => 'Tipos',
+        'manage_ticket_types'  => 'Gestionar Tipos de Tickets',
     ],
 
     // Traducciones específicas para el dashboard
@@ -28,6 +28,14 @@ return [
         'ticket_types'       => 'Tipos de Tickets',
         'users_and_admins'   => 'Usuarios y Admins',
         'assigned_tickets'   => 'Tickets Asignados',
+    ],
+
+    'statuses' => [
+        'new'      => 'Nuevo',
+        'closed'   => 'Cerrado',
+        'resolved' => 'Resuelto',
+        'in_progress' => 'En Progreso',
+        'pending'  => 'Pendiente',
     ],
 
     // Otras traducciones…
@@ -55,6 +63,7 @@ return [
     ],
 
     'admin_ticket_details' => [
+        'edit_ticket'       => 'Editar Ticket',
         'page_title'        => 'Detalles del Ticket',
         // Se usa ":ticket_id" como parámetro para mostrar dinámicamente el número de ticket
         'ticket_details'    => 'Detalles del Ticket #:ticket_id',
@@ -86,6 +95,7 @@ return [
     ],
 
     'admin_ticket_manage' => [
+        'showing_results'    => 'Mostrando :count ticket(s)',
         'page_title'         => 'Gestionar Tickets',
         'list_title'         => 'Lista de Tickets',
         'status_filter'      => 'Estado',
@@ -154,6 +164,10 @@ return [
         'author_label'       => 'Autor:',
         'comment_label'      => 'Comentario:',
         'mark_as_read'       => 'Marcar como leída',
+        'mark_all_as_read' => 'Marcar todas como leídas',
+        'read'               => 'Leídas',
+        'unread'             => 'No leídas',
+        'view_button'        => 'Ver',
     ],
 
     'admin_dashboard' => [

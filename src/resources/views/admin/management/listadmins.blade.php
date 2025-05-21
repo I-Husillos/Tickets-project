@@ -36,46 +36,47 @@
 
 
     {{-- Filtro elegante con AdminLTE style --}}
-<div class="card card-outline card-secondary shadow rounded-4 mb-4">
-    <div class="card-header">
-        <h3 class="card-title">
-            <i class="fas fa-filter"></i> {{ __('general.admin_admins.advanced_search') }}
-        </h3>
-    </div>
-    <div class="card-body">
-        <form method="GET" action="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="row g-3 align-items-end">
-            {{-- Buscar por nombre --}}
-            <div class="col-md-6">
-                <label for="search" class="form-label">{{ __('general.admin_admins.search_label') }}</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-light"><i class="fas fa-search"></i></span>
-                    <input type="text" name="search" id="search" value="{{ request('search') }}"
-                           class="form-control" placeholder="{{ __('general.admin_admins.search_placeholder') }}">
+    <div class="card card-outline card-secondary shadow rounded-4 mb-4">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-filter"></i> {{ __('general.admin_admins.advanced_search') }}
+            </h3>
+        </div>
+        <div class="card-body">
+            <form method="GET" action="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}" class="row g-3 align-items-end">
+                {{-- Buscar por nombre --}}
+                <div class="col-md-5">
+                    <label for="search" class="form-label">{{ __('general.admin_admins.search_label') }}</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="fas fa-search"></i></span>
+                        <input type="text" name="search" id="search" value="{{ request('search') }}"
+                            class="form-control" placeholder="{{ __('general.admin_admins.search_placeholder') }}">
+                    </div>
                 </div>
-            </div>
 
-            {{-- Filtro por tipo --}}
-            <div class="col-md-4">
-                <label for="superadmin" class="form-label">{{ __('general.admin_admins.filter_label') }}</label>
-                <select name="superadmin" id="superadmin" class="form-select">
-                    <option value="">{{ __('general.admin_admins.filter_placeholder') }}</option>
-                    <option value="1" {{ request('superadmin') === '1' ? 'selected' : '' }}>{{ __('general.admin_admins.option_superadmin') }}</option>
-                    <option value="0" {{ request('superadmin') === '0' ? 'selected' : '' }}>{{ __('general.admin_admins.option_regular') }}</option>
-                </select>
-            </div>
+                {{-- Filtro por tipo --}}
+                <div class="col-md-3">
+                    <label for="superadmin" class="form-label">{{ __('general.admin_admins.filter_label') }}</label>
+                    <select name="superadmin" id="superadmin" class="form-select">
+                        <option value="">{{ __('general.admin_admins.filter_placeholder') }}</option>
+                        <option value="1" {{ request('superadmin') === '1' ? 'selected' : '' }}>{{ __('general.admin_admins.option_superadmin') }}</option>
+                        <option value="0" {{ request('superadmin') === '0' ? 'selected' : '' }}>{{ __('general.admin_admins.option_regular') }}</option>
+                    </select>
+                </div>
 
-            {{-- Botones --}}
-            <div class="col-md-2 d-grid gap-2">
-                <button type="submit" class="btn btn-outline-primary">
-                    <i class="fas fa-filter"></i> {{ __('general.admin_admins.filter_button') }}
-                </button>
-                <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}"
-                   class="btn btn-secondary">
-                    <i class="fas fa-times-circle"></i> {{ __('general.admin_admins.clear_filter') }}
-                </a>
-            </div>
-        </form>
-    </div>
+                {{-- Botones --}}
+                <div class="col-md-24d-flex gap-2">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="fas fa-filter"></i> {{ __('general.admin_admins.filter_button') }}
+                    </button>
+                    <a href="{{ route('admin.dashboard.list.admins', ['locale' => app()->getLocale()]) }}"
+                    class="btn btn-secondary">
+                        <i class="fas fa-times-circle"></i> {{ __('general.admin_admins.clear_filter') }}
+                    </a>
+                </div>
+            </form>
+        </div>
+        
 </div>
 
 
@@ -131,17 +132,18 @@
         </div>
     </div>
 
+    {{-- Paginación elegante --}}
     <div class="card-footer d-flex justify-content-center bg-light">
         {{ $admins->links('pagination::bootstrap-4') }}
     </div>
 </div>
 
 
-    {{-- Botón volver --}}
+    <!-- {{-- Botón volver --}}
     <div class="mt-4 text-center">
         <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary rounded-4 shadow">
             <i class="fas fa-arrow-left"></i> {{ __('general.admin_admins.back_to_dashboard') }}
         </a>
-    </div>
+    </div> -->
 </div>
 @endsection

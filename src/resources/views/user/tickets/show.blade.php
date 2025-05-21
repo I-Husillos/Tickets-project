@@ -63,7 +63,7 @@
             <div class="card-body">
                 @foreach ($ticket->comments as $comment)
                     <div class="alert alert-secondary">
-                        <p><strong>{{ $comment->user->name }}</strong> ({{ $comment->created_at->format('d/m/Y H:i') }}):</p>
+                        <p><strong>{{ $comment->user }}</strong> ({{ $comment->created_at->format('d/m/Y H:i') }}):</p>
                         <p>{{ $comment->message }}</p>
                     </div>
                 @endforeach

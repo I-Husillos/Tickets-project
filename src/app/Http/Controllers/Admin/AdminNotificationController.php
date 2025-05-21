@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\DatabaseNotification;
+use PhpParser\Node\Expr\Cast\String_;
 
 class AdminNotificationController extends Controller
 {
-    public function showNotifications(Request $request)
+    public function showNotifications(String $locale, Request $request)
     {
         $admin = Auth::guard('admin')->user();
         $query = DatabaseNotification::where('notifiable_id', $admin->id)->where('notifiable_type', get_class($admin));
@@ -24,8 +26,12 @@ class AdminNotificationController extends Controller
                 $query->where('data->type', 'comment');
             }
         }
-        
-        $notifications = $query->paginate(5);
+
+        $notifications = auth()->user()->notifications()
+            ->when(request('type'), fn($q) => $q->where('type', 'like', '%' . request('type') . '%'))
+            ->latest()
+            ->paginate(10);
+
 
 
         return view('admin.notifications.notifications', compact('notifications'));
@@ -43,5 +49,23 @@ class AdminNotificationController extends Controller
         }
 
         return redirect()->route('admin.notifications', ['locale' => $locale]);
+    }
+
+    public function markAllAsRead()
+    {
+        $admin = Auth::guard('admin')->user();
+
+        $admin->unreadNotifications->markAsRead();
+
+        return redirect()->route('admin.notifications', ['locale' => app()->getLocale()])->with('success', __('general.admin_notifications.all_marked'));
+    }
+
+    public function show(String $locale, DatabaseNotification $notification)
+    {
+        // Buscar la notificación por ID
+        $notification = Notification::findOrFail($notification);
+
+        // Retornar solo el contenido HTML de la notificación para ser mostrado en el drawer
+        return view('components.notification-details', compact('notification'));
     }
 }

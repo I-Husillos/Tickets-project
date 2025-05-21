@@ -8,6 +8,21 @@
     {{-- Título principal del panel de control --}}
     <h1 class="text-center mb-4">{{ __('general.admin_dashboard.control_panel') }}</h1>
 
+    {{-- Breadcrumbs manuales --}}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ route('admin.dashboard', ['locale' => app()->getLocale()]) }}">
+                    <i class="fas fa-home"></i> {{ __('general.home') }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ __('general.admin_dashboard.page_title') }}
+            </li>
+        </ol>
+    </nav>
+    
+
     {{-- Mensaje de bienvenida dinámico (se pasa el nombre del usuario como parámetro) --}}
     <p class="text-center">{{ __('general.admin_dashboard.welcome_message', ['name' => Auth::guard('admin')->user()->name]) }}</p>
 
@@ -91,26 +106,6 @@
              
         @endif
 
-    </div>
-
-    <!-- Estadísticas -->
-    <div class="row text-center mb-4">
-        <div class="col-md-3 mb-4">
-            <div class="card card-outline card-info elevation-2">
-                <div class="card-body">
-                    <h5 class="card-title text-muted">{{ __('general.admin_dashboard.pending_tickets') }}</h5>
-                    <h2 class="card-text text-danger">{{ $pendingTickets }}</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card card-outline card-info elevation-2">
-                <div class="card-body">
-                    <h5 class="card-title text-muted">{{ __('general.admin_dashboard.resolved_tickets') }}</h5>
-                    <h2 class="card-text text-success">{{ $resolvedTickets }}</h2>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Últimos eventos (Reducir tamaño) -->

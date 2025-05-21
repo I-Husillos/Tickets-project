@@ -53,17 +53,20 @@ return [
 
 
         // Comments
-        'admin.comments.add' => 'administrador/comentarios/agregar',
+        'admin.comments.add' => 'administrador/comentarios/agregar/{ticket}',
         'admin.comments.delete' => 'administrador/comentarios/eliminar/{comment}',
         'admin.comments.view' => 'administrador/comentarios/ver/{ticket}',
 
 
         // Admins
-        'admin.admins.list' => 'administrador/administradores/lista',
+        'admin.dashboard.list.admins' => 'administrador/administradores/lista',
+        'admin.filter.admins' => 'administrador/administradores/filtrar',
         'admin.admins.list' => 'administrador/administradores/lista',
         'admin.admins.create' => 'administrador/administradores/crear',
         'admin.admins.edit' => 'administrador/administradores/editar/{admin}',
+        'admin.admins.update' => 'administrador/administradores/actualizar/{admin}',
         'admin.admins.confirm_delete' => 'administrador/administradores/confirmar-eliminar/{admin}',
+        'admin.admins.destroy' => 'administrador/administradores/eliminar/{admin}',
 
 
         // Types
@@ -78,6 +81,8 @@ return [
         // Notifications
         'admin.notifications' => 'administrador/notificaciones',
         'admin.notifications.read' => 'administrador/notificaciones/marcar-leida/{notification}',
+        'admin.notifications.markAllAsRead' => 'administrador/notificaciones/marcar-todas-leidas',
+        'admin.notifications.show' => 'administrador/notificaciones/mostrar/{notification}',
 
 
         // History

@@ -27,7 +27,7 @@
                 @include('components.sidebar')
                 
                 
-                <div class="content-wrapper"  style="min-height: 100vh; border: 2px dashed red;">
+                <div class="content-wrapper"">
                     <div class="content-header">
                         <div class="container-fluid">
                             <div class="row mb-2">

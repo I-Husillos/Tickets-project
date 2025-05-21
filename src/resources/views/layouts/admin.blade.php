@@ -12,6 +12,13 @@
         @vite('resources/js/app.js', 'resources/css/app.css')
 
         <link rel="canonical" href="{{ url()->current() }}">
+
+        <script>
+            window.Laravel = {
+                locale: "{{ app()->getLocale() }}"
+            };
+        </script>
+
     </head>
 
     <body class="hold-transition sidebar-mini" style="height: auto;">
@@ -32,10 +39,28 @@
                             </div>
                             <div class="col-sm-6">
                                 <!-- Breadcrumbs -->
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">@yield('title', __('general.frontoffice.layout.page_title'))</li>
-                                </ol>
+                                 <!-- permite que cada vista pueda “inyectar” su bloque personalizado de breadcrumbs usando push --> 
+                                <!-- @stack('breadcrumbs') -->
+
+
+                                <!-- @php
+                                    $breadcrumbs = \App\Helpers\BreadcrumbHelper::generate();
+                                @endphp
+
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        @foreach($breadcrumbs as $breadcrumb)
+                                            <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}">
+                                                @if (!$loop->last)
+                                                    <a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a>
+                                                @else
+                                                    {{ $breadcrumb['name'] }}
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                </nav> -->
+
                             </div>
                         </div>
                     </div>

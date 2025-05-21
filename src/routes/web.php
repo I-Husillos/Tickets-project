@@ -76,6 +76,8 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
     Route::middleware('auth:admin')->group(function () use ($routes) {
 
+        Route::post($routes['admin.logout'], [AdminAuthController::class, 'logout']) -> name('admin.logout');
+
         Route::get('/', [AdminDashboardController::class, 'showManageDashboard'])->name('admin.dashboard');
 
         Route::get($routes['admin.profile'], [AdminProfileController::class, 'showProfile'])->name('admin.profile');
@@ -98,9 +100,6 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::delete($routes['admin.comments.delete'], [CommentController::class, 'deleteComment'])->name('admin.comments.delete');
         Route::get($routes['admin.comments.view'], [CommentController::class, 'viewComments'])->name('admin.comments.view');
 
-
-
-        
         
         Route::get($routes['admin.dashboard.list.users'], [AdminUserController::class, 'showListUsers'])->name('admin.dashboard.list.users');
         Route::get($routes['admin.filter.users'], [AdminUserController::class, 'filterUsers'])->name('admin.filter.users');
@@ -115,13 +114,14 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
 
         
-        Route::get($routes['admin.admins.list'], [AdminAdminController::class, 'showListAdmins'])->name('admin.dashboard.list.admins');
+        Route::get($routes['admin.dashboard.list.admins'], [AdminAdminController::class, 'showListAdmins'])->name('admin.dashboard.list.admins');
+        Route::get($routes['admin.filter.admins'], [AdminAdminController::class, 'filterAdmins'])->name('admin.filter.admins');
         Route::get($routes['admin.admins.create'], [AdminAdminController::class, 'createAdmin'])->name('admin.admins.create');
         Route::post('/', [AdminAdminController::class, 'storeAdmin'])->name('admin.admins.store');
         Route::get($routes['admin.admins.edit'], [AdminAdminController::class, 'editAdmin'])->name('admin.admins.edit');
-        Route::put('/{admin}', [AdminAdminController::class, 'updateAdmin'])->name('admin.admins.update');
+        Route::put($routes['admin.admins.update'], [AdminAdminController::class, 'updateAdmin'])->name('admin.admins.update');
         Route::get($routes['admin.admins.confirm_delete'], [AdminAdminController::class, 'confirmDeleteAdmin'])->name('admin.admins.confirmDelete');
-        Route::delete('/{admin}', [AdminAdminController::class, 'confirmDeleteAdminPost'])->name('admin.admins.destroy');
+        Route::delete($routes['admin.admins.destroy'], [AdminAdminController::class, 'confirmDeleteAdminPost'])->name('admin.admins.destroy');
 
         
 
@@ -139,11 +139,14 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
         Route::get($routes['admin.notifications'], [AdminNotificationController::class, 'showNotifications'])->name('admin.notifications');
         Route::patch($routes['admin.notifications.read'], [AdminNotificationController::class, 'markAsRead'])->name('admin.notifications.read');
+        Route::patch($routes['admin.notifications.markAllAsRead'], [AdminNotificationController::class, 'markAllAsRead'])
+            ->name('admin.notifications.markAllAsRead');
+        Route::get($routes['admin.notifications.show'], [AdminNotificationController::class, 'show'])->name('admin.notifications.show');
+
+
 
         Route::get($routes['admin.history.events'], [EventHistoryController::class, 'indexEventHistory'])->name('admin.history.events');
 
-
-        Route::post($routes['admin.logout'], [AdminAuthController::class, 'logout']) -> name('admin.logout');
     });
 
 });
