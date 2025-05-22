@@ -3,6 +3,14 @@
 @section('title', __('general.admin_history_events.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_history_events.page_title')]
+    ];
+@endphp
+
+
 <div class="container mt-5">
     <!-- Encabezado principal -->
     <h1 class="text-center mb-4">{{ __('general.admin_history_events.heading') }}</h1>
@@ -64,8 +72,8 @@
     </div>
 
     <!-- Botón para regresar al Panel de Control -->
-    <div class="mt-4">
+    <!-- <div class="mt-4">
         <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_history_events.back_button') }}</a>
-    </div>
+    </div> -->
 </div>
 @endsection

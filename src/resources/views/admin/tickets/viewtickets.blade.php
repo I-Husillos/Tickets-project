@@ -3,7 +3,17 @@
 @section('title', __('general.admin_ticket_details.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_ticket_manage.page_title'), 'url' => route('admin.manage.tickets', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_ticket_details.page_title')]
+    ];
+@endphp
+
+
 <div class="container-fluid mt-4">
+
     <div class="row">
         <!-- DATOS DEL TICKET -->
         <div class="col-md-4">

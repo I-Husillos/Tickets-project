@@ -3,11 +3,13 @@
 @section('title', __('frontoffice.tickets.list_title'))
 
 @section('content')
-@if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-        {{ session('success') }}
-    </div>
-@endif
+@php
+$breadcrumbs = [
+    ['label' => __('general.home'), 'url' => route('user.dashboard', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.tickets.list_title')]
+];
+@endphp
+
 
 <div class="card card-outline card-primary">
     <div class="card-header">
@@ -16,6 +18,15 @@
             <i class="fas fa-plus"></i> {{ __('frontoffice.tickets.create_button') }}
         </a>
     </div>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="{{ __('Cerrar') }}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
     <div class="card-body">
         @if ($tickets->isEmpty())
@@ -45,14 +56,53 @@
                             </div>
 
                             <div class="card-footer d-flex justify-content-between">
+                                <!-- Ver Ticket -->
                                 <a href="{{ route('user.tickets.show', ['locale' => app()->getLocale(), 'ticket' => $ticket, 'username' => Auth::user()->id]) }}" 
                                 class="btn btn-info btn-sm">
                                     <i class="fas fa-eye"></i> {{ __('frontoffice.tickets.detail') }}
                                 </a>
+                                <!-- Editar Ticket -->
                                 <a href="{{ route('user.tickets.edit', ['locale' => app()->getLocale(), 'ticket' => $ticket, 'username' => Auth::user()->id]) }}" 
                                 class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> {{ __('frontoffice.tickets.edit') }}
                                 </a>
+                                <!-- Comentar Ticket -->
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#commentModal">
+                                    <i class="fas fa-comment"></i> {{ __('Comentar') }}
+                                </button>
+                                <!-- Eliminar Ticket -->
+                                <form action="{{ route('user.tickets.destroy', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}" 
+                                    method="POST" style="display: inline-block;" 
+                                    onsubmit="return confirm('{{ __('¿Estás seguro de eliminar este ticket?') }}')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> {{ __('Eliminar') }}
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- Modal para comentar -->
+                            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="commentModalLabel">{{ __('Agregar Comentario') }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="comment-form" method="POST" action="{{ route('user.tickets.comment', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <textarea name="body" id="comment-body" class="form-control" rows="4" placeholder="Escribe tu comentario..."></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cerrar') }}</button>
+                                                <button type="submit" class="btn btn-primary">{{ __('Guardar Comentario') }}</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,12 +115,11 @@
                 </div>
             @endif
         @endif
-        <a href="{{ route('user.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary mt-3">
+        <!-- <a href="{{ route('user.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary mt-3">
             {{ __('frontoffice.dashboard.return_to_user_dashboard') }}
-        </a>
+        </a> -->
     </div>
 </div>
 @endsection
-
 
 

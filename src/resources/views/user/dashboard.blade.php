@@ -3,6 +3,12 @@
 @section('title', __('frontoffice.dashboard.title'))
 
 @section('content')
+@php
+$breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('user.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('frontoffice.dashboard.title')]
+    ];
+@endphp
 <div class="container">
     
     <!-- Resumen General -->

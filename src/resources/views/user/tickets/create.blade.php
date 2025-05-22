@@ -3,6 +3,15 @@
 @section('title', __('frontoffice.tickets.create_new_ticket'))
 
 @section('content')
+@php
+$breadcrumbs = [
+    ['label' => __('general.home'), 'url' => route('user.dashboard', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.tickets.list_title'), 'url' => route('user.tickets.index', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.tickets.create_new_ticket')]
+];
+@endphp
+
+
     <div class="container">
         <div class="card">
             <div class="card-header bg-primary text-white">

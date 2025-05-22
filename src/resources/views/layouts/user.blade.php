@@ -36,10 +36,12 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <!-- Breadcrumbs -->
-                                    <ol class="breadcrumb float-sm-right">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active">@yield('title', __('general.frontoffice.layout.page_title'))</li>
-                                    </ol>
+                                    <!-- Breadcrumbs -->
+                                    <div class="col-sm-6">
+                                        @isset($breadcrumbs)
+                                            @include('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+                                        @endisset
+                                    </div>
                                 </div>
                             </div>
                         </div>

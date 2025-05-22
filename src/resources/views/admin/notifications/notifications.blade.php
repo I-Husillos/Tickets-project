@@ -4,6 +4,17 @@
 @section('title', __('general.admin_notifications.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_notifications.page_title')]
+    ];
+@endphp
+
+<script>
+    window.notificationRoute = "{{ route('admin.notifications.show', ['locale' => app()->getLocale(), 'notification' => ':id']) }}";
+</script>
+
 <div class="container mt-5">
     <h2 class="text-center">{{ __('general.admin_notifications.header') }}</h2>
 
@@ -44,14 +55,22 @@
         </div>
     @endif
 </div>
-{{-- Menú flotante para mostrar la notificación --}}
-<div id="notificationDrawer" class="notification-drawer">
-    <div class="drawer-content">
-        <div id="notificationContent">
-            {{-- Aquí se cargará la información de la notificación --}}
+<!-- Modal donde se van a mostrar los detalles de la notificación -->
+<div id="notificationModal" class="modal fade" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notificationModalLabel">Detalles de la notificación</h5>
+            </div>
+            <div class="modal-body">
+                <div id="notificationDetails">
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 @endsection
 

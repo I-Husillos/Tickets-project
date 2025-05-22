@@ -3,6 +3,12 @@
 @section('title', __('Perfil de Usuario'))
 
 @section('content')
+@php
+$breadcrumbs = [
+    ['label' => __('general.home'), 'url' => route('user.dashboard', ['locale' => app()->getLocale()])],
+    ['label' => __('Perfil de Usuario')]
+];
+@endphp
 <div class="container-fluid">
     <!-- Tarjeta de perfil -->
     <div class="card card-primary card-outline">

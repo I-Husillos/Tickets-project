@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
-    public function showProfile($locale)
+    public function showUserProfile($locale)
     {
         app()->setLocale($locale);
         $user = Auth::guard('user')->user();

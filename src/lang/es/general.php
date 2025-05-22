@@ -40,9 +40,9 @@ return [
 
     // Otras traducciones…
     'admin_types' => [
-        'page_title'             => 'Types de Tickets - Administrador',
+        'page_title'             => 'Tipos de Tickets',
         'list_title'             => 'Listado de Tipos de Ticket',
-        'new_type'               => '+ Nuevo Tipo',
+        'new_type'               => 'Nuevo Tipo',
         'name'                   => 'Nombre',
         'description'            => 'Descripción',
         'actions'                => 'Acciones',
@@ -153,6 +153,7 @@ return [
     ],
 
     'admin_notifications' => [
+        'message'           => 'Mensaje',
         'page_title'         => 'Notificaciones',
         'header'             => 'Notificaciones',
         'no_notifications'   => 'No tienes notificaciones.',

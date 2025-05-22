@@ -3,6 +3,14 @@
 @section('title', __('general.admin_create_user.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_users.page_title'), 'url' => route('admin.dashboard.list.users', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_create_user.page_title')]
+    ];
+@endphp
+
 <div class="container mt-5">
     <h1 class="text-center mb-4">{{ __('general.admin_create_user.heading') }}</h1>
 
@@ -47,7 +55,7 @@
         <button type="submit" class="btn btn-primary">{{ __('general.admin_create_user.create_button') }}</button>
     </form>
     <div class="mt-4">
-        <a href="{{ route('admin.manage.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_create_user.back_button') }}</a>
+        <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_create_user.back_button') }}</a>
     </div>
 </div>
 @endsection

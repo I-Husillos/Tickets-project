@@ -64,12 +64,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview ps-3">
+                        @if(Auth::guard('admin')->user()->superadmin)
                         <li class="nav-item">
                             <a href="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.manage.tickets') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{ __('general.frontoffice.tech_panel.all_tickets') }}</p>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a href="{{ route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.show.assigned.tickets') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>

@@ -3,6 +3,17 @@
 @section('title', __('general.admin_admins.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_admins.page_title')]
+    ];
+@endphp
+<!-- <ol class="breadcrumb">
+  <li><a href="/dashboard"></i> Home</a></li>
+  <li class="active">Task Phases</li>
+</ol> -->
+
 <div class="container mt-5">
 
     {{-- Alertas de éxito o error --}}

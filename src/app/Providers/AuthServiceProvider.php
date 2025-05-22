@@ -8,14 +8,13 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 
 use App\Policies\TicketPolicy;
-use App\Policies\CommentPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
 
     protected $policies = [
         Ticket::class => TicketPolicy::class,
-        Comment::class => CommentPolicy::class,
+        \App\Models\Comment::class => \App\Policies\CommentPolicy::class,
     ];
     
     /**

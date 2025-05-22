@@ -4,23 +4,16 @@
 @section('title', __('general.admin_dashboard.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_dashboard.page_title')]
+    ];
+@endphp
+
 <div class="container">
     {{-- Título principal del panel de control --}}
     <h1 class="text-center mb-4">{{ __('general.admin_dashboard.control_panel') }}</h1>
-
-    {{-- Breadcrumbs manuales --}}
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('admin.dashboard', ['locale' => app()->getLocale()]) }}">
-                    <i class="fas fa-home"></i> {{ __('general.home') }}
-                </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                {{ __('general.admin_dashboard.page_title') }}
-            </li>
-        </ol>
-    </nav>
     
 
     {{-- Mensaje de bienvenida dinámico (se pasa el nombre del usuario como parámetro) --}}

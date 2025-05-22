@@ -4,6 +4,13 @@
 @section('title', __('general.admin_types.create_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_types.page_title'), 'url' => route('admin.types.index', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_types.create_title')]
+    ];
+@endphp
 <div class="container mt-4">
     <!-- Encabezado para la creación -->
     <h2>{{ __('general.admin_types.create_heading') }}</h2>

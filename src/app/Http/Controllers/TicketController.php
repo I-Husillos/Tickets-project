@@ -84,6 +84,20 @@ class TicketController extends Controller
         return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', 'Ticket creado con éxito.');
     }
 
+    public function destroy(string $locale, Ticket $ticket)
+    {
+        // Verifica si el usuario tiene permiso para eliminarlo (opcional)
+        if ($ticket->user_id !== auth()->id()) {
+            abort(403, 'No autorizado.');
+        }
+
+        $ticket->delete();
+
+        return redirect()->route('user.tickets.index', ['locale' => $locale])
+                        ->with('success', __('frontoffice.tickets.deleted_successfully'));
+    }
+
+
 
     public function show(String $locale,Ticket $ticket)
     {

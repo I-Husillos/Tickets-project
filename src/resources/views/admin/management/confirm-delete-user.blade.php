@@ -3,6 +3,13 @@
 @section('title', __('general.admin_delete_user.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_users.page_title'), 'url' => route('admin.dashboard.list.users', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_delete_user.page_title')]
+    ];
+@endphp
 <div class="container mt-5">
     <h2>{{ __('general.admin_delete_user.heading') }}</h2>
 

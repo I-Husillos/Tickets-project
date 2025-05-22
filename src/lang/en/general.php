@@ -145,6 +145,7 @@ return [
 
     // Notifications
     'admin_notifications' => [
+        'message'            => 'Message',
         'page_title'         => 'Notifications',
         'header'             => 'Notifications',
         'no_notifications'   => 'You have no notifications.',

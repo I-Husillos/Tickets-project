@@ -3,6 +3,14 @@
 @section('title', 'Mis Notificaciones')
 
 @section('content')
+@php
+$breadcrumbs = [
+    ['label' => __('general.home'), 'url' => route('user.dashboard', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.notifications_title')]
+];
+@endphp
+
+
 <div class="container   ">
     <h2 class="text-center">{{ __('frontoffice.notifications_title') }}</h2>
 

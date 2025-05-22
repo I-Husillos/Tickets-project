@@ -4,6 +4,14 @@
 @section('title', __('general.admin_ticket_manage.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_ticket_manage.page_title')]
+    ];
+@endphp
+
+
 <div class="container mt-5">
     <!-- Título del listado de tickets -->
     <h2 class="text-center">{{ __('general.admin_ticket_manage.list_title') }}</h2>

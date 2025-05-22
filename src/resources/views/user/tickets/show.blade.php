@@ -3,7 +3,34 @@
 @section('title', __('frontoffice.tickets.detail_tiket'))
 
 @section('content')
+@php 
+$breadcrumbs = [
+    ['label' => __('general.home'), 'url' => route('user.dashboard', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.tickets.list_title'), 'url' => route('user.tickets.index', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.tickets.detail_tiket')]
+];
+@endphp
+
+
 <div class="container">
+    {{-- Flash Messages (Bootstrap 4 / AdminLTE) --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+            <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+            <i class="fas fa-exclamation-triangle mr-2"></i> {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card">
         <div class="card-header bg-primary text-white">
             <h3>{{ __('frontoffice.tickets.detail_tiket') }}</h3>
@@ -40,7 +67,7 @@
             <h4>{{ __('frontoffice.tickets.add_comment_heading') }}</h4>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('ticket.add.comment', ['locale' => app()->getLocale(), 'ticket' => $ticket]) }}">
+            <form method="POST" action="{{ route('user.tickets.comment', ['locale' => app()->getLocale(), 'ticket' => $ticket]) }}">
                 @csrf
                 <div class="form-group">
                     <textarea 
@@ -58,22 +85,60 @@
     @if ($ticket->comments->isNotEmpty())
         <div class="card mt-4">
             <div class="card-header bg-info text-white">
-                <h4>{{ __('frontoffice.tickets.comments') }}</h4>
+                <h4>{{ __('frontoffice.tickets.comment') }}</h4>
             </div>
-            <div class="card-body">
-                @foreach ($ticket->comments as $comment)
-                    <div class="alert alert-secondary">
-                        <p><strong>{{ $comment->user }}</strong> ({{ $comment->created_at->format('d/m/Y H:i') }}):</p>
-                        <p>{{ $comment->message }}</p>
+            <div class="card-body p-0">
+                <div class="timeline">
+                    @foreach ($ticket->comments as $comment)
+                        <!-- timeline item -->
+                        <div class="time-label">
+                            <span class="bg-secondary">
+                                {{ $comment->created_at->format('d M Y') }}
+                            </span>
+                        </div>
+                        <div>
+                            <i class="fas fa-comment bg-info"></i>
+                            <div class="timeline-item">
+                                <span class="time">
+                                    <i class="far fa-clock"></i> {{ $comment->created_at->format('H:i') }}
+                                </span>
+                                <h3 class="timeline-header">
+                                    <strong>{{ $comment->author->name }}</strong> 
+                                </h3>
+                                <div class="timeline-body">
+                                    {{ $comment->message }}
+                                </div>
+                            </div>
+                        </div>
+                        <form 
+                            method="POST" 
+                            action="{{ route('user.ticket.comment.delete', [
+                                'locale' => app()->getLocale(), 
+                                'ticket' => $ticket->id,
+                                'comment' => $comment->id
+                            ]) }}" 
+                            style="display:inline"
+                            onsubmit="return confirm('{{ __('¿Eliminar este comentario?') }}')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger float-right">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    @endforeach
+                    <!-- FIN timeline -->
+                    <div>
+                        <i class="far fa-clock bg-gray"></i>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     @endif
 
-    <a href="{{ route('user.tickets.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary mt-3">
+
+    <!-- <a href="{{ route('user.tickets.index', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary mt-3">
         {{ __('frontoffice.tickets.return_to_ticket_list') }}
-    </a>
+    </a> -->
 </div>
 @endsection
 

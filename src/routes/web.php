@@ -45,13 +45,12 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     Route::middleware('auth:user')->group(function () use ($routes) {
         Route::post($routes['user.logout'], [UserAuthController::class, 'logOut'])->name('user.logout');
 
-
         Route::get($routes['user.dashboard'], [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('user.dashboard');
 
         Route::get($routes['user.tickets.search'], [TicketController::class, 'search'])->name('user.tickets.search');
 
 
-        Route::get($routes['user.show.profile'], [UserProfileController::class, 'showProfile'])->name('user.show.profile');
+        Route::get($routes['user.show.profile'], [UserProfileController::class, 'showUserProfile'])->name('user.show.profile');
 
         Route::get($routes['user.tickets.index'], [TicketController::class, 'showAll'])->name('user.tickets.index');
         Route::get($routes['user.tickets.create'], [TicketController::class, 'showCreateForm'])->name('user.tickets.create');
@@ -59,9 +58,12 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::patch($routes['user.tickets.update'], [TicketController::class, 'update'])->name('user.tickets.update');
         Route::post($routes['user.tickets.store'], [TicketController::class, 'create'])->name('user.tickets.store');
         Route::get($routes['user.tickets.show'], [TicketController::class, 'show'])->name('user.tickets.show');
+        Route::delete($routes['user.tickets.destroy'], [TicketController::class, 'destroy'])->name('user.tickets.destroy');
 
-        Route::post($routes['user.tickets.comment'], [CommentController::class, 'addComment'])->name('ticket.add.comment');
+
+        Route::post($routes['user.tickets.comment'], [CommentController::class, 'addComment'])->name('user.tickets.comment');
         Route::post($routes['user.tickets.validate'], [TicketController::class, 'validateResolution'])->name('user.tickets.validate');
+        Route::delete($routes['user.ticket.comment.delete'], [CommentController::class, 'deleteComment'])->name('user.ticket.comment.delete');
 
         Route::get($routes['user.notifications'], [UserNotificationController::class, 'showNotificationsView'])->name('user.notifications');
         Route::patch($routes['user.notifications.read'], [UserNotificationController::class, 'markAsRead'])->name('user.notifications.read');
@@ -80,7 +82,7 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
         Route::get('/', [AdminDashboardController::class, 'showManageDashboard'])->name('admin.dashboard');
 
-        Route::get($routes['admin.profile'], [AdminProfileController::class, 'showProfile'])->name('admin.profile');
+        Route::get($routes['admin.show.profile'], [AdminProfileController::class, 'showAdminProfile'])->name('admin.show.profile');
 
         Route::get($routes['admin.manage.dashboard'], [AdminDashboardController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
 

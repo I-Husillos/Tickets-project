@@ -3,6 +3,14 @@
 @section('title', __('general.admin_assigned_tickets.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_assigned_tickets.page_title'), 'url' => route('admin.manage.tickets', ['locale' => app()->getLocale()])],
+    ];
+@endphp
+
+
 <div class="container-fluid mt-3">
     <div class="card shadow">
         <!-- Encabezado -->

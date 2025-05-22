@@ -21,6 +21,8 @@ return [
         'user.tickets.show' => 'user/tickets/show/{ticket}',
         'user.tickets.comment' => 'user/tickets/add-comment/{ticket}',
         'user.tickets.validate' => 'user/tickets/validate',
+        'user.tickets.destroy' => 'user/tickets/destroy/{ticket}',
+        'user.ticket.comment.delete' => 'user/tickets/delete-comment/{comment}',
 
         'user.notifications' => 'user/notifications',
         'user.notifications.read' => 'user/notifications/mark-read/{notification}',
@@ -31,7 +33,7 @@ return [
         'admin.logout' => 'admin/logout',
         '/' => 'dashboard',
         'admin.manage.dashboard' => 'admin/dashboard',
-        'admin.profile' => 'admin/profile',
+        'admin.show.profile' => 'admin/profile',
 
         // Tickets
         'admin.show.assigned.tickets' => 'admin/tickets/assigned',

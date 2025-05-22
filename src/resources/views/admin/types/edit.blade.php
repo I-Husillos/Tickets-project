@@ -4,6 +4,15 @@
 @section('title', __('general.admin_types.edit_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_types.page_title'), 'url' => route('admin.types.index', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_types.edit_title')]
+    ];
+@endphp
+
+
 <div class="container mt-4">
     <!-- Título del formulario de edición, usando parámetro para el nombre -->
     <h2>{{ __('general.admin_types.edit_heading', ['name' => $type->name]) }}</h2>

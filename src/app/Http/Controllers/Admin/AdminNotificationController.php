@@ -60,12 +60,25 @@ class AdminNotificationController extends Controller
         return redirect()->route('admin.notifications', ['locale' => app()->getLocale()])->with('success', __('general.admin_notifications.all_marked'));
     }
 
-    public function show(String $locale, DatabaseNotification $notification)
+    public function show(String $locale, $notification)
     {
-        // Buscar la notificación por ID
-        $notification = Notification::findOrFail($notification);
+        $admin = Auth::guard('admin')->user();
 
-        // Retornar solo el contenido HTML de la notificación para ser mostrado en el drawer
-        return view('components.notification-details', compact('notification'));
+
+        // Obtener la notificación específica
+        $notification = $admin->notifications->find($notification);
+
+        if (!$notification) {
+            return response()->json(['error' => 'Notification not found'], 404);
+        }
+
+        return response()->json([
+            'message' => $notification->data['message'],
+            'created_at' => $notification->created_at->format('d/m/Y H:i'),
+            'status' => $notification->read_at ? __('general.admin_notifications.read') : __('general.admin_notifications.unread'),
+        ]);
     }
+
+
+
 }

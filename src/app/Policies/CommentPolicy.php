@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Ticket;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class CommentPolicy
 {
@@ -53,9 +54,17 @@ class CommentPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(Admin $admin, Comment $comment): bool
+    public function delete($user, Comment $comment): bool
     {
-        return $comment->admin_id === $admin->id || $admin->superadmin;
+        if ($user instanceof \App\Models\Admin) {
+            return $comment->author_id === $user->id || $user->superadmin;
+        }
+
+        if ($user instanceof \App\Models\User) {
+            return $comment->author_id === $user->id;
+        }
+
+        return false;
     }
 
     /**

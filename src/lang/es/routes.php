@@ -21,6 +21,8 @@ return [
         'user.tickets.show' => 'usuario/tickets/mostrar/{ticket}',
         'user.tickets.comment' => 'usuario/tickets/agregar-comentario/{ticket}',
         'user.tickets.validate' => 'usuario/tickets/validar',
+        'user.tickets.destroy' => 'usuario/tickets/eliminar/{ticket}',
+        'user.ticket.comment.delete' => 'usuario/tickets/eliminar-comentario/{comment}',
 
         'user.notifications' => 'usuario/notificaciones',
         'user.notifications.read' => 'usuario/notificaciones/marcar-leida/{notification}',
@@ -30,7 +32,7 @@ return [
         'admin.logout' => 'administrador/cerrar-sesion',
         '/' => 'panel-control',
         'admin.manage.dashboard' => 'administrador/panel-control',
-        'admin.profile' => 'administrador/perfil',  
+        'admin.show.profile' => 'administrador/perfil',  
 
         // Tickets
         'admin.show.assigned.tickets' => 'administrador/tickets/asignados',

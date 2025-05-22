@@ -15,7 +15,8 @@ class CommentService
 {
     public function addComment(Ticket $ticket, string $message)
     {
-        $author = Auth::user();
+        $author = auth()->user() ?? auth('admin')->user();
+        
         
         $comment = $ticket->comments()->create([
             'ticket_id' => $ticket,

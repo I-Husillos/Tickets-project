@@ -19,6 +19,10 @@ webpack
 vite
 
 investigar webpack y vite
+
+- revisar que no se puedan ingresar datos atraves de la herramienta de desarrollo para inyectar datos y
+  que por ejempplo esos datos si son tipos que se guarde en dos tablas, etc, laravel debe hacerlo y 
+  en las tablas deben ser fijos
 -
 -
 - visualizar plantilla https://adminlte.io/
@@ -37,9 +41,6 @@ investigar webpack y vite
 - includes en Blade
 - prefijo url que cumpla idioma
 - request
-- revisar que no se puedan ingresar datos atraves de la herramienta de desarrollo para inyectar datos y
-  que por ejempplo esos datos si son tipos que se guarde en dos tablas, etc, laravel debe hacerlo y 
-  en las tablas deben ser fijos
 - 
 - 
 - 

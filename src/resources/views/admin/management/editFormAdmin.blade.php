@@ -3,6 +3,15 @@
 @section('title', __('general.admin_edit_admin.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_admins.page_title'), 'url' => route('admin.dashboard.list.admins', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_edit_admin.page_title')]
+    ];
+@endphp
+
+
 <div class="container mt-5">
     <h2>{{ __('general.admin_edit_admin.heading') }}</h2>
 

@@ -15,6 +15,9 @@ return [
             'date' => 'Fecha',
             'actions' => 'Acciones',
         ],
+        'updated_success' => 'Ticket actualizado correctamente.',
+        'deleted_successfully' => 'Ticket eliminado correctamente.',
+        'comment_deleted' => 'Comentario eliminado correctamente.',
         'title' => 'Título',
         'description' => 'Descripción',
         'detail_tiket' => 'Detalles del Ticket',
@@ -59,6 +62,7 @@ return [
         'create_ticket' => 'Crear Nuevo Ticket',
         'return_to_user_dashboard' => 'Volver al Panel de Usuario',
     ],
+    
     'notifications' => 'Notificaciones',
     'notifications_title' => 'Mis Notificaciones',
     'mark_as_read' => 'Marcar como leída',

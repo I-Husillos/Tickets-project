@@ -3,6 +3,12 @@
 @section('title', __('general.admin_users.page_title'))
 
 @section('admincontent')
+@php
+    $breadcrumbs = [
+        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+        ['label' => __('general.admin_users.page_title')]
+    ];
+@endphp
 <div class="container mt-5">
     
 

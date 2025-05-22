@@ -3,6 +3,15 @@
 @section('title', __('frontoffice.tickets.edit'))
 
 @section('content')
+@php
+$breadcrumbs = [
+    ['label' => __('general.home'), 'url' => route('user.dashboard', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.tickets.list_title'), 'url' => route('user.tickets.index', ['locale' => app()->getLocale()])],
+    ['label' => __('frontoffice.tickets.edit')]
+];
+@endphp
+
+
 <div class="container">
     <h2>{{ __('frontoffice.tickets.edit') }}</h2>
 

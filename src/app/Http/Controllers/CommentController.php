@@ -26,7 +26,6 @@ class CommentController extends Controller
 
     public function addComment(StoreCommentRequest $request, String $locale, Ticket $ticket)
     {
-
         if (!$ticket) {
             return redirect()->back()->with('error', 'El ticket no existe.');
         }
@@ -42,7 +41,7 @@ class CommentController extends Controller
         }
 
 
-        return redirect()->route('user.tickets.edit', ['locale' => $locale, 'ticket' => $ticket])->with('success', 'Comentario agregado correctamente.');
+        return redirect()->route('user.tickets.index', ['locale' => $locale, 'ticket' => $ticket])->with('success', 'Comentario agregado correctamente.');
     }
 
     public function viewComments(Ticket $ticket)
@@ -55,8 +54,12 @@ class CommentController extends Controller
 
     public function deleteComment(String $locale, Comment $comment)
     {
-        $this->authorize('delete', $comment);
+
+        if (!auth()->user()->can('delete', $comment)) {
+            return redirect()->back()->with('error', 'No tienes permiso para eliminar este comentario.');
+        }
         
+
         $comment->delete();
 
         return redirect()->back()->with('success', 'Comentario eliminado correctamente.');

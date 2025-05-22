@@ -1,26 +1,42 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.view-notification-btn');
+document.querySelectorAll('.view-notification-btn').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+        var notificationId = this.getAttribute('data-id');
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const id = btn.dataset.id;
+        // Reemplazar ':id' por el ID de la notificación
+        const url = window.notificationRoute.replace(':id', notificationId);
 
-            try {
-                // Construir la URL correctamente utilizando JavaScript
-                const url = `/${window.Laravel.locale}/admin/notifications/${id}`;
-                const response = await fetch(url);
-                
-                if (!response.ok) throw new Error('Error cargando notificación');
+        // Realizar una petición AJAX para obtener los detalles de la notificación
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    // Verificar si el modal y el contenedor de detalles están disponibles
+                    const notificationDetails = document.getElementById('notificationDetails');
 
-                const html = await response.text();
-                document.getElementById('notificationContent').innerHTML = html;
+                    console.log(notificationDetails);
+                    
+                    if (notificationDetails) {
+                        notificationDetails.innerHTML = `
+                            <strong>Mensaje:</strong> ${data.message} <br>
+                            <strong>Fecha:</strong> ${data.created_at} <br>
+                            <strong>Estado:</strong> ${data.status}
+                        `;
+                        
 
-                const modal = new bootstrap.Modal(document.getElementById('notificationModal'));
-                modal.show();
-            } catch (err) {
-                alert('Hubo un error al cargar el contenido.');
-                console.error(err);
-            }
-        });
+                        const modalElement = $('#notificationModal');
+                        if (modalElement.length) {
+                            modalElement.modal('show');
+                        } else {
+                            console.error("El modal 'notificationModal' no se encuentra en el DOM.");
+                        }
+
+                    } else {
+                        console.error("No se encontró el contenedor 'notificationDetails' en el DOM.");
+                    }
+                }
+            })
     });
 });
