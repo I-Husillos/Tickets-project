@@ -17,7 +17,12 @@ class LanguageMiddleware
         
         $availableLanguages = ['es', 'en'];
 
-        
+        // omitir las rutas de debugbar para que no haya conflicto con el prefijo de idiomas
+        if ($request->is('_debugbar*')) {
+            return $next($request);
+        }
+
+
         if (!in_array($locale, $availableLanguages)) {
             $defaultLocale = 'es';
             return redirect("/$defaultLocale" . $request->getPathInfo());
@@ -26,6 +31,7 @@ class LanguageMiddleware
         if ($locale !== Session::get('locale')) {
             // Session::put('locale', $locale);
             App::setLocale($locale);
+            \Illuminate\Support\Facades\URL::defaults(['locale' => $locale]); // << Añadido
         }
 
 

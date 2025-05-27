@@ -50,7 +50,7 @@ return [
         'add_comment_heading' => 'Add a Comment',
         'comment_placeholder' => 'Enter your comment here...',
         'return_to_ticket_list' => 'Return to Ticket List',
-        'edit_ticket' => 'Edit Ticket',
+        'edit' => 'Edit Ticket',
         'form_error' => 'Error updating ticket',
     ],
     'dashboard' => [
@@ -63,8 +63,12 @@ return [
         'create_ticket' => 'Create Ticket',
         'return_to_user_dashboard' => 'Return to User Dashboard',
     ],
+
+    'created_by' => 'Created by',
+    'updated_by' => 'Updated by',
     'notifications' => 'Notifications',
     'notifications_title' => 'My Notifications',
+    'notifications_detail' => 'Notification Details',
     'mark_as_read' => 'Mark as Read',
     'readed' => 'Readed',
     'received_at' => 'Received',
@@ -73,4 +77,5 @@ return [
     'filter_by_type' => 'Filter by Type',
     'filter_by_change_status' => 'Filter by Change Status',
     'filter_by_add_comment' => 'Filter by Comment Added',
+    'message' => 'Message',
 ];

@@ -24,16 +24,18 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 
 
-
 Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     ->prefix('{locale}')
     ->where(['locale' => 'es|en'])
     ->group(function () {
 
+
+
     $locale = request()->segment(1); // Obtener el idioma desde la URL
 
 
     $routes = trans('routes', [], $locale); // Cargar traducciones en el idioma correcto
+    
     
     Route::get('/', [HomeController::class, 'showOptions'])->name('home');
 
@@ -64,9 +66,12 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::post($routes['user.tickets.comment'], [CommentController::class, 'addComment'])->name('user.tickets.comment');
         Route::post($routes['user.tickets.validate'], [TicketController::class, 'validateResolution'])->name('user.tickets.validate');
         Route::delete($routes['user.ticket.comment.delete'], [CommentController::class, 'deleteComment'])->name('user.ticket.comment.delete');
+        Route::get($routes['user.ticket.comment.edit'], [CommentController::class, 'editComment'])->name('user.ticket.comment.edit');
+        Route::put($routes['user.ticket.comment.update'], [CommentController::class, 'updateComment'])->name('user.ticket.comment.update');
 
         Route::get($routes['user.notifications'], [UserNotificationController::class, 'showNotificationsView'])->name('user.notifications');
         Route::patch($routes['user.notifications.read'], [UserNotificationController::class, 'markAsRead'])->name('user.notifications.read');
+        Route::get($routes['user.notifications.show'], [UserNotificationController::class, 'showUserNotification'])->name('user.notifications.show');
 
     });
 
@@ -87,7 +92,16 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['admin.manage.dashboard'], [AdminDashboardController::class, 'showManageDashboard'])->name('admin.manage.dashboard');
 
 
+
+        // ruta para devolver tickets asgandos en JSON
+        Route::get($routes['admin.ajax.assigned_tickets'], [AdminTicketController::class, 'getAssignedTicketsAjax'])->name('admin.ajax.assigned_tickets');
+
         Route::get($routes['admin.show.assigned.tickets'], [AdminTicketController::class, 'showAssignedTickets'])->name('admin.show.assigned.tickets');
+
+
+
+        // ruta para devolver tickets en JSON
+        Route::get($routes['admin.ajax.tickets'], [AdminTicketController::class, 'getTicketsJson'])->name('admin.ajax.tickets');
 
 
         Route::get($routes['admin.manage.tickets'], [AdminTicketController::class, 'manageTickets'])->name('admin.manage.tickets');
@@ -98,9 +112,17 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::post($routes['admin.tickets.assign'], [AdminTicketController::class, 'assignTicket'])->name('admin.assign.ticket');
 
 
+        // ruta para devolver comentarios en JSON
+        Route::get($routes['admin.ajax.ticket_comments'], [CommentController::class, 'getTicketCommentsAjax'])->name('admin.ajax.ticket_comments');
+
+
         Route::post($routes['admin.comments.add'], [CommentController::class, 'addComment'])->name('admin.comments.add');
         Route::delete($routes['admin.comments.delete'], [CommentController::class, 'deleteComment'])->name('admin.comments.delete');
         Route::get($routes['admin.comments.view'], [CommentController::class, 'viewComments'])->name('admin.comments.view');
+
+
+        // ruta para devolver usuarios en JSON
+        Route::get($routes['admin.ajax.users'], [AdminUserController::class, 'getUsersAjax'])->name('admin.ajax.users');
 
         
         Route::get($routes['admin.dashboard.list.users'], [AdminUserController::class, 'showListUsers'])->name('admin.dashboard.list.users');
@@ -115,6 +137,9 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
 
 
+        // ruta para devolver administradores en JSON
+        Route::get($routes['admin.ajax.admins'], [AdminAdminController::class, 'getAdminsAjax'])->name('admin.ajax.admins');
+
         
         Route::get($routes['admin.dashboard.list.admins'], [AdminAdminController::class, 'showListAdmins'])->name('admin.dashboard.list.admins');
         Route::get($routes['admin.filter.admins'], [AdminAdminController::class, 'filterAdmins'])->name('admin.filter.admins');
@@ -127,24 +152,31 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
         
 
+        // ruta para devolver tipos de tickets en JSON
+        Route::get($routes['admin.ajax.types'], [TypesController::class, 'getTypesAjax'])->name('admin.ajax.types');
 
         Route::get($routes['admin.types.index'], [TypesController::class, 'index'])->name('admin.types.index');
         Route::get($routes['admin.types.create'], [TypesController::class, 'create'])->name('admin.types.create');
         Route::post($routes['admin.types.store'], [TypesController::class, 'store'])->name('admin.types.store');
         Route::get($routes['admin.types.edit'], [TypesController::class, 'edit'])->name('admin.types.edit');
         Route::put($routes['admin.types.update'], [TypesController::class, 'update'])->name('admin.types.update');
-        Route::delete('/{type}', [TypesController::class, 'destroy'])->name('admin.types.destroy');
+        Route::delete($routes['admin.types.destroy'], [TypesController::class, 'destroy'])->name('admin.types.destroy');
         Route::get($routes['admin.types.confirm_delete'], [TypesController::class, 'confirmDelete'])->name('admin.types.confirmDelete');
 
         
 
+        // ruta para devolver notificaciones en JSON
+        Route::get($routes['admin.ajax.notifications'], [AdminNotificationController::class, 'getAdminNotificationsAjax'])->name('admin.ajax.notifications');
+
 
         Route::get($routes['admin.notifications'], [AdminNotificationController::class, 'showNotifications'])->name('admin.notifications');
         Route::patch($routes['admin.notifications.read'], [AdminNotificationController::class, 'markAsRead'])->name('admin.notifications.read');
-        Route::patch($routes['admin.notifications.markAllAsRead'], [AdminNotificationController::class, 'markAllAsRead'])
-            ->name('admin.notifications.markAllAsRead');
-        Route::get($routes['admin.notifications.show'], [AdminNotificationController::class, 'show'])->name('admin.notifications.show');
+        Route::patch($routes['admin.notifications.markAllAsRead'], [AdminNotificationController::class, 'markAllAsRead'])->name('admin.notifications.markAllAsRead');
+        Route::get($routes['admin.notifications.show'], [AdminNotificationController::class, 'showAdminNotification'])->name('admin.notifications.show');
 
+
+        // ruta para devolver eventos en JSON
+        Route::get($routes['admin.ajax.events'], [EventHistoryController::class, 'getEventsAjax'])->name('admin.ajax.events');
 
 
         Route::get($routes['admin.history.events'], [EventHistoryController::class, 'indexEventHistory'])->name('admin.history.events');

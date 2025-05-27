@@ -34,7 +34,7 @@ return [
     'admin_types' => [
         'page_title'             => 'Ticket Types - Administrator',
         'list_title'             => 'Ticket Types List',
-        'new_type'               => '+ New Type',
+        'new_type'               => 'New Type',
         'name'                   => 'Name',
         'description'            => 'Description',
         'actions'                => 'Actions',

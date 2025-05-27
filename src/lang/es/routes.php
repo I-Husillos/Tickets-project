@@ -23,9 +23,12 @@ return [
         'user.tickets.validate' => 'usuario/tickets/validar',
         'user.tickets.destroy' => 'usuario/tickets/eliminar/{ticket}',
         'user.ticket.comment.delete' => 'usuario/tickets/eliminar-comentario/{comment}',
+        'user.ticket.comment.edit' => 'usuario/tickets/editar-comentario/{comment}',
+        'user.ticket.comment.update' => 'usuario/tickets/actualizar-comentario/{comment}',
 
         'user.notifications' => 'usuario/notificaciones',
         'user.notifications.read' => 'usuario/notificaciones/marcar-leida/{notification}',
+        'user.notifications.show' => 'usuario/notificaciones/mostrar/{notification}',
 
         //administrador
         'admin.login' => 'administrador/iniciar-sesion',
@@ -35,16 +38,19 @@ return [
         'admin.show.profile' => 'administrador/perfil',  
 
         // Tickets
+        'admin.ajax.tickets' => 'administrador/tickets/ajax',
         'admin.show.assigned.tickets' => 'administrador/tickets/asignados',
         'admin.tickets.update_status' => 'administrador/tickets/actualizar-estado/{ticket}',
         'admin.tickets.close' => 'administrador/tickets/cerrar/{ticket}',
         'admin.tickets.reopen' => 'administrador/tickets/reabrir/{ticket}',
+        'admin.ajax.assigned_tickets' => 'administrador/tickets/asignados/ajax',
         'admin.tickets.assign' => 'administrador/tickets/asignar/{ticket}',
         'admin.manage.tickets' => 'administrador/tickets/lista',
         'admin.view.ticket' => 'administrador/tickets/mostrar/{ticket}',
 
 
         // Users
+        'admin.ajax.users' => 'administrador/usuarios/ajax',
         'admin.dashboard.list.users' => 'administrador/usuarios/lista',
         'admin.filter.users' => 'administrador/usuarios/filtrar',
         'admin.users.add_dashboard' => 'administrador/usuarios/dashboard',
@@ -55,12 +61,14 @@ return [
 
 
         // Comments
+        'admin.ajax.ticket_comments' => 'administrador/tickets/{ticket}/comentarios/json',
         'admin.comments.add' => 'administrador/comentarios/agregar/{ticket}',
         'admin.comments.delete' => 'administrador/comentarios/eliminar/{comment}',
         'admin.comments.view' => 'administrador/comentarios/ver/{ticket}',
 
 
         // Admins
+        'admin.ajax.admins' => 'administrador/administradores/ajax',
         'admin.dashboard.list.admins' => 'administrador/administradores/lista',
         'admin.filter.admins' => 'administrador/administradores/filtrar',
         'admin.admins.list' => 'administrador/administradores/lista',
@@ -72,15 +80,18 @@ return [
 
 
         // Types
+        'admin.ajax.types' => 'administrador/tipos/ajax',
         'admin.types.index' => 'administrador/tipos',
         'admin.types.create' => 'administrador/tipos/crear',
         'admin.types.edit' => 'administrador/tipos/editar/{type}',
         'admin.types.store' => 'administrador/tipos/guardar',
         'admin.types.confirm_delete' => 'administrador/tipos/confirmar-eliminar/{type}',
         'admin.types.update' => 'administrador/tipos/actualizar/{type}',
+        'admin.types.destroy' => 'administrador/tipos/eliminar/{type}',
 
 
         // Notifications
+        'admin.ajax.notifications' => 'administrador/notificaciones/ajax',
         'admin.notifications' => 'administrador/notificaciones',
         'admin.notifications.read' => 'administrador/notificaciones/marcar-leida/{notification}',
         'admin.notifications.markAllAsRead' => 'administrador/notificaciones/marcar-todas-leidas',
@@ -88,6 +99,7 @@ return [
 
 
         // History
+        'admin.ajax.events' => 'administrador/historial/eventos/ajax',
         'admin.history.events' => 'administrador/historial/eventos',
 
     ];

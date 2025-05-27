@@ -63,8 +63,11 @@ return [
         'return_to_user_dashboard' => 'Volver al Panel de Usuario',
     ],
     
+    'created_by' => 'Creado por',
+    'updated_by' => 'Actualizado por',
     'notifications' => 'Notificaciones',
     'notifications_title' => 'Mis Notificaciones',
+    'notifications_detail' => 'Detalles de la Notificación',
     'mark_as_read' => 'Marcar como leída',
     'readed' => 'Leída',
     'received_at' => 'Recibido',
@@ -73,4 +76,5 @@ return [
     'filter_by_type' => 'Filtrar por Tipo',
     'filter_by_change_status' => 'Filtrar por Cambio de Estado',
     'filter_by_add_comment' => 'Filtrar por Comentario Añadido',
+    'message' => 'Mensaje',
 ];

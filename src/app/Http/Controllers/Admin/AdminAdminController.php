@@ -122,5 +122,21 @@ class AdminAdminController extends Controller
 
         return redirect()->route('admin.dashboard.list.admins', ['locale' => $locale])->with('success', 'Administrador actualizado correctamente.');
     }
+
+
+    public function getAdminsAjax()
+    {
+        $admins = Admin::select('id', 'name', 'email')->get();
+
+        $data = $admins->map(function ($admin) {
+            return [
+                'name' => $admin->name,
+                'email' => $admin->email,
+                'actions' => view('components.actions.admin-actions', ['admin' => $admin])->render()
+            ];
+        });
+
+        return response()->json(["data" => $data]);
+    }
 }
 

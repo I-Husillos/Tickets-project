@@ -103,27 +103,39 @@
 
     <!-- Últimos eventos (Reducir tamaño) -->
     <div class="card shadow mb-4 rounded-4">
-        <div class="card-header bg-primary text-white rounded-top-4">
-            <h5 class="mb-0">{{ __('general.admin_dashboard.latest_events_card_title') }}</h5>
+        <div class="card-header bg-primary text-white rounded-top-4 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-history mr-2"></i> {{ __('general.admin_dashboard.latest_events_card_title') }}</h5>
+            <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="btn btn-sm btn-light">
+                <i class="fas fa-list"></i> Ver todo
+            </a>
         </div>
         <div class="card-body" style="max-height: 300px; overflow-y: auto;">
             @if($recentEvents->count())
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover text-sm">
                         <thead class="sticky-top bg-primary text-white">
                             <tr>
-                                <th>{{ __('general.admin_dashboard.latest_events_table_type') }}</th>
+                                <th><i class="fas fa-tag"></i></th>
                                 <th>{{ __('general.admin_dashboard.latest_events_table_description') }}</th>
-                                <th>{{ __('general.admin_dashboard.latest_events_table_user') }}</th>
-                                <th>{{ __('general.admin_dashboard.latest_events_table_date') }}</th>
+                                <th><i class="fas fa-user"></i></th>
+                                <th><i class="fas fa-clock"></i></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($recentEvents as $event)
                                 <tr>
-                                    <td>{{ $event->event_type }}</td>
+                                    <td>
+                                        <span class="badge 
+                                            @if($event->event_type === 'created') badge-success
+                                            @elseif($event->event_type === 'updated') badge-warning
+                                            @elseif($event->event_type === 'deleted') badge-danger
+                                            @else badge-secondary
+                                            @endif">
+                                            {{ ucfirst($event->event_type) }}
+                                        </span>
+                                    </td>
                                     <td>{{ $event->description }}</td>
-                                    <td>{{ $event->user }}</td>
+                                    <td><i class="fas fa-user-circle text-primary mr-1"></i> {{ $event->user }}</td>
                                     <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
                                 </tr>
                             @endforeach
@@ -131,30 +143,79 @@
                     </table>
                 </div>
             @else
-                <p class="text-muted">{{ __('general.admin_dashboard.latest_events_none') }}</p>
+                <div class="text-center text-muted">
+                    <i class="fas fa-history fa-2x mb-2"></i>
+                    <p>{{ __('general.admin_dashboard.latest_events_none') }}</p>
+                </div>
             @endif
         </div>
     </div>
 
+
+
     <!-- Notificaciones Recientes -->
     <div class="card shadow mb-4 rounded-4">
-        <div class="card-header bg-info text-white rounded-top-4">
-            <h5 class="mb-0">{{ __('general.admin_dashboard.recent_notifications_card_title') }}</h5>
+        <div class="card-header bg-info text-white rounded-top-4 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-bell mr-2"></i> {{ __('general.admin_dashboard.recent_notifications_card_title') }}</h5>
+            <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="btn btn-sm btn-light">
+                <i class="fas fa-eye"></i> Ver todas
+            </a>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="max-height: 300px; overflow-y: auto;">
             @if($recentNotifications->count())
-                <ul class="list-group">
+                <ul class="list-group list-group-flush">
                     @foreach($recentNotifications as $notification)
-                        <li class="list-group-item">
-                            {{ $notification->data['message'] }} 
-                            <small class="text-muted">({{ $notification->created_at->diffForHumans() }})</small>
+                        @php
+                            $type = $notification->data['type'] ?? 'info';
+                            $icon = match($type) {
+                                'comment' => 'fas fa-comment',
+                                'status' => 'fas fa-sync-alt',
+                                'close' => 'fas fa-lock',
+                                'open', 'reopened' => 'fas fa-unlock',
+                                default => 'fas fa-info-circle'
+                            };
+
+                            $badge = match($type) {
+                                'comment' => 'primary',
+                                'status' => 'warning',
+                                'close' => 'danger',
+                                'open', 'reopened' => 'success',
+                                default => 'secondary'
+                            };
+                        @endphp
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="d-flex align-items-center">
+                                <span class="badge badge-{{ $badge }} mr-3 p-2">
+                                    <i class="{{ $icon }}"></i>
+                                </span>
+                                <div>
+                                    <div>{{ $notification->data['message'] }}</div>
+                                    <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
+                                </div>
+                            </div>
+                            <button 
+                                type="button"
+                                class="btn btn-sm btn-outline-info view-notification-btn"
+                                data-id="{{ $notification->id }}">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
                         </li>
                     @endforeach
                 </ul>
             @else
-                <p class="text-muted">{{ __('general.admin_dashboard.recent_notifications_none') }}</p>
+                <div class="text-center text-muted">
+                    <i class="fas fa-bell-slash fa-2x mb-2"></i>
+                    <p>{{ __('general.admin_dashboard.recent_notifications_none') }}</p>
+                </div>
             @endif
         </div>
     </div>
+    @push('modals')
+        @include('components.modals.showNotifications')
+    @endpush
+
+
+
+
 </div>
 @endsection

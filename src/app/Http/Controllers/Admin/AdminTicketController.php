@@ -10,6 +10,8 @@ use App\Models\Type;
 use App\Jobs\SendNotifications;
 use App\Models\EventHistory;
 use App\Http\Requests\UpdateTicketStatusRequest;
+use Illuminate\Support\Str;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -131,4 +133,62 @@ class AdminTicketController extends Controller
 
         return view('admin.tickets.assignedticketsview', compact('assignedTickets'));
     }
+
+
+    public function getTicketsJson()
+    {
+        $tickets = Ticket::with('comments', 'admin')->get();
+
+        $data = $tickets->map(function ($ticket) {
+            return [
+                'id' => $ticket->id,
+                'title' => $ticket->title,
+                'status' => ucfirst($ticket->status),
+                'priority' => ucfirst($ticket->priority),
+                'type' => ucfirst($ticket->type),
+                'comments_count' => $ticket->comments->count(),
+                'assigned_to' => $ticket->admin->name ?? __('general.admin_ticket_manage.sin_asignar'),
+                'actions' => view('components.actions.ticket-actions', compact('ticket'))->render()
+            ];
+        });
+
+        return response()->json(['data' => $data]);
+    }
+
+    public function getAssignedTicketsAjax(Request $request)
+    {
+        $query = Ticket::with('comments')
+            ->where('admin_id', auth('admin')->id());
+
+        // Filtros opcionales
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('priority')) {
+            $query->where('priority', $request->priority);
+        }
+
+
+        $tickets = $query->get();
+
+
+        $data = $tickets->map(function ($ticket) {
+            return [
+                'id' => $ticket->id,
+                'title' => $ticket->title,
+                'description' => Str::limit($ticket->description, 50),
+                'status' => view('components.badges.status', compact('ticket'))->render(),
+                'priority' => view('components.badges.priority', compact('ticket'))->render(),
+                'type' => ucfirst($ticket->type),
+                'comments_count' => $ticket->comments->count(),
+                'actions' => view('components.actions.ticket-actions', compact('ticket'))->render()
+            ];
+        });
+
+        return response()->json(['data' => $data]);
+    }
+
 }
+
+

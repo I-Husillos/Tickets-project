@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Services\CommentService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 use PhpParser\Node\Expr\Cast\String_;
 
 class CommentController extends Controller
@@ -64,7 +65,46 @@ class CommentController extends Controller
 
         return redirect()->back()->with('success', 'Comentario eliminado correctamente.');
     }
+
+
+    public function editComment(String $locale, Ticket $ticket, Comment $comment)
+    {
+        if (!auth()->user()->can('update', $comment)) {
+            return redirect()->back()->with('error', __('messages.comment.not_authorized'));
+        }
+
+        return view('comments.edit', compact('ticket', 'comment'));
+    }
+
+
+    public function updateComment(UpdateCommentRequest $request, String $locale, Comment $comment)
+    {
+        if (!auth()->user()->can('update', $comment)) {
+            return redirect()->back()->with('error', __('messages.comment.not_authorized'));
+        }
+
+        $comment->message = $request->input('message');
+        $comment->save();
+
+        return redirect()->back()->with('success', 'Comentario actualizado correctamente.');
+    }
+
+
+    public function getTicketCommentsAjax(String $locale, Ticket $ticket)
+    {
+        $comments = $ticket->comments()->with('author')->get();
+
+        $data = $comments->map(function ($comment) {
+            return [
+                'author' => $comment->author->name,
+                'message' => $comment->message,
+                'date' => $comment->created_at->format('d/m/Y H:i'),
+                'actions' => view('components.actions.comment-actions', compact('comment'))->render(),
+            ];
+        });
+
+        return response()->json(['data' => $data]);
+    }
+
 }
 
-
-//php artisan queue:work redis

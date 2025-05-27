@@ -10,6 +10,14 @@
     ];
 @endphp
 <div class="container-fluid mt-3">
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="{{ __('Cerrar') }}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
     <!-- Card contenedora del índice -->
     <div class="card">
@@ -24,52 +32,22 @@
         </div>
 
         <div class="card-body">
-            <!-- Alert de éxito -->
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="fas fa-check-circle"></i> {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
 
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered text-center align-middle">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>{{ __('general.admin_types.name') }}</th>
-                            <th>{{ __('general.admin_types.description') }}</th>
-                            <th>{{ __('general.admin_types.actions') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($types as $type)
-                            <tr>
-                                <td>{{ $type->name }}</td>
-                                <td>{{ $type->description }}</td>
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a href="{{ route('admin.types.edit', ['locale' => app()->getLocale(), 'type' => $type->id]) }}" 
-                                           class="btn btn-warning btn-sm" title="{{ __('general.admin_types.edit') }}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('admin.types.confirmDelete', ['locale' => app()->getLocale(), 'type' => $type->id]) }}" 
-                                           class="btn btn-danger btn-sm" title="{{ __('general.admin_types.delete') }}">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3">{{ __('general.admin_types.no_records') }}</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
+        <table id="tabla-types"
+            class="table table-hover table-bordered text-center align-middle"
+            data-url="{{ route('admin.ajax.types', ['locale' => app()->getLocale()]) }}"
+            data-locale="{{ app()->getLocale() }}">
+            <thead class="thead-dark">
+                <tr>
+                    <th>{{ __('general.admin_types.name') }}</th>
+                    <th>{{ __('general.admin_types.description') }}</th>
+                    <th>{{ __('general.admin_types.actions') }}</th>
+                </tr>
+            </thead>
+        </table>
         </div> <!-- /.card-body -->
     </div> <!-- /.card -->
 
 </div> <!-- /.container-fluid -->
 @endsection
+

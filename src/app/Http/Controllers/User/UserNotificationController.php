@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\DatabaseNotification;
-
+use Illuminate\Notifications\Notification;
+use App\Services\NotificationService;
 
 class UserNotificationController extends Controller
 {
@@ -39,6 +40,22 @@ class UserNotificationController extends Controller
 
         return redirect()->route('user.notifications', ['locale' => $locale]);
     }
+
+    public function showUserNotification(String $locale, $notification)
+    {
+        $user = Auth::guard('user')->user();
+
+        dd($user);
+        
+        $notificationId = $user->notifications()->find($notification);
+
+        if (!$notificationId) {
+            return response()->json(['error' => 'Notification not found'], 404);
+        }
+
+        return response()->json(NotificationService::format($notificationId, $locale, 'user'));
+    }
 }
+
 
 

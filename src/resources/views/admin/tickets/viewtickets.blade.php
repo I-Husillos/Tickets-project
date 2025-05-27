@@ -141,36 +141,19 @@
                                 <p class="text-muted">{{ __('general.admin_ticket_details.no_comments') }}</p>
                             @else
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>{{ __('general.admin_ticket_details.author') }}</th>
-                                            <th>{{ __('general.admin_ticket_details.message') }}</th>
-                                            <th>{{ __('general.admin_ticket_details.date') }}</th>
-                                            <th>{{ __('general.admin_ticket_details.actions') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($ticket->comments as $comment)
-                                        <tr>
-                                            <td>{{ $comment->author->name }}</td>
-                                            <td>{{ $comment->message }}</td>
-                                            <td>{{ $comment->created_at->format('d/m/Y H:i') }}</td>
-                                            <td>
-                                                @can('delete', $comment)
-                                                <form method="POST" action="{{ route('admin.comments.delete', ['comment' => $comment->id, 'locale' => app()->getLocale()]) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-trash-alt"></i> {{ __('general.admin_ticket_details.delete') }}
-                                                    </button>
-                                                </form>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <table id="tabla-comentarios"
+                                class="table table-bordered table-hover text-center"
+                                data-url="{{ route('admin.ajax.ticket_comments', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}"
+                                data-locale="{{ app()->getLocale() }}">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>{{ __('general.admin_ticket_details.author') }}</th>
+                                        <th>{{ __('general.admin_ticket_details.message') }}</th>
+                                        <th>{{ __('general.admin_ticket_details.date') }}</th>
+                                        <th>{{ __('general.admin_ticket_details.actions') }}</th>
+                                    </tr>
+                                </thead>
+                            </table>
                             </div>
                             @endif
 

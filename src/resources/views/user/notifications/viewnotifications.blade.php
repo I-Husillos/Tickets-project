@@ -11,8 +11,7 @@ $breadcrumbs = [
 @endphp
 
 
-<div class="container   ">
-    <h2 class="text-center">{{ __('frontoffice.notifications_title') }}</h2>
+<div class="container">
 
     @if ($notifications->isEmpty())
         <p>No tienes notificaciones.</p>
@@ -34,52 +33,50 @@ $breadcrumbs = [
 
         <div class="list-group mt-4">
             @foreach ($notifications as $notification)
-                <a href="{{ route('user.tickets.show', ['ticket' => $notification->data['ticket_id'], 'locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action
-                    @if ($notification->read_at) 
-                        list-group-item-light 
-                    @else
-                        list-group-item-info 
-                    @endif
-                ">
+                <div class="list-group-item list-group-item-action 
+                    @if ($notification->read_at) list-group-item-light @else list-group-item-info @endif
+                    view-notification-btn" 
+                    data-id="{{ $notification->id }}">
+
                     <!-- Mensaje principal -->
                     <strong>{{ $notification->data['message'] }}</strong><br>
 
-                    <!-- Si es cambio de estado -->
-                    @isset($notification->data['status'])
-                        <p><strong>{{ __('frontoffice.tickets.new_status') }}:</strong> {{ ucfirst($notification->data['status']) }}</p>
-                    @endisset
-
-                    <!-- Si tiene autor -->
-                    @isset($notification->data['author'])
-                        <p><strong>{{ __('frontoffice.tickets.author') }}:</strong> {{ $notification->data['author'] }}</p>
-                    @endisset
-
-                    <!-- Si tiene contenido del comentario -->
-                    @isset($notification->data['comment'])
-                        <p><strong>{{ __('frontoffice.tickets.comment') }}:</strong> "{{ $notification->data['comment'] }}"</p>
-                    @endisset
-
-                    <!-- Si tiene info del que actualizó -->
-                    @isset($notification->data['name'])
-                        <p><strong>Actualizado por:</strong> {{ $notification->data['name']}}</p>
-                    @endisset
-
-                    <!-- Fecha -->
-                    <small>{{ __('frontoffice.received_at') }}: {{ $notification->created_at->format('d/m/Y H:i') }}</small>
-
                     <!-- Marcar como leído -->
-                    @if (!$notification->read_at)
-                        <form action="{{ route('user.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="btn btn-sm btn-outline-secondary float-right">{{ __('frontoffice.mark_as_read') }}</button>
-                        </form>
-                    @else
-                        <span class="badge badge-success float-right">{{ __('frontoffice.readed') }}</span>
-                    @endif
-                </a>
+                    <div class="d-flex justify-content-end align-items-center gap-2" style="gap: 0.5rem;">
+                        {{-- Botón Ver --}}
+                        <button type="button" 
+                                class="btn btn-sm btn-outline-info view-notification-btn" 
+                                data-id="{{ $notification->id }}" title="{{ __('Ver detalles') }}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+
+                        {{-- Marcar como leída o mostrar "Leída" --}}
+                        @if (!$notification->read_at)
+                            <form action="{{ route('user.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}" 
+                                method="POST" class="mb-0">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-sm btn-outline-success" title="{{ __('frontoffice.mark_as_read') }}">
+                                    <i class="fas fa-check-circle"></i>
+                                </button>
+                            </form>
+                        @else
+                            <span class="badge badge-success d-flex align-items-center">
+                                <i class="fas fa-check mr-1"></i> {{ __('frontoffice.readed') }}
+                            </span>
+                        @endif
+                    </div>
+
+
+                </div>
             @endforeach
         </div>
+
+        @push('modals')
+            @include('components.modals.showNotifications') {{-- sin pasar $notification --}}
+        @endpush
+
+
         @if ($notifications->hasPages())
             <div class="d-flex justify-content-center mt-4">
                 {{ $notifications->links('pagination::bootstrap-4') }}

@@ -23,9 +23,12 @@ return [
         'user.tickets.validate' => 'user/tickets/validate',
         'user.tickets.destroy' => 'user/tickets/destroy/{ticket}',
         'user.ticket.comment.delete' => 'user/tickets/delete-comment/{comment}',
+        'user.ticket.comment.edit' => 'user/tickets/edit-comment/{comment}',
+        'user.ticket.comment.update' => 'user/tickets/update-comment/{comment}',
 
         'user.notifications' => 'user/notifications',
         'user.notifications.read' => 'user/notifications/mark-read/{notification}',
+        'user.notifications.show' => 'user/notifications/show/{notification}',
 
 
         // Administrator
@@ -36,15 +39,18 @@ return [
         'admin.show.profile' => 'admin/profile',
 
         // Tickets
+        'admin.ajax.tickets' => 'admin/tickets/ajax',
         'admin.show.assigned.tickets' => 'admin/tickets/assigned',
         'admin.tickets.update_status' => 'admin/tickets/update-status/{ticket}',
         'admin.tickets.close' => 'admin/tickets/close/{ticket}',
         'admin.tickets.reopen' => 'admin/tickets/reopen/{ticket}',
+        'admin.ajax.assigned_tickets' => 'admin/tickets/assigned/ajax',
         'admin.tickets.assign' => 'admin/tickets/assign/{ticket}',
         'admin.manage.tickets' => 'admin/tickets/list',
         'admin.view.ticket' => 'admin/tickets/view/{ticket}',
 
         // Users
+        'admin.ajax.users' => 'admin/users/ajax',
         'admin.dashboard.list.users' => 'admin/users/list',
         'admin.filter.users' => 'admin/users/filter',
         'admin.users.add_dashboard' => 'admin/users/dashboard',
@@ -55,11 +61,13 @@ return [
         'admin.users.confirm_delete' => 'admin/users/confirm-delete/{user}',
 
         // Comments
+        'admin.ajax.ticket_comments' => 'administrador/tickets/{ticket}/comentarios/json',
         'admin.comments.add' => 'admin/comments/add',
         'admin.comments.delete' => 'admin/comments/delete/{comment}',
         'admin.comments.view' => 'admin/comments/view/{ticket}',
 
         // Admins
+        'admin.ajax.admins' => 'admin/admins/ajax',
         'admin.dashboard.list.admins' => 'admin/admins/list',
         'admin.filter.admins' => 'admin/admins/filter',
         'admin.admins.create' => 'admin/admins/create',
@@ -69,20 +77,24 @@ return [
         'admin.admins.destroy' => 'admin/admins/destroy/{admin}',
 
         // Types
+        'admin.ajax.types' => 'admin/types/ajax',
         'admin.types.index' => 'admin/types',
         'admin.types.create' => 'admin/types/create',
         'admin.types.edit' => 'admin/types/edit/{type}',
         'admin.types.store' => 'admin/types/store',
         'admin.types.confirm_delete' => 'admin/types/confirm-delete/{type}',
         'admin.types.update' => 'admin/types/update/{type}',
+        'admin.types.destroy' => 'admin/types/destroy/{type}',
 
         // Notifications
+        'admin.ajax.notifications' => 'admin/notifications/ajax',
         'admin.notifications' => 'admin/notifications',
         'admin.notifications.read' => 'admin/notifications/mark-read/{notification}',
         'admin.notifications.markAllAsRead' => 'admin/notifications/mark-all-as-read',
         'admin.notifications.show' => 'admin/notifications/show/{notification}',
 
         // History
+        'admin.ajax.events' => 'admin/history/events/ajax',
         'admin.history.events' => 'admin/history/events',
 
 ];

@@ -80,6 +80,15 @@
                         </li>
                     </ul>
                 </li>
+    
+                {{-- Historial de Eventos --}}
+                <li class="nav-header">{{ __('general.admin_sidebar.historial_eventos') }}</li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.history.events') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-history"></i>
+                        <p>{{ __('general.admin_history_events.page_title') }}</p>
+                    </a>
+                </li>
 
                 {{-- NOTIFICACIONES --}}
                 <li class="nav-header">{{ __('general.admin_sidebar.notificaciones') }}</li>
@@ -87,15 +96,6 @@
                     <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.notifications') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bell"></i>
                         <p>{{ __('general.admin_notifications.page_title') }}</p>
-                    </a>
-                </li>
-
-                {{-- Historial de Eventos --}}
-                <li class="nav-header">{{ __('general.admin_sidebar.historial_eventos') }}</li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="nav-link {{ request()->routeIs('admin.history.events') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-history"></i>
-                        <p>{{ __('general.admin_history_events.page_title') }}</p>
                     </a>
                 </li>
 

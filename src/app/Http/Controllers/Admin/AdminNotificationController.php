@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\DatabaseNotification;
+use App\Services\NotificationService;
 use PhpParser\Node\Expr\Cast\String_;
 
 class AdminNotificationController extends Controller
@@ -60,25 +61,48 @@ class AdminNotificationController extends Controller
         return redirect()->route('admin.notifications', ['locale' => app()->getLocale()])->with('success', __('general.admin_notifications.all_marked'));
     }
 
-    public function show(String $locale, $notification)
+    public function showAdminNotification(String $locale, $notification)
     {
         $admin = Auth::guard('admin')->user();
 
+        dd($admin);
 
-        // Obtener la notificación específica
-        $notification = $admin->notifications->find($notification);
+        $notificationId = $admin->notifications()->find($notification);
 
-        if (!$notification) {
+
+        if (!$notificationId) {
             return response()->json(['error' => 'Notification not found'], 404);
         }
 
-        return response()->json([
-            'message' => $notification->data['message'],
-            'created_at' => $notification->created_at->format('d/m/Y H:i'),
-            'status' => $notification->read_at ? __('general.admin_notifications.read') : __('general.admin_notifications.unread'),
-        ]);
+        return response()->json(NotificationService::format($notificationId, $locale, 'admin'));
+    }
+
+    public function getAdminNotificationsAjax(Request $request)
+    {
+        $admin = auth('admin')->user();
+
+        $query = $admin->notifications();
+
+        if ($request->filled('type')) {
+            $query->where('type', 'like', '%' . $request->type . '%');
+        }
+
+        $notifications = $query->latest()->get();
+
+        $data = $notifications->map(function ($notification) {
+            return [
+                'message' => $notification->data['message'] ?? '',
+                'status' => $notification->data['status'] ?? '-',
+                'author' => $notification->data['author'] ?? '-',
+                'created_at' => $notification->created_at->format('d/m/Y H:i'),
+                'actions' => view('admin.partials.notification-actions', compact('notification'))->render()
+            ];
+        });
+
+        return response()->json(['data' => $data]);
     }
 
 
-
 }
+
+

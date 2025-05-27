@@ -3,6 +3,10 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <meta name="notification-url-template" content="{{ route(request()->is('admin*') ? 'admin.notifications.show' : 'user.notifications.show', ['locale' => app()->getLocale(), 'notification' => ':id']) }}">
+
+            
             <title>@yield('title', __('general.frontoffice.layout.page_title'))</title>
 
             @vite(['resources/js/app.js', 'resources/css/app.css'])
@@ -13,6 +17,8 @@
 
             <!-- Canonical -->
             <link rel="canonical" href="{{ url()->current() }}">
+
+            @include('partials.translations.notifications')
 
         </head>
 
@@ -27,7 +33,7 @@
                 @include('components.sidebar')
                 
                 
-                <div class="content-wrapper"">
+                <div class="content-wrapper">
                     <div class="content-header">
                         <div class="container-fluid">
                             <div class="row mb-2">
@@ -50,6 +56,9 @@
                     <section class="content">
                         @yield('content')
                     </section>
+                    <!-- Inyectar modales mediante push desde la vista en cuestión -->
+                    @stack('modals')
+
                 </div>
                 
                 <!-- Footer -->

@@ -90,12 +90,14 @@ $breadcrumbs = [
             <div class="card-body p-0">
                 <div class="timeline">
                     @foreach ($ticket->comments as $comment)
-                        <!-- timeline item -->
+                        <!-- Fecha -->
                         <div class="time-label">
                             <span class="bg-secondary">
                                 {{ $comment->created_at->format('d M Y') }}
                             </span>
                         </div>
+
+                        <!-- Comentario -->
                         <div>
                             <i class="fas fa-comment bg-info"></i>
                             <div class="timeline-item">
@@ -108,24 +110,39 @@ $breadcrumbs = [
                                 <div class="timeline-body">
                                     {{ $comment->message }}
                                 </div>
+
+                                <!-- Botones -->
+                                <div class="timeline-footer text-right">
+                                    <!-- Botón Editar -->
+                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal{{ $comment->id }}">
+                                        <i class="fas fa-edit"></i> {{ __('Editar') }}
+                                    </button>
+
+                                    <!-- Botón Eliminar -->
+                                    <form 
+                                        method="POST" 
+                                        action="{{ route('user.ticket.comment.delete', [
+                                            'locale' => app()->getLocale(), 
+                                            'ticket' => $ticket->id,
+                                            'comment' => $comment->id
+                                        ]) }}" 
+                                        style="display:inline"
+                                        onsubmit="return confirm('{{ __('¿Eliminar este comentario?') }}')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i> {{ __('Eliminar') }}
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <form 
-                            method="POST" 
-                            action="{{ route('user.ticket.comment.delete', [
-                                'locale' => app()->getLocale(), 
-                                'ticket' => $ticket->id,
-                                'comment' => $comment->id
-                            ]) }}" 
-                            style="display:inline"
-                            onsubmit="return confirm('{{ __('¿Eliminar este comentario?') }}')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger float-right">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    @endforeach
+                        @push('modals')
+                            @include('components.modals.edit-comment', ['comment' => $comment, 'ticket' => $ticket])
+                        @endpush
+                    @endforeach 
+
+
                     <!-- FIN timeline -->
                     <div>
                         <i class="far fa-clock bg-gray"></i>
