@@ -31,7 +31,6 @@ class LanguageMiddleware
         if ($locale !== Session::get('locale')) {
             // Session::put('locale', $locale);
             App::setLocale($locale);
-            \Illuminate\Support\Facades\URL::defaults(['locale' => $locale]); // << Añadido
         }
 
 

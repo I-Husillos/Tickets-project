@@ -166,6 +166,7 @@ return [
         'comment_label'      => 'Comentario:',
         'mark_as_read'       => 'Marcar como leída',
         'mark_all_as_read' => 'Marcar todas como leídas',
+        'mark_as_unread'     => 'Marcar como no leída',
         'read'               => 'Leídas',
         'unread'             => 'No leídas',
         'view_button'        => 'Ver',

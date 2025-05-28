@@ -157,6 +157,7 @@ return [
         'author_label'       => 'Author:',
         'comment_label'      => 'Comment:',
         'mark_as_read'       => 'Mark as Read',
+        'mark_as_unread'     => 'Marcar como no leída',
         'mark_all_as_read' => 'Mark All as Read',
         'read'               => 'Read',
         'unread'             => 'Unread',

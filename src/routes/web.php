@@ -37,7 +37,7 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     $routes = trans('routes', [], $locale); // Cargar traducciones en el idioma correcto
     
     
-    Route::get('/', [HomeController::class, 'showOptions'])->name('home');
+    Route::get($routes['home'], [HomeController::class, 'showOptions'])->name('home');
 
     Route::get($routes['login'], [UserAuthController::class, 'showLoginForm'])->name('login');
     Route::post($routes['login'], [UserAuthController::class, 'login'])->name('login.submit');
@@ -71,10 +71,16 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
 
         Route::get($routes['user.notifications'], [UserNotificationController::class, 'showNotificationsView'])->name('user.notifications');
         Route::patch($routes['user.notifications.read'], [UserNotificationController::class, 'markAsRead'])->name('user.notifications.read');
+        Route::patch($routes['user.notifications.unread'], [UserNotificationController::class, 'markAsUnread'])->name('user.notifications.unread');
+
+
         Route::get($routes['user.notifications.show'], [UserNotificationController::class, 'showUserNotification'])->name('user.notifications.show');
 
     });
 
+
+
+    Route::get($routes['admin.redirect'], [AdminAuthController::class, 'redirectToLogin'])->name('admin.redirect');
 
 
     Route::get($routes['admin.login'], [AdminAuthController::class, 'showLoginForm']) -> name('admin.login');
@@ -131,9 +137,9 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['admin.users.create'], [AdminUserController::class, 'createUser'])->name('admin.users.create');
         Route::post($routes['admin.users.store'], [AdminUserController::class, 'storeUser'])->name('admin.users.store');
         Route::get($routes['admin.users.edit'], [AdminUserController::class, 'editUser'])->name('admin.users.edit');
-        Route::put('/{user}', [AdminUserController::class, 'updateUser'])->name('admin.users.update');
+        Route::put($routes['admin.users.update'], [AdminUserController::class, 'updateUser'])->name('admin.users.update');
         Route::get($routes['admin.users.confirm_delete'], [AdminUserController::class, 'confirmDeleteUser'])->name('admin.users.confirmDelete');
-        Route::delete('/{user}', [AdminUserController::class, 'confirmDeleteUserPost'])->name('admin.users.destroy');
+        Route::delete($routes['admin.users.destroy'], [AdminUserController::class, 'confirmDeleteUserPost'])->name('admin.users.destroy');
 
 
 
@@ -172,6 +178,7 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['admin.notifications'], [AdminNotificationController::class, 'showNotifications'])->name('admin.notifications');
         Route::patch($routes['admin.notifications.read'], [AdminNotificationController::class, 'markAsRead'])->name('admin.notifications.read');
         Route::patch($routes['admin.notifications.markAllAsRead'], [AdminNotificationController::class, 'markAllAsRead'])->name('admin.notifications.markAllAsRead');
+        Route::patch($routes['admin.notifications.unread'], [AdminNotificationController::class, 'unread'])->name('admin.notifications.unread');
         Route::get($routes['admin.notifications.show'], [AdminNotificationController::class, 'showAdminNotification'])->name('admin.notifications.show');
 
 

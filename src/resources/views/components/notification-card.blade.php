@@ -1,8 +1,9 @@
 @php
     $isRead = $notification->read_at !== null;
+    $isAdmin = $context === 'admin';
 @endphp
 
-<div class="list-group-item {{ $isRead ? 'list-group-item-secondary' : 'list-group-item-primary' }}">
+<div class="list-group-item {{ $isRead ? 'list-group-item-light' : 'list-group-item-info' }}">
     <div class="d-flex justify-content-between align-items-center">
         <div>
             <strong>{{ $notification->data['message'] }}</strong><br>
@@ -10,23 +11,37 @@
         </div>
 
         <div class="btn-group">
-            {{-- Botón para abrir modal --}}
-            <button class="btn btn-sm btn-info view-notification-btn"
-                    data-id="{{ $notification->id }}">
-                <i class="fas fa-eye"></i> {{ __('general.admin_notifications.view_button') }}
+            <button type="button"
+                    class="btn btn-sm btn-outline-info {{ $isAdmin ? 'admin-view-notification-btn' : 'user-view-notification-btn' }}"
+                    data-id="{{ $notification->id }}"
+                    title="{{ __('Ver detalles') }}">
+                <i class="fas fa-eye"></i>
             </button>
 
-            {{-- Botón para marcar como leída --}}
             @if (! $isRead)
-                <form action="{{ route('admin.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}"
-                      method="POST" style="display:inline;">
+                <form action="{{ route($isAdmin ? 'admin.notifications.read' : 'user.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}"
+                      method="POST" style="display:inline;" onclick="event.stopPropagation()">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn btn-sm btn-outline-secondary">
-                        <i class="fas fa-check"></i> {{ __('general.admin_notifications.mark_as_read') }}
+                    <button type="submit" class="btn btn-sm btn-outline-success">
+                        <i class="fas fa-check-circle"></i>
+                        {{ $isAdmin ? __('general.admin_notifications.mark_as_read') : __('frontoffice.mark_as_read') }}
                     </button>
                 </form>
             @endif
+
+            @if ($isRead)
+                <form action="{{ route($isAdmin ? 'admin.notifications.unread' : 'user.notifications.unread', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}"
+                    method="POST" style="display:inline;" onclick="event.stopPropagation()">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn btn-sm btn-outline-warning">
+                        <i class="fas fa-undo"></i>
+                        {{ $isAdmin ? __('general.admin_notifications.mark_as_unread') : __('frontoffice.mark_as_unread') }}
+                    </button>
+                </form>
+            @endif
+
         </div>
     </div>
 </div>

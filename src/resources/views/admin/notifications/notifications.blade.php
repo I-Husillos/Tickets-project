@@ -11,10 +11,6 @@
     ];
 @endphp
 
-<script>
-    window.notificationRoute = "{{ route('admin.notifications.show', ['locale' => app()->getLocale(), 'notification' => ':id']) }}";
-</script>
-
 <div class="container mt-5">
     <h2 class="text-center">{{ __('general.admin_notifications.header') }}</h2>
 
@@ -46,7 +42,7 @@
         {{-- Lista de notificaciones --}}
         <div class="list-group">
             @foreach ($notifications as $notification)
-                @include('components.notification-card', ['notification' => $notification])
+                @include('components.notification-card', ['notification' => $notification, 'context' => 'admin'])
             @endforeach
         </div>
 
@@ -55,22 +51,9 @@
         </div>
     @endif
 </div>
-<!-- Modal donde se van a mostrar los detalles de la notificación -->
-<div id="notificationModal" class="modal fade" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="notificationModalLabel">Detalles de la notificación</h5>
-            </div>
-            <div class="modal-body">
-                <div id="notificationDetails">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+@push('modals')
+    @include('components.modals.admin_notifications') {{-- sin pasar $notification --}}
+@endpush
 
 @endsection
 

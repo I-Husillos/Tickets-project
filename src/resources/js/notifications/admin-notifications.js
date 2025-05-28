@@ -1,49 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.view-notification-btn');
-    const modal = document.getElementById('notificationModal');
-    const modalBody = modal?.querySelector('.modal-body');
+    $('.admin-view-notification-btn').on('click', function () {
+        const notificationId = $(this).data('id');
+        const locale = document.documentElement.lang || 'es';
+        const modal = $('#notificationModal');
+        const container = $('#notificationDetails');
 
-    const urlTemplate = document.querySelector('meta[name="admin-notification-url-template"]')?.content;
+        container.html('<div class="text-center text-muted"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
 
-    console.log(urlTemplate);
+        $.ajax({
+            url: `/${locale}/administrador/notificaciones/mostrar/${notificationId}`,
+            method: 'GET',
+            success: function (response) {
+                // Componer contenido HTML dinámico
+                const data = response.data;
+                console.log('Response:', response);
+                let html = `
+                    <p><strong>${data.message}</strong></p>
+                `;
 
-    if (!urlTemplate || !modal || !modalBody) {
-        console.warn('Faltan elementos esenciales para el modal de notificaciones admin.');
-        return;
-    }
+                if (data.author) {
+                    html += `<p><strong>Autor:</strong> ${data.author}</p>`;
+                }
 
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const notificationId = button.dataset.id;
+                if (data.comment) {
+                    html += `<p><strong>Comentario:</strong> "${data.comment}"</p>`;
+                }
 
-            console.log(notificationId);
+                if (data.status) {
+                    html += `<p><strong>Estado:</strong> ${data.status}</p>`;
+                }
 
-            const url = urlTemplate.replace(':id', notificationId);
+                if (data.priority) {
+                    html += `<p><strong>Prioridad:</strong> ${data.priority}</p>`;
+                }
 
-            console.log(url);
+                if (data.created_at) {
+                    html += `<p><strong>Fecha:</strong> ${data.created_at}</p>`;
+                }
 
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.error) {
-                        return alert(data.error);
-                    }
+                if (data.link) {
+                    html += `<a href="${data.link}" class="btn btn-outline-primary mt-3" target="_blank">Ver Ticket</a>`;
+                }
 
-                    modalBody.innerHTML = `
-                        <p><strong>${window.translations.message}:</strong> ${data.message}</p>
-                        ${data.title ? `<p><strong>${window.translations.title}:</strong> ${data.title}</p>` : ''}
-                        ${data.priority ? `<p><strong>${window.translations.priority}:</strong> ${data.priority}</p>` : ''}
-                        ${data.type ? `<p><strong>${window.translations.type}:</strong> ${data.type}</p>` : ''}
-                        ${data.created_by ? `<p><strong>${window.translations.created_by}:</strong> ${data.created_by}</p>` : ''}
-                        <p><strong>${window.translations.received_at}:</strong> ${data.created_at}</p>
-                        <a href="${data.link}" class="btn btn-primary mt-2"><i class="fas fa-eye"></i> Ver ticket</a>
-                    `;
-                    $('#notificationModal').modal('show');
-                })
-                .catch(error => {
-                    console.error('Error cargando notificación:', error);
-                    alert('Ocurrió un error al cargar los detalles.');
-                });
+                container.html(html);
+                modal.modal('show');
+            },
+            error: function () {
+                container.html('<div class="alert alert-danger">Ocurrió un error al cargar la notificación.</div>');
+            }
         });
     });
 });

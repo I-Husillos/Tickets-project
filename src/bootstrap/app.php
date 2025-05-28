@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(\App\Http\Middleware\LanguageMiddleware::class);
+        $middleware->alias([
+            'auth' => \App\Http\Middleware\AuthenticateWithLocale::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

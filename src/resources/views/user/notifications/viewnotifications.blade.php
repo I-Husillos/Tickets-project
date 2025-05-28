@@ -33,42 +33,7 @@ $breadcrumbs = [
 
         <div class="list-group mt-4">
             @foreach ($notifications as $notification)
-                <div class="list-group-item list-group-item-action 
-                    @if ($notification->read_at) list-group-item-light @else list-group-item-info @endif
-                    view-notification-btn" 
-                    data-id="{{ $notification->id }}">
-
-                    <!-- Mensaje principal -->
-                    <strong>{{ $notification->data['message'] }}</strong><br>
-
-                    <!-- Marcar como leído -->
-                    <div class="d-flex justify-content-end align-items-center gap-2" style="gap: 0.5rem;">
-                        {{-- Botón Ver --}}
-                        <button type="button" 
-                                class="btn btn-sm btn-outline-info view-notification-btn" 
-                                data-id="{{ $notification->id }}" title="{{ __('Ver detalles') }}">
-                            <i class="fas fa-eye"></i>
-                        </button>
-
-                        {{-- Marcar como leída o mostrar "Leída" --}}
-                        @if (!$notification->read_at)
-                            <form action="{{ route('user.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}" 
-                                method="POST" class="mb-0">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit" class="btn btn-sm btn-outline-success" title="{{ __('frontoffice.mark_as_read') }}">
-                                    <i class="fas fa-check-circle"></i>
-                                </button>
-                            </form>
-                        @else
-                            <span class="badge badge-success d-flex align-items-center">
-                                <i class="fas fa-check mr-1"></i> {{ __('frontoffice.readed') }}
-                            </span>
-                        @endif
-                    </div>
-
-
-                </div>
+                @include('components.notification-card', ['notification' => $notification, 'context' => 'user'])
             @endforeach
         </div>
 

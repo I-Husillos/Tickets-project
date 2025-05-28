@@ -61,21 +61,37 @@ class AdminNotificationController extends Controller
         return redirect()->route('admin.notifications', ['locale' => app()->getLocale()])->with('success', __('general.admin_notifications.all_marked'));
     }
 
-    public function showAdminNotification(String $locale, $notification)
+    public function unread(string $locale, $notificationId)
+    {
+        $user = Auth::user();
+        $notification = $user->notifications()->find($notificationId);
+
+        if (!$notification) {
+            return redirect()->back()->with('error', 'Notificación no encontrada.');
+        }
+
+        $notification->update(['read_at' => null]);
+
+        return redirect()->back()->with('success', 'Notificación marcada como no leída.');
+    }
+
+
+
+    public function showAdminNotification(string $locale, $notification)
     {
         $admin = Auth::guard('admin')->user();
+        $notificationData = $admin->notifications()->find($notification);
 
-        dd($admin);
-
-        $notificationId = $admin->notifications()->find($notification);
-
-
-        if (!$notificationId) {
+        if (!$notificationData) {
             return response()->json(['error' => 'Notification not found'], 404);
         }
 
-        return response()->json(NotificationService::format($notificationId, $locale, 'admin'));
+        return response()->json([
+            'data' => NotificationService::format($notificationData, $locale, 'admin')
+        ]);
     }
+
+
 
     public function getAdminNotificationsAjax(Request $request)
     {
@@ -104,5 +120,6 @@ class AdminNotificationController extends Controller
 
 
 }
+
 
 

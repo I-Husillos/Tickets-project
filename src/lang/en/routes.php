@@ -28,10 +28,13 @@ return [
 
         'user.notifications' => 'user/notifications',
         'user.notifications.read' => 'user/notifications/mark-read/{notification}',
+        'user.notifications.unread' => 'user/notifications/mark-unread/{notification}',
+        'admin.notifications.unread' => 'admin/notifications/mark-unread/{notification}',
         'user.notifications.show' => 'user/notifications/show/{notification}',
 
 
         // Administrator
+        'admin.redirect' => 'admin',
         'admin.login' => 'admin/login',
         'admin.logout' => 'admin/logout',
         '/' => 'dashboard',
@@ -51,6 +54,7 @@ return [
 
         // Users
         'admin.ajax.users' => 'admin/users/ajax',
+        'admin.users.update' => 'admin/users/update/{user}',
         'admin.dashboard.list.users' => 'admin/users/list',
         'admin.filter.users' => 'admin/users/filter',
         'admin.users.add_dashboard' => 'admin/users/dashboard',
@@ -58,6 +62,7 @@ return [
         'admin.users.store' => 'admin/users/store',
         'admin.users.edit' => 'admin/users/edit/{user}',
         'admin.users.update' => 'admin/users/update/{user}',
+        'admin.users.destroy' => 'admin/users/destroy/{user}',
         'admin.users.confirm_delete' => 'admin/users/confirm-delete/{user}',
 
         // Comments

@@ -12,6 +12,17 @@ class AdminAuthController extends Controller
 {
 
 
+    public function redirectToLogin(Request $request)
+    {
+        $locale = $request->route('locale') ?? app()->getLocale();
+
+        if (auth('admin')->check()) {
+            return redirect()->route('admin.dashboard', ['locale' => $locale]);
+        }
+
+        return redirect()->route('admin.login', ['locale' => $locale]);
+    }
+
     public function showLoginForm()
     {
         return view('auth.adminform');

@@ -44,16 +44,25 @@ class UserNotificationController extends Controller
     public function showUserNotification(String $locale, $notification)
     {
         $user = Auth::guard('user')->user();
-
-        dd($user);
-        
         $notificationId = $user->notifications()->find($notification);
 
         if (!$notificationId) {
             return response()->json(['error' => 'Notification not found'], 404);
         }
 
-        return response()->json(NotificationService::format($notificationId, $locale, 'user'));
+        return response()->json([
+            'data' => NotificationService::format($notificationId, $locale, 'user')
+        ]);
+    }
+
+    public function markAsUnread(String $locale, $notification)
+    {
+        $user = Auth::user();
+        $notif = $user->notifications()->findOrFail($notification);
+
+        $notif->update(['read_at' => null]);
+
+        return redirect()->back()->with('success', 'Notificación marcada como no leída.');
     }
 }
 

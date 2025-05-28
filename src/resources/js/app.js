@@ -25,6 +25,7 @@ import './sidebar-toggle.js';
 import './notifications/notifications.js';
 import './notifications/admin-notifications.js';
 import './commentTicket.js';
+import './forms/admin-users-form.js'
 
 import { initAdminUsersTable } from './tables/admin-users-table';
 import { initAdminAdminsTable } from './tables/admin-admins-table';

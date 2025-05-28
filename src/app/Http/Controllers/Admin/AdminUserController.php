@@ -63,6 +63,13 @@ class AdminUserController extends Controller
             'user' => Auth::guard('admin')->user()->name,
         ]);
 
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Usuario creado correctamente.',
+            ]);
+        }
+        
         return redirect()->route('admin.dashboard.list.users', ['locale' => app()->getLocale()])->with('success', 'Usuario creado correctamente.');
     }
 

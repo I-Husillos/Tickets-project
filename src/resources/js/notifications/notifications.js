@@ -1,100 +1,88 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.view-notification-btn');
-    const modal = document.getElementById('notificationModal');
-    const modalBody = modal.querySelector('.modal-body');
+    $('.user-view-notification-btn').on('click', function () {
+        const notificationId = $(this).data('id');
+        const locale = document.documentElement.lang || 'es';
+        const modal = $('#notificationModal');
+        const container = $('#notificationDetails');
 
+        container.html('<div class="text-center text-muted"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
 
-    const urlTemplate = document.querySelector('meta[name="notification-url-template"]')?.content;
-
-    if (!urlTemplate || !modal || !modalBody) {
-        console.warn('Faltan elementos esenciales para mostrar el modal.');
-        return;
-    }
-
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const notificationId = button.getAttribute('data-id');
-            const url = urlTemplate.replace(':id', notificationId);
-
-            console.log(url);
-
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert(data.error);
-                        return;
-                    }
-
-                    // Rellenar el contenido del modal dinámicamente
-                    modalBody.innerHTML = `
-                        <p><strong>${window.translations.message}:</strong> ${data.message}</p>
-                        ${data.title ? `<p><strong>${window.translations.title}:</strong> ${data.title}</p>` : ''}
-                        ${data.status ? `<p><strong>${window.translations.status}:</strong> ${data.status}</p>` : ''}
-                        ${data.priority ? `<p><strong>${window.translations.priority}:</strong> ${data.priority}</p>` : ''}
-                        ${data.type ? `<p><strong>${window.translations.type}:</strong> ${data.type}</p>` : ''}
-                        ${data.comment ? `<p><strong>${window.translations.comment}:</strong> "${data.comment}"</p>` : ''}
-                        ${data.author ? `<p><strong>${window.translations.author}:</strong> ${data.author}</p>` : ''}
-                        ${data.updated_by ? `<p><strong>${window.translations.updated_by}:</strong> ${data.updated_by}</p>` : ''}
-                        ${data.created_by ? `<p><strong>${window.translations.created_by}:</strong> ${data.created_by}</p>` : ''}
-                        <p><strong>${window.translations.received_at}:</strong> ${data.created_at}</p>
+        $.ajax({
+            url: `/${locale}/usuario/notificaciones/mostrar/${notificationId}`,
+            method: 'GET',
+            success: function (response) {
+                const data = response.data;
+            
+                let html = `
+                    <h5 class="mb-3">
+                        <i class="fas fa-bell"></i> 
+                        ${data.title ?? 'Notificación'}
+                    </h5>
+                    <p>${data.message ?? ''}</p>
+                `;
+            
+                // Mostramos datos específicos según el tipo de notificación
+                switch (data.type) {
+                    case 'comment':
+                        if (data.author) {
+                            html += `<p><strong>Autor:</strong> ${data.author}</p>`;
+                        }
+                        if (data.comment) {
+                            html += `<p><strong>Comentario:</strong> "${data.comment}"</p>`;
+                        }
+                        break;
+            
+                    case 'status':
+                        if (data.status) {
+                            html += `<p><strong>Estado:</strong> ${data.status}</p>`;
+                        }
+                        if (data.priority) {
+                            html += `<p><strong>Prioridad:</strong> ${data.priority}</p>`;
+                        }
+                        if (data.updated_by && data.updated_by.name) {
+                            html += `<p><strong>Actualizado por:</strong> ${data.updated_by.name}</p>`;
+                        }
+                        break;
+            
+                    case 'close':
+                        if (data.created_by) {
+                            html += `<p><strong>Cerrado por:</strong> ${data.created_by}</p>`;
+                        }
+                        break;
+            
+                    case 'reopen':
+                        if (data.author) {
+                            html += `<p><strong>Reabierto por:</strong> ${data.author}</p>`;
+                        }
+                        break;
+            
+                    default:
+                        html += `<p><em>Tipo de notificación no reconocido.</em></p>`;
+                        break;
+                }
+            
+                // Fecha
+                if (data.created_at) {
+                    html += `<hr><p class="text-muted"><i class="far fa-clock"></i> ${data.created_at}</p>`;
+                }
+            
+                // Botón para ir al ticket
+                if (data.link) {
+                    html += `
+                        <div class="mt-3 text-center">
+                            <a href="${data.link}" class="btn btn-outline-primary" target="_blank">
+                                <i class="fas fa-ticket-alt"></i> Ver ticket
+                            </a>
+                        </div>
                     `;
-
-                    
-                    // Mostrar el modal
-                    $('#notificationModal').modal('show');
-                })
-                .catch(error => {
-                    console.error('Error al cargar la notificación:', error);
-                    alert('Error al cargar la notificación');
-                });
+                }
+            
+                $('#notificationDetails').html(html);
+                $('#notificationModal').modal('show');
+            },
+            error: function () {
+                container.html('<div class="alert alert-danger">Error al cargar la notificación.</div>');
+            }
         });
     });
 });
-
-    
-
-
-// document.querySelectorAll('.view-notification-btn').forEach(function(button) {
-//     button.addEventListener('click', function(event) {
-//         event.preventDefault();
-//         var notificationId = this.getAttribute('data-id');
-
-//         // Reemplazar ':id' por el ID de la notificación
-//         const url = window.notificationRoute.replace(':id', notificationId);
-
-//         // Realizar una petición AJAX para obtener los detalles de la notificación
-//         fetch(url)
-//             .then(response => response.json())
-//             .then(data => {
-//                 if (data.error) {
-//                     alert(data.error);
-//                 } else {
-//                     // Verificar si el modal y el contenedor de detalles están disponibles
-//                     const notificationDetails = document.getElementById('notificationDetails');
-
-//                     console.log(notificationDetails);
-                    
-//                     if (notificationDetails) {
-//                         notificationDetails.innerHTML = `
-//                             <strong>Mensaje:</strong> ${data.message} <br>
-//                             <strong>Fecha:</strong> ${data.created_at} <br>
-//                             <strong>Estado:</strong> ${data.status}
-//                         `;
-                        
-
-//                         const modalElement = $('#notificationModal');
-//                         if (modalElement.length) {
-//                             modalElement.modal('show');
-//                         } else {
-//                             console.error("El modal 'notificationModal' no se encuentra en el DOM.");
-//                         }
-
-//                     } else {
-//                         console.error("No se encontró el contenedor 'notificationDetails' en el DOM.");
-//                     }
-//                 }
-//             })
-//     });
-// });

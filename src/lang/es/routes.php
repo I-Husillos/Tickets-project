@@ -2,8 +2,8 @@
 
 return [
         'home' => '/',
-        'user' => 'usuario',
         'login' => 'iniciar-sesion',
+        'user' => 'usuario',
         'register' => 'registrarse',
         'user.logout' => 'cerrar-sesion',
 
@@ -28,9 +28,11 @@ return [
 
         'user.notifications' => 'usuario/notificaciones',
         'user.notifications.read' => 'usuario/notificaciones/marcar-leida/{notification}',
+        'user.notifications.unread' => 'usuario/notificaciones/marcar-no-leida/{notification}',
         'user.notifications.show' => 'usuario/notificaciones/mostrar/{notification}',
 
         //administrador
+        'admin.redirect' => 'administrador',
         'admin.login' => 'administrador/iniciar-sesion',
         'admin.logout' => 'administrador/cerrar-sesion',
         '/' => 'panel-control',
@@ -51,12 +53,14 @@ return [
 
         // Users
         'admin.ajax.users' => 'administrador/usuarios/ajax',
+        'admin.users.update' => 'administrador/usuarios/actualizar/{user}',
         'admin.dashboard.list.users' => 'administrador/usuarios/lista',
         'admin.filter.users' => 'administrador/usuarios/filtrar',
         'admin.users.add_dashboard' => 'administrador/usuarios/dashboard',
         'admin.users.create' => 'administrador/usuarios/crear',
         'admin.users.store' => 'administrador/usuarios/guardar',
         'admin.users.edit' => 'administrador/usuarios/editar/{user}',
+        'admin.users.destroy' => 'administrador/usuarios/eliminar/{user}',
         'admin.users.confirm_delete' => 'administrador/usuarios/confirmar-eliminar/{user}',
 
 
@@ -95,6 +99,7 @@ return [
         'admin.notifications' => 'administrador/notificaciones',
         'admin.notifications.read' => 'administrador/notificaciones/marcar-leida/{notification}',
         'admin.notifications.markAllAsRead' => 'administrador/notificaciones/marcar-todas-leidas',
+        'admin.notifications.unread' => 'administrador/notificaciones/marcar-no-leida/{notification}',
         'admin.notifications.show' => 'administrador/notificaciones/mostrar/{notification}',
 
 
