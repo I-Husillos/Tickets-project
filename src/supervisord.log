@@ -392,3 +392,4 @@
 2025-05-28 05:57:17,359 INFO spawned: 'php-server' with pid 7
 2025-05-28 05:57:18,503 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2025-05-28 05:57:18,505 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-05-28 12:48:09,629 INFO reaped unknown pid 89 (exit status 0)
