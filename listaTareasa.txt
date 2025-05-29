@@ -342,6 +342,6 @@ bearer token
 
 prefijo /api/ en peticiones
 
-guddle
+guddle o CRUD
 
 

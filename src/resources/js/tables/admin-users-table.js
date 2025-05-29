@@ -1,15 +1,20 @@
-import $ from 'jquery';
+import $, { ajax } from 'jquery';
 
-export function initAdminUsersTable(locale, url) {
-
+export function initAdminUsersTable(locale, apiUrl, token) {
     $('#tabla-usuarios').DataTable({
         processing: true,
         responsive: true,
-        ajax: url,
+        ajax: {
+            url: apiUrl,
+            type: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            }
+        },
         columns: [
-            {data: 'name', className: 'text-center align-middle' },
-            {data: 'email', className: 'text-center align-middle' },
-            {data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' }
+            { data: 'name', className: 'align-middle' },
+            { data: 'email', className: 'align-middle' },
+            { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' }
         ],
     })
 }
