@@ -22,6 +22,10 @@ class LanguageMiddleware
             return $next($request);
         }
 
+        if($request->is('api/*')) {
+            return $next($request);
+        }
+
 
         if (!in_array($locale, $availableLanguages)) {
             $defaultLocale = 'es';

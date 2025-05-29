@@ -320,3 +320,28 @@ Sabiendo este resumen general de la aplicación, quiero reestructurar las vistas
         </nav>
     </div>
 </aside>
+
+
+
+
+
+
+
+
+Client ID .......................................................................................... 01971b25-a094-7136-9db9-de5e2e6f4bac  
+  Client Secret .................................................................................. 65tPRM2oT8UuKkhMwEn7XvR3ZWW67qvxZb9XZxAf  
+
+
+clean code 
+patrones d ediseño
+
+
+middleware mirar claves api
+
+bearer token
+
+prefijo /api/ en peticiones
+
+guddle
+
+

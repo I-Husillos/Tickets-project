@@ -32,14 +32,6 @@ class RouteServiceProvider extends ServiceProvider
 
             $currentRouteName = Route::currentRouteName();
 
-            // dd($currentRouteName);
-
-            // $segments = explode('.', $currentRouteName); // Dividir la ruta en segmentos
-
-            // $translatedSegments = array_map(function ($segment) use ($alternateLocale) {
-            //     return trans("routes.$segment", [], $alternateLocale);
-            // }, $segments);
-
 
 
             $translatedRoute = trans("routes.$currentRouteName", [], $alternateLocale);
@@ -47,19 +39,18 @@ class RouteServiceProvider extends ServiceProvider
             
             $alternateUrl = url("/$alternateLocale/$translatedRoute");
             
-            //dd("routes.$currentRouteName", $alternateLocale, $translatedRoute, $alternateUrl);
-            
             $view->with([
                 'currentLocale' => $currentLocale,
                 'alternateLocale' => $alternateLocale,
                 'alternateUrl' => $alternateUrl
             ]);
-
         });
+
+        Route::prefix('api')
+            ->middleware('api')
+            ->group(base_path('routes/api.php'));
+
     }
-    
-    
-    
     
 
     /**
