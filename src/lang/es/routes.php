@@ -37,7 +37,8 @@ return [
         'admin.logout' => 'administrador/cerrar-sesion',
         '/' => 'panel-control',
         'admin.manage.dashboard' => 'administrador/panel-control',
-        'admin.show.profile' => 'administrador/perfil',  
+        'admin.show.profile' => 'administrador/perfil',
+
 
         // Tickets
         'admin.ajax.tickets' => 'administrador/tickets/ajax',

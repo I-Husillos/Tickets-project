@@ -328,8 +328,8 @@ Sabiendo este resumen general de la aplicación, quiero reestructurar las vistas
 
 
 
-Client ID .......................................................................................... 01971b25-a094-7136-9db9-de5e2e6f4bac  
-  Client Secret .................................................................................. 65tPRM2oT8UuKkhMwEn7XvR3ZWW67qvxZb9XZxAf  
+Client ID ................................................................................................... 0197210b-fc8b-72bd-9df6-9ed33bb4bdba  
+  Client Secret ........................................................................................... NnObwb8SxvVA2heTHbzWXW4C2FxacN25Koy2RlpS  
 
 
 clean code 

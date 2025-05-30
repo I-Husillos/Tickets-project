@@ -1,9 +1,9 @@
-import $, { ajax } from 'jquery';
+import $ from 'jquery';
 
 export function initAdminUsersTable(locale, apiUrl, token) {
     $('#tabla-usuarios').DataTable({
         processing: true,
-        responsive: true,
+        serverSide: true,
         ajax: {
             url: apiUrl,
             type: 'GET',
@@ -12,10 +12,13 @@ export function initAdminUsersTable(locale, apiUrl, token) {
             }
         },
         columns: [
-            { data: 'name', className: 'align-middle' },
-            { data: 'email', className: 'align-middle' },
-            { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' }
-        ],
-    })
+            { data: 'name', className: 'text-center align-middle' },
+            { data: 'email', className: 'text-center align-middle' },
+            { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' },
+        ]
+    });
 }
 
+
+
+    

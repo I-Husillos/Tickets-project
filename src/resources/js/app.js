@@ -34,6 +34,29 @@ import { initAdminTicketsTable } from './tables/admin-tickets-table';
 import { initAdminAssignedTicketsTable } from './tables/admin-assigned-tickets-table';
 import { initAdminTicketCommentsTable } from './tables/admin-ticket-comments-table';
 import { initAdminEventsTable } from './tables/admin-events-table';
+import { Alert } from 'bootstrap';
+
+
+//const bearerToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+// Token de autenticación
+const storedToken = localStorage.getItem('api_token');
+const metaToken = document.querySelector('meta[name="api-token"]')?.getAttribute('content');
+const token = storedToken || metaToken;
+
+if (token) {
+    localStorage.setItem('api_token', token); // Guarda en localStorage por si viene del meta
+    $.ajaxSetup({
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    });
+} else {
+    console.warn('No se encontró token ni en localStorage ni en meta');
+}
+
+
+
 
 // mapa de tablas y funciones
 const tablasDataTables = [
@@ -48,22 +71,43 @@ const tablasDataTables = [
 ];
 
 // --- Inicialización de tablas ---
+// document.addEventListener('DOMContentLoaded', () => {
+//     tablasDataTables.forEach(({ id, fn }) => {
+//         const tabla = document.getElementById(id);
+//         if (tabla) {
+//             const url = tabla.dataset.url;
+//             const locale = tabla.dataset.locale || 'es';
+        
+//             if (!url) {
+//                 console.warn(`La tabla con ID "${id}" no tiene data-url.`);
+//                 return;
+//             }
+        
+//             // Aquí se pasa el token Bearer a cada tabla
+//             fn(locale, url, bearerToken);
+//         }        
+//     });
+// });
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     tablasDataTables.forEach(({ id, fn }) => {
         const tabla = document.getElementById(id);
-        if (tabla) {
-            const url = tabla.dataset.url;
-            const locale = tabla.dataset.locale || 'es';
-        
-            if (!url) {
-                console.warn(`La tabla con ID "${id}" no tiene data-url.`);
-                return;
-            }
-        
-            fn(locale, url);
-        }        
+        if (!tabla) return;
+
+        const apiUrl = tabla.dataset.apiUrl;
+        const locale = tabla.dataset.locale || 'es';
+
+        if (!apiUrl || !token) {
+            console.warn(`Faltan datos para inicializar ${id}`);
+            return;
+        }
+
+        console.log(token);
+
+        fn(locale, apiUrl, token);
     });
 });
-
 
 

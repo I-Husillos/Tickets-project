@@ -6,20 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Http\Requests\RegisterUserRequest;
+
 
 class AuthController extends Controller
 {
     // Registro
-    public function register(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        $validated = $request->validated();
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+
+        if ($validated->fails()) {
+            return response()->json($validated->errors(), 422);
         }
 
         $user = User::create([
@@ -41,16 +40,18 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        // Usa el guard correcto (por defecto es 'web')
         if (!Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json([
+                'error' => 'Unauthorized'
+            ], 401);
         }
 
-        $user = Auth::user();
-        $token = $user->createToken('API Token')->accessToken;
+        $user = Auth::user(); // o tu modelo admin si tienes guard personalizado
 
         return response()->json([
-            'user'  => $user,
-            'token' => $token,
+            'token_type' => 'Bearer',
+            'access_token' => $user->createToken('admin-session-token')->accessToken
         ]);
     }
 
@@ -60,3 +61,5 @@ class AuthController extends Controller
         return response()->json($request->user());
     }
 }
+
+

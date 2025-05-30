@@ -22,6 +22,7 @@ use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Routing\RouteAction;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Api\AdminTokenController;
 
 
 Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])

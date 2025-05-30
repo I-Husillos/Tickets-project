@@ -43,10 +43,11 @@
     
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table id="tabla-usuarios" 
+            <table id="tabla-usuarios"
                 class="table table-hover table-striped table-bordered mb-0" 
-                data-url="{{ route('admin.ajax.users', ['locale' => app()->getLocale()]) }}" 
+                data-api-url="{{ url('/api/admin/users') }}"
                 data-locale="{{ app()->getLocale() }}">
+
                 <thead class="thead-dark text-center">
                     <tr>
                         <th>{{ __('general.admin_users.table_name') }}</th>

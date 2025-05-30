@@ -5,6 +5,13 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="notification-url-template" content="{{ route(request()->is('admin*') ? 'admin.notifications.show' : 'user.notifications.show', ['locale' => app()->getLocale(), 'notification' => ':id']) }}">
+        
+        @if (isset($apiToken))
+            <meta name="api-token" content="{{ $apiToken }}">
+        @endif
+
+
+        
         <title>@yield('title', __('Panel de Administración'))</title>
 
         <!-- Font Awesome -->
@@ -51,6 +58,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- Main content -->
                 <section class="content">
                     @yield('admincontent')

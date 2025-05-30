@@ -5,43 +5,51 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UserDataController extends Controller
 {
     public function index(Request $request)
     {
+        Log::info('---------------------Entrando a /api/admin/users');
+        return response()->json(['ok' => true]);
         $query = User::query();
 
-        // Filtro por búsqueda
-        if ($search = $request->input('search.value')) {
-            $query->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%");
+        // Filtros y paginación
+        $search = $request->input('search.value');
+        if ($search) {
+            $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%");
         }
 
-        $total = $query->count();
+        $total = User::count();
+        $filtered = $query->count();
 
-        $users = $query->offset($request->input('start'))
-                       ->limit($request->input('length'))
-                       ->get();
+        $start = $request->input('start', 0);
+        $length = $request->input('length', 10);
+        $users = $query->skip($start)->take($length)->get();
 
+        $locale = app()->getLocale(); // o desde la request si viene con ?locale=es
 
-        $data = $users->map(function ($user) {
+        $data = $users->map(function ($user) use ($locale) {
+            $actions = view('components.actions.user-actions', compact('user', 'locale'))->render();
+
             return [
                 'name' => $user->name,
                 'email' => $user->email,
-                'actions' => view('components.actions.user-actions', compact('user'))->render(),
+                'actions' => $actions,
             ];
         });
 
         return response()->json([
-            'draw' => intval($request->input('draw')),
+            'draw' => (int) $request->input('draw'),
             'recordsTotal' => $total,
-            'recordsFiltered' => $total,
+            'recordsFiltered' => $filtered,
             'data' => $data,
         ]);
-
     }
-}
 
+
+}
 
 

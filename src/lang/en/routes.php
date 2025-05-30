@@ -41,6 +41,8 @@ return [
         'admin.manage.dashboard' => 'admin/dashboard',
         'admin.show.profile' => 'admin/profile',
 
+        'admin.api.token' => 'admin/api/token',
+
         // Tickets
         'admin.ajax.tickets' => 'admin/tickets/ajax',
         'admin.show.assigned.tickets' => 'admin/tickets/assigned',
