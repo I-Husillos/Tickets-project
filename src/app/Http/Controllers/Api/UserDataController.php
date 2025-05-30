@@ -11,8 +11,9 @@ class UserDataController extends Controller
 {
     public function index(Request $request)
     {
-        Log::info('---------------------Entrando a /api/admin/users');
-        return response()->json(['ok' => true]);
+        Log::info('Usuario autenticado:', ['user' => auth()->user()]);
+
+        
         $query = User::query();
 
         // Filtros y paginación
