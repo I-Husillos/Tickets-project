@@ -1,10 +1,8 @@
 <div class="btn-group" role="group">
-    <a href="{{ route('admin.types.edit', ['locale' => app()->getLocale(), 'type' => $type->id]) }}" 
-       class="btn btn-warning btn-sm" title="{{ __('general.admin_types.edit') }}">
+    <a href="{{ $editUrl }}" class="btn btn-sm btn-warning" title="{{ __('Editar') }}">
         <i class="fas fa-edit"></i>
     </a>
-    <a href="{{ route('admin.types.confirmDelete', ['locale' => app()->getLocale(), 'type' => $type->id]) }}" 
-       class="btn btn-danger btn-sm" title="{{ __('general.admin_types.delete') }}">
+    <a href="{{ $deleteUrl }}" class="btn btn-sm btn-danger" title="{{ __('Eliminar') }}">
         <i class="fas fa-trash-alt"></i>
     </a>
 </div>

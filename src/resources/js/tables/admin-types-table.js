@@ -1,14 +1,32 @@
 import $ from 'jquery';
 
-export function initAdminTypesTable(locale, url) {
+export function initAdminTypesTable(apiUrl, token) {
+    const locale = document.documentElement.lang || 'en';
+
     $('#tabla-types').DataTable({
         processing: true,
-        responsive: true,
-        ajax: url,
+        serverSide: true,
+        ajax: {
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                locale: locale
+            },
+            beforeSend: function (xhr) {
+                if (token) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                }
+                xhr.setRequestHeader('X-Locale', locale);
+            },
+            error: function (xhr) {
+                console.error('Error en petición AJAX (Types):', xhr.status, xhr.responseText);
+            }
+        },
         columns: [
-            { data: 'name', className: 'align-middle' },
-            { data: 'description', className: 'align-middle' },
-            { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' }
-        ],
+            { data: 'name', className: 'text-center align-middle' },
+            { data: 'description', className: 'text-center align-middle' },
+            { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' },
+        ]
     });
 }

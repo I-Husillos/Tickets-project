@@ -35,7 +35,7 @@
 
         <table id="tabla-types"
             class="table table-hover table-bordered text-center align-middle"
-            data-url="{{ route('admin.ajax.types', ['locale' => app()->getLocale()]) }}"
+            data-api-url="{{ url('/api/admin/types') }}"
             data-locale="{{ app()->getLocale() }}">
             <thead class="thead-dark">
                 <tr>

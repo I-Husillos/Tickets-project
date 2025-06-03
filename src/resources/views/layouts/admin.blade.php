@@ -8,7 +8,6 @@
         <meta name="notification-url-template" content="{{ route(request()->is('admin*') ? 'admin.notifications.show' : 'user.notifications.show', ['locale' => app()->getLocale(), 'notification' => ':id']) }}">
         
         @if(session('admin_token'))
-            <meta name="api-token" content="{{ session('admin_token') }}">
             <script>
                 localStorage.setItem('api_token', @json(session('admin_token')));
             </script>

@@ -2,20 +2,26 @@ import $ from 'jquery';
 
 
 export function initAdminAdminsTable(apiUrl, token) {
-    console.log('Token recibido:', token); // Asegura que no sea null
+    const locale = document.documentElement.lang || 'en';
 
     $('#tabla-admins').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: `/api/admin/admins`,
+            url: apiUrl,
             type: 'GET',
+            dataType: 'json',
+            data: {
+                locale: locale
+            },
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                xhr.setRequestHeader('X-Locale', locale);
             },
             error: function (xhr) {
                 console.error('Error en respuesta AJAX:', xhr.status, xhr.responseText);
-            }
+            },
+
         },
         columns: [
             { data: 'name', className: 'text-center align-middle' },
@@ -24,3 +30,5 @@ export function initAdminAdminsTable(apiUrl, token) {
         ]
     });
 }
+
+

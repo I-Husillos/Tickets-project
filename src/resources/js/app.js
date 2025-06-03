@@ -39,8 +39,7 @@ import { Alert } from 'bootstrap';
 
 
 // --- TOKEN de autenticación ---
-const token = localStorage.getItem('api_token')
-    || document.querySelector('meta[name="api-token"]')?.getAttribute('content');
+const token = localStorage.getItem('api_token');
 
 if (token) {
     localStorage.setItem('api_token', token); // Persistencia
@@ -80,12 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        console.log(apiUrl);
-        console.log(token);
-
         console.log(`Token para ${id}:`, token);
         fn(apiUrl, token);
     });
 });
+
 
 

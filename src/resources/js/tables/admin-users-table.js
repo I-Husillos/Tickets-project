@@ -1,20 +1,24 @@
 import $ from 'jquery';
 
 export function initAdminUsersTable(apiUrl, token) {
+    const locale = document.documentElement.lang || 'en';
 
-    console.log('Url recibida:', apiUrl);
+
     $('#tabla-usuarios').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: 'http://localhost:8080/api/admin/users',
+            url: apiUrl,
             type: 'GET',
             dataType: 'json',
+            data: {
+                locale: locale
+            },
             beforeSend: function (xhr) {
-                const token = localStorage.getItem('api_token');
                 if (token) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                 }
+                xhr.setRequestHeader('X-Locale', locale);
             },
             error: function (xhr) {
                 console.error('Error en respuesta AJAX:', xhr.responseText);
@@ -30,4 +34,4 @@ export function initAdminUsersTable(apiUrl, token) {
 
 
 
-    
+

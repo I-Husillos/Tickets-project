@@ -13,6 +13,7 @@ use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Services\FilterUsersService;
+use Illuminate\Support\Facades\Log;
 
 class AdminUserController extends Controller
 {
@@ -94,7 +95,7 @@ class AdminUserController extends Controller
 
     public function editUser(String $locale, User $user)
     {
-        return view('admin.management.editFormUser', compact('user'));
+        return view('admin.management.editFormUser', compact('user', 'locale'));
     }
 
     public function updateUser(String $locale, UpdateUserRequest $request, User $user)

@@ -45,7 +45,8 @@
         <div class="table-responsive">
             <table id="tabla-usuarios"
                 class="table table-hover table-striped table-bordered mb-0" 
-                data-api-url="{{ url('/api/admin/users') }}">
+                data-api-url="{{ url('/api/admin/users') }}"
+                data-locale="{{ app()->getLocale() }}">
 
                 <thead class="thead-dark text-center">
                     <tr>

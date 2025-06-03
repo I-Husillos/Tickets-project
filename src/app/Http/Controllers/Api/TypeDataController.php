@@ -4,44 +4,39 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Log;
+use App\Models\Type;
 use Illuminate\Support\Facades\App;
 
-class UserDataController extends Controller
+class TypeDataController extends Controller
 {
-    public function indexUsers(Request $request)
+    public function indexTypes(Request $request)
     {
         $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';
         App::setLocale($locale);
 
-        $query = User::query();
+        $query = Type::query();
 
         $search = $request->input('search.value');
         if ($search) {
             $query->where('name', 'LIKE', "%$search%")
-                ->orWhere('email', 'LIKE', "%$search%");
+                  ->orWhere('description', 'LIKE', "%$search%");
         }
 
-        $total = User::count();
+        $total = Type::count();
         $filtered = $query->count();
 
         $start = $request->input('start', 0);
         $length = $request->input('length', 10);
-        $users = $query->skip($start)->take($length)->get();
+        $types = $query->skip($start)->take($length)->get();
 
-        $data = $users->map(function ($user) use ($locale) {
-            // Generar URLs traducidas manualmente
-            $editUrl = url("/$locale/" . trans('routes.admin.users.edit', [], $locale));
-            $editUrl = str_replace('{user}', $user->id, $editUrl);
-
-            $deleteUrl = url("/$locale/" . trans('routes.admin.users.confirm_delete', [], $locale));
-            $deleteUrl = str_replace('{user}', $user->id, $deleteUrl);
+        $data = $types->map(function ($type) use ($locale) {
+            $editUrl = url("/$locale/types/edit/" . $type->id);
+            $deleteUrl = url("/$locale/types/delete/" . $type->id);
 
             return [
-                'name' => $user->name,
-                'email' => $user->email,
-                'actions' => view('components.actions.user-actions', [
+                'name' => $type->name,
+                'description' => $type->description,
+                'actions' => view('components.actions.type-actions', [
                     'editUrl' => $editUrl,
                     'deleteUrl' => $deleteUrl,
                 ])->render(),
@@ -55,8 +50,4 @@ class UserDataController extends Controller
             'data' => $data,
         ]);
     }
-
-
 }
-
-

@@ -6,27 +6,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\App;
 
 class AdminDataController extends Controller
 {
-    public function index(Request $request)
+    public function indexAdmins(Request $request)
     {
-        $admin = auth('user-api')->user();
+        $admin = auth('api')->user();
 
         if (!$admin) {
             Log::warning('Token rechazado o expirado');
             return response()->json(['error' => 'Token inválido'], 401);
         }
 
-        Log::info('Petición a lista de admins', ['user' => auth()->user()]);
-
         $query = Admin::query();
 
-        // Filtro de búsqueda
         $search = $request->input('search.value');
         if ($search) {
             $query->where('name', 'LIKE', "%$search%")
-                  ->orWhere('email', 'LIKE', "%$search%");
+                ->orWhere('email', 'LIKE', "%$search%");
         }
 
         $total = Admin::count();
@@ -36,17 +34,27 @@ class AdminDataController extends Controller
         $length = $request->input('length', 10);
         $admins = $query->skip($start)->take($length)->get();
 
-        $locale = app()->getLocale();
+        $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';
+        App::setLocale($locale);
 
         $data = $admins->map(function ($admin) use ($locale) {
-            $actions = view('components.actions.admin-actions', compact('admin', 'locale'))->render();
+            $editUrl = url("/$locale/" . trans('routes.admin.admins.edit', [], $locale));
+            $editUrl = str_replace('{admin}', $admin->id, $editUrl);
+
+            $deleteUrl = url("/$locale/" . trans('routes.admin.admins.confirm_delete', [], $locale));
+            $deleteUrl = str_replace('{admin}', $admin->id, $deleteUrl);
 
             return [
                 'name' => $admin->name,
                 'email' => $admin->email,
-                'actions' => $actions,
+                'actions' => view('components.actions.admin-actions', [
+                    'editUrl' => $editUrl,
+                    'deleteUrl' => $deleteUrl,
+                ])->render(),
             ];
         });
+
+
 
         return response()->json([
             'draw' => (int) $request->input('draw'),
@@ -55,6 +63,7 @@ class AdminDataController extends Controller
             'data' => $data,
         ]);
     }
+
 
 }
 
