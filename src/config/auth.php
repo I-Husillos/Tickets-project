@@ -13,10 +13,12 @@ return [
     |
     */
 
+    
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'user'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -45,11 +47,15 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'admins',
         ],
+        
     ],
+
+
 
     /*
     |--------------------------------------------------------------------------

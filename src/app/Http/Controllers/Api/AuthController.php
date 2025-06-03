@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\LoginRequest;
 
 
 class AuthController extends Controller
@@ -36,24 +37,22 @@ class AuthController extends Controller
     }
 
     // Login
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 
-        // Usa el guard correcto (por defecto es 'web')
-        if (!Auth::attempt($credentials)) {
-            return response()->json([
-                'error' => 'Unauthorized'
-            ], 401);
+        if (!auth('admin')->attempt($credentials)) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        $user = Auth::user(); // o tu modelo admin si tienes guard personalizado
+        $admin = auth('admin')->user();
+        $token = $admin->createToken('admin-session-token')->accessToken;
 
         return response()->json([
-            'token_type' => 'Bearer',
-            'access_token' => $user->createToken('admin-session-token')->accessToken
+            'access_token' => $token
         ]);
     }
+
 
     // Obtener usuario autenticado
     public function me(Request $request)

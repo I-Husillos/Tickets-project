@@ -49,7 +49,7 @@
         <div class="table-responsive">
         <table id="tabla-admins"
             class="table table-hover table-striped table-bordered mb-0"
-            data-url="{{ route('admin.ajax.admins', ['locale' => app()->getLocale()]) }}"
+            data-api-url="{{ url('/api/admins') }}"
             data-locale="{{ app()->getLocale() }}">
             <thead class="thead-dark text-center">
                 <tr>

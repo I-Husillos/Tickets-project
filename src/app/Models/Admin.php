@@ -9,7 +9,7 @@ use Laravel\Passport\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use HasApiTokens, Notifiable;
 
     protected $fillable = [
         'name',
@@ -27,6 +27,12 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
         'superadmin' => 'boolean'
     ];
+
+    public function getProviderName()
+    {
+        return 'admins';
+    }
+
 
 }
 

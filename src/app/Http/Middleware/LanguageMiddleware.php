@@ -22,7 +22,9 @@ class LanguageMiddleware
             return $next($request);
         }
 
-        if($request->is('api/*')) {
+        if($request->is('oauth/token') ||
+            $request->is('oauth/*') || 
+            $request->is('api/*')) {
             return $next($request);
         }
 

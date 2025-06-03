@@ -33,25 +33,23 @@ class AdminAuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $admin = Auth::guard('admin')->user();
-
-            $token = $admin->createToken('admin-session-token')->accessToken;
-
-            Log::info('Login exitoso para: ' . $credentials['email']);
-            return redirect()
-                ->route('admin.manage.dashboard', ['locale' => app()->getLocale()])
-                ->with('success', 'Inicio de sesión exitoso.')
-                ->with('token', $token);
+        if (!Auth::guard('admin')->attempt($credentials)) {
+            return back()->with('error', 'Correo o contraseña incorrectos.');
         }
-    
-        Log::error('Login fallido para: ' . $credentials['email']);
-        
-    
-        return back()->with('error', 'Correo o contraseña incorrectos.');
+
+        $admin = auth('admin')->user();
+
+        // 💡 Asegúrate de usar HasApiTokens en el modelo Admin
+        $token = $admin->createToken('admin-session-token')->accessToken;
+
+        // 🔐 Guardar el token en la sesión temporalmente
+        session(['admin_token' => $token]);
+
+        // 🚀 Redirigir al dashboard (flujo tradicional)
+        return redirect()->route('admin.manage.dashboard', ['locale' => app()->getLocale()]);
     }
-    
-    
+
+
 
     public function logout()
     {

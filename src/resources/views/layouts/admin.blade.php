@@ -4,14 +4,17 @@
         <meta charset="UTF-8">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <meta name="notification-url-template" content="{{ route(request()->is('admin*') ? 'admin.notifications.show' : 'user.notifications.show', ['locale' => app()->getLocale(), 'notification' => ':id']) }}">
         
-        @if (isset($apiToken))
-            <meta name="api-token" content="{{ $apiToken }}">
+        @if(session('admin_token'))
+            <meta name="api-token" content="{{ session('admin_token') }}">
+            <script>
+                localStorage.setItem('api_token', @json(session('admin_token')));
+            </script>
         @endif
 
 
-        
         <title>@yield('title', __('Panel de Administración'))</title>
 
         <!-- Font Awesome -->
@@ -75,6 +78,7 @@
                 <strong>&copy; {{ date('Y') }} - Mi Aplicación.</strong> Todos los derechos reservados.
             </footer>
         </div>
+
     </body>
 </html>
 

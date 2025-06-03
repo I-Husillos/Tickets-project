@@ -11,6 +11,23 @@ class UserDataController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth('api')->check()) {
+            Log::warning('Token rechazado o expirado');
+            return response()->json(['error' => 'Token inválido'], 401);
+        }
+
+
+        if (!auth('api')->check()) {
+            Log::warning('Token inválido');
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+        
+
+        $admin = auth('api')->user();
+        Log::info('Admin autenticado', ['id' => $admin->id]);
+        
+
+        
         Log::info('Usuario autenticado:', ['user' => auth()->user()]);
 
         
@@ -32,21 +49,17 @@ class UserDataController extends Controller
 
         $locale = app()->getLocale(); // o desde la request si viene con ?locale=es
 
-        $data = $users->map(function ($user) use ($locale) {
-            $actions = view('components.actions.user-actions', compact('user', 'locale'))->render();
-
-            return [
-                'name' => $user->name,
-                'email' => $user->email,
-                'actions' => $actions,
-            ];
-        });
-
         return response()->json([
             'draw' => (int) $request->input('draw'),
             'recordsTotal' => $total,
             'recordsFiltered' => $filtered,
-            'data' => $data,
+            'data' => $users->map(function ($user) use ($locale) {
+                return [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'actions' => view('components.actions.user-actions', compact('user', 'locale'))->render(),
+                ];  
+            }),
         ]);
     }
 

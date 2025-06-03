@@ -5,10 +5,22 @@ namespace App\Providers;
 use App\Models\Ticket;
 use App\Models\Comment;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
+use App\Models\Admin;
+
+use Carbon\CarbonInterval;
 
 use App\Policies\TicketPolicy;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Auth;
+
+
+use Laravel\Passport\Guards\TokenGuard;
+use League\OAuth2\Server\ResourceServer;
+
+use Laravel\Passport\TokenRepository;
+use Laravel\Passport\ClientRepository;
+use Illuminate\Contracts\Encryption\Encrypter;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -33,10 +45,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Passport::tokensExpireIn(now()->addDays(15));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::tokensExpireIn(CarbonInterval::days(15));
+        Passport::refreshTokensExpireIn(CarbonInterval::days(30));
+        Passport::personalAccessTokensExpireIn(CarbonInterval::months(6));
 
-        Passport::useTokenModel(\Laravel\Passport\Token::class);
+        Passport::enablePasswordGrant();
+
+        
     }
 }
 
