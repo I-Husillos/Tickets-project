@@ -7,46 +7,45 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
+use App\Services\UsersDataTable\UserQueryService;
+use App\Services\UsersDataTable\UserDataActions;
+
+use App\Services\DataTables\GenericQueryService;
+use App\Services\DataTables\GenericDataActions;
 
 class UserDataController extends Controller
 {
+    protected $queryService;
+    protected $dataActions;
+
+    public function __construct(UserQueryService $queryService, UserDataActions $dataActions)
+    {
+        $this->queryService = $queryService;
+        $this->dataActions = $dataActions;
+    }
+
     public function indexUsers(Request $request)
     {
         $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';
         App::setLocale($locale);
 
-        $query = User::query();
-
-        $search = $request->input('search.value');
-        if ($search) {
-            $query->where('name', 'LIKE', "%$search%")
-                ->orWhere('email', 'LIKE', "%$search%");
-        }
+        $queryService = new GenericQueryService();
+        $query = $queryService->filter($request, User::query());
 
         $total = User::count();
         $filtered = $query->count();
 
-        $start = $request->input('start', 0);
-        $length = $request->input('length', 10);
-        $users = $query->skip($start)->take($length)->get();
+        $users = $query->skip($request->input('start', 0))
+                    ->take($request->input('length', 10))
+                    ->get();
 
-        $data = $users->map(function ($user) use ($locale) {
-            // Generar URLs traducidas manualmente
-            $editUrl = url("/$locale/" . trans('routes.admin.users.edit', [], $locale));
-            $editUrl = str_replace('{user}', $user->id, $editUrl);
+        $actionService = new GenericDataActions(
+            'routes.admin.users.edit',
+            'routes.admin.users.confirm_delete',
+            'components.actions.user-actions'
+        );
 
-            $deleteUrl = url("/$locale/" . trans('routes.admin.users.confirm_delete', [], $locale));
-            $deleteUrl = str_replace('{user}', $user->id, $deleteUrl);
-
-            return [
-                'name' => $user->name,
-                'email' => $user->email,
-                'actions' => view('components.actions.user-actions', [
-                    'editUrl' => $editUrl,
-                    'deleteUrl' => $deleteUrl,
-                ])->render(),
-            ];
-        });
+        $data = $users->map(fn($user) => $actionService->transform($user, $locale));
 
         return response()->json([
             'draw' => (int) $request->input('draw'),
@@ -56,7 +55,4 @@ class UserDataController extends Controller
         ]);
     }
 
-
 }
-
-

@@ -7,41 +7,36 @@ use Illuminate\Http\Request;
 use App\Models\Type;
 use Illuminate\Support\Facades\App;
 
+use App\Services\TypesDataTable\TypeQueryService;
+use App\Services\TypesDataTable\TypeDataActions;
+
+
 class TypeDataController extends Controller
 {
+    protected $typeQueryService;
+    protected $typeDataActions;
+
+    public function __construct(TypeQueryService $typeQueryService, TypeDataActions $typeDataActions)
+    {
+        $this->typeQueryService = $typeQueryService;
+        $this->typeDataActions = $typeDataActions;
+    }
+
     public function indexTypes(Request $request)
     {
         $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';
         App::setLocale($locale);
 
-        $query = Type::query();
+        $query = $this->typeQueryService->getFilteredTypes($request);
 
-        $search = $request->input('search.value');
-        if ($search) {
-            $query->where('name', 'LIKE', "%$search%")
-                  ->orWhere('description', 'LIKE', "%$search%");
-        }
-
-        $total = Type::count();
+        $total = $this->typeQueryService->countAll();
         $filtered = $query->count();
 
         $start = $request->input('start', 0);
         $length = $request->input('length', 10);
         $types = $query->skip($start)->take($length)->get();
 
-        $data = $types->map(function ($type) use ($locale) {
-            $editUrl = url("/$locale/types/edit/" . $type->id);
-            $deleteUrl = url("/$locale/types/delete/" . $type->id);
-
-            return [
-                'name' => $type->name,
-                'description' => $type->description,
-                'actions' => view('components.actions.type-actions', [
-                    'editUrl' => $editUrl,
-                    'deleteUrl' => $deleteUrl,
-                ])->render(),
-            ];
-        });
+        $data = $types->map(fn ($type) => $this->typeDataActions->transform($type, $locale));
 
         return response()->json([
             'draw' => (int) $request->input('draw'),

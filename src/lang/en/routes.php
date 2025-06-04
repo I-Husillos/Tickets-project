@@ -44,7 +44,7 @@ return [
         'admin.api.token' => 'admin/api/token',
 
         // Tickets
-        'admin.ajax.tickets' => 'admin/tickets/ajax',
+        'admin.tickets.view' => 'admin/tickets/view/{ticket}',
         'admin.show.assigned.tickets' => 'admin/tickets/assigned',
         'admin.tickets.update_status' => 'admin/tickets/update-status/{ticket}',
         'admin.tickets.close' => 'admin/tickets/close/{ticket}',

@@ -5,7 +5,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserDataController;
 use App\Http\Controllers\Api\AdminDataController;
+use App\Http\Controllers\Api\TicketDataController;
 use App\Http\Controllers\Api\TypeDataController;
+use App\Http\Controllers\Api\AssignedTicketDataController;
+use App\Http\Controllers\Api\CommentDataController;
+use App\Http\Controllers\Api\TicketApiController;
 
 Route::prefix('admin')->group(function () {
     // Rutas públicas
@@ -25,6 +29,17 @@ Route::prefix('admin')->group(function () {
         Route::get('/users', [UserDataController::class, 'indexUsers']);
         Route::get('/admins', [AdminDataController::class, 'indexAdmins']);
         Route::get('/types', [TypeDataController::class, 'indexTypes']);
+
+        Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
+        Route::get('/assigned-tickets', [AssignedTicketDataController::class, 'indexAssignedTickets']);
+
+        Route::get('/tickets/{ticket}/comments', [CommentDataController::class, 'viewComments']);
+
+
+        Route::patch('/tickets/{ticket}/close', [TicketApiController::class, 'closeTicket']);
+        Route::post('tickets/{ticket}/reopen', [TicketApiController::class, 'reopen']);
+
+
     });
 
 });

@@ -30,9 +30,10 @@ import { initAdminUsersTable } from './tables/admin-users-table';
 import { initAdminAdminsTable } from './tables/admin-admins-table';
 import { initAdminTypesTable } from './tables/admin-types-table';
 import { initAdminTicketsTable } from './tables/admin-tickets-table';
-import { initAdminAssignedTicketsTable } from './tables/admin-assigned-tickets-table';
+import { initAssignedTicketsTable } from './tables/admin-assigned-tickets-table';
 import { initAdminTicketCommentsTable } from './tables/admin-ticket-comments-table';
 import { initAdminEventsTable } from './tables/admin-events-table';
+import { initAdminCommentsTable } from './tables/admin-comments';
 
 // --- Bootstrap Alert (necesario si usas JS para cerrarlas manualmente) ---
 import { Alert } from 'bootstrap';
@@ -59,10 +60,10 @@ const tablasDataTables = [
     { id: 'tabla-admins', fn: initAdminAdminsTable },
     { id: 'tabla-types', fn: initAdminTypesTable },
     { id: 'tabla-tickets', fn: initAdminTicketsTable },
-    { id: 'tabla-tickets-asignados', fn: initAdminAssignedTicketsTable },
+    { id: 'tabla-tickets-asignados', fn: initAssignedTicketsTable },
     { id: 'tabla-comentarios', fn: initAdminTicketCommentsTable },
     { id: 'tabla-eventos', fn: initAdminEventsTable },
-    // Puedes agregar más aquí siguiendo el mismo patrón
+    { id: 'tabla-comentarios', fn: initAdminCommentsTable }
 ];
 
 

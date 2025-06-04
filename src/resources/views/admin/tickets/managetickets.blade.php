@@ -77,7 +77,7 @@
             <div class="table-responsive">
             <table id="tabla-tickets"
                 class="table table-hover table-striped table-bordered text-center"
-                data-url="{{ route('admin.ajax.tickets', ['locale' => app()->getLocale()]) }}"
+                data-api-url="{{ url('/api/admin/tickets') }}"
                 data-locale="{{ app()->getLocale() }}">
                 <thead class="thead-dark">
                     <tr>
@@ -102,3 +102,6 @@
     </div>
 </div>
 @endsection
+
+
+

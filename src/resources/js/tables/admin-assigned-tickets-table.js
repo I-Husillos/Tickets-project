@@ -1,25 +1,39 @@
 import $ from 'jquery';
 
-export function initAdminAssignedTicketsTable(locale, url) {
+export function initAssignedTicketsTable(apiUrl, token) {
+    const locale = document.documentElement.lang || 'en';
+
     $('#tabla-tickets-asignados').DataTable({
         processing: true,
-        responsive: true,
-        ajax: url,
+        serverSide: true,
+        ajax: {
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                locale: locale
+            },
+            beforeSend: function (xhr) {
+                if (token) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                }
+                xhr.setRequestHeader('X-Locale', locale);
+            },
+            error: function (xhr) {
+                console.error('Error en AJAX (Assigned Tickets):', xhr.status, xhr.responseText);
+            }
+        },
         columns: [
-            { data: 'id', className: 'align-middle' },
-            { data: 'title', className: 'align-middle' },
-            { data: 'description', className: 'align-middle' },
-            { data: 'status', className: 'align-middle' },
-            { data: 'priority', className: 'align-middle' },
-            { data: 'type', className: 'align-middle' },
-            { data: 'comments_count', className: 'align-middle' },
+            { data: 'id', className: 'text-center align-middle' },
+            { data: 'title', className: 'text-center align-middle' },
+            { data: 'description', className: 'text-center align-middle' },
+            { data: 'status', className: 'text-center align-middle' },
+            { data: 'priority', className: 'text-center align-middle' },
+            { data: 'type', className: 'text-center align-middle' },
+            { data: 'comments', className: 'text-center align-middle' },
             { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' }
-        ],
-    });
-
-    // Recargar tabla al enviar el filtro
-    document.querySelector('form').addEventListener('submit', e => {
-        e.preventDefault();
-        $('#tabla-tickets-asignados').DataTable().ajax.reload();
+        ]
     });
 }
+
+

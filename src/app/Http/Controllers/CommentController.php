@@ -15,6 +15,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use PhpParser\Node\Expr\Cast\String_;
+use App\Services\CommentsService\CommentDataActions;
+
 
 class CommentController extends Controller
 {
@@ -94,14 +96,9 @@ class CommentController extends Controller
     {
         $comments = $ticket->comments()->with('author')->get();
 
-        $data = $comments->map(function ($comment) {
-            return [
-                'author' => $comment->author->name,
-                'message' => $comment->message,
-                'date' => $comment->created_at->format('d/m/Y H:i'),
-                'actions' => view('components.actions.comment-actions', compact('comment'))->render(),
-            ];
-        });
+        $transformer = new CommentDataActions();
+
+        $data = $comments->map(fn($comment) => $transformer->transform($comment));
 
         return response()->json(['data' => $data]);
     }

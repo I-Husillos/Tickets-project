@@ -108,8 +108,8 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['admin.manage.tickets'], [AdminTicketController::class, 'manageTickets'])->name('admin.manage.tickets');
         Route::get($routes['admin.view.ticket'], [AdminTicketController::class, 'viewTicket'])->name('admin.view.ticket');
         Route::patch($routes['admin.tickets.update_status'], [AdminTicketController::class, 'updateTicketStatus'])->name('admin.update.ticket');
-        Route::patch($routes['admin.tickets.close'], [TicketController::class, 'closeTicket'])->name('admin.close.ticket');
-        Route::post($routes['admin.tickets.reopen'], [TicketController::class, 'reopenTicket'])->name('admin.reopen.ticket');
+        Route::patch($routes['admin.tickets.close'], [TicketController::class, 'closeTicket'])->name('admin.tickets.close');
+        Route::post($routes['admin.tickets.reopen'], [TicketController::class, 'reopenTicket'])->name('admin.tickets.reopen');
         Route::post($routes['admin.tickets.assign'], [AdminTicketController::class, 'assignTicket'])->name('admin.assign.ticket');
 
 
