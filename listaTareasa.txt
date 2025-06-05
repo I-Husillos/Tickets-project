@@ -45,7 +45,8 @@ investigar webpack y vite
 - 
 - 
 - 
-- 
+- mirar api-token
+    hace dos
 - 
 - 
 - config laravel listado

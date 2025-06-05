@@ -22,7 +22,7 @@ class TicketApiController extends Controller
 
     public function close(Ticket $ticket): JsonResponse
     {
-        $admin = Auth::guard('admin-api')->user();
+        $admin = Auth::guard('api')->user();
 
         if ($ticket->status === 'closed') {
             return response()->json(['message' => 'El ticket ya está cerrado.'], 200);
@@ -40,7 +40,7 @@ class TicketApiController extends Controller
 
     public function reopen(Ticket $ticket): JsonResponse
     {
-        $admin = Auth::guard('admin-api')->user();
+        $admin = Auth::guard('api')->user();
 
         if ($ticket->status !== 'closed') {
             return response()->json(['message' => 'Solo se pueden reabrir tickets cerrados.'], 400);

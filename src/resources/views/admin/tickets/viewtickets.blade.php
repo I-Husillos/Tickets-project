@@ -142,8 +142,9 @@
                             @else
                             <div class="table-responsive">
                                 <table 
-                                    class="table table-hover table-striped table-bordered"
-                                    data-api-url="{{ url('/api/admin/tickets/{ticket}/comments') }}"
+                                    id="tabla-comentarios"
+                                    class="table table-hover table-striped table-bordered dt-responsive nowrap"
+                                    data-api-url="{{ url('/api/admin/tickets/' . $ticket->id . '/comments') }}"
                                     data-locale="{{ app()->getLocale() }}">
                                     <thead class="thead-dark">
                                         <tr>
@@ -163,6 +164,7 @@
                                 <div class="form-group">
                                     <label for="message">{{ __('general.admin_ticket_details.add_comment_heading') }}</label>
                                     <textarea name="message" class="form-control" rows="4" placeholder="{{ __('general.admin_ticket_details.comment_placeholder') }}"></textarea>
+                                    
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-2">
                                     <i class="fas fa-comment"></i> {{ __('general.admin_ticket_details.add_comment') }}

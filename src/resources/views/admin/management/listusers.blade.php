@@ -40,15 +40,17 @@
             <i class="fas fa-user-plus"></i> {{ __('general.admin_users.create_button') }}
         </a>
     </div>
+
+    
     
     <div class="card-body p-0">
         <div class="table-responsive">
             <table id="tabla-usuarios"
-                class="table table-hover table-striped table-bordered mb-0" 
+                class="table table-hover table-striped table-bordered mb-0 dt-responsive nowrap" 
                 data-api-url="{{ url('/api/admin/users') }}"
                 data-locale="{{ app()->getLocale() }}">
 
-                <thead class="thead-dark text-center">
+                <thead class="text-center bg-white font-weight-bold">
                     <tr>
                         <th>{{ __('general.admin_users.table_name') }}</th>
                         <th>{{ __('general.admin_users.table_email') }}</th>

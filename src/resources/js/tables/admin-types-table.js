@@ -13,6 +13,7 @@ export function initAdminTypesTable(apiUrl, token) {
             data: {
                 locale: locale
             },
+            resposive: true,
             beforeSend: function (xhr) {
                 if (token) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + token);

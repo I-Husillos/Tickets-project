@@ -46,3 +46,5 @@ class TypeDataController extends Controller
         ]);
     }
 }
+
+

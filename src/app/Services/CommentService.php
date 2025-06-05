@@ -10,6 +10,7 @@ use Dotenv\Util\Str;
 use PhpParser\Node\Expr\Cast\String_;
 use App\Models\User;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Log;
 
 class CommentService
 {
@@ -19,11 +20,12 @@ class CommentService
         
         
         $comment = $ticket->comments()->create([
-            'ticket_id' => $ticket,
+            'ticket_id' => $ticket->id,
             'author_id' => Auth::id(),
             'author_type' => Auth::user() instanceof Admin ? Admin::class : User::class,
             'message' => $message,
         ]);
+
 
         EventHistory::create([
             'event_type' => 'Comentario',

@@ -16,9 +16,9 @@
     <div class="table-responsive mt-4">
         <table id="tabla-eventos"
             class="table table-striped table-bordered text-center"
-            data-url="{{ route('admin.ajax.events', ['locale' => app()->getLocale()]) }}"
+            data-api-url="{{ url('/api/admin/historyEvents') }}"
             data-locale="{{ app()->getLocale() }}">
-            <thead class="thead-dark">
+            <thead class="text-center bg-white font-weight-bold">
                 <tr>
                     <th>{{ __('general.admin_history_events.table.header_event_type') }}</th>
                     <th>{{ __('general.admin_history_events.table.header_description') }}</th>

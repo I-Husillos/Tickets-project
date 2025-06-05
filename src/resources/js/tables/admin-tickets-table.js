@@ -13,6 +13,7 @@ export function initAdminTicketsTable(apiUrl, token) {
             data: {
                 locale: locale
             },
+            responsive: true,
             beforeSend: function (xhr) {
                 if (token) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + token);

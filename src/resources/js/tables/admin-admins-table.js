@@ -14,6 +14,7 @@ export function initAdminAdminsTable(apiUrl, token) {
             data: {
                 locale: locale
             },
+            responsive: true,
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                 xhr.setRequestHeader('X-Locale', locale);

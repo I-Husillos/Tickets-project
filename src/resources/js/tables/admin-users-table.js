@@ -3,7 +3,6 @@ import $ from 'jquery';
 export function initAdminUsersTable(apiUrl, token) {
     const locale = document.documentElement.lang || 'en';
 
-
     $('#tabla-usuarios').DataTable({
         processing: true,
         serverSide: true,
@@ -14,6 +13,7 @@ export function initAdminUsersTable(apiUrl, token) {
             data: {
                 locale: locale
             },
+            responsive: true,
             beforeSend: function (xhr) {
                 if (token) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -27,7 +27,12 @@ export function initAdminUsersTable(apiUrl, token) {
         columns: [
             { data: 'name', className: 'text-center align-middle' },
             { data: 'email', className: 'text-center align-middle' },
-            { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' },
+            { 
+                data: 'actions', 
+                orderable: false, 
+                searchable: false, 
+                className: 'text-center align-middle' 
+            },
         ]
     });
 }

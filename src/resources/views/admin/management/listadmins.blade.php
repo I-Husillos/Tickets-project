@@ -48,10 +48,10 @@
     <div class="card-body p-0">
         <div class="table-responsive">
         <table id="tabla-admins"
-            class="table table-hover table-striped table-bordered mb-0"
+            class="table table-hover table-striped table-bordered mb-0 dt-responsive nowrap"
             data-api-url="{{ url('/api/admin/admins') }}"
             data-locale="{{ app()->getLocale() }}">
-            <thead class="thead-dark text-center">
+            <thead class="text-center bg-white font-weight-bold">
                 <tr>
                     <th><i class="fas fa-user-shield"></i> {{ __('general.admin_admins.table_name') }}</th>
                     <th><i class="fas fa-envelope"></i> {{ __('general.admin_admins.table_email') }}</th>

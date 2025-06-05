@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\TicketDataController;
 use App\Http\Controllers\Api\TypeDataController;
 use App\Http\Controllers\Api\AssignedTicketDataController;
 use App\Http\Controllers\Api\CommentDataController;
+use App\Http\Controllers\Api\EventHistoryDataController;
 use App\Http\Controllers\Api\TicketApiController;
 
 Route::prefix('admin')->group(function () {
@@ -32,12 +33,14 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
         Route::get('/assigned-tickets', [AssignedTicketDataController::class, 'indexAssignedTickets']);
+        Route::patch('/tickets/{ticket}/close', [TicketApiController::class, 'close']);
+        Route::patch('/tickets/{ticket}/reopen', [TicketApiController::class, 'reopen']);
 
         Route::get('/tickets/{ticket}/comments', [CommentDataController::class, 'viewComments']);
 
+        Route::delete('/comments/delete/{comment}', [CommentDataController::class, 'deleteComment']);
 
-        Route::patch('/tickets/{ticket}/close', [TicketApiController::class, 'closeTicket']);
-        Route::post('tickets/{ticket}/reopen', [TicketApiController::class, 'reopen']);
+        Route::get('/historyEvents', [EventHistoryDataController::class, 'indexEventHistory']);
 
 
     });

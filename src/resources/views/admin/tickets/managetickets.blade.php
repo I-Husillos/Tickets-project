@@ -33,7 +33,7 @@
             </div>
         </form>
     </div> -->
-    
+
     <div class="row">
         <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
@@ -42,7 +42,7 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('general.admin_dashboard.total_tickets') }}</span>
-                    <span class="info-box-number">100</span>
+                    <span class="info-box-number">{{ $totalTickets }}</span>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('general.admin_dashboard.resolved_tickets') }}</span>
-                    <span class="info-box-number">100</span>
+                    <span class="info-box-number">{{ $resolvedTickets }}</span>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">{{ __('general.admin_dashboard.pending_tickets') }}</span>
-                    <span class="info-box-number">100</span>
+                    <span class="info-box-number">{{ $pendingTickets }}</span>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 class="table table-hover table-striped table-bordered text-center"
                 data-api-url="{{ url('/api/admin/tickets') }}"
                 data-locale="{{ app()->getLocale() }}">
-                <thead class="thead-dark">
+                <thead class="text-center bg-white font-weight-bold">
                     <tr>
                         <th>#</th>
                         <th>{{ __('Título') }}</th>

@@ -120,3 +120,17 @@ nvm install node  # Última versión de Node
 npm run dev
 
 php artisan db:seed --class=UserSeeder
+
+
+npm run build
+
+
+Solo se necesita jQuery si...
+Usas $.ajax()
+
+Manipulas el DOM con $() en ese archivo (cosa que no deberías hacer en actions.js)
+
+Usas métodos como $.on(), $.val(), etc.
+
+
+

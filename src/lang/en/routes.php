@@ -69,7 +69,7 @@ return [
 
         // Comments
         'admin.ajax.ticket_comments' => 'administrador/tickets/{ticket}/comentarios/json',
-        'admin.comments.add' => 'admin/comments/add',
+        'admin.comments.add' => 'admin/comments/add/{ticket}',
         'admin.comments.delete' => 'admin/comments/delete/{comment}',
         'admin.comments.view' => 'admin/comments/view/{ticket}',
 

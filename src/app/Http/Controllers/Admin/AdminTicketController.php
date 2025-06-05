@@ -39,9 +39,18 @@ class AdminTicketController extends Controller
             $query->where('priority', $request->priority);
         }
 
+        $totalTickets = Ticket::count();
+        $resolvedTickets = Ticket::where('status', 'resolved')->count();
+        $pendingTickets = Ticket::where('status', 'pending')->count();
+
         $tickets = $query->paginate(5);
 
-        return view('admin.tickets.managetickets', compact('tickets'));
+        return view('admin.tickets.managetickets', [
+            'tickets' => $tickets,
+            'totalTickets' => $totalTickets,
+            'resolvedTickets' => $resolvedTickets,
+            'pendingTickets' => $pendingTickets,
+        ]);
     }
 
 
@@ -129,9 +138,18 @@ class AdminTicketController extends Controller
             $query->where('priority', $request->priority);
         }
 
+        $totalTickets = $query->count();
+        $resolvedTickets = $query->where('status', 'resolved')->count();
+        $pendingTickets = $query->where('status', 'pending')->count();
+
         $assignedTickets = $query->paginate(5);
 
-        return view('admin.tickets.assignedticketsview', compact('assignedTickets'));
+        return view('admin.tickets.assignedticketsview', [
+            'assignedTickets' => $assignedTickets,
+            'totalTickets' => $totalTickets,
+            'resolvedTickets' => $resolvedTickets,
+            'pendingTickets' => $pendingTickets
+        ]);
     }
 
 

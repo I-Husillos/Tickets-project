@@ -14,7 +14,7 @@
 <div class="container">
     {{-- Título principal del panel de control --}}
     <h1 class="text-center mb-4">{{ __('general.admin_dashboard.control_panel') }}</h1>
-    
+
 
     {{-- Mensaje de bienvenida dinámico (se pasa el nombre del usuario como parámetro) --}}
     <p class="text-center">{{ __('general.admin_dashboard.welcome_message', ['name' => Auth::guard('admin')->user()->name]) }}</p>

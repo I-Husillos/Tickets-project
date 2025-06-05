@@ -22,7 +22,7 @@ import './navbar';
 import './sidebar-toggle.js';
 import './notifications/notifications.js';
 import './notifications/admin-notifications.js';
-import './commentTicket.js';
+import './comments/deleteCommentTicket.js';
 import './forms/admin-users-form.js';
 
 // --- Importación de tablas específicas ---
@@ -31,9 +31,10 @@ import { initAdminAdminsTable } from './tables/admin-admins-table';
 import { initAdminTypesTable } from './tables/admin-types-table';
 import { initAdminTicketsTable } from './tables/admin-tickets-table';
 import { initAssignedTicketsTable } from './tables/admin-assigned-tickets-table';
-import { initAdminTicketCommentsTable } from './tables/admin-ticket-comments-table';
 import { initAdminEventsTable } from './tables/admin-events-table';
 import { initAdminCommentsTable } from './tables/admin-comments';
+
+import { initTicketActionButtons } from './tickets/events.js';
 
 // --- Bootstrap Alert (necesario si usas JS para cerrarlas manualmente) ---
 import { Alert } from 'bootstrap';
@@ -49,6 +50,11 @@ if (token) {
             'Authorization': 'Bearer ' + token
         }
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initTicketActionButtons(token);
+    });
+
 } else {
     console.warn('No se encontró token ni en localStorage ni en la meta-tag');
 }
@@ -61,7 +67,7 @@ const tablasDataTables = [
     { id: 'tabla-types', fn: initAdminTypesTable },
     { id: 'tabla-tickets', fn: initAdminTicketsTable },
     { id: 'tabla-tickets-asignados', fn: initAssignedTicketsTable },
-    { id: 'tabla-comentarios', fn: initAdminTicketCommentsTable },
+    { id: 'tabla-comentarios', fn: initAdminCommentsTable },
     { id: 'tabla-eventos', fn: initAdminEventsTable },
     { id: 'tabla-comentarios', fn: initAdminCommentsTable }
 ];

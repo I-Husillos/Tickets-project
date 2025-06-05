@@ -34,10 +34,10 @@
         <div class="card-body">
 
         <table id="tabla-types"
-            class="table table-hover table-bordered text-center align-middle"
+            class="table table-hover table-bordered text-center align-middle dt-responsive nowrap"
             data-api-url="{{ url('/api/admin/types') }}"
             data-locale="{{ app()->getLocale() }}">
-            <thead class="thead-dark">
+            <thead class="text-center bg-white font-weight-bold">
                 <tr>
                     <th>{{ __('general.admin_types.name') }}</th>
                     <th>{{ __('general.admin_types.description') }}</th>

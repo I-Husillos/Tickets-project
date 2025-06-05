@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\AdminTokenController;
 use Illuminate\Facades\Auth;
 
 
+
 Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
     ->prefix('{locale}')
     ->where(['locale' => 'es|en'])
