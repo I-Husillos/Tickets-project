@@ -18,7 +18,7 @@
         <div class="alert alert-danger">{{ __('general.admin_create_user.error_message') }}</div>
     @endif
 
-    <form id="create-user-form" action="{{ route('admin.users.store', ['locale' => app()->getLocale()]) }}" method="POST">
+    <form id="create-user-form" action="/api/admin/users/store" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('general.admin_create_user.label_name') }}</label>
@@ -58,4 +58,7 @@
         <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_create_user.back_button') }}</a>
     </div>
 </div>
+
+
 @endsection
+

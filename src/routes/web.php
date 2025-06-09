@@ -142,7 +142,7 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['admin.admins.confirm_delete'], [AdminAdminController::class, 'confirmDeleteAdmin'])->name('admin.admins.confirmDelete');
         Route::delete($routes['admin.admins.destroy'], [AdminAdminController::class, 'confirmDeleteAdminPost'])->name('admin.admins.destroy');
 
-        
+
 
         Route::get($routes['admin.types.index'], [TypesController::class, 'index'])->name('admin.types.index');
         Route::get($routes['admin.types.create'], [TypesController::class, 'create'])->name('admin.types.create');

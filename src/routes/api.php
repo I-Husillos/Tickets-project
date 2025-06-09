@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminApiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\AuthController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Api\AssignedTicketDataController;
 use App\Http\Controllers\Api\CommentDataController;
 use App\Http\Controllers\Api\EventHistoryDataController;
 use App\Http\Controllers\Api\TicketApiController;
+use App\Http\Controllers\Api\UserApiController;
 
 Route::prefix('admin')->group(function () {
     // Rutas públicas
@@ -28,8 +30,20 @@ Route::prefix('admin')->group(function () {
     // Rutas protegidas con Passport
     Route::middleware('auth:api')->group(function () {
         Route::get('/users', [UserDataController::class, 'indexUsers']);
+        Route::post('/users/store', [UserApiController::class, 'storeUser']);
+        Route::put('/users/{user}', [UserApiController::class, 'updateUser']);
+        Route::delete('/users/{user}', [UserApiController::class, 'destroyUser']);
+
+
         Route::get('/admins', [AdminDataController::class, 'indexAdmins']);
+        Route ::post('/admins/store', [AdminApiController::class, 'storeAdmin']);
+        Route::put('/admins/{admin}', [AdminApiController::class, 'updateAdmin']);
+        Route::delete('/admins/{admin}', [AdminApiController::class, 'destroyAdmin']);
+
+
+
         Route::get('/types', [TypeDataController::class, 'indexTypes']);
+
 
         Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
         Route::get('/assigned-tickets', [AssignedTicketDataController::class, 'indexAssignedTickets']);

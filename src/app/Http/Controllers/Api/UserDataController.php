@@ -42,7 +42,8 @@ class UserDataController extends Controller
         $actionService = new GenericDataActions(
             'routes.admin.users.edit',
             'routes.admin.users.confirm_delete',
-            'components.actions.user-actions'
+            'components.actions.user-actions',
+            'user'
         );
 
         $data = $users->map(fn($user) => $actionService->transform($user, $locale));

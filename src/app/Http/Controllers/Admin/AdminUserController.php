@@ -8,12 +8,9 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\EventHistory;
-use Dotenv\Util\Str;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Services\FilterUsersService;
-use Illuminate\Support\Facades\Log;
 
 class AdminUserController extends Controller
 {

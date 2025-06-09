@@ -18,8 +18,11 @@
     <form method="POST" action="{{ route('admin.users.destroy', ['user' => $user->id, 'locale' => app()->getLocale()]) }}">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-danger">{{ __('general.admin_delete_user.confirm_button') }}</button>
+        <button class="btn btn-sm btn-danger btn-delete-user" data-id="{{ $user->id }}">
+            {{ __('general.admin_delete_user.confirm_button') }}
+        </button>
         <a href="{{ route('admin.dashboard.list.users', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">{{ __('general.admin_delete_user.cancel_button') }}</a>
     </form>
 </div>
 @endsection
+

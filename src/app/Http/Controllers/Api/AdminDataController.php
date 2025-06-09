@@ -49,7 +49,8 @@ class AdminDataController extends Controller
         $actionService = new GenericDataActions(
             'routes.admin.admins.edit',
             'routes.admin.admins.confirm_delete',
-            'components.actions.admin-actions'
+            'components.actions.admin-actions',
+            'admin'
         );
 
         $data = $admins->map(fn($admin) => $actionService->transform($admin, $locale));

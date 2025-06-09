@@ -64,7 +64,7 @@ return [
         'priority_label'    => 'Priority',
         'type_label'        => 'Type',
         'assigned_to_label' => 'Assigned to',
-        'sin_asignar'       => 'Unassigned',
+        'unassigned'       => 'Unassigned',
         'created_at_label'  => 'Creation Date',
         'updated_at_label'  => 'Last Update Date',
         'select_option'     => 'Select...',
@@ -112,7 +112,7 @@ return [
         'view_edit'          => 'View & Edit',
         'reopen_ticket'      => 'Reopen Ticket',
         'close_ticket'       => 'Close',
-        'sin_asignar'        => 'Unassigned',
+        'unassigned'        => 'Unassigned',
     ],
 
 
@@ -306,7 +306,7 @@ return [
         'page_title'     => 'Confirm User Deletion',
         'heading'        => 'Confirm User Deletion',
         'confirmation'   => 'Are you sure you want to delete user ":name"?',
-        'confirm_button' => 'Yes, delete',
+        'confirm_button' => 'Delete',
         'cancel_button'  => 'Cancel',
     ],
 

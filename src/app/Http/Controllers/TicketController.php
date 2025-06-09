@@ -3,24 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendNotifications;
-use App\Models\Admin;
 use App\Models\Ticket;
-use App\Models\User;
 use App\Models\EventHistory;
-use App\Notifications\TicketClosed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Services\TicketService;
-use Illuminate\Support\Facades\Gate;
-use App\Policies\TicketPolicy;
-use App\Notifications\TicketCreatedNotification;
-use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\SearchTicketRequest;
 use App\Http\Requests\UpdateDataTicketRequest;
-use Dotenv\Util\Str;
 
 class TicketController extends Controller
 {

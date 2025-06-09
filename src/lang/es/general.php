@@ -73,7 +73,7 @@ return [
         'priority_label'    => 'Prioridad',
         'type_label'        => 'Tipo',
         'assigned_to_label' => 'Asignado a',
-        'sin_asignar'       => 'Sin Asignar',
+        'unassigned'       => 'Sin Asignar',
         'created_at_label'  => 'Fecha de Creación',
         'updated_at_label'  => 'Fecha de la última Actualización',
         'select_option'     => 'Seleccionar...',
@@ -121,9 +121,9 @@ return [
         'view_edit'          => 'Ver y Editar',
         'reopen_ticket'      => 'Reabrir ticket',
         'close_ticket'       => 'Cerrar',
-        'sin_asignar'        => 'Sin Asignar',
+        'unassigned'        => 'Sin Asignar',
     ],
-    
+
 
     'admin_assigned_tickets' => [
         'page_title'            => 'Tickets Asignados',
@@ -317,7 +317,7 @@ return [
         'page_title'      => 'Confirmar Eliminación Administrador',
         'heading'         => 'Confirmar Eliminación de administrador',
         'confirmation'    => '¿Estás seguro de que deseas eliminar el admin ":name"?',
-        'confirm_button'  => 'Sí, eliminar',
+        'confirm_button'  => 'Eliminar',
         'cancel_button'   => 'Cancelar',
     ],
 

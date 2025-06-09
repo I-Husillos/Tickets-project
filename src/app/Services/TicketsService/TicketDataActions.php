@@ -34,7 +34,7 @@ class TicketDataActions
             'priority' => ucfirst($ticket->priority),
             'type' => ucfirst($ticket->type),
             'comments' => $ticket->comments->count(),
-            'assigned_to' => $ticket->admin?->name ?? __('general.unassigned'),
+            'assigned_to' => $ticket->admin?->name ?? __('general.admin_ticket_manage.unassigned'),
             'actions' => $actionsView,
         ];
     }

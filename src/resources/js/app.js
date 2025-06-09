@@ -24,6 +24,17 @@ import './notifications/notifications.js';
 import './notifications/admin-notifications.js';
 import './comments/deleteCommentTicket.js';
 import './forms/admin-users-form.js';
+import './admin/users/admin-users-actions';
+// import './admin/admins/admin-admins-form.js';
+import './admin/admins/admin-admins-actions.js';
+// import './forms/admin-types-form.js';
+// import './admin/types/admin-types-actions';
+// import './forms/admin-tickets-form.js';
+// import './admin/tickets/admin-tickets-actions';
+// import './forms/admin-events-form.js';
+// import './admin/events/admin-events-actions';
+// import './forms/admin-comments-form.js';
+// import './admin/comments/admin-comments-actions';
 
 // --- Importación de tablas específicas ---
 import { initAdminUsersTable } from './tables/admin-users-table';

@@ -61,6 +61,11 @@
         </div>
     </div>
 </div>
+
+
+@include('components.modals.edit-user-modal')
+@include('components.modals.delete-user-modal')
+
 @endsection
 
 

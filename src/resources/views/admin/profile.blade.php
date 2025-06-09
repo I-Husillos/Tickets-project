@@ -1,8 +1,8 @@
-@extends('layouts.user') {{-- Asegúrate de que esta layout use AdminLTE --}}
+@extends('layouts.admin') {{-- Asegúrate de que esta layout use AdminLTE --}}
 
-@section('title', __('Perfil de Usuario'))
+@section('title', __('Perfil de Administrador'))
 
-@section('content')
+@section('admincontent')
 <div class="container-fluid">
     <!-- Tarjeta de perfil -->
     <div class="card card-primary card-outline">

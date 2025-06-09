@@ -6,32 +6,45 @@ use Illuminate\Support\Facades\View;
 
 class GenericDataActions
 {
-    protected string $editRouteKey;
-    protected string $deleteRouteKey;
-    protected string $viewPath;
+    protected $editRouteName;
+    protected $deleteRouteName;
+    protected $componentView;
+    protected $variableName;
 
-    public function __construct(string $editRouteKey, string $deleteRouteKey, string $viewPath)
-    {
-        $this->editRouteKey = $editRouteKey;
-        $this->deleteRouteKey = $deleteRouteKey;
-        $this->viewPath = $viewPath;
+    public function __construct(string $editRouteName,string $deleteRouteName,string $componentView,string $variableName = 'user') {
+        $this->editRouteName = $editRouteName;
+        $this->deleteRouteName = $deleteRouteName;
+        $this->componentView = $componentView;
+        $this->variableName = $variableName;
     }
 
     public function transform($model, string $locale): array
     {
-        $editUrl = url("/$locale/" . trans($this->editRouteKey, [], $locale));
-        $editUrl = str_replace('{id}', $model->id, $editUrl);
+        // Generar URLs traducidas y reemplazar el placeholder con el ID
+        $editUrl = url("/$locale/" . trans($this->editRouteName, [], $locale));
+        $editUrl = str_replace("{" . $this->variableName . "}", $model->id, $editUrl);
 
-        $deleteUrl = url("/$locale/" . trans($this->deleteRouteKey, [], $locale));
-        $deleteUrl = str_replace('{id}', $model->id, $deleteUrl);
+        $deleteUrl = url("/$locale/" . trans($this->deleteRouteName, [], $locale));
+        $deleteUrl = str_replace("{" . $this->variableName . "}", $model->id, $deleteUrl);
+
+        // Construir el array de datos para pasar a la vista
+        $data = [
+            'editUrl' => $editUrl,
+            'deleteUrl' => $deleteUrl,
+            $this->variableName => $model, // aquí se pasa dinámicamente
+        ];
+
+        // Renderizar el componente de acciones
+        $actionsHtml = View::make($this->componentView, $data)->render();
 
         return [
             'name' => $model->name,
             'email' => $model->email,
-            'actions' => View::make($this->viewPath, [
-                'editUrl' => $editUrl,
-                'deleteUrl' => $deleteUrl,
-            ])->render(),
+            'actions' => $actionsHtml,
         ];
     }
+
+    
 }
+
+

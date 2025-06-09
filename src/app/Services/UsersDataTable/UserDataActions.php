@@ -15,6 +15,8 @@ class UserDataActions
         $deleteUrl = url("/$locale/" . trans('routes.admin.users.confirm_delete', [], $locale));
         $deleteUrl = str_replace('{user}', $user->id, $deleteUrl);
 
+        dd($deleteUrl);
+
         return [
             'name' => $user->name,
             'email' => $user->email,
@@ -25,3 +27,4 @@ class UserDataActions
         ];
     }
 }
+
