@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\TicketApiController;
 use App\Http\Controllers\Api\Types\TypeApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\Auth\ApiLoginController;
+use Monolog\Handler\RotatingFileHandler;
 
 Route::prefix('admin')->group(function () {
     // Rutas públicas
@@ -66,5 +67,33 @@ Route::prefix('admin')->group(function () {
     });
 
 });
+
+
+
+Route::prefix('user')->group(function () {
+
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [ApiLoginController::class, 'login']);
+
+    Route::middleware('auth:api_user')->group(function () {
+        Route::get('/test', function (Request $request) {
+            return response()->json([
+                'auth_user' => $request->user(),
+            ]);
+        });
+    });
+
+
+    Route::middleware('auth:api_user')->group(function () {
+        Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
+        Route::post('/tickets', [TicketApiController::class, 'storeTicket']);
+        Route::patch('/tickets/update/{ticket}', [TicketApiController::class, 'updateTicket']);
+        Route::delete('/tickets/{ticket}', [TicketApiController::class, 'destroyTicket']);
+
+
+
+    });
+});
+
 
 

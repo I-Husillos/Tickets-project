@@ -45,6 +45,7 @@ import { initAdminTicketsTable } from './tables/admin-tickets-table';
 import { initAssignedTicketsTable } from './tables/admin-assigned-tickets-table';
 import { initAdminEventsTable } from './tables/admin-events-table';
 import { initAdminCommentsTable } from './tables/admin-comments';
+import { initUserTicketsTable } from './tables/user-tickets-table';
 
 import { initTicketActionButtons } from './tickets/events.js';
 
@@ -81,7 +82,8 @@ const tablasDataTables = [
     { id: 'tabla-tickets-asignados', fn: initAssignedTicketsTable },
     { id: 'tabla-comentarios', fn: initAdminCommentsTable },
     { id: 'tabla-eventos', fn: initAdminEventsTable },
-    { id: 'tabla-comentarios', fn: initAdminCommentsTable }
+    { id: 'tabla-comentarios', fn: initAdminCommentsTable },
+    { id: 'tabla-users-tickets', fn: initUserTicketsTable },
 ];
 
 

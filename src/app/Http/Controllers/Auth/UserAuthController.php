@@ -25,12 +25,22 @@ class UserAuthController extends Controller
         $credentials = $request->only('email','password');
 
 
-        if(Auth::guard('user') -> attempt($credentials))
+        if(!Auth::guard('user') -> attempt($credentials))
         {
             return redirect()->route('user.dashboard', ['locale' => app()->getLocale()])->with('success', 'Inicio de sesión exitoso.');
         }
 
-        return back()->with('error', 'Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.');
+        $user = auth('user') -> user();
+
+
+        $token = $user->createToken('user-session-token')->accessToken;
+
+
+        // Guardar el token en la sesión temporalmente
+        session(['api_token' => $token]);
+
+
+        return redirect()->route('user.dashboard', ['locale' => app()->getLocale()])->with('success', 'Inicio de sesión exitoso.');
     }
 
 

@@ -35,54 +35,24 @@ $breadcrumbs = [
             </div>
         @else
             <div class="row">
-                @foreach ($tickets as $ticket)
-                    <div class="col-md-4 mb-4">
-                        <div class="card card-outline 
-                            @if($ticket->status === 'new') card-primary 
-                            @elseif($ticket->status === 'resolved') card-success 
-                            @elseif($ticket->status === 'pending') card-warning 
-                            @else card-secondary 
-                            @endif">
+                <div class="card-body">
+                    <table id="tabla-tickets"
+                        class="table table-bordered table-hover"
+                        data-api-url="{{ url('/api/user/tickets') }}"
+                        data-locale="{{ app()->getLocale() }}">
 
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">{{ $ticket->title }}</h5>
-                                <span class="badge">{{ ucfirst($ticket->status) }}</span>
-                            </div>
-
-                            <div class="card-body">
-                                <p><i class="fas fa-flag"></i> <strong>{{ __('frontoffice.tickets.table.priority') }}:</strong> {{ ucfirst($ticket->priority) }}</p>
-                                <p><i class="fas fa-comments"></i> <strong>{{ __('frontoffice.tickets.table.comments') }}:</strong> {{ $ticket->comments->count() }}</p>
-                                <p><i class="fas fa-calendar-alt"></i> <strong>{{ __('frontoffice.tickets.table.date') }}:</strong> {{ $ticket->created_at->format('d/m/Y') }}</p>
-                            </div>
-
-                            <div class="card-footer d-flex justify-content-between">
-                                <!-- Ver Ticket -->
-                                <a href="{{ route('user.tickets.show', ['locale' => app()->getLocale(), 'ticket' => $ticket, 'username' => Auth::user()->id]) }}" 
-                                class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i> {{ __('frontoffice.tickets.detail') }}
-                                </a>
-                                <!-- Editar Ticket -->
-                                <a href="{{ route('user.tickets.edit', ['locale' => app()->getLocale(), 'ticket' => $ticket, 'username' => Auth::user()->id]) }}" 
-                                class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i> {{ __('frontoffice.tickets.edit') }}
-                                </a>
-                                <!-- Eliminar Ticket -->
-                                <form action="{{ route('user.tickets.destroy', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}" 
-                                    method="POST" style="display: inline-block;" 
-                                    onsubmit="return confirm('{{ __('¿Estás seguro de eliminar este ticket?') }}')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i> {{ __('Eliminar') }}
-                                    </button>
-                                </form>
-                            </div>
-                            @push('modals')
-                                @include('components.modals.comment', ['ticket' => $ticket])
-                            @endpush
-                        </div>
-                    </div>
-                @endforeach
+                        <thead class="text-center bg-white font-weight-bold">
+                            <tr>
+                                <th>{{ __('Título') }}</th>
+                                <th>{{ __('Estado') }}</th>
+                                <th>{{ __('Prioridad') }}</th>
+                                <th>{{ __('Comentarios') }}</th>
+                                <th>{{ __('Fecha') }}</th>
+                                <th>{{ __('Acciones') }}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
 
             @if ($tickets->hasPages())
