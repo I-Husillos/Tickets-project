@@ -15,11 +15,7 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">{{ __('general.admin_create_admin.heading') }}</h1>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">{{ __('general.admin_create_admin.error_message') }}</div>
-    @endif
-
-    <form action="{{ route('admin.admins.store', ['locale' => app()->getLocale()]) }}" method="POST">
+    <form id="create-admin-form" action="/api/admin/admins/store" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('general.admin_create_admin.label_name') }}</label>

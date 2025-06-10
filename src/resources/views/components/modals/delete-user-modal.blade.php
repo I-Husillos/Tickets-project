@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ __('¿Estás seguro de que deseas eliminar al usuario') }} <strong id="delete-user-name"></strong>?</p>
+        <p>{{ __('general.admin_delete_user.confirmation') }}<strong id="delete-user-name"></strong>?</p>
         <input type="hidden" id="delete-user-id">
       </div>
       <div class="modal-footer">

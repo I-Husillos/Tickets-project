@@ -21,8 +21,7 @@ class TypeDataActions
             'name' => $type->name,
             'description' => $type->description,
             'actions' => View::make('components.actions.type-actions', [
-                'editUrl' => $editUrl,
-                'deleteUrl' => $deleteUrl,
+                'type' => $type,
             ])->render(),
         ];
     }

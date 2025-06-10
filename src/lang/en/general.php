@@ -50,7 +50,7 @@ return [
         'create_error'           => 'Error creating type',
         'confirm_deletion_title' => 'Confirm Deletion',
         'confirm_deletion_heading' => 'Confirm Deletion',
-        'confirm_deletion_message' => 'Are you sure you want to delete the type ":name"?',
+        'confirm_deletion_message' => 'Are you sure you want to delete the type ',
         'confirm_deletion_yes'   => 'Yes, delete',
     ],
 
@@ -305,7 +305,7 @@ return [
     'admin_delete_user' => [
         'page_title'     => 'Confirm User Deletion',
         'heading'        => 'Confirm User Deletion',
-        'confirmation'   => 'Are you sure you want to delete user ":name"?',
+        'confirmation'   => 'Are you sure you want to delete user ',
         'confirm_button' => 'Delete',
         'cancel_button'  => 'Cancel',
     ],
@@ -314,7 +314,7 @@ return [
     'admin_delete_admin' => [
         'page_title'     => 'Confirm Administrator Deletion',
         'heading'        => 'Confirm Administrator Deletion',
-        'confirmation'   => 'Are you sure you want to delete administrator ":name"?',
+        'confirmation'   => 'Are you sure you want to delete administrato r',
         'confirm_button' => 'Yes, delete',
         'cancel_button'  => 'Cancel',
     ],

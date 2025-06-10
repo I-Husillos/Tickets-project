@@ -39,13 +39,12 @@ class AdminAuthController extends Controller
 
         $admin = auth('admin')->user();
 
-        // 💡 Asegúrate de usar HasApiTokens en el modelo Admin
         $token = $admin->createToken('admin-session-token')->accessToken;
 
-        // 🔐 Guardar el token en la sesión temporalmente
-        session(['admin_token' => $token]);
+        // Guardar el token en la sesión temporalmente
+        session(['api_token' => $token]);
 
-        // 🚀 Redirigir al dashboard (flujo tradicional)
+        // Redirigir al dashboard (flujo tradicional)
         return redirect()->route('admin.manage.dashboard', ['locale' => app()->getLocale()]);
     }
 
@@ -57,3 +56,5 @@ class AdminAuthController extends Controller
         return redirect()->route('admin.login', ['locale' => app()->getLocale()]);
     }
 }
+
+

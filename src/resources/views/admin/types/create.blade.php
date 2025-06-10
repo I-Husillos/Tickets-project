@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.types.store', ['locale' => app()->getLocale()]) }}" method="POST">
+    <form id="create-type-form" action="/api/admin/types/store" method="POST">
         @csrf
         <div class="form-group">
             <label for="name">{{ __('general.admin_types.name') }}</label>

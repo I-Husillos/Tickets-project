@@ -58,7 +58,7 @@ return [
         'create_error'           => 'Error al crear el tipo',
         'confirm_deletion_title' => 'Confirmar Eliminación',
         'confirm_deletion_heading' => 'Confirmar Eliminación',
-        'confirm_deletion_message' => '¿Estás seguro de que deseas eliminar el tipo ":name"?',
+        'confirm_deletion_message' => '¿Estás seguro de que deseas eliminar el tipo ',
         'confirm_deletion_yes'   => 'Sí, eliminar',
     ],
 
@@ -308,7 +308,7 @@ return [
     'admin_delete_user' => [
         'page_title'      => 'Confirmar Eliminación Usuario',
         'heading'         => 'Confirmar Eliminación de usuario',
-        'confirmation'    => '¿Estás seguro de que deseas eliminar el usuario ":name"?',
+        'confirmation'    => '¿Estás seguro de que deseas eliminar el usuario ',
         'confirm_button'  => 'Sí, eliminar',
         'cancel_button'   => 'Cancelar',
     ],
@@ -316,7 +316,7 @@ return [
     'admin_delete_admin' => [
         'page_title'      => 'Confirmar Eliminación Administrador',
         'heading'         => 'Confirmar Eliminación de administrador',
-        'confirmation'    => '¿Estás seguro de que deseas eliminar el admin ":name"?',
+        'confirmation'    => '¿Estás seguro de que deseas eliminar el admin ',
         'confirm_button'  => 'Eliminar',
         'cancel_button'   => 'Cancelar',
     ],

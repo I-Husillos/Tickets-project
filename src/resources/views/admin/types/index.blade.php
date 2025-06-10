@@ -49,5 +49,9 @@
     </div> <!-- /.card -->
 
 </div> <!-- /.container-fluid -->
+
+@include('components.modals.edit-type-modal')
+@include('components.modals.delete-type-modal')
+
 @endsection
 

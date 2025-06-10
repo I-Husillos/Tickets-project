@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    const form = document.getElementById('create-user-form');
+    const form = document.getElementById('create-admin-form');
 
-    
     form.addEventListener('submit', async function (e) {
         e.preventDefault(); // Evita el envío tradicional
 
@@ -10,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const locale = document.documentElement.lang;
         const token = localStorage.getItem('api_token'); // o desde meta tag
 
-        try {
-            const response = await fetch('/api/admin/users/store', {
+        try{
+            const response = await fetch('/api/admin/admins/store', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -28,13 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            alert(data.message); // Usuario creado correctamente.
-            form.reset(); // Limpiar formulario
-            // Redirigir o actualizar tabla
-        } catch (error) {
-            console.error('Error al crear usuario:', error);
+            alert(data.message);
+            form.reset();
+        }catch (error) {
+            console.error('Error al crear el administrador:', error);
+            alert('Error al crear el administrador: ' + error.message); 
         }
     });
 });
-
-

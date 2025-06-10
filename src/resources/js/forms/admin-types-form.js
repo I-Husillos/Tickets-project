@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    const form = document.getElementById('create-user-form');
+    const form = document.getElementById('create-type-form');
 
-    
     form.addEventListener('submit', async function (e) {
         e.preventDefault(); // Evita el envío tradicional
 
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const token = localStorage.getItem('api_token'); // o desde meta tag
 
         try {
-            const response = await fetch('/api/admin/users/store', {
+            const response = await fetch('/api/admin/types/store', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -28,13 +27,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            alert(data.message); // Usuario creado correctamente.
-            form.reset(); // Limpiar formulario
-            // Redirigir o actualizar tabla
+            alert(data.message);
+            form.reset();
+
         } catch (error) {
-            console.error('Error al crear usuario:', error);
+            console.error('Error al crear el tipo:', error);
+            alert('Error al crear el tipo: ' + error.message);
         }
     });
 });
-
-

@@ -12,12 +12,14 @@ use App\Http\Controllers\Api\AssignedTicketDataController;
 use App\Http\Controllers\Api\CommentDataController;
 use App\Http\Controllers\Api\EventHistoryDataController;
 use App\Http\Controllers\Api\TicketApiController;
+use App\Http\Controllers\Api\Types\TypeApiController;
 use App\Http\Controllers\Api\UserApiController;
+use App\Http\Controllers\Api\Auth\ApiLoginController;
 
 Route::prefix('admin')->group(function () {
     // Rutas públicas
     Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [ApiLoginController::class, 'login']);
 
 
     Route::middleware('auth:api')->get('/test', function (Request $request) {
@@ -26,7 +28,7 @@ Route::prefix('admin')->group(function () {
         ]);
     });
 
-    
+
     // Rutas protegidas con Passport
     Route::middleware('auth:api')->group(function () {
         Route::get('/users', [UserDataController::class, 'indexUsers']);
@@ -43,12 +45,16 @@ Route::prefix('admin')->group(function () {
 
 
         Route::get('/types', [TypeDataController::class, 'indexTypes']);
+        Route::post('/types/store', [TypeApiController::class, 'storeType']);
+        Route::put('/types/{type}', [TypeApiController::class, 'updateType']);
+        Route::delete('/types/{type}', [TypeApiController::class, 'destroyType']);
 
 
         Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
         Route::get('/assigned-tickets', [AssignedTicketDataController::class, 'indexAssignedTickets']);
         Route::patch('/tickets/{ticket}/close', [TicketApiController::class, 'close']);
         Route::patch('/tickets/{ticket}/reopen', [TicketApiController::class, 'reopen']);
+        Route::patch('/tickets/update/{ticket}', [TicketApiController::class, 'updateTicket']);
 
         Route::get('/tickets/{ticket}/comments', [CommentDataController::class, 'viewComments']);
 

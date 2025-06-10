@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 use App\Models\Ticket;
 use App\Models\User;
 use App\Services\TicketService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Models\EventHistory;
+use App\Http\Requests\UpdateDataTicketRequest;
+
 
 class TicketApiController extends Controller
 {
@@ -55,4 +57,23 @@ class TicketApiController extends Controller
 
         return response()->json(['message' => 'Ticket reabierto correctamente.']);
     }
+
+    public function updateTicket(UpdateDataTicketRequest $request, Ticket $ticket): JsonResponse
+    {
+        $admin = Auth::guard('api')->user();
+
+        $ticket->update($request->validated());
+
+        EventHistory::create([
+            'event_type' => 'Actualización',
+            'description' => 'Ticket con id ' . $ticket->id . ' actualizado por ' . $admin->name,
+            'user' => $admin->name,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Ticket actualizado correctamente.',
+        ]);
+    }
+
 }

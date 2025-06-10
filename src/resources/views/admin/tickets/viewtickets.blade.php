@@ -70,9 +70,19 @@
                         <!-- TAB: Editar ticket -->
                         <div class="active tab-pane" id="edit">
                             @can('update', $ticket)
-                            <form action="{{ route('admin.update.ticket', ['ticket' => $ticket->id, 'locale' => app()->getLocale()]) }}" method="POST">
+                            <form id="edit-ticket-form" action="/api/admin/tickets/update/{{ $ticket->id }}" method="POST">
                                 @csrf
                                 @method('PATCH')
+
+                                <div class="form-group">
+                                    <label for="title">{{ __('Título') }}</label>
+                                    <input type="text" name="title" id="title" class="form-control" value="{{ $ticket->title }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">{{ __('Descripción') }}</label>
+                                    <textarea name="description" id="description" class="form-control" rows="3" required>{{ $ticket->description }}</textarea>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="status">{{ __('general.admin_ticket_details.status_label') }}</label>

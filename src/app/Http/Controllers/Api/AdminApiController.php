@@ -21,6 +21,7 @@ class AdminApiController extends Controller
         $admin->name = $data['name'];
         $admin->email = $data['email'];
         $admin->password = Hash::make($request->password);
+        $admin->superadmin = $request->boolean('superadmin');
         $admin->save();
 
 
@@ -32,7 +33,7 @@ class AdminApiController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Administrador creado correctamente.'
+            'message' => 'Administrador creado correctamente, puede volver a la lista de administradores.'
         ], 201);
     }
 
