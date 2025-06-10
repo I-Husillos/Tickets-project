@@ -6,6 +6,12 @@
 
             <meta name="notification-url-template" content="{{ route(request()->is('admin*') ? 'admin.notifications.show' : 'user.notifications.show', ['locale' => app()->getLocale(), 'notification' => ':id']) }}">
 
+
+            @if(session('api_token'))
+                <script>
+                    localStorage.setItem('api_token', @json(session('api_token')));
+                </script>
+            @endif
             
             <title>@yield('title', __('general.frontoffice.layout.page_title'))</title>
 

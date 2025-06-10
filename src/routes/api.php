@@ -86,7 +86,7 @@ Route::prefix('user')->group(function () {
 
     Route::middleware('auth:api_user')->group(function () {
         Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
-        Route::post('/tickets', [TicketApiController::class, 'storeTicket']);
+        Route::post('/tickets/store', [TicketApiController::class, 'storeTicket']);
         Route::patch('/tickets/update/{ticket}', [TicketApiController::class, 'updateTicket']);
         Route::delete('/tickets/{ticket}', [TicketApiController::class, 'destroyTicket']);
 
