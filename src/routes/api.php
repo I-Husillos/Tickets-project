@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\TicketApiController;
 use App\Http\Controllers\Api\Types\TypeApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\Auth\ApiLoginController;
+use App\Http\Controllers\Api\UserNotificationController;
+use App\Http\Controllers\Api\AdminNotificationController;
 use Monolog\Handler\RotatingFileHandler;
 
 Route::prefix('admin')->group(function () {
@@ -51,7 +53,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/types/{type}', [TypeApiController::class, 'destroyType']);
 
 
-        Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
+        Route::get('/tickets', [TicketDataController::class, 'indexTicketsAdmin']);
         Route::get('/assigned-tickets', [AssignedTicketDataController::class, 'indexAssignedTickets']);
         Route::patch('/tickets/{ticket}/close', [TicketApiController::class, 'close']);
         Route::patch('/tickets/{ticket}/reopen', [TicketApiController::class, 'reopen']);
@@ -60,6 +62,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/tickets/{ticket}/comments', [CommentDataController::class, 'viewComments']);
 
         Route::delete('/comments/delete/{comment}', [CommentDataController::class, 'deleteComment']);
+
+
+
+        Route::get('/notifications', [AdminNotificationController::class, 'getNotifications']);
+        Route::patch('/notifications/{id}/read', [AdminNotificationController::class, 'markAsRead']);
+        Route::patch('/notifications/{id}/unread', [AdminNotificationController::class, 'markAsUnread']);
+        Route::get('/notifications/{id}', [AdminNotificationController::class, 'showNotification']);
+
 
         Route::get('/historyEvents', [EventHistoryDataController::class, 'indexEventHistory']);
 
@@ -85,12 +95,17 @@ Route::prefix('user')->group(function () {
 
 
     Route::middleware('auth:api_user')->group(function () {
-        Route::get('/tickets', [TicketDataController::class, 'indexTickets']);
+        Route::get('/tickets', [TicketDataController::class, 'indexTicketsUsers']);
         Route::post('/tickets/store', [TicketApiController::class, 'storeTicket']);
         Route::patch('/tickets/update/{ticket}', [TicketApiController::class, 'updateTicket']);
         Route::delete('/tickets/{ticket}', [TicketApiController::class, 'destroyTicket']);
 
 
+        Route::get('/notifications', [UserNotificationController::class, 'getNotifications']);
+        Route::patch('/notifications/{id}/read', [UserNotificationController::class, 'markAsRead']);
+        Route::patch('/notifications/{id}/unread', [UserNotificationController::class, 'markAsUnread']);
+        Route::get('/notifications/{id}', [UserNotificationController::class, 'showNotification']);
+    
 
     });
 });

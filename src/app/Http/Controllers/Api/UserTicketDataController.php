@@ -21,6 +21,7 @@ class UserTicketDataController extends Controller
 
     public function index(Request $request)
     {
+        
         $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';
         App::setLocale($locale);
 

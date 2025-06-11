@@ -13,10 +13,16 @@ class UserTicketQueryService
         // Solo tickets del usuario autenticado
         $query->where('user_id', Auth::id());
 
-        // Filtro por estado si lo hay
-        if ($request->filled('status')) {
-            $query->where('status', $request->input('status'));
+        
+        if ($request->has('search.value')) {
+            $search = $request->input('search.value');
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%$search%")
+                  ->orWhere('status', 'LIKE', "%$search%")
+                  ->orWhere('priority', 'LIKE', "%$search%");
+            });
         }
+        
 
         return $query;
     }

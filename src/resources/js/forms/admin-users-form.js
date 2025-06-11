@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     const form = document.getElementById('create-user-form');
+    if (!form) return;
 
     
     form.addEventListener('submit', async function (e) {

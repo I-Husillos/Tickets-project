@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    $('.user-view-notification-btn').on('click', function () {
+    $(document).on('click', '.show-notification', function () {
         const notificationId = $(this).data('id');
         const locale = document.documentElement.lang || 'es';
         const modal = $('#notificationModal');
@@ -14,10 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = response.data;
             
                 let html = `
-                    <h5 class="mb-3">
-                        <i class="fas fa-bell"></i> 
-                        ${data.title ?? 'Notificación'}
-                    </h5>
                     <p>${data.message ?? ''}</p>
                 `;
             

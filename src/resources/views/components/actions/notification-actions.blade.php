@@ -1,14 +1,18 @@
-<form action="{{ route('admin.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}"
-      method="POST" class="d-inline">
-    @csrf
-    @method('PATCH')
-    <button type="submit" class="btn btn-sm btn-outline-success">
-        {{ __('general.admin_notifications.mark_as_read') }}
+<div class="btn-group btn-group-sm" role="group">
+    {{-- Botón para marcar como leída --}}
+    <button type="button"
+            class="btn btn-outline-success mark-as-read"
+            data-id="{{ $notification->id }}"
+            title="{{ __('general.admin_notifications.mark_as_read') }}">
+        <i class="fas fa-check"></i>
     </button>
-</form>
 
-<button type="button"
-        class="btn btn-sm btn-outline-info show-notification"
-        data-id="{{ $notification->id }}">
-    <i class="fas fa-eye"></i>
-</button>
+
+    {{-- Botón para ver el contenido --}}
+    <button type="button"
+            class="btn btn-sm btn-outline-info show-notification"
+            data-id="{{ $notification->id }}"
+            title="{{ __('Ver detalle') }}">
+        <i class="fas fa-eye"></i>
+    </button>
+</div>

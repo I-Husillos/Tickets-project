@@ -23,6 +23,7 @@ import './sidebar-toggle.js';
 // import './forms/admin-login.js';
 import './notifications/notifications.js';
 import './notifications/admin-notifications.js';
+import './notifications/notifications-actions.js';
 import './comments/deleteCommentTicket.js';
 import './forms/admin-users-form.js';
 import './forms/admin-admins-form.js';
@@ -31,6 +32,7 @@ import './forms/admin-tickets-form.js';
 import './admin/users/admin-users-actions';
 import './admin/admins/admin-admins-actions.js';
 import './admin/types/admin-types-actions.js';
+import './user/user-ticket.actions.js';
 // import './admin/tickets/admin-tickets-actions';
 // import './forms/admin-events-form.js';
 // import './admin/events/admin-events-actions';
@@ -46,6 +48,8 @@ import { initAssignedTicketsTable } from './tables/admin-assigned-tickets-table'
 import { initAdminEventsTable } from './tables/admin-events-table';
 import { initAdminCommentsTable } from './tables/admin-comments';
 import { initUserTicketsTable } from './tables/user-tickets-table';
+import { initUserNotificationsTable } from './tables/user-notifications-table.js';
+import { initAdminNotificationsTable } from './tables/admin-notifications-table.js';
 
 import { initTicketActionButtons } from './tickets/events.js';
 
@@ -83,7 +87,9 @@ const tablasDataTables = [
     { id: 'tabla-comentarios', fn: initAdminCommentsTable },
     { id: 'tabla-eventos', fn: initAdminEventsTable },
     { id: 'tabla-comentarios', fn: initAdminCommentsTable },
-    { id: 'tabla-users-tickets', fn: initUserTicketsTable },
+    { id: 'tabla-tickets-usuario', fn: initUserTicketsTable },
+    { id: 'tabla-notificaciones-usuario', fn: initUserNotificationsTable },
+    { id: 'tabla-notificaciones-admin', fn: initAdminNotificationsTable },
 ];
 
 

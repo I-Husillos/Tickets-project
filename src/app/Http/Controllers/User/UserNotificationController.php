@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notification;
 use App\Services\NotificationService;
+use Illuminate\Support\Facades\Log;
 
 class UserNotificationController extends Controller
 {
@@ -28,19 +29,6 @@ class UserNotificationController extends Controller
         return view('user.notifications.viewnotifications', compact('notifications'));
     }
 
-    public function markAsRead($locale, $notificationId)
-    {
-        $user = Auth::guard('user')->user();
-        
-        $notification = $user->notifications->find($notificationId);
-
-        if ($notification) {
-            $notification->markAsRead();
-        }
-
-        return redirect()->route('user.notifications', ['locale' => $locale]);
-    }
-
     public function showUserNotification(String $locale, $notification)
     {
         $user = Auth::guard('user')->user();
@@ -54,6 +42,23 @@ class UserNotificationController extends Controller
             'data' => NotificationService::format($notificationId, $locale, 'user')
         ]);
     }
+    
+    public function markAsRead($locale, $notificationId)
+    {
+        Log::info('Marcar como leída', [$notificationId]);
+
+        $user = Auth::guard('user')->user();
+        
+        $notification = $user->notifications->find($notificationId);
+
+        if ($notification) {
+            $notification->markAsRead();
+        }
+
+        return redirect()->route('user.notifications', ['locale' => $locale]);
+    }
+
+
 
     public function markAsUnread(String $locale, $notification)
     {

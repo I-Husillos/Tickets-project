@@ -4,27 +4,31 @@
 namespace App\Services\TicketsService;
 
 use Illuminate\Support\Facades\View;
+use App\Models\Ticket;
 
 class UserTicketDataActions
 {
-    protected $viewComponent;
-
-    public function __construct()
+    public function transform(Ticket $ticket, string $locale): array
     {
-        $this->viewComponent = 'components.actions.user-ticket-actions';
-    }
+        // Rutas traducidas del usuario
+        $showUrl = url("/$locale/" . trans('routes.user.tickets.show', [], $locale));
+        $showUrl = str_replace('{ticket}', $ticket->id, $showUrl);
+        $showUrl .= '?username=' . $ticket->user_id;
 
-    public function transform($ticket, $locale): array
-    {
+        $editUrl = url("/$locale/" . trans('routes.user.tickets.edit', [], $locale));
+        $editUrl = str_replace('{ticket}', $ticket->id, $editUrl);
+        $editUrl .= '?username=' . $ticket->user_id;
+
         return [
             'title' => $ticket->title,
             'status' => ucfirst($ticket->status),
             'priority' => ucfirst($ticket->priority),
-            'comments_count' => $ticket->comments->count(),
-            'created_at' => $ticket->created_at->format('d/m/Y'),
-            'actions' => View::make($this->viewComponent, [
+            'comments' => $ticket->comments()->count(),
+            'date' => $ticket->created_at->format('d/m/Y'),
+            'actions' => View::make('components.actions.user-ticket-actions', [
                 'ticket' => $ticket,
-                'locale' => $locale
+                'showUrl' => $showUrl,
+                'editUrl' => $editUrl,
             ])->render(),
         ];
     }

@@ -16,29 +16,29 @@ $breadcrumbs = [
     @if ($notifications->isEmpty())
         <p>No tienes notificaciones.</p>
     @else
-    <form method="GET" action="{{ route('user.notifications', ['locale' => app()->getLocale()]) }}" class="mb-4">
-        <div class="form-row">
-            <div class="col-md-4">
-            <select name="type" class="form-control">
-                <option value="">-- {{ __('frontoffice.filter_by_type') }} --</option>
-                <option value="status" {{ request('type') == 'status' ? 'selected' : '' }}>{{ __('frontoffice.filter_by_change_status') }}</option>
-                <option value="comment" {{ request('type') == 'comment' ? 'selected' : '' }}>{{ __('frontoffice.filter_by_add_comment') }}</option>
-            </select>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary">{{ __('frontoffice.filter') }}</button>
-            </div>
-        </div>
-    </form>
 
         <div class="list-group mt-4">
-            @foreach ($notifications as $notification)
-                @include('components.notification-card', ['notification' => $notification, 'context' => 'user'])
-            @endforeach
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table id="tabla-notificaciones-usuario"
+                        class="table table-bordered table-hover mb-0 dt-responsive nowrap"
+                        data-api-url="{{ url('/api/user/notifications') }}"
+                        data-locale="{{ app()->getLocale() }}">
+                        <thead class="text-center bg-white font-weight-bold">
+                            <tr>
+                                <th>{{ __('Tipo') }}</th>
+                                <th>{{ __('Contenido') }}</th>
+                                <th>{{ __('Fecha') }}</th>
+                                <th>{{ __('Acciones') }}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
-
+    
         @push('modals')
-            @include('components.modals.showNotifications') {{-- sin pasar $notification --}}
+            @include('components.modals.showNotifications')
         @endpush
 
 

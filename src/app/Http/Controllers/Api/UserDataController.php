@@ -5,25 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
-use App\Services\UsersDataTable\UserQueryService;
-use App\Services\UsersDataTable\UserDataActions;
 
 use App\Services\DataTables\GenericQueryService;
 use App\Services\DataTables\GenericDataActions;
 
 class UserDataController extends Controller
 {
-    protected $queryService;
-    protected $dataActions;
-
-    public function __construct(UserQueryService $queryService, UserDataActions $dataActions)
-    {
-        $this->queryService = $queryService;
-        $this->dataActions = $dataActions;
-    }
-
     public function indexUsers(Request $request)
     {
         $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';

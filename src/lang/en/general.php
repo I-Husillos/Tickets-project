@@ -159,6 +159,7 @@ return [
         'mark_as_read'       => 'Mark as Read',
         'mark_as_unread'     => 'Marcar como no leída',
         'mark_all_as_read' => 'Mark All as Read',
+        'modal_title'        => 'Notification Details',
         'read'               => 'Read',
         'unread'             => 'Unread',
         'view_button'        => 'View',

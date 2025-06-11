@@ -2,12 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
 
 
 class RouteServiceProvider extends ServiceProvider
@@ -28,23 +25,44 @@ class RouteServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $currentLocale = app()->getLocale();
-            $alternateLocale = $currentLocale == 'es' ? 'en' : 'es';
-
-            $currentRouteName = Route::currentRouteName();
-
-
-
-            $translatedRoute = trans("routes.$currentRouteName", [], $alternateLocale);
-
-            
-            $alternateUrl = url("/$alternateLocale/$translatedRoute");
-            
+            $alternateLocale = $currentLocale === 'es' ? 'en' : 'es';
+        
+            $currentRoute = Route::current();
+            $routeName = $currentRoute?->getName();
+            $routeParameters = $currentRoute?->parameters() ?? [];
+        
+            $alternateUrl = url("/$alternateLocale");
+        
+            if ($routeName && isset($routeParameters)) {
+                try {
+                    // Carga las traducciones del otro idioma
+                    $translatedRoutes = trans('routes', [], $alternateLocale);
+        
+                    // Obtiene la ruta traducida usando el nombre
+                    $translatedPath = $translatedRoutes[$routeName] ?? null;
+        
+                    if ($translatedPath) {
+                        // Reemplaza los parámetros en la URL
+                        foreach ($routeParameters as $key => $value) {
+                            $translatedPath = str_replace("{{$key}}", is_object($value) ? $value->id : $value, $translatedPath);
+                        }
+                        
+        
+                        $alternateUrl = url("/$alternateLocale/$translatedPath");
+                    }
+        
+                } catch (\Exception $e) {
+                    $alternateUrl = url("/$alternateLocale");
+                }
+            }
+        
             $view->with([
                 'currentLocale' => $currentLocale,
                 'alternateLocale' => $alternateLocale,
-                'alternateUrl' => $alternateUrl
+                'alternateUrl' => $alternateUrl,
             ]);
         });
+        
 
         Route::prefix('api')
             ->middleware('api')
