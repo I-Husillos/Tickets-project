@@ -91,6 +91,19 @@ class UserNotificationController extends Controller
         return response()->json(['error' => 'Notification not found'], 404);
     }
 
+    public function markAsUnread(Request $request, $notificationId)
+    {
+        $user = auth('api_user')->user();
+        $notification = $user->notifications()->find($notificationId);
+
+        if ($notification) {
+            $notification->update(['read_at' => null]);
+            return response()->json(['message' => 'Notification marked as unread']);
+        }
+
+        return response()->json(['error' => 'Notification not found'], 404);
+    }
+
 
 }
 
