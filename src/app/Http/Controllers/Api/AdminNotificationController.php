@@ -39,10 +39,10 @@ class AdminNotificationController extends Controller
         $data = $notifications->map(function ($notification) use ($locale) {
             return [
                 'id' => $notification->id,
-                'message' => $notification->data['message'],
+                'content' => $notification->data['message'],
                 'type' => $notification->data['type'],
                 'date' => $notification->created_at->diffForHumans(),
-                'actions' => view('admin.partials.notification-actions', compact('notification'))->render()
+                'actions' => view('components.actions.notification-actions', compact('notification'))->render()
             ];
         });
 

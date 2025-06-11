@@ -24,7 +24,7 @@
                 <div class="table-responsive">
                     <table id="tabla-notificaciones-admin"
                         class="table table-bordered table-hover mb-0 dt-responsive nowrap"
-                        data-api-url="{{ url('/api/user/notifications') }}"
+                        data-api-url="{{ url('/api/admin/notifications') }}"
                         data-locale="{{ app()->getLocale() }}">
                         <thead class="text-center bg-white font-weight-bold">
                             <tr>
