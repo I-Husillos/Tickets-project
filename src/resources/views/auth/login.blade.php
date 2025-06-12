@@ -5,11 +5,15 @@
 @section('content')
     <p class="login-box-msg">{{ __('general.frontoffice.auth.login.heading') }}</p>
 
-    @if (session('status'))
+    @if (session('error'))
         <div class="alert alert-danger">
-            {{ session('status') }}
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="{{ __('Cerrar') }}">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
+
 
     <form method="POST" action="{{ route('login', ['locale' => app()->getLocale()]) }}">
         @csrf

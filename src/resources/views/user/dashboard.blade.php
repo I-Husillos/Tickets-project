@@ -10,6 +10,15 @@ $breadcrumbs = [
     ];
 @endphp
 <div class="container">
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="{{ __('Cerrar') }}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     
     <!-- Resumen General -->
     <div class="row">

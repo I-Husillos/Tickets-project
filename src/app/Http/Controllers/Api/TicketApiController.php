@@ -76,4 +76,31 @@ class TicketApiController extends Controller
         ]);
     }
 
+
+    public function destroyTicket(Ticket $ticket): JsonResponse
+    {
+        $user = Auth::guard('api_user')->user(); // Cambia a 'api' si estás usando ese guard
+
+        // Verifica que el ticket pertenezca al usuario autenticado
+        if ($ticket->user_id !== $user->id) {
+            return response()->json(['message' => 'No tienes permiso para eliminar este ticket.'], 403);
+        }
+
+        // Elimina el ticket
+        $ticket->delete();
+
+        // Registra el evento de eliminación en el historial
+        EventHistory::create([
+            'event_type' => 'Eliminación',
+            'description' => 'El ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" ha sido eliminado por ' . $user->name,
+            'user' => $user->name,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Ticket eliminado correctamente.',
+        ]);
+    }
+
+
 }

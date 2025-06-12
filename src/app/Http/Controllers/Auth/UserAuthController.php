@@ -28,7 +28,7 @@ class UserAuthController extends Controller
 
         if(!Auth::guard('user') -> attempt($credentials))
         {
-            return redirect()->route('user.dashboard', ['locale' => app()->getLocale()])->with('success', 'Inicio de sesión exitoso.');
+            return back()->with('error', 'Correo o contraseña incorrectos.');
         }
 
 
