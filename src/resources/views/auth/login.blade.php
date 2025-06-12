@@ -5,6 +5,12 @@
 @section('content')
     <p class="login-box-msg">{{ __('general.frontoffice.auth.login.heading') }}</p>
 
+    @if (session('status'))
+        <div class="alert alert-danger">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login', ['locale' => app()->getLocale()]) }}">
         @csrf
 
