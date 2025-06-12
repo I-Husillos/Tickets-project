@@ -42,7 +42,10 @@
 
 
 @push('modals')
-    @include('components.modals.admin_notifications') {{-- sin pasar $notification --}}
+    @include('components.modals.admin_notifications', [
+        'notifications' => $notifications,
+        'guard' => 'admin'
+    ])
 @endpush
 </div>
 

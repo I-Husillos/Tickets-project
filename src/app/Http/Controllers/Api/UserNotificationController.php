@@ -11,6 +11,7 @@ use Illuminate\Notifications\DatabaseNotification;
 
 class UserNotificationController extends Controller
 {
+
     public function getNotifications(Request $request)
     {
         $user = auth('api_user')->user();
@@ -46,7 +47,8 @@ class UserNotificationController extends Controller
                 'date' => $notification->created_at->format('d/m/Y H:i'),
                 'actions' => view('components.actions.notification-actions', [
                     'notification' => $notification,
-                    'locale' => $locale
+                    'locale' => $locale,
+                    'guard' => 'user'
                 ])->render(),
             ];
         });
@@ -74,11 +76,13 @@ class UserNotificationController extends Controller
         }
 
         return response()->json([
-            'data' => NotificationService::format($notificationId, $locale, 'user')
+            'data' => NotificationService::format($notification, 'user')
         ]);
     }
 
-    public function markAsRead(Request $request, $notificationId)
+
+
+    public function markAsRead($notificationId)
     {
         $user = auth('api_user')->user();
         $notification = $user->notifications()->find($notificationId);
@@ -91,7 +95,7 @@ class UserNotificationController extends Controller
         return response()->json(['error' => 'Notification not found'], 404);
     }
 
-    public function markAsUnread(Request $request, $notificationId)
+    public function markAsUnread($notificationId)
     {
         $user = auth('api_user')->user();
         $notification = $user->notifications()->find($notificationId);
@@ -103,7 +107,6 @@ class UserNotificationController extends Controller
 
         return response()->json(['error' => 'Notification not found'], 404);
     }
-
 
 }
 

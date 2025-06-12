@@ -73,7 +73,6 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/historyEvents', [EventHistoryDataController::class, 'indexEventHistory']);
 
-
     });
 
 });

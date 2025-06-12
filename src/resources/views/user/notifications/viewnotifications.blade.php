@@ -38,7 +38,10 @@ $breadcrumbs = [
         </div>
     
         @push('modals')
-            @include('components.modals.showNotifications')
+            @include('components.modals.showNotifications', [
+                'notifications' => $notifications,
+                'guard' => 'user'
+            ])
         @endpush
 
 

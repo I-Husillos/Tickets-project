@@ -12,6 +12,7 @@
                     localStorage.setItem('api_token', @json(session('api_token')));
                 </script>
             @endif
+
             
             <title>@yield('title', __('general.frontoffice.layout.page_title'))</title>
 

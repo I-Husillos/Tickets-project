@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class AdminAuthController extends Controller
 {
@@ -39,10 +40,17 @@ class AdminAuthController extends Controller
 
         $admin = auth('admin')->user();
 
+        // revocar tokens del otro guard user
+        DB::table('oauth_access_tokens')
+            ->where('user_id', $admin->id)
+            ->where('name', 'user-session-token')
+            ->update(['revoked' => true]);
+
         $token = $admin->createToken('admin-session-token')->accessToken;
 
         // Guardar el token en la sesión temporalmente
         session(['api_token' => $token]);
+        
 
         // Redirigir al dashboard (flujo tradicional)
         return redirect()->route('admin.manage.dashboard', ['locale' => app()->getLocale()]);

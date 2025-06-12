@@ -33,6 +33,7 @@ import './admin/users/admin-users-actions';
 import './admin/admins/admin-admins-actions.js';
 import './admin/types/admin-types-actions.js';
 import './user/user-ticket.actions.js';
+import './sync-auth.js'
 // import './admin/tickets/admin-tickets-actions';
 // import './forms/admin-events-form.js';
 // import './admin/events/admin-events-actions';
@@ -50,15 +51,19 @@ import { initAdminCommentsTable } from './tables/admin-comments';
 import { initUserTicketsTable } from './tables/user-tickets-table';
 import { initUserNotificationsTable } from './tables/user-notifications-table.js';
 import { initAdminNotificationsTable } from './tables/admin-notifications-table.js';
-
 import { initTicketActionButtons } from './tickets/events.js';
+
+import { getToken, clearTokenAndRedirect } from './api/auth.js';
 
 // --- Bootstrap Alert (necesario si usas JS para cerrarlas manualmente) ---
 import { Alert } from 'bootstrap';
 
 
 // --- TOKEN de autenticación ---
-const token = localStorage.getItem('api_token');
+const token = getToken();
+
+const $locale = document.documentElement.lang || 'en';
+
 
 if (token) {
     localStorage.setItem('api_token', token); // Persistencia

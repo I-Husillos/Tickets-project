@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
 class AdminNotificationController extends Controller
@@ -42,7 +43,11 @@ class AdminNotificationController extends Controller
                 'content' => $notification->data['message'],
                 'type' => $notification->data['type'],
                 'date' => $notification->created_at->diffForHumans(),
-                'actions' => view('components.actions.notification-actions', compact('notification'))->render()
+                'actions' => view('components.actions.notification-actions', [
+                    'notification' => $notification,
+                    'locale' => $locale,
+                    'guard' => 'admin',
+                ])->render(),
             ];
         });
 
@@ -55,20 +60,52 @@ class AdminNotificationController extends Controller
 
     }
 
-    public function markAsRead()
-    {
 
+    public function showNotification(Request $request, $notificationId)
+    {
+        $admin = auth('api')->user();
+
+        if (!$admin) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $notification = $admin->notifications()->find($notificationId);
+
+        if (!$notification) {
+            return response()->json(['error' => 'Notification not found'], 404);
+        }
+
+        return response()->json([
+            'data' => NotificationService::format($notification, 'admin')
+        ]);
     }
 
-    public function markAsUnread()
-    {
 
+    public function markAsRead($notificationId)
+    {
+        $admin = auth('api')->user();
+        $notification = $admin->notifications()->find($notificationId);
+
+        if ($notification) {
+            $notification->markAsRead();
+            return response()->json(['message' => 'Notification marked as read']);
+        }
+
+        return response()->json(['error' => 'Notification not found'], 404);
     }
 
-    public function showNotification()
+
+    public function markAsUnread($notificationId)
     {
+        $admin = auth('api')->user();
+        $notification = $admin->notifications()->find($notificationId);
 
+        if ($notification) {
+            $notification->update(['read_at' => null]);
+            return response()->json(['message' => 'Notification marked as unread']);
+        }
+
+        return response()->json(['error' => 'Notification not found'], 404);
     }
-
 
 }

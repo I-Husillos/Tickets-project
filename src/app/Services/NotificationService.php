@@ -17,7 +17,7 @@ class NotificationService
             'ticket_id'  => $data['ticket_id'] ?? null,
             'title'      => $data['title'] ?? null,
             'message'    => $data['message'] ?? null,
-            'comment'    => $data['comment'] ?? null,
+            'comment'    => $data['comment'] ?? null,   
             'author'     => $data['author'] ?? null,
             'created_by' => $data['created_by'] ?? null,
             'priority'   => $data['priority'] ?? null,

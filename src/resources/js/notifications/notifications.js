@@ -3,12 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const notificationId = $(this).data('id');
         const locale = document.documentElement.lang || 'es';
         const modal = $('#notificationModal');
+        const guard = $(this).data('guard');
         const container = $('#notificationDetails');
 
         container.html('<div class="text-center text-muted"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
 
         $.ajax({
-            url: `/${locale}/usuario/notificaciones/mostrar/${notificationId}`,
+            url: `/api/${guard}/notifications/${notificationId}`,
             method: 'GET',
             success: function (response) {
                 const data = response.data;

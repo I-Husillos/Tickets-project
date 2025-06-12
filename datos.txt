@@ -134,3 +134,4 @@ Usas métodos como $.on(), $.val(), etc.
 
 
 
+https://fontawesome.com/v4/icons/

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\EventHistory;
@@ -30,8 +31,14 @@ class UserAuthController extends Controller
             return redirect()->route('user.dashboard', ['locale' => app()->getLocale()])->with('success', 'Inicio de sesión exitoso.');
         }
 
+
         $user = auth('user') -> user();
 
+        // revocar tokens del otro guard admin
+        DB::table('oauth_access_tokens')
+        ->where('user_id', $user->id)
+        ->where('name', 'admin-session-token')
+        ->update(['revoked' => true]);
 
         $token = $user->createToken('user-session-token')->accessToken;
 
