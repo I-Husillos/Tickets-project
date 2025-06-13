@@ -34,6 +34,8 @@ import './admin/admins/admin-admins-actions.js';
 import './admin/types/admin-types-actions.js';
 import './user/user-ticket.actions.js';
 import './sync-auth.js'
+import './user/user-ticket-create.js';
+
 // import './admin/tickets/admin-tickets-actions';
 // import './forms/admin-events-form.js';
 // import './admin/events/admin-events-actions';

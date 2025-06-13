@@ -25,11 +25,11 @@ $breadcrumbs = [
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-                        </ul>
+                        </ul>   
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('user.tickets.store', ['locale' => app()->getLocale()]) }}">
+                <form id="ticketForm">
                     @csrf
                     <div class="form-group mt-3">
                         <label for="title">{{ __('frontoffice.tickets.title') }}</label>

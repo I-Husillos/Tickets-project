@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\StoreTicketRequest;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Services\TicketService;
@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\EventHistory;
 use App\Http\Requests\UpdateDataTicketRequest;
 use App\Jobs\SendNotifications;
+use Illuminate\Support\Facades\Log;
 
 class TicketApiController extends Controller
 {
@@ -109,5 +110,28 @@ class TicketApiController extends Controller
         ]);
     }
 
+    public function storeTicket(StoreTicketRequest $request): JsonResponse
+    {
+        $user = Auth::guard('api_user')->user();
+
+        $data = $request->validated();
+        $data['user_id'] = $user->id;
+
+        $ticket = Ticket::create($data);
+
+        EventHistory::create([
+            'event_type' => 'Creación',
+            'description' => 'Nuevo ticket creado con id ' . $ticket->id . ' por ' . $user->name,
+            'user' => $user->name,
+        ]);
+
+        SendNotifications::dispatch($ticket->id, 'created', $user);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Ticket creado correctamente.',
+            'ticket' => $ticket,
+        ], 201);
+    }
 
 }
