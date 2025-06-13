@@ -563,3 +563,19 @@
 2025-06-12 11:29:57,640 INFO spawned: 'php-server' with pid 7
 2025-06-12 11:29:58,675 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2025-06-12 11:29:58,676 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-06-12 12:49:47,073 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2025-06-12 12:49:47,383 INFO RPC interface 'supervisor' initialized
+2025-06-12 12:49:47,384 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2025-06-12 12:49:47,385 INFO supervisord started with pid 1
+2025-06-12 12:49:48,388 INFO spawned: 'laravel-queue' with pid 7
+2025-06-12 12:49:48,392 INFO spawned: 'php-server' with pid 8
+2025-06-12 12:49:49,555 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-06-12 12:49:49,556 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-06-13 05:58:32,012 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2025-06-13 05:58:32,319 INFO RPC interface 'supervisor' initialized
+2025-06-13 05:58:32,319 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2025-06-13 05:58:32,320 INFO supervisord started with pid 1
+2025-06-13 05:58:33,323 INFO spawned: 'laravel-queue' with pid 7
+2025-06-13 05:58:33,327 INFO spawned: 'php-server' with pid 8
+2025-06-13 05:58:34,502 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-06-13 05:58:34,503 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
