@@ -44,7 +44,7 @@ class CommentController extends Controller
         }
 
 
-        return redirect()->route('user.tickets.index', ['locale' => $locale, 'ticket' => $ticket])->with('success', 'Comentario agregado correctamente.');
+        return redirect()->back()->with('success', 'Comentario agregado correctamente.');
     }
 
     public function viewComments(Ticket $ticket)

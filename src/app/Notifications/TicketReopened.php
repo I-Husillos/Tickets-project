@@ -33,6 +33,7 @@ class TicketReopened extends Notification
     public function toDatabase($notifiable)
     {
         return [
+            'type' => 'reopened',
             'ticket_id' => $this->ticket->id,
             'message' => 'El ticket ha sido reabierto por ' . $this->admin->name,
         ];

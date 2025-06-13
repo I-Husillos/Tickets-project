@@ -54,6 +54,7 @@ return [
     ],
     'dashboard' => [
         'title' => 'Panel de Usuario',
+        'ticket_list' => 'Lista de Tickets',
         'open_tickets' => 'Tickets Abiertos',
         'resolved_tickets' => 'Tickets Resueltos',
         'pending_tickets' => 'Tickets Pendientes',

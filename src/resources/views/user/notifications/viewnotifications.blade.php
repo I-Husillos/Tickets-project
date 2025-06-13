@@ -10,14 +10,21 @@ $breadcrumbs = [
 ];
 @endphp
 
-
-<div class="container">
-
+<div class="container-fluid mt-3">
     @if ($notifications->isEmpty())
-        <p>No tienes notificaciones.</p>
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> {{ __('No tienes notificaciones.') }}
+        </div>
     @else
+        <!-- Card contenedora -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center bg-info text-white">
+                <h3 class="card-title m-0">
+                    <i class="fas fa-bell"></i>
+                    {{ __('frontoffice.notifications_title') }}
+                </h3>
+            </div>
 
-        <div class="list-group mt-4">
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table id="tabla-notificaciones-usuario"
@@ -35,21 +42,21 @@ $breadcrumbs = [
                     </table>
                 </div>
             </div>
+
+            @if ($notifications->hasPages())
+                <div class="card-footer d-flex justify-content-center">
+                    {{ $notifications->links('pagination::bootstrap-4') }}
+                </div>
+            @endif
         </div>
-    
+
+        <!-- Modales -->
         @push('modals')
             @include('components.modals.showNotifications', [
                 'notifications' => $notifications,
                 'guard' => 'user'
             ])
         @endpush
-
-
-        @if ($notifications->hasPages())
-            <div class="d-flex justify-content-center mt-4">
-                {{ $notifications->links('pagination::bootstrap-4') }}
-            </div>
-        @endif
     @endif
 </div>
 @endsection

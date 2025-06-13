@@ -55,6 +55,7 @@ return [
     ],
     'dashboard' => [
         'title' => 'Dashboard',
+        'ticket_list' => 'Ticket List',
         'open_tickets' => 'Open Tickets',
         'resolved_tickets' => 'Resolved Tickets',
         'pending_tickets' => 'Pending Tickets',

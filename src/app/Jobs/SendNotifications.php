@@ -99,32 +99,29 @@ class SendNotifications implements ShouldQueue
                 }
                 break;
             
-            case 'closed':
-                if ($ticket->user) {
-                    $ticket->user->notify(new TicketClosed($ticket, $this->extraData));
-                } else {
-                    Log::warning("No admin found for ticket: {$ticket->id}. Notifying all admins.");
-                    // Si no hay admin asociado, notificar a todos los administradores
-                    $admins = Admin::all();
-                    foreach ($admins as $admin) {
-                        $admin->notify(new TicketClosed($ticket, $this->extraData));
+                case 'closed':
+                    if ($ticket->user && $this->extraData instanceof Admin) {
+                        $ticket->user->notify(new TicketClosed($ticket, $this->extraData));
+                    } else {
+                        Log::warning("No admin found or actor is not Admin for ticket: {$ticket->id}. Notifying all admins.");
+                        $admins = Admin::all();
+                        foreach ($admins as $admin) {
+                            $admin->notify(new TicketClosed($ticket, $admin));
+                        }
                     }
-                }
-                break;
+                    break;
 
-            case 'reopened':
-
-                if ($ticket->user) {
-                    $ticket->user->notify(new TicketReopened($ticket, $this->extraData));
-                } else {
-                    Log::warning("No admin found for ticket: {$ticket->id}. Notifying all admins.");
-                    // Si no hay admin asociado, notificar a todos los administradores
-                    $admins = Admin::all();
-                    foreach ($admins as $admin) {
-                        $admin->notify(new TicketClosed($ticket, $this->extraData));
+                case 'reopened':
+                    if ($ticket->user && $this->extraData instanceof Admin) {
+                        $ticket->user->notify(new TicketReopened($ticket, $this->extraData));
+                    } else {
+                        Log::warning("No admin found or actor is not Admin for ticket: {$ticket->id}. Notifying all admins.");
+                        $admins = Admin::all();
+                        foreach ($admins as $admin) {
+                            $admin->notify(new TicketReopened($ticket, $admin));
+                        }
                     }
-                }
-                break;
+                    break;                
         
             default:
                 Log::warning("Tipo de notificación desconocido: {$this->type}");

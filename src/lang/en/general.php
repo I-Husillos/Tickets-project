@@ -64,7 +64,7 @@ return [
         'priority_label'    => 'Priority',
         'type_label'        => 'Type',
         'assigned_to_label' => 'Assigned to',
-        'unassigned'       => 'Unassigned',
+        'unassigned'        => 'Unassigned',
         'created_at_label'  => 'Creation Date',
         'updated_at_label'  => 'Last Update Date',
         'select_option'     => 'Select...',

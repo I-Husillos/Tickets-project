@@ -73,7 +73,7 @@ return [
         'priority_label'    => 'Prioridad',
         'type_label'        => 'Tipo',
         'assigned_to_label' => 'Asignado a',
-        'unassigned'       => 'Sin Asignar',
+        'unassigned'        => 'Sin Asignar',
         'created_at_label'  => 'Fecha de Creación',
         'updated_at_label'  => 'Fecha de la última Actualización',
         'select_option'     => 'Seleccionar...',

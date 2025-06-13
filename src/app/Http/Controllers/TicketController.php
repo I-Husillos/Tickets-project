@@ -72,7 +72,6 @@ class TicketController extends Controller
         SendNotifications::dispatch($ticket->id, 'created');
 
 
-
         return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', 'Ticket creado con éxito.');
     }
 
@@ -90,11 +89,8 @@ class TicketController extends Controller
     }
 
 
-
     public function show(String $locale,Ticket $ticket)
     {
-        Log::info('Ticket recibido:', ['ticket' => $ticket]);
-
         $this->authorize('view', $ticket);
 
         $ticket->load('comments');

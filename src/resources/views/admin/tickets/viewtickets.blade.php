@@ -113,7 +113,7 @@
                                     <select name="type" id="type" class="form-control">
                                         <option value="">{{ __('general.admin_ticket_details.select_option') }}</option>
                                         @foreach($ticketTypes as $type)
-                                            <option value="{{ $type->name }}" {{ $ticket->type == $type->name ? 'selected' : '' }}>
+                                            <option value="{{ $type->name }}" {{ trim(strtolower($ticket->type)) == trim(strtolower($type->name)) ? 'selected' : '' }}>
                                                 {{ ucfirst($type->name) }}
                                             </option>
                                         @endforeach
@@ -124,7 +124,7 @@
                                 <div class="form-group">
                                     <label for="assigned_to">{{ __('general.admin_ticket_details.assigned_to_label') }}</label>
                                     <select name="assigned_to" id="assigned_to" class="form-control">
-                                        <option value="">{{ __('general.admin_ticket_details.sin_asignar') }}</option>
+                                        <option value="">{{ __('general.admin_ticket_details.unassigned') }}</option>
                                         @foreach($admins as $admin)
                                             <option value="{{ $admin->id }}" {{ $ticket->admin_id == $admin->id ? 'selected' : '' }}>
                                                 {{ $admin->name }}

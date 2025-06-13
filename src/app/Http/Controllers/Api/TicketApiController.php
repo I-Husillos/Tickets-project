@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EventHistory;
 use App\Http\Requests\UpdateDataTicketRequest;
-
+use App\Jobs\SendNotifications;
 
 class TicketApiController extends Controller
 {
@@ -37,6 +37,8 @@ class TicketApiController extends Controller
             'Ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' cerrado por ' . $admin->name,
         );
 
+        SendNotifications::dispatch($ticket->id, 'closed', $admin);
+
         return response()->json(['message' => 'Ticket cerrado correctamente.']);
     }
 
@@ -55,6 +57,9 @@ class TicketApiController extends Controller
             'Ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' reabierto por ' . $admin->name,
         );
 
+        SendNotifications::dispatch($ticket->id, 'reopened', $admin);
+
+
         return response()->json(['message' => 'Ticket reabierto correctamente.']);
     }
 
@@ -69,6 +74,8 @@ class TicketApiController extends Controller
             'description' => 'Ticket con id ' . $ticket->id . ' actualizado por ' . $admin->name,
             'user' => $admin->name,
         ]);
+
+        SendNotifications::dispatch($ticket->id, 'updated');
 
         return response()->json([
             'success' => true,

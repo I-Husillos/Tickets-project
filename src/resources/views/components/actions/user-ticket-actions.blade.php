@@ -3,9 +3,11 @@
         <i class="fas fa-eye"></i> {{ __('Ver') }}
     </a>
 
-    <a href="{{ $editUrl }}" class="btn btn-warning btn-sm">
-        <i class="fas fa-edit"></i> {{ __('Editar') }}
-    </a>
+    @if ($ticket->status !== 'closed')
+        <a href="{{ $editUrl }}" class="btn btn-warning btn-sm">
+            <i class="fas fa-edit"></i> {{ __('Editar') }}
+        </a>
+    @endif
 
     <button class="btn btn-danger btn-sm btn-delete-user-ticket"
             data-id="{{ $ticket->id }}">
