@@ -156,11 +156,14 @@
     <!-- Notificaciones Recientes -->
     <div class="card shadow mb-4 rounded-4">
         <div class="card-header bg-info text-white rounded-top-4 d-flex justify-content-between align-items-center">
-            <h5 class="mb-0"><i class="fas fa-bell mr-2"></i> {{ __('general.admin_dashboard.recent_notifications_card_title') }}</h5>
+            <h5 class="mb-0">
+                <i class="fas fa-bell mr-2"></i> {{ __('general.admin_dashboard.recent_notifications_card_title') }}
+            </h5>
             <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="btn btn-sm btn-light">
                 <i class="fas fa-eye"></i> Ver todas
             </a>
         </div>
+
         <div class="card-body" style="max-height: 300px; overflow-y: auto;">
             @if($recentNotifications->count())
                 <ul class="list-group list-group-flush">
@@ -191,12 +194,10 @@
                                 <div>
                                     <div>{{ $notification->data['message'] }}</div>
                                     <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
-                                    {{-- Botón para ver detalle (mismo que en la vista de notificaciones) --}}
-                                    <div>
-                                        <button 
-                                            class="btn btn-link btn-sm text-info p-0 show-notification-dashboard"
-                                            data-id="{{ $notification->id }}">
-                                            <i class="fas fa-eye"></i> {{ __('Ver detalle') }}
+                                    <div class="mt-1">
+                                        <button class="btn btn-sm btn-link text-info p-0 show-notification-btn"
+                                                data-id="{{ $notification->id }}">
+                                            <i class="fas fa-eye"></i> Ver detalle
                                         </button>
                                     </div>
                                 </div>
@@ -217,7 +218,6 @@
 @push('modals')
     @include('components.modals.showNotifications')
 @endpush
-
 
 </div>
 @endsection

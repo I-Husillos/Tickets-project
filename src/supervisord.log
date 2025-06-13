@@ -579,3 +579,7 @@
 2025-06-13 05:58:33,327 INFO spawned: 'php-server' with pid 8
 2025-06-13 05:58:34,502 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2025-06-13 05:58:34,503 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-06-13 13:01:09,899 WARN received SIGQUIT indicating exit request
+2025-06-13 13:01:09,900 INFO waiting for laravel-queue, php-server to die
+2025-06-13 13:01:09,903 WARN stopped: php-server (terminated by SIGTERM)
+2025-06-13 13:01:10,909 WARN stopped: laravel-queue (terminated by SIGTERM)
