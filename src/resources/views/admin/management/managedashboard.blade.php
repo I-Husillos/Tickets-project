@@ -191,14 +191,16 @@
                                 <div>
                                     <div>{{ $notification->data['message'] }}</div>
                                     <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
+                                    {{-- Botón para ver detalle (mismo que en la vista de notificaciones) --}}
+                                    <div>
+                                        <button 
+                                            class="btn btn-link btn-sm text-info p-0 show-notification-dashboard"
+                                            data-id="{{ $notification->id }}">
+                                            <i class="fas fa-eye"></i> {{ __('Ver detalle') }}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <button 
-                                type="button"
-                                class="btn btn-sm btn-outline-info view-notification-btn"
-                                data-id="{{ $notification->id }}">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
                         </li>
                     @endforeach
                 </ul>
@@ -210,11 +212,11 @@
             @endif
         </div>
     </div>
-    @push('modals')
-        @include('components.modals.showNotifications')
-    @endpush
 
 
+@push('modals')
+    @include('components.modals.showNotifications')
+@endpush
 
 
 </div>

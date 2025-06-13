@@ -9,67 +9,63 @@
         ['label' => __('general.admin_assigned_tickets.page_title'), 'url' => route('admin.manage.tickets', ['locale' => app()->getLocale()])],
     ];
 @endphp
-<div class="container mt-5">
-    <div class="d-flex justify-content-end mt-4">
-        </div>
-        <!-- Formulario de filtro -->
-        <!-- <div class="card p-3 shadow-sm rounded-4 mt-4">
-            <form method="GET" action="{{ route('admin.manage.tickets', ['locale' => app()->getLocale()]) }}">
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        status
-                    </div>
-                    <div class="col-md-4">
-                        priority
-                    </div>
-                    <div class="col-md-4 text-end">
-                        submit
-                    </div>
-                </div>
-            </form>
-        </div> -->
 
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-warning">
-                        <i class="fas fa-ticket-alt"></i>
-                    </span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">{{ __('general.admin_dashboard.total_tickets') }}</span>
-                        <span class="info-box-number">{{ $totalTickets }}</span>
-                    </div>
-                </div>
-            </div>
+<div class="container-fluid mt-3">
 
-            <div class="col-md-4 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-success">
-                        <i class="fas fa-ticket-alt"></i>
-                    </span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">{{ __('general.admin_dashboard.resolved_tickets') }}</span>
-                        <span class="info-box-number">{{ $resolvedTickets }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-danger">
-                        <i class="fas fa-ticket-alt"></i>
-                    </span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">{{ __('general.admin_dashboard.pending_tickets') }}</span>
-                        <span class="info-box-number">{{ $pendingTickets }}</span>
-                    </div>
-                </div>
-            </div>
+    <!-- Card principal -->
+    <div class="card">
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+            <h3 class="card-title m-0">
+                <i class="fas fa-user-check"></i>
+                {{ __('general.admin_assigned_tickets.page_title') }}
+            </h3>
+            <!-- Botón opcional -->
+            {{-- <a href="#" class="btn btn-light text-dark">
+                <i class="fas fa-filter"></i> {{ __('Filtrar') }}
+            </a> --}}
         </div>
 
+        <div class="card-body">
+            <!-- Info boxes -->
+            <div class="row mb-4">
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning">
+                            <i class="fas fa-ticket-alt"></i>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{ __('general.admin_dashboard.total_tickets') }}</span>
+                            <span class="info-box-number">{{ $totalTickets }}</span>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Tabla -->
-        <div class="card-body pt-0">
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success">
+                            <i class="fas fa-ticket-alt"></i>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{ __('general.admin_dashboard.resolved_tickets') }}</span>
+                            <span class="info-box-number">{{ $resolvedTickets }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger">
+                            <i class="fas fa-ticket-alt"></i>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">{{ __('general.admin_dashboard.pending_tickets') }}</span>
+                            <span class="info-box-number">{{ $pendingTickets }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de tickets asignados -->
             <div class="table-responsive">
                 <table id="tabla-tickets-asignados"
                     class="table table-hover table-striped table-bordered text-center dt-responsive nowrap"
@@ -89,9 +85,10 @@
                     </thead>
                 </table>
             </div>
-        </div>
-    </div>
-</div>
+        </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
+
+</div> <!-- /.container-fluid -->
 @endsection
 
 

@@ -92,7 +92,6 @@ Route::prefix('user')->group(function () {
         });
     });
 
-
     Route::middleware('auth:api_user')->group(function () {
         Route::get('/tickets', [TicketDataController::class, 'indexTicketsUsers']);
         Route::post('/tickets/store', [TicketApiController::class, 'storeTicket']);

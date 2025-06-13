@@ -62,11 +62,17 @@ class SendNotifications implements ShouldQueue
 
         switch ($this->type) {
             case 'created':
-                $admins = Admin::all();
-            foreach ($admins as $admin) {
-                $admin->notify(new TicketCreatedNotification($ticket));
-            }
-            break;
+                if ($ticket->admin) {
+                    $ticket->admin->notify(new TicketCreatedNotification($ticket));
+                } else {
+                    // Notificar solo a superadmins si no hay admin asignado
+                    $superadmins = Admin::where('role', 'superadmin')->get();
+                    foreach ($superadmins as $admin) {
+                        $admin->notify(new TicketCreatedNotification($ticket));
+                    }
+                }
+                break;
+            
 
             case 'commented':
                 if ($ticket->user) {

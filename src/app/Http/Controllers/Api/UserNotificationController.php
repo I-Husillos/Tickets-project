@@ -42,7 +42,7 @@ class UserNotificationController extends Controller
 
         $data = $notifications->map(function ($notification) use ($locale) {
             return [
-                'type' => ucfirst($notification->data['type'] ?? 'N/A'),
+                'type' => $notification->data['type'] ?? '',
                 'content' => $notification->data['message'] ?? '',
                 'date' => $notification->created_at->format('d/m/Y H:i'),
                 'actions' => view('components.actions.notification-actions', [
