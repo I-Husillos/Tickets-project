@@ -90,41 +90,44 @@
     <div class="card shadow mb-4 rounded-4">
         <div class="card-header bg-primary text-white rounded-top-4 d-flex justify-content-between align-items-center">
             <h5 class="mb-0"><i class="fas fa-history mr-2"></i> {{ __('general.admin_dashboard.latest_events_card_title') }}</h5>
-            <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="btn btn-sm btn-light">
-                <i class="fas fa-list"></i> Ver todo
+            <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}"
+                class="btn btn-sm btn-outline-light">
+                <i class="fas fa-list"></i> Ver historial completo
             </a>
+
+
         </div>
-        <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+        <div class="card-body">
             @if($recentEvents->count())
                 <div class="table-responsive">
-                    <table class="table table-hover text-sm">
-                    <thead class="text-center bg-white font-weight-bold">
-                        <tr>
-                            <th><i class="fas fa-tag"></i> {{ __('Tipo') }}</th>
-                            <th>{{ __('Descripción') }}</th>
-                            <th><i class="fas fa-user"></i> {{ __('Usuario') }}</th>
-                            <th><i class="fas fa-clock"></i> {{ __('Fecha') }}</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                            @foreach($recentEvents as $event)
-                                <tr>
-                                    <td>
-                                        <span class="badge 
-                                            @if($event->event_type === 'created') badge-success
-                                            @elseif($event->event_type === 'updated') badge-warning
-                                            @elseif($event->event_type === 'deleted') badge-danger
-                                            @else badge-secondary
-                                            @endif">
-                                            {{ ucfirst($event->event_type) }}
-                                        </span>
-                                    </td>
-                                    <td>{{ $event->description }}</td>
-                                    <td><i class="fas fa-user-circle text-primary mr-1"></i> {{ $event->user }}</td>
-                                    <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                    <table class="table table-bordered table-striped table-hover text-sm">
+                        <thead class="text-center bg-white font-weight-bold">
+                            <tr>
+                                <th><i class="fas fa-tag"></i> {{ __('Tipo') }}</th>
+                                <th>{{ __('Descripción') }}</th>
+                                <th><i class="fas fa-user"></i> {{ __('Usuario') }}</th>
+                                <th><i class="fas fa-clock"></i> {{ __('Fecha') }}</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                @foreach($recentEvents as $event)
+                                    <tr>
+                                        <td>
+                                            <span class="badge 
+                                                @if($event->event_type === 'created') badge-success
+                                                @elseif($event->event_type === 'updated') badge-warning
+                                                @elseif($event->event_type === 'deleted') badge-danger
+                                                @else badge-secondary
+                                                @endif">
+                                                {{ ucfirst($event->event_type) }}
+                                            </span>
+                                        </td>
+                                        <td>{{ $event->description }}</td>
+                                        <td><i class="fas fa-user-circle text-primary mr-1"></i> {{ $event->user }}</td>
+                                        <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                     </table>
                 </div>
             @else
