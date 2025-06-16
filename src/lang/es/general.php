@@ -183,6 +183,7 @@ return [
         'superadmin_manage_admins'           => 'Administrar admins',
         'regular_view_tickets'               => 'Ver Mis Tickets',
         'regular_event_history'              => 'Historial de Eventos',
+        'view_all'                           => 'Ver Todo',
         
         // Estadísticas
         'registered_users'                   => 'Usuarios Registrados',

@@ -17,7 +17,6 @@ use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\Auth\ApiLoginController;
 use App\Http\Controllers\Api\UserNotificationController;
 use App\Http\Controllers\Api\AdminNotificationController;
-use Monolog\Handler\RotatingFileHandler;
 
 Route::prefix('admin')->group(function () {
     // Rutas públicas
@@ -58,6 +57,8 @@ Route::prefix('admin')->group(function () {
         Route::patch('/tickets/{ticket}/close', [TicketApiController::class, 'close']);
         Route::patch('/tickets/{ticket}/reopen', [TicketApiController::class, 'reopen']);
         Route::patch('/tickets/update/{ticket}', [TicketApiController::class, 'updateTicket']);
+        Route::delete('/tickets/delete/{ticket}', [TicketApiController::class, 'destroy']);
+
 
         Route::get('/tickets/{ticket}/comments', [CommentDataController::class, 'viewComments']);
 

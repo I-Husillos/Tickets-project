@@ -25,11 +25,20 @@ class CommentDataController extends Controller
         $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';
         App::setLocale($locale);
 
-        $comments = $ticket->comments()->with('author')->get();
+        $commentsQuery = $ticket->comments()->with('author');
+
+        $total = $commentsQuery->count();
+
+        // Simula paginación manual (puedes adaptarlo si usas filtros)
+        $start = (int) $request->input('start', 0);
+        $length = (int) $request->input('length', 10);
+        $draw = (int) $request->input('draw', 1);
+
+        $comments = $commentsQuery->skip($start)->take($length)->get();
 
         $data = $comments->map(function ($comment) use ($locale) {
             $view = View::make('components.actions.comment-actions', compact('comment'))->render();
-    
+
             return [
                 'author' => $comment->author->name,
                 'message' => $comment->message,
@@ -37,11 +46,15 @@ class CommentDataController extends Controller
                 'actions' => $view,
             ];
         });
-    
+
         return response()->json([
+            'draw' => $draw,
+            'recordsTotal' => $total,
+            'recordsFiltered' => $total, // Aquí podrías usar un filtrado real si lo necesitas
             'data' => $data,
         ]);
     }
+
 
     public function deleteComment(Comment $comment)
     {

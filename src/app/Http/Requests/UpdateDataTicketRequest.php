@@ -26,8 +26,11 @@ class UpdateDataTicketRequest extends FormRequest
             'description' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'priority' => 'required|string|max:255',
+            'status' => 'nullable|string|in:new,in_progress,pending,resolved,closed',
+            'assigned_to' => 'nullable|exists:admins,id',
         ];
     }
+
 
     public function messages()
     {
@@ -36,6 +39,7 @@ class UpdateDataTicketRequest extends FormRequest
             'description.required' => 'La descripción es obligatoria.',
             'type.required' => 'El tipo es obligatorio.',
             'priority.required' => 'La prioridad es obligatoria.',
+            'assigned_to.exists' => 'El administrador seleccionado no existe.'
         ];
     }
 }

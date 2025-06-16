@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTicketRequest;
 use App\Models\Ticket;
-use App\Models\User;
 use App\Services\TicketService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +12,7 @@ use App\Models\EventHistory;
 use App\Http\Requests\UpdateDataTicketRequest;
 use App\Jobs\SendNotifications;
 use Illuminate\Support\Facades\Log;
+
 
 class TicketApiController extends Controller
 {
@@ -68,7 +68,31 @@ class TicketApiController extends Controller
     {
         $admin = Auth::guard('api')->user();
 
-        $ticket->update($request->validated());
+        Log::info('Petición de actualización recibida', [
+            'admin_id' => $admin?->id,
+            'admin_name' => $admin?->name,
+            'auth_check' => $admin !== null,
+        ]);
+
+        if (!$admin) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No autenticado como admin.',
+            ], 401);
+        }
+
+        $validated = $request->validated();
+
+        // Aplicar los campos comunes
+        $ticket->fill($validated);
+
+        // Aplicar manualmente el campo assigned_to → admin_id
+        if (isset($validated['assigned_to'])) {
+            $ticket->admin_id = $validated['assigned_to'];
+        }
+
+        $ticket->save(); // guardar todos los cambios
+
 
         EventHistory::create([
             'event_type' => 'Actualización',
@@ -133,5 +157,30 @@ class TicketApiController extends Controller
             'ticket' => $ticket,
         ], 201);
     }
+    
+
+    public function destroy(Ticket $ticket): JsonResponse
+    {
+        $admin = Auth::guard('api')->user();
+
+
+        Log::info('Intentando eliminar ticket:', ['id' => $ticket->id]);
+
+        // Elimina el ticket
+        $ticket->delete();
+
+        // Registra el evento de eliminación en el historial
+        EventHistory::create([
+            'event_type' => 'Eliminación',
+            'description' => 'El ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" ha sido eliminado por ' . $admin->name,
+            'user' => $admin->name,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Ticket eliminado correctamente.',
+        ]);
+    }
+
 
 }

@@ -70,50 +70,49 @@
                         <!-- TAB: Editar ticket -->
                         <div class="active tab-pane" id="edit">
                             @can('update', $ticket)
-                            <form id="edit-ticket-form" action="/api/admin/tickets/update/{{ $ticket->id }}" method="POST">
-                                @csrf
-                                @method('PATCH')
 
+                            <form id="edit-ticket-form" data-ticket-id="{{ $ticket->id }}">
+                                @csrf {{-- solo si usas alguna validación JS basada en Blade --}}
+                                
                                 <div class="form-group">
-                                    <label for="title">{{ __('Título') }}</label>
-                                    <input type="text" name="title" id="title" class="form-control" value="{{ $ticket->title }}" required>
+                                    <label for="title">Título</label>
+                                    <input type="text" id="title" value="{{ $ticket->title }}" class="form-control" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description">{{ __('Descripción') }}</label>
-                                    <textarea name="description" id="description" class="form-control" rows="3" required>{{ $ticket->description }}</textarea>
+                                    <label for="description">Descripción</label>
+                                    <textarea id="description" class="form-control" rows="3" required>{{ $ticket->description }}</textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="status">{{ __('general.admin_ticket_details.status_label') }}</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="">{{ __('general.admin_ticket_details.select_option') }}</option>
+                                    <label for="status">Estado</label>
+                                    <select id="status" class="form-control">
                                         @foreach(['new', 'in_progress', 'pending', 'resolved', 'closed'] as $status)
-                                            <option value="{{ $status }}" {{ $ticket->status == $status ? 'selected' : '' }}>
+                                            <option value="{{ $status }}" {{ $ticket->status === $status ? 'selected' : '' }}>
                                                 {{ ucfirst($status) }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
 
+                                <!-- Prioridad -->
                                 <div class="form-group">
-                                    <label for="priority">{{ __('general.admin_ticket_details.priority_label') }}</label>
-                                    <select name="priority" id="priority" class="form-control">
-                                        <option value="">{{ __('general.admin_ticket_details.select_option') }}</option>
+                                    <label for="priority">Prioridad</label>
+                                    <select id="priority" class="form-control">
                                         @foreach(['low', 'medium', 'high', 'critical'] as $priority)
-                                            <option value="{{ $priority }}" {{ $ticket->priority == $priority ? 'selected' : '' }}>
+                                            <option value="{{ $priority }}" {{ $ticket->priority === $priority ? 'selected' : '' }}>
                                                 {{ ucfirst($priority) }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
 
+                                <!-- Tipo -->
                                 <div class="form-group">
-                                    <label for="type">{{ __('general.admin_ticket_details.type_label') }}</label>
-                                    <select name="type" id="type" class="form-control">
-                                        <option value="">{{ __('general.admin_ticket_details.select_option') }}</option>
+                                    <label for="type">Tipo</label>
+                                    <select id="type" class="form-control">
                                         @foreach($ticketTypes as $type)
-                                            <option value="{{ $type->name }}" {{ trim(strtolower($ticket->type)) == trim(strtolower($type->name)) ? 'selected' : '' }}>
+                                            <option value="{{ $type->name }}" {{ strtolower($ticket->type) === strtolower($type->name) ? 'selected' : '' }}>
                                                 {{ ucfirst($type->name) }}
                                             </option>
                                         @endforeach
@@ -122,11 +121,11 @@
 
                                 @if(Auth::guard('admin')->user()->superadmin)
                                 <div class="form-group">
-                                    <label for="assigned_to">{{ __('general.admin_ticket_details.assigned_to_label') }}</label>
-                                    <select name="assigned_to" id="assigned_to" class="form-control">
-                                        <option value="">{{ __('general.admin_ticket_details.unassigned') }}</option>
+                                    <label for="assigned_to">Asignado a</label>
+                                    <select id="assigned_to" class="form-control">
+                                        <option value="">{{ __('Sin asignar') }}</option>
                                         @foreach($admins as $admin)
-                                            <option value="{{ $admin->id }}" {{ $ticket->admin_id == $admin->id ? 'selected' : '' }}>
+                                            <option value="{{ $admin->id }}" {{ $ticket->admin_id === $admin->id ? 'selected' : '' }}>
                                                 {{ $admin->name }}
                                             </option>
                                         @endforeach
@@ -134,11 +133,9 @@
                                 </div>
                                 @endif
 
-                                <div class="form-group mt-4">
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-save"></i> {{ __('general.admin_ticket_details.save_changes') }}
-                                    </button>
-                                </div>
+                                <button type="submit" class="btn btn-success mt-3">
+                                    <i class="fas fa-save"></i> Guardar Cambios
+                                </button>
                             </form>
                             @endcan
                         </div>

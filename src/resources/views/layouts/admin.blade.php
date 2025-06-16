@@ -13,6 +13,11 @@
             </script>
         @endif
 
+        @if(session('api_token'))
+            <meta name="admin-token" content="{{ session('api_token') }}">
+        @endif
+
+
 
         <title>@yield('title', __('Panel de Administración'))</title>
 

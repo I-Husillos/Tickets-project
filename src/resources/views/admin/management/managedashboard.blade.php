@@ -81,22 +81,7 @@
                     </a>
                 </div>
             </div>
-            <!-- Acceso directo a historial de eventos -->
-            <!-- <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3>25</h3>
-                        <p>Historial de eventos</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <a href="{{ route('admin.history.events', ['locale' => app()->getLocale()]) }}" class="small-box-footer">
-                        Ver historial de eventos <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div> -->
-             
+
         @endif
 
     </div>
@@ -113,14 +98,14 @@
             @if($recentEvents->count())
                 <div class="table-responsive">
                     <table class="table table-hover text-sm">
-                        <thead class="sticky-top bg-primary text-white">
-                            <tr>
-                                <th><i class="fas fa-tag"></i></th>
-                                <th>{{ __('general.admin_dashboard.latest_events_table_description') }}</th>
-                                <th><i class="fas fa-user"></i></th>
-                                <th><i class="fas fa-clock"></i></th>
-                            </tr>
-                        </thead>
+                    <thead class="text-center bg-white font-weight-bold">
+                        <tr>
+                            <th><i class="fas fa-tag"></i> {{ __('Tipo') }}</th>
+                            <th>{{ __('Descripción') }}</th>
+                            <th><i class="fas fa-user"></i> {{ __('Usuario') }}</th>
+                            <th><i class="fas fa-clock"></i> {{ __('Fecha') }}</th>
+                        </tr>
+                    </thead>
                         <tbody>
                             @foreach($recentEvents as $event)
                                 <tr>
@@ -159,9 +144,12 @@
             <h5 class="mb-0">
                 <i class="fas fa-bell mr-2"></i> {{ __('general.admin_dashboard.recent_notifications_card_title') }}
             </h5>
-            <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="btn btn-sm btn-light">
-                <i class="fas fa-eye"></i> Ver todas
-            </a>
+            <div>
+                <a href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}"
+                class="btn btn-sm btn-light text-dark border">
+                    <i class="fas fa-eye"></i> {{ __('general.admin_dashboard.view_all') }}
+                </a>
+            </div>
         </div>
 
         <div class="card-body" style="max-height: 300px; overflow-y: auto;">
@@ -177,7 +165,6 @@
                                 'open', 'reopened' => 'fas fa-unlock',
                                 default => 'fas fa-info-circle'
                             };
-
                             $badge = match($type) {
                                 'comment' => 'primary',
                                 'status' => 'warning',
@@ -194,12 +181,6 @@
                                 <div>
                                     <div>{{ $notification->data['message'] }}</div>
                                     <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
-                                    <div class="mt-1">
-                                        <button class="btn btn-sm btn-link text-info p-0 show-notification-btn"
-                                                data-id="{{ $notification->id }}">
-                                            <i class="fas fa-eye"></i> Ver detalle
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -215,9 +196,12 @@
     </div>
 
 
+
 @push('modals')
     @include('components.modals.showNotifications')
 @endpush
 
 </div>
 @endsection
+
+

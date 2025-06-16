@@ -42,6 +42,7 @@ class EventHistoryDataController extends Controller
         $length = $request->input('length', 10);
         $query->skip($start)->take($length);
 
+
         $events = $query->get();
 
         $data = $events->map(fn ($event) => $this->eventHistoryDataActions->transform($event, $locale));

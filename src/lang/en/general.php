@@ -175,6 +175,7 @@ return [
         'superadmin_manage_admins' => 'Manage Admins',
         'regular_view_tickets' => 'View My Tickets',
         'regular_event_history'=> 'Event History',
+        'view_all'             => 'View All',
         
         // Statistics
         'registered_users'     => 'Registered Users',
