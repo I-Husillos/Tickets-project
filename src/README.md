@@ -99,7 +99,7 @@ La autenticación API se maneja con **Laravel Passport**, permitiendo la generac
 │   └── tests/                     # Pruebas unitarias y de características
 ├── docker-compose.yml             # Orquestación de contenedores
 ├── .env                           # Variables de entorno para Docker
-├── my.cnf                         # Configuración adicional para MySQL
+├── my.cnf                         # Configuración adicional para MySQL por conflictos de mayusculas al en Windows
 ├── DocumentacionUsuario.odt       # Manual de usuario
 ├── DocumentacionGeneral.odt       # Documentación general
 └── otros documentos *.docx        # Informes y buenas prácticas
