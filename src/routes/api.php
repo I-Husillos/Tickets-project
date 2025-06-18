@@ -1,22 +1,22 @@
 <?php
 
-use App\Http\Controllers\Api\AdminApiController;
+use App\Http\Controllers\Api\Admin\AdminApiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\UserDataController;
-use App\Http\Controllers\Api\AdminDataController;
-use App\Http\Controllers\Api\TicketDataController;
-use App\Http\Controllers\Api\TypeDataController;
-use App\Http\Controllers\Api\AssignedTicketDataController;
-use App\Http\Controllers\Api\CommentDataController;
-use App\Http\Controllers\Api\EventHistoryDataController;
-use App\Http\Controllers\Api\TicketApiController;
+use App\Http\Controllers\Api\Users\UserDataController;
+use App\Http\Controllers\Api\Admin\AdminDataController;
+use App\Http\Controllers\Api\Tickets\TicketDataController;
+use App\Http\Controllers\Api\Types\TypeDataController;
+use App\Http\Controllers\Api\Tickets\AssignedTicketDataController;
+use App\Http\Controllers\Api\Comments\CommentDataController;
+use App\Http\Controllers\Api\Events\EventHistoryDataController;
+use App\Http\Controllers\Api\Tickets\TicketApiController;
 use App\Http\Controllers\Api\Types\TypeApiController;
-use App\Http\Controllers\Api\UserApiController;
+use App\Http\Controllers\Api\Users\UserApiController;
 use App\Http\Controllers\Api\Auth\ApiLoginController;
-use App\Http\Controllers\Api\UserNotificationController;
-use App\Http\Controllers\Api\AdminNotificationController;
+use App\Http\Controllers\Api\Notifications\UserNotificationController;
+use App\Http\Controllers\Api\Notifications\AdminApiNotificationController;
 
 Route::prefix('admin')->group(function () {
     // Rutas públicas
@@ -66,10 +66,10 @@ Route::prefix('admin')->group(function () {
 
 
 
-        Route::get('/notifications', [AdminNotificationController::class, 'getNotifications']);
-        Route::patch('/notifications/{id}/read', [AdminNotificationController::class, 'markAsRead']);
-        Route::patch('/notifications/{id}/unread', [AdminNotificationController::class, 'markAsUnread']);
-        Route::get('/notifications/{id}', [AdminNotificationController::class, 'showNotification']);
+        Route::get('/notifications', [AdminApiNotificationController::class, 'getNotifications']);
+        Route::patch('/notifications/{id}/read', [AdminApiNotificationController::class, 'markAsRead']);
+        Route::patch('/notifications/{id}/unread', [AdminApiNotificationController::class, 'markAsUnread']);
+        Route::get('/notifications/{id}', [AdminApiNotificationController::class, 'showNotification']);
 
 
         Route::get('/historyEvents', [EventHistoryDataController::class, 'indexEventHistory']);

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Notifications;
 
 use App\Http\Controllers\Controller;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
-class AdminNotificationController extends Controller
+class AdminApiNotificationController extends Controller
 {
     public function getNotifications(Request $request)
     {

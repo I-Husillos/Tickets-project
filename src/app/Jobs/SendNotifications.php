@@ -50,9 +50,6 @@ class SendNotifications implements ShouldQueue
      */
     public function handle(): void
     {
-
-        Log::info("📬 Job recibido con tipo: {$this->type} y ticket ID: {$this->ticket}");
-
         $ticket = $this->ticket instanceof Ticket ? $this->ticket->load(['user', 'admin']): Ticket::with(['user', 'admin'])->find($this->ticket);
 
 
@@ -66,7 +63,6 @@ class SendNotifications implements ShouldQueue
 
         switch ($this->type) {
             case 'created':
-                Log::info("🚀 Job de creación de ticket lanzado para ID {$ticket->id}");
 
                 // Notificar solo a superadmins
                 $admins = Admin::where('superadmin', 1)->get();

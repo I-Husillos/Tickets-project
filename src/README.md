@@ -28,7 +28,7 @@ Este repositorio contiene una aplicación completa de gestión de incidencias y 
 
 ## Introducción
 
-Esta aplicación se construyó siguiendo los principios de diseño de *Clean Code* y *SOLID*. Permite manejar de forma sencilla la creación y seguimiento de tickets de soporte. Incluye control de usuarios, roles de administrador, notificaciones y un sistema API completo para integraciones externas.
+Esta aplicación se construyó siguiendo los principios de diseño de *SOLID*. Permite manejar de forma sencilla la creación y seguimiento de tickets de soporte. Incluye control de usuarios, roles de administrador, notificaciones y un sistema API completo para integraciones externas.
 
 ---
 

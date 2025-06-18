@@ -136,6 +136,13 @@ Usas métodos como $.on(), $.val(), etc.
 
 https://fontawesome.com/v4/icons/
 
+
+npm run build
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
 supervisorctl reread
 supervisorctl update
 supervisorctl restart laravel-queue
+
