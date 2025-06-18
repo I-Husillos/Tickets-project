@@ -81,9 +81,7 @@
                     </a>
                 </div>
             </div>
-
         @endif
-
     </div>
 
     <!-- Últimos eventos (Reducir tamaño) -->
@@ -94,7 +92,6 @@
                 class="btn btn-sm btn-outline-light">
                 <i class="fas fa-list"></i> Ver historial completo
             </a>
-
 
         </div>
         <div class="card-body">

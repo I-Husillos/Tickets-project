@@ -17,6 +17,7 @@
             <title>@yield('title', __('general.frontoffice.layout.page_title'))</title>
 
             @vite(['resources/js/app.js', 'resources/css/app.css'])
+
         
 
             <!-- Font Awesome -->
