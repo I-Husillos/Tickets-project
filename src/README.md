@@ -131,13 +131,9 @@ La autenticación API se maneja con **Laravel Passport**, permitiendo la generac
    Esto iniciará los servicios de PHP, MySQL, Redis, phpMyAdmin y Mailpit.
 6. **Ejecutar migraciones y seeders**
    ```bash
-   docker compose exec servicephp-fpm bash -c "php artisan migrate --seed"
+   docker compose exec servicephp-fpm bash -c "php artisan migrate --seed" para llenar la tabal de usuarios con datos de prueba.
    ```
-7. **Iniciar el trabajador de colas**
-   ```bash
-   docker compose exec servicephp-fpm bash -c "php artisan queue:work redis"
-   ```
-8. **Acceder a la aplicación**
+7. **Acceder a la aplicación**
    Visite `http://localhost:8080/es` (o `/en`) para entrar en el sistema. El idioma se selecciona mediante el prefijo en la URL.
 
 ---
