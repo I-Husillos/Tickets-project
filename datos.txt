@@ -135,3 +135,7 @@ Usas métodos como $.on(), $.val(), etc.
 
 
 https://fontawesome.com/v4/icons/
+
+supervisorctl reread
+supervisorctl update
+supervisorctl restart laravel-queue

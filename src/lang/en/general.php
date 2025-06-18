@@ -147,6 +147,7 @@ return [
     'admin_notifications' => [
         'message'            => 'Message',
         'page_title'         => 'Notifications',
+        'list_title'         => 'Notifications List',
         'header'             => 'Notifications',
         'no_notifications'   => 'You have no notifications.',
         'filter_placeholder' => '-- Filter by type --',

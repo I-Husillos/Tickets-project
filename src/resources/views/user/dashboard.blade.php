@@ -81,10 +81,12 @@ $breadcrumbs = [
                                            class="btn btn-sm btn-primary">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('user.tickets.edit', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}"
-                                           class="btn btn-sm btn-warning">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                        @if ($ticket->status !== 'closed')
+                                            <a href="{{ route('user.tickets.edit', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}"
+                                            class="btn btn-sm btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endif
                                     </div>
                                 </li>
                             @endforeach

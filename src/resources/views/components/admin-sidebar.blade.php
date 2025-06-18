@@ -10,7 +10,7 @@
         <!-- Opcional: Usuario autenticado -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">  
             <div class="info">
-                <a href="{{ route('user.show.profile', ['locale' => app()->getLocale()]) }}" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="{{ route('admin.show.profile', ['locale' => app()->getLocale()]) }}" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 

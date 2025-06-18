@@ -157,6 +157,7 @@ return [
         'page_title'         => 'Notificaciones',
         'header'             => 'Notificaciones',
         'no_notifications'   => 'No tienes notificaciones.',
+        'list_title'         => 'Notificaciones',
         'filter_placeholder' => '-- Filtrar por tipo --',
         'option_ticket'      => 'Ticket creado',
         'option_comment'     => 'Comentario añadido',

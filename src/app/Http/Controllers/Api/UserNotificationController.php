@@ -30,8 +30,13 @@ class UserNotificationController extends Controller
         $total = $query->count();
 
         if ($search = $request->input('search.value')) {
-            $query->where('data->message', 'LIKE', "%{$search}%");
+            $query->where(function ($q) use ($search) {
+                $q->where('data->message', 'LIKE', "%{$search}%")
+                  ->orWhere('data->type', 'LIKE', "%{$search}%")
+                  ->orWhere('data->author_name', 'LIKE', "%{$search}%");
+            });
         }
+        
 
         $filtered = $query->count();
 

@@ -149,7 +149,7 @@ class TicketApiController extends Controller
             'user' => $user->name,
         ]);
 
-        SendNotifications::dispatch($ticket->id, 'created', $user);
+        SendNotifications::dispatch($ticket->id, 'created');
 
         return response()->json([
             'success' => true,

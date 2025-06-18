@@ -50,6 +50,9 @@ class SendNotifications implements ShouldQueue
      */
     public function handle(): void
     {
+
+        Log::info("📬 Job recibido con tipo: {$this->type} y ticket ID: {$this->ticket}");
+
         $ticket = $this->ticket instanceof Ticket ? $this->ticket->load(['user', 'admin']): Ticket::with(['user', 'admin'])->find($this->ticket);
 
 
@@ -60,18 +63,25 @@ class SendNotifications implements ShouldQueue
             return;
         }
 
+
         switch ($this->type) {
             case 'created':
-                if ($ticket->admin) {
-                    $ticket->admin->notify(new TicketCreatedNotification($ticket));
-                } else {
-                    // Notificar solo a superadmins si no hay admin asignado
-                    $superadmins = Admin::where('role', 'superadmin')->get();
-                    foreach ($superadmins as $admin) {
-                        $admin->notify(new TicketCreatedNotification($ticket));
-                    }
+                Log::info("🚀 Job de creación de ticket lanzado para ID {$ticket->id}");
+
+                // Notificar solo a superadmins
+                $admins = Admin::where('superadmin', 1)->get();
+            
+                // Si no hay superadmins, notificar a todos los admins
+                if ($admins->isEmpty()) {
+                    Log::warning("No hay superadmins. Notificando a todos los administradores.");
+                    $admins = Admin::all();
+                }
+            
+                foreach ($admins as $admin) {
+                    $admin->notify(new TicketCreatedNotification($ticket));
                 }
                 break;
+            
             
 
             case 'commented':

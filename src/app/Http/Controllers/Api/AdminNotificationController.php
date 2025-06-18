@@ -27,7 +27,15 @@ class AdminNotificationController extends Controller
         $total = $query->count();
 
         if ($search = $request->input('search.value')) {
-            $query->where('data->message', 'LIKE', "%{$search}%");
+            if ($search = $request->input('search.value')) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('data->message', 'LIKE', "%{$search}%")
+                      ->orWhere('data->type', 'LIKE', "%{$search}%")
+                      ->orWhere('data->user', 'LIKE', "%{$search}%") // si se guarda el autor como 'user'
+                      ->orWhere('data->assigned_by', 'LIKE', "%{$search}%") // si es asignación
+                      ->orWhere('data->closed_by', 'LIKE', "%{$search}%"); // si es cierre
+                });
+            }            
         }
 
         $filtered = $query->count();

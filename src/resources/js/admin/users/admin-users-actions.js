@@ -1,5 +1,12 @@
 import $ from 'jquery';
 
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', main);
+} else {
+    main();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('api_token');
 

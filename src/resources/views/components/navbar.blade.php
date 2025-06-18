@@ -15,27 +15,24 @@
         @include('components.language-switcher')
 
         <!-- Perfil -->
-         <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.show.profile', ['locale' => app()->getLocale()]) }}" class="d-block text-white">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.show.profile', ['locale' => app()->getLocale()]) }}">
                 <i class="fas fa-user"></i>
             </a>
         </li>
 
-
-         
         <!-- Notificaciones -->
         <li class="nav-item dropdown">
-            <a class="nav-link" href="{{ route('user.notifications', ['locale' => app()->getLocale()]) }}" class="d-block text-white">
-                    @php
-                        // Verificamos que el usuario esté autenticado antes de obtener las notificaciones
-                        $unreadCount = Auth::check() ? Auth::user()->unreadNotifications->count() : 0;
-                    @endphp
+            <a class="nav-link" href="{{ route('user.notifications', ['locale' => app()->getLocale()]) }}">
                 <i class="far fa-bell"></i>
-                    @if ($unreadCount > 0)
-                        <span class="badge badge-warning navbar-badge">{{ $unreadCount }}</span>
-                    @endif
+                @if(Auth::check() && Auth::user()->unreadNotifications->count() > 0)
+                    <span class="badge badge-warning navbar-badge">
+                        {{ Auth::user()->unreadNotifications->count() }}
+                    </span>
+                @endif
             </a>
         </li>
+
 
         <!-- Cerrar Sesión -->
         <li class="nav-item">
@@ -48,3 +45,4 @@
         </li>
     </ul>
 </nav>
+

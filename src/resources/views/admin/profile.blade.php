@@ -24,11 +24,11 @@
                 @endif
             </dl>
         </div>
-        <!-- <div class="card-footer">
-            <a href="{{ route('user.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">
+        <div class="card-footer">
+            <a href="{{ route('admin.dashboard', ['locale' => app()->getLocale()]) }}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> {{ __('Volver') }}
             </a>
-        </div> -->
+        </div>
     </div>
 </div>
 @endsection
