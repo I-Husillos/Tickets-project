@@ -230,17 +230,6 @@ El sistema soporta dos idiomas: español (`es`) e inglés (`en`). Para cambiar e
 
 Los textos se cargan desde los archivos de traducción dentro de `src/lang/`. Se proveen traducciones para mensajes genéricos, validaciones, rutas y vistas.
 
----
-
-## Pruebas y Calidad
-
-Existen pruebas mínimas dentro del directorio `src/tests`. Se pueden ejecutar con PHPUnit desde el contenedor PHP:
-```bash
-docker compose exec servicephp-fpm bash -c "php artisan test"
-```
-También se puede ejecutar directamente `vendor/bin/phpunit` si se prefiere.
-
-La configuración `phpunit.xml` se encuentra en el directorio raíz de `src/` y puede ajustarse para agregar más pruebas.
 
 ---
 
