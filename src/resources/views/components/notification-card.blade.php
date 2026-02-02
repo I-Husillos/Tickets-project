@@ -20,7 +20,7 @@
 
             @if (! $isRead)
                 <form action="{{ route($isAdmin ? 'admin.notifications.read' : 'user.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}"
-                      method="POST" style="display:inline;" onclick="event.stopPropagation()">
+                    method="POST" style="display:inline;" onclick="event.stopPropagation()">
                     @csrf
                     @method('PATCH')
                     <button type="submit" class="btn btn-sm btn-outline-success">

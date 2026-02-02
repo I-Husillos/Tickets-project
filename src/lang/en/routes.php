@@ -63,12 +63,11 @@ return [
         'admin.users.create' => 'admin/users/create',
         'admin.users.store' => 'admin/users/store',
         'admin.users.edit' => 'admin/users/edit/{user}',
-        'admin.users.update' => 'admin/users/update/{user}',
         'admin.users.destroy' => 'admin/users/destroy/{user}',
         'admin.users.confirm_delete' => 'admin/users/confirm-delete/{user}',
 
         // Comments
-        'admin.ajax.ticket_comments' => 'administrador/tickets/{ticket}/comentarios/json',
+        'admin.ajax.ticket_comments' => 'admin/tickets/{ticket}/comments/json',
         'admin.comments.add' => 'admin/comments/add/{ticket}',
         'admin.comments.delete' => 'admin/comments/delete/{comment}',
         'admin.comments.view' => 'admin/comments/view/{ticket}',

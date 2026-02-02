@@ -46,7 +46,6 @@
                         
             <!-- Sidebar -->
             @include('components.admin-sidebar')
-              
 
             <div class="content-wrapper">
                 <div class="content-header">

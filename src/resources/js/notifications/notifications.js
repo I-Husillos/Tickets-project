@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let html = `
                     <p>${data.message ?? ''}</p>
                 `;
-            
+
                 // Mostramos datos específicos según el tipo de notificación
                 switch (data.type) {
                     case 'comment':

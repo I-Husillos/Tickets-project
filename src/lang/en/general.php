@@ -14,21 +14,23 @@ return [
         'historial_eventos'    => 'Event History',
         'notificaciones'       => 'Notifications',
         'cerrar_sesion'        => 'Log Out',
+        'tickets'              => 'Tickets',
         'types'                => 'Types',
         'manage_ticket_types'  => 'Manage Ticket Types',
     ],
 
     // Traducciones específicas para el dashboard
-    'admin_dashboard' => [
-        'dashboard_title'    => 'Dashboard - Administrator',
-        'panel_admin'        => 'Admin Panel',
-        'welcome'            => 'Welcome',
-        'logout'             => 'Log Out',
-        'manage_tickets'     => 'Manage Tickets',
-        'ticket_types'       => 'Ticket Types',
-        'users_and_admins'   => 'Users and Admins',
-        'assigned_tickets'   => 'Assigned Tickets',
-    ],
+    // 'admin_dashboard' => [
+    //     'dashboard_title'    => 'Dashboard - Administrator',
+    //     'panel_admin'        => 'Admin Panel',
+    //     'welcome'            => 'Welcome',
+    //     'superadmin_manage_all_users' => 'Manage All users',
+    //     'logout'             => 'Log Out',
+    //     'manage_tickets'     => 'Manage Tickets',
+    //     'ticket_types'       => 'Ticket Types',
+    //     'users_and_admins'   => 'Users and Admins',
+    //     'assigned_tickets'   => 'Assigned Tickets',
+    // ],
 
     // Otras traducciones…
     'admin_types' => [
@@ -172,6 +174,7 @@ return [
         'control_panel'        => 'Control Panel',
         'welcome_message'      => 'Welcome, :name',
         'direct_access_title'  => 'Quick Access',
+        'superadmin_manage_all_users' => 'Manage all users',
         'superadmin_manage_users'  => 'Manage Users',
         'superadmin_manage_admins' => 'Manage Admins',
         'regular_view_tickets' => 'View My Tickets',

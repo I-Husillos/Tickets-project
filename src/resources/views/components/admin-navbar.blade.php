@@ -22,7 +22,6 @@
         </li>
 
 
-         
         <!-- Notificaciones -->
         <li class="nav-item dropdown">
             <a class="nav-link" href="{{ route('admin.notifications', ['locale' => app()->getLocale()]) }}" class="d-block text-white">

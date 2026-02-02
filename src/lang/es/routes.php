@@ -39,6 +39,8 @@ return [
         'admin.manage.dashboard' => 'administrador/panel-control',
         'admin.show.profile' => 'administrador/perfil',
 
+        'admin.api.token' => 'admin/api/token',
+
 
         // Tickets
         'admin.ajax.tickets' => 'administrador/tickets/ajax',

@@ -669,3 +669,22 @@
 2025-06-18 12:18:07,836 INFO spawned: 'php-server' with pid 8
 2025-06-18 12:18:08,871 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2025-06-18 12:18:08,872 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-06-18 12:59:22,004 WARN received SIGQUIT indicating exit request
+2025-06-18 12:59:22,005 INFO waiting for laravel-queue, php-server to die
+2025-06-18 12:59:22,007 WARN stopped: php-server (terminated by SIGTERM)
+2025-06-18 12:59:22,010 WARN stopped: laravel-queue (terminated by SIGTERM)
+2026-02-02 10:14:43,058 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2026-02-02 10:14:43,063 INFO RPC interface 'supervisor' initialized
+2026-02-02 10:14:43,063 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2026-02-02 10:14:43,064 INFO supervisord started with pid 1
+2026-02-02 10:14:44,068 INFO spawned: 'laravel-queue' with pid 6
+2026-02-02 10:14:44,072 INFO spawned: 'php-server' with pid 7
+2026-02-02 10:14:45,102 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2026-02-02 10:14:45,103 INFO success: php-server entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2026-02-02 10:14:45,248 WARN exited: laravel-queue (exit status 1; not expected)
+2026-02-02 10:14:46,254 INFO spawned: 'laravel-queue' with pid 12
+2026-02-02 10:14:46,905 WARN exited: laravel-queue (exit status 1; not expected)
+2026-02-02 10:14:47,906 INFO spawned: 'laravel-queue' with pid 17
+2026-02-02 10:14:48,501 WARN exited: laravel-queue (exit status 1; not expected)
+2026-02-02 10:14:50,505 INFO spawned: 'laravel-queue' with pid 22
+2026-02-02 10:14:51,507 INFO success: laravel-queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
