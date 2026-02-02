@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 // Mostramos datos específicos según el tipo de notificación
-                switch (data.type) {
+                switch (data.type) {                        
                     case 'comment':
                         if (data.author) {
                             html += `<p><strong>Autor:</strong> ${data.author}</p>`;
@@ -38,17 +38,34 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         if (data.updated_by && data.updated_by.name) {
                             html += `<p><strong>Actualizado por:</strong> ${data.updated_by.name}</p>`;
+                        } else if (data.updated_by && typeof data.updated_by === 'string') {
+                            html += `<p><strong>Actualizado por:</strong> ${data.updated_by}</p>`;
                         }
                         break;
             
-                    case 'close':
+                    case 'closed':
                         if (data.created_by) {
                             html += `<p><strong>Cerrado por:</strong> ${data.created_by}</p>`;
                         }
                         break;
-            
-                    case 'reopen':
-                        if (data.author) {
+
+                    case 'create':
+                        if (data.created_by && data.created_by.name) {
+                            html += `<p><strong>Creado por:</strong> ${data.created_by.name}</p>`;
+                        } else if (data.created_by && typeof data.created_by === 'string') {
+                            html += `<p><strong>Creado por:</strong> ${data.created_by}</p>`;
+                        } else if (data.author) {
+                            html += `<p><strong>Creado por:</strong> ${data.author}</p>`;
+                        }
+                        if (data.ticket) {
+                            html += `<p><strong>Ticket:</strong> ${data.ticket}</p>`;
+                        }
+                        break;
+
+                    case 'reopened':
+                        if (data.created_by) {
+                            html += `<p><strong>Reabierto por:</strong> ${data.created_by}</p>`;
+                        } else if (data.author) {
                             html += `<p><strong>Reabierto por:</strong> ${data.author}</p>`;
                         }
                         break;

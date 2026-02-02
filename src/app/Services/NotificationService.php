@@ -8,9 +8,7 @@ class NotificationService
     {
         $data = $notification->data;
 
-        $routeName = $guard === 'admin'
-            ? 'admin.manage.tickets'
-            : 'user.tickets.show';
+        $routeName = $guard === 'admin' ? 'admin.view.ticket' : 'user.tickets.show';
 
         return [
             'type'       => $data['type'] ?? null,
