@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Notifications;
 use App\Http\Controllers\Controller;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class AdminApiNotificationController extends Controller
 {
@@ -16,7 +17,12 @@ class AdminApiNotificationController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $locale = $request->header('X-Locale') ?? app()->getLocale();
+        $locale = $request->header('X-Locale') ?? 'es';
+        // Validar que el locale sea válido
+        if (!in_array($locale, ['es', 'en'])) {
+            $locale = 'es';
+        }
+        app()->setLocale($locale);
 
         $query = $admin->notifications();
 
@@ -30,7 +36,7 @@ class AdminApiNotificationController extends Controller
             if ($search = $request->input('search.value')) {
                 $query->where(function ($q) use ($search) {
                     $q->where('data->message', 'LIKE', "%{$search}%")
-                      ->orWhere('data->type', 'LIKE', "%{$search}%")
+                       ->orWhere('data->type', 'LIKE', "%{$search}%")
                       ->orWhere('data->user', 'LIKE', "%{$search}%") // si se guarda el autor como 'user'
                       ->orWhere('data->assigned_by', 'LIKE', "%{$search}%") // si es asignación
                       ->orWhere('data->closed_by', 'LIKE', "%{$search}%"); // si es cierre
@@ -77,14 +83,22 @@ class AdminApiNotificationController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        $locale = $request->header('X-Locale') ?? 'es';
+        // Validar que el locale sea válido
+        if (!in_array($locale, ['es', 'en'])) {
+            $locale = 'es';
+        }
+        app()->setLocale($locale);
+
         $notification = $admin->notifications()->find($notificationId);
+        
 
         if (!$notification) {
             return response()->json(['error' => 'Notification not found'], 404);
         }
 
         return response()->json([
-            'data' => NotificationService::format($notification, 'admin')
+            'data' => NotificationService::format($notification, $locale, 'admin')
         ]);
     }
 

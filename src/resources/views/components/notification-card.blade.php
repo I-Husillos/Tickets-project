@@ -11,12 +11,16 @@
         </div>
 
         <div class="btn-group">
-            <button type="button"
-                    class="btn btn-sm btn-outline-info {{ $isAdmin ? 'admin-view-notification-btn' : 'user-view-notification-btn' }}"
-                    data-id="{{ $notification->id }}"
-                    title="{{ __('Ver detalles') }}">
+            <button
+                type="button"
+                class="btn btn-sm btn-outline-info show-notification"
+                data-id="{{ $notification->id }}"
+                data-guard="admin"
+                data-locale="{{ app()->getLocale() }}"
+            >
                 <i class="fas fa-eye"></i>
             </button>
+
 
             @if (! $isRead)
                 <form action="{{ route($isAdmin ? 'admin.notifications.read' : 'user.notifications.read', ['locale' => app()->getLocale(), 'notification' => $notification->id]) }}"

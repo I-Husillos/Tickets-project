@@ -18,7 +18,7 @@ return [
         'user.tickets.edit' => 'usuario/tickets/editar/{ticket}',
         'user.tickets.update' => 'usuario/tickets/actualizar/{ticket}',
         'user.tickets.store' => 'usuario/tickets/almacenar',
-        'user.tickets.show' => 'usuario/tickets/mostrar/{ticket}',
+        'user.tickets.show' => 'usuario/tickets/{ticket}',
         'user.tickets.comment' => 'usuario/tickets/agregar-comentario/{ticket}',
         'user.tickets.validate' => 'usuario/tickets/validar',
         'user.tickets.destroy' => 'usuario/tickets/eliminar/{ticket}',
@@ -51,7 +51,7 @@ return [
         'admin.ajax.assigned_tickets' => 'administrador/tickets/asignados/ajax',
         'admin.tickets.assign' => 'administrador/tickets/asignar/{ticket}',
         'admin.manage.tickets' => 'administrador/tickets/lista',
-        'admin.view.ticket' => 'administrador/tickets/mostrar/{ticket}',
+        'admin.view.ticket' => 'administrador/tickets/{ticket}',
 
 
         // Users

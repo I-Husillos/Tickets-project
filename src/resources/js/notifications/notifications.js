@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     $(document).on('click', '.show-notification', function () {
         const notificationId = $(this).data('id');
-        const locale = document.documentElement.lang || 'es';
         const modal = $('#notificationModal');
         const guard = $(this).data('guard');
+        const locale = $(this).data('locale');
         const container = $('#notificationDetails');
 
         container.html('<div class="text-center text-muted"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
         $.ajax({
             url: `/api/${guard}/notifications/${notificationId}`,
             method: 'GET',
+            headers: {
+                'X-Locale': locale
+            },
             success: function (response) {
                 const data = response.data;
             
@@ -45,8 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
                     case 'closed':
                         if (data.created_by) {
-                            html += `<p><strong>Cerrado por:</strong> ${data.created_by}</p>`;
+                            html += `<p><strong>El ticket:</strong> ${data.ticket} <strong> del usuario </strong> ${data.author} <strong> ha sido cerrado.</strong></p>`;
                         }
+
                         break;
 
                     case 'create':
@@ -84,12 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.link) {
                     html += `
                         <div class="mt-3 text-center">
-                            <a href="${data.link}" class="btn btn-outline-primary" target="_blank">
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary go-to-ticket"
+                                data-link="${data.link}">
                                 <i class="fas fa-ticket-alt"></i> Ver ticket
-                            </a>
+                            </button>
                         </div>
                     `;
                 }
+
             
                 $('#notificationDetails').html(html);
                 $('#notificationModal').modal('show');

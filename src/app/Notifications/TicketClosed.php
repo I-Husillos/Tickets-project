@@ -63,15 +63,4 @@ class TicketClosed extends Notification
         ];
     }
 
-
-
-    public function toDatabase($notifiable)
-    {
-        return [
-            'type' => 'closed',
-            'ticket_id' => $this->ticket->id,
-            'message' => 'El ticket ha sido cerrado por ' . $this->admin->name,
-        ];
-    }
-
 }

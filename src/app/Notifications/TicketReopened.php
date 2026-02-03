@@ -30,7 +30,12 @@ class TicketReopened extends Notification
                     ->line('Reabierto por: ' . $this->admin->name);
     }
 
-    public function toDatabase($notifiable)
+    /**
+     * Get the array representation of the notification.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray($notifiable): array
     {
         return [
             'type' => 'reopened',

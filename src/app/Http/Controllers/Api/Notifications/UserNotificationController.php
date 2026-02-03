@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 use Illuminate\Notifications\DatabaseNotification;
 
 
@@ -19,7 +20,12 @@ class UserNotificationController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $locale = $request->header('X-Locale') ?? app()->getLocale();
+        $locale = $request->header('X-Locale') ?? 'es';
+        // Validar que el locale sea válido
+        if (!in_array($locale, ['es', 'en'])) {
+            $locale = 'es';
+        }
+        app()->setLocale($locale);
 
         $query = $user->notifications();
 
@@ -74,6 +80,13 @@ class UserNotificationController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        $locale = $request->header('X-Locale') ?? 'es';
+        // Validar que el locale sea válido
+        if (!in_array($locale, ['es', 'en'])) {
+            $locale = 'es';
+        }
+        app()->setLocale($locale);
+
         $notification = $user->notifications()->find($notificationId);
 
         if (!$notification) {
@@ -81,7 +94,7 @@ class UserNotificationController extends Controller
         }
 
         return response()->json([
-            'data' => NotificationService::format($notification, 'user')
+            'data' => NotificationService::format($notification, $locale, 'user')
         ]);
     }
 

@@ -35,6 +35,7 @@ class AdminNotificationController extends Controller
 
 
 
+
         return view('admin.notifications.notifications', compact('notifications'));
     }
 

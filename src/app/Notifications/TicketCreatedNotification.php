@@ -45,15 +45,21 @@ class TicketCreatedNotification extends Notification
     }
 
 
-    public function toDatabase(object $notifiable)
+    /**
+     * Get the array representation of the notification.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(object $notifiable): array
     {
         return [
-            'ticket_id' => $this->ticket->id,
-            'title' => $this->ticket->title,
+            'type'        => 'create',
+            'ticket_id'   => $this->ticket->id,
+            'title'       => $this->ticket->title,
             'message'     => 'Se ha creado un nuevo ticket con el título: ' . $this->ticket->title . ' por el usuario: ' . $this->ticket->user->name,
             'created_by'  => $this->ticket->user->name,
+            'author'      => $this->ticket->user->name,
             'priority'    => $this->ticket->priority,
-            'type'        => $this->ticket->type,
             'status'      => $this->ticket->status,
         ];
     }
