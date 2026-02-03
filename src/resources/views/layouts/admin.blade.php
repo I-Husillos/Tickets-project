@@ -43,7 +43,7 @@
         <div class="wrapper">
             <!-- Navbar -->
             @include('components.admin-navbar')
-                        
+
             <!-- Sidebar -->
             @include('components.admin-sidebar')
 
