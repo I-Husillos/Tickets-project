@@ -66,6 +66,56 @@
                 </li>
 
                 <!-- Ayuda -->
+                <li class="nav-item has-treeview {{ Route::is('user.help.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Route::is('user.help.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-question-circle"></i>
+                        <p>
+                            Ayuda
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+
+                        <!-- Introducción -->
+                        <li class="nav-item">
+                            <a href="{{ route('user.help.index', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ Route::is('user.help.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Introducción</p>
+                            </a>
+                        </li>
+
+                        <!-- Tickets -->
+                        <li class="nav-item">
+                            <a href="{{ route('user.help.tickets', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ Route::is('user.help.tickets') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tickets</p>
+                            </a>
+                        </li>
+
+                        <!-- Notificaciones -->
+                        <li class="nav-item">
+                            <a href="{{ route('user.help.notifications', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ Route::is('user.help.notifications') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Notificaciones</p>
+                            </a>
+                        </li>
+
+                        <!-- FAQ -->
+                        <li class="nav-item">
+                            <a href="{{ route('user.help.faq', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ Route::is('user.help.faq') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Preguntas frecuentes</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
 
 
                 <!-- Cerrar sesión -->

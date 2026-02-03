@@ -31,6 +31,12 @@ return [
         'user.notifications.unread' => 'usuario/notificaciones/marcar-no-leida/{notification}',
         'user.notifications.show' => 'usuario/notificaciones/mostrar/{notification}',
 
+        // Help usuario
+        'user.help.index' => 'ayuda/usuario',
+        'user.help.faq' => 'ayuda/usuario/preguntas-frecuentes',
+        'user.help.tickets' => 'ayuda/usuario/tickets',
+        'user.help.notifications' => 'ayuda/usuario/notificaciones',
+
         //administrador
         'admin.redirect' => 'administrador',
         'admin.login' => 'administrador/iniciar-sesion',
@@ -109,6 +115,14 @@ return [
         // History
         'admin.ajax.events' => 'administrador/historial/eventos/ajax',
         'admin.history.events' => 'administrador/historial/eventos',
+
+        // Help administrador
+        'admin.help.index' => 'ayuda/administrador',
+        'admin.help.faq' => 'ayuda/administrador/preguntas-frecuentes',
+        'admin.help.users' => 'ayuda/administrador/usuarios',
+        'admin.help.tickets' => 'ayuda/administrador/tickets',
+        'admin.help.notifications' => 'ayuda/administrador/notificaciones',
+        'admin.help.events' => 'ayuda/administrador/eventos',
 
     ];
 

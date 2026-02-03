@@ -36,7 +36,6 @@
                 <!-- Navbar -->
                 @include('components.navbar')
 
-                
                 <!-- Sidebar -->
                 @include('components.sidebar')
                 

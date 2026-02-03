@@ -7,5 +7,25 @@ use Illuminate\Http\Request;
 
 class UserHelpController extends Controller
 {
-    //
+    public function indexHelpUser()
+    {
+        return view('help.user.intro');
+    }
+
+    public function faqHelpUser()
+    {
+        return view('help.user.faq');
+    }
+
+    public function ticketsHelpUser()
+    {
+        return view('help.user.tickets');
+    }
+
+    public function notificationsHelpUser()
+    {
+        return view('help.user.notifications');
+    }
+
+
 }

@@ -99,6 +99,79 @@
                     </a>
                 </li>
 
+
+                {{-- AYUDA --}}
+                <li class="nav-header">Ayuda</li>
+
+                <li class="nav-item has-treeview {{ request()->routeIs('admin.help.*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('admin.help.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-question-circle"></i>
+                        <p>
+                            Centro de ayuda
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview ps-3">
+
+                        {{-- Introducción --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.help.index', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ request()->routeIs('admin.help.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Introducción</p>
+                            </a>
+                        </li>
+
+                        {{-- Usuarios --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.help.users', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ request()->routeIs('admin.help.users') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Usuarios</p>
+                            </a>
+                        </li>
+
+                        {{-- Tickets --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.help.tickets', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ request()->routeIs('admin.help.tickets') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tickets</p>
+                            </a>
+                        </li>
+
+                        {{-- Notificaciones --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.help.notifications', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ request()->routeIs('admin.help.notifications') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Notificaciones</p>
+                            </a>
+                        </li>
+
+                        {{-- Eventos --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.help.events', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ request()->routeIs('admin.help.events') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Historial de eventos</p>
+                            </a>
+                        </li>
+
+                        {{-- FAQ --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.help.faq', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ request()->routeIs('admin.help.faq') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>FAQ</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
                 {{-- CERRAR SESIÓN --}}
                 <li class="nav-item">
                     <form method="POST" action="{{ route('admin.logout', ['locale' => app()->getLocale()]) }}">

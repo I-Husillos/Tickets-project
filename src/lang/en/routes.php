@@ -32,6 +32,12 @@ return [
         'admin.notifications.unread' => 'admin/notifications/mark-unread/{notification}',
         'user.notifications.show' => 'user/notifications/show/{notification}',
 
+        // Help usuario
+        'user.help.index' => 'help/user',
+        'user.help.faq' => 'help/user/frequently-asked-questions',
+        'user.help.tickets' => 'help/user/tickets',
+        'user.help.notifications' => 'help/user/notifications',
+
 
         // Administrator
         'admin.redirect' => 'admin',
@@ -102,6 +108,14 @@ return [
         // History
         'admin.ajax.events' => 'admin/history/events/ajax',
         'admin.history.events' => 'admin/history/events',
+
+        // Help administrador
+        'admin.help.index' => 'help/admin',
+        'admin.help.faq' => 'help/admin/frequently-asked-questions',
+        'admin.help.users' => 'help/admin/users',
+        'admin.help.tickets' => 'help/admin/tickets',
+        'admin.help.notifications' => 'help/admin/notifications',
+        'admin.help.events' => 'help/admin/events',
 
 ];
 
