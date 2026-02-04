@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Api\Notifications;
 
 use App\Http\Controllers\Controller;
+use App\Http\ValidatesLocale;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class AdminApiNotificationController extends Controller
 {
+    use ValidatesLocale;
+
+
     public function getNotifications(Request $request)
     {
         $admin = auth('api')->user();
@@ -17,7 +21,7 @@ class AdminApiNotificationController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $locale = $request->header('X-Locale') ?? 'es';
+        $locale = $this->getValidatedLocale($request);
         // Validar que el locale sea válido
         if (!in_array($locale, ['es', 'en'])) {
             $locale = 'es';
@@ -36,8 +40,8 @@ class AdminApiNotificationController extends Controller
             if ($search = $request->input('search.value')) {
                 $query->where(function ($q) use ($search) {
                     $q->where('data->message', 'LIKE', "%{$search}%")
-                       ->orWhere('data->type', 'LIKE', "%{$search}%")
-                      ->orWhere('data->user', 'LIKE', "%{$search}%") // si se guarda el autor como 'user'
+                      ->orWhere('data->type', 'LIKE', "%{$search}%")
+                    //   ->orWhere('data->user', 'LIKE', "%{$search}%") // si se guarda el autor como 'user'
                       ->orWhere('data->assigned_by', 'LIKE', "%{$search}%") // si es asignación
                       ->orWhere('data->closed_by', 'LIKE', "%{$search}%"); // si es cierre
                 });
@@ -51,19 +55,9 @@ class AdminApiNotificationController extends Controller
             ->take($request->input('length', 10))
             ->get();
 
-        $data = $notifications->map(function ($notification) use ($locale) {
-            return [
-                'id' => $notification->id,
-                'content' => $notification->data['message'],
-                'type' => $notification->data['type'],
-                'date' => $notification->created_at->diffForHumans(),
-                'actions' => view('components.actions.notification-actions', [
-                    'notification' => $notification,
-                    'locale' => $locale,
-                    'guard' => 'admin',
-                ])->render(),
-            ];
-        });
+        $data = $notifications->map(fn($notification)=>
+            NotificationService::format($notification, $locale, 'admin')
+        );
 
         return response()->json([
             'draw' => $request->input('draw'),
@@ -122,12 +116,12 @@ class AdminApiNotificationController extends Controller
         $admin = auth('api')->user();
         $notification = $admin->notifications()->find($notificationId);
 
-        if ($notification) {
-            $notification->update(['read_at' => null]);
-            return response()->json(['message' => 'Notification marked as unread']);
+        if (!$notification) {
+            return response()->json(['error' => 'Notification not found'], 404);
         }
 
-        return response()->json(['error' => 'Notification not found'], 404);
+            $notification->update(['read_at' => null]);
+            return response()->json(['message' => 'Notification marked as unread']);
     }
 
 }

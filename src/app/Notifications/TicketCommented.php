@@ -57,9 +57,10 @@ class TicketCommented extends Notification
         return [
             'type' => 'comment',
             'ticket_id' => $this->ticket->id,
+            'ticket_title' => $this->ticket->title,
             'comment' => $this->comment->message,
             'author' => $this->comment->author->name,
-            'ticket_title' => $this->ticket->title,
         ];
     }
 }
+

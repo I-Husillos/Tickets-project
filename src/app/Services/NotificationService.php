@@ -33,10 +33,10 @@ class NotificationService
         $notifications, 
         string $locale='es',
         string $guard ='user'
-    ): array{
-        return $notifications->map(fn ($notification) => 
-            self::format($notification, $locale, $guard))
-        ->all();
+    ): array {
+        return $notifications->map(fn($notification) =>
+            self::format($notification, $locale, $guard)
+        )->all();
     }
 
     /**
@@ -59,11 +59,11 @@ class NotificationService
 
 
         $translationKey = $typeMap[$type] ?? $type;
-        $messageKey = "general.admin_notifications.{$translationKey}";
+        $messageKey = "notifications.{$translationKey}";
 
         // Fallback si no existe
         if (!trans()->has($messageKey, $locale)) {
-            return ucfirst($type);
+            return ucfirst(str_replace('_',' ', $translationKey));
         }
 
         return trans($messageKey, [], $locale);
