@@ -2,38 +2,17 @@
  * Componente Modal para mostrar notificaciones
  * ✅ Renderiza contenido según tipo
  * ✅ Maneja abrir/cerrar
- * ✅ Reutilizable para user y admin
  */
 export class NotificationModal {
     constructor(modalSelector = '#notificationModal') {
         this.modal = document.querySelector(modalSelector);
         this.titleElement = this.modal?.querySelector('.modal-title');
         this.detailsContainer = this.modal?.querySelector('[data-notification-details]');
-        this.closeButtons = this.modal?.querySelectorAll('[data-bs-dismiss="modal"]');
         
         if (!this.modal) {
             console.warn(`Modal no encontrado: ${modalSelector}`);
             return;
         }
-
-        this.bindEvents();
-    }
-
-    /**
-     * Vincula eventos de cierre
-     */
-    bindEvents() {
-        // Cierre con botón X o dismiss
-        this.closeButtons.forEach(btn => {
-            btn.addEventListener('click', () => this.close());
-        });
-
-        // Cierre haciendo click fuera del modal (backdrop)
-        this.modal?.addEventListener('click', (e) => {
-            if (e.target === this.modal) {
-                this.close();
-            }
-        });
     }
 
     /**
@@ -49,17 +28,15 @@ export class NotificationModal {
         // Renderizar contenido
         this.detailsContainer.innerHTML = this.renderContent(notification);
 
-        // Mostrar modal (Bootstrap 5)
-        const bootstrapModal = new bootstrap.Modal(this.modal);
-        bootstrapModal.show();
+        // Mostrar modal con jQuery (compatible con tu setup actual)
+        $(this.modal).modal('show');
     }
 
     /**
      * Cierra el modal
      */
     close() {
-        const bootstrapModal = bootstrap.Modal.getInstance(this.modal);
-        bootstrapModal?.hide();
+        $(this.modal).modal('hide');
     }
 
     /**

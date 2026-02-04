@@ -1,121 +1,34 @@
-console.log('inicio');
+import { NotificationsAPI } from '../api/notificationsAPI.js';
+import { NotificationModal } from '../components/NotificationModal.js';
+
+/**
+ * Manejador de modal para notificaciones de usuario
+ * ✅ Refactorizado para usar NotificationsAPI y NotificationModal
+ */
+
+const api = new NotificationsAPI('user');
+const modal = new NotificationModal('#notificationModal');
 
 document.addEventListener('DOMContentLoaded', () => {
-    $(document).on('click', '.show-notification', function () {
+    // Delegado: mostrar notificación
+    $(document).on('click', '.show-notification', async function () {
         const notificationId = $(this).data('id');
-        const modal = $('#notificationModal');
-        const guard = $(this).data('guard');
-        const locale = $(this).data('locale');
-        const container = $('#notificationDetails');
-alert('test')
-        container.html('<div class="text-center text-muted"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
-        console.log(0);
+        const locale = $(this).data('locale') || document.documentElement.lang || 'es';
 
-        $.ajax({
-            url: `/api/${guard}/notifications/${notificationId}`,
-            method: 'GET',
-            headers: {
-                'X-Locale': locale
-            },
-            success: function (response) {
-                const data = response.data;
+        try {
+            const response = await api.getById(notificationId);
+            modal.show(response.data);
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al cargar la notificación');
+        }
+    });
 
-                let html = `
-                    <p>${data.message ?? ''}</p>
-                `;
-
-
-                console.log(1);
-
-                // Mostramos datos específicos según el tipo de notificación
-                switch (data.type) {                        
-                    case 'comment':
-                        if (data.author) {
-                            html += `<p><strong>Autor:</strong> ${data.author}</p>`;
-                        }
-                        if (data.comment) {
-                            html += `<p><strong>Comentario:</strong> "${data.comment}"</p>`;
-                        }
-                        break;
-            
-                    case 'status':
-                        if (data.status) {
-                            html += `<p><strong>Estado:</strong> ${data.status}</p>`;
-                        }
-                        if (data.priority) {
-                            html += `<p><strong>Prioridad:</strong> ${data.priority}</p>`;
-                        }
-                        if (data.updated_by && data.updated_by.name) {
-                            html += `<p><strong>Actualizado por:</strong> ${data.updated_by.name}</p>`;
-                        } else if (data.updated_by && typeof data.updated_by === 'string') {
-                            html += `<p><strong>Actualizado por:</strong> ${data.updated_by}</p>`;
-                        }
-                        break;
-            
-                    case 'closed':
-                        if (data.created_by) {
-                            html += `<p><strong>El ticket:</strong> ${data.ticket} <strong> del usuario </strong> ${data.author} <strong> ha sido cerrado.</strong></p>`;
-                        }
-
-                        break;
-
-                    case 'create':
-                        if (data.created_by && data.created_by.name) {
-                            html += `<p><strong>Creado por:</strong> ${data.created_by.name}</p>`;
-                        } else if (data.created_by && typeof data.created_by === 'string') {
-                            html += `<p><strong>Creado por:</strong> ${data.created_by}</p>`;
-                        } else if (data.author) {
-                            html += `<p><strong>Creado por:</strong> ${data.author}</p>`;
-                        }
-                        if (data.ticket) {
-                            html += `<p><strong>Ticket:</strong> ${data.ticket}</p>`;
-                        }
-                        break;
-
-                    case 'reopened':
-                        if (data.created_by) {
-                            html += `<p><strong>Reabierto por:</strong> ${data.created_by}</p>`;
-                        } else if (data.author) {
-                            html += `<p><strong>Reabierto por:</strong> ${data.author}</p>`;
-                        }
-                        break;
-            
-                    default:
-                        html += `<p><em>Tipo de notificación no reconocido.</em></p>`;
-                        break;
-                }
-
-                console.log(2);
-            
-                // Fecha
-                if (data.created_at) {
-                    html += `<hr><p class="text-muted"><i class="far fa-clock"></i> ${data.created_at}</p>`;
-                }
-
-                console.log(3);
-            
-                // Botón para ir al ticket
-                if (data.link) {
-                    html += `
-                        <div class="mt-3 text-center">
-                            <button type="button" class="btn btn-outline-primary go-to-ticket" data-link="${data.link}">
-                                <i class="fas fa-ticket-alt"></i> Ver ticket
-                            </button>
-                        </div>
-                    `;
-                }
-
-                console.log(4);
-
-            
-                $('#notificationDetails').html(html);
-
-                console.log(5);
-                $('#notificationModal').modal('show');
-            },
-            error: function () {
-                container.html('<div class="alert alert-danger">Error al cargar la notificación.</div>');
-            }
-        });
+    // Ir al ticket desde modal
+    $(document).on('click', '.go-to-ticket', function () {
+        const link = $(this).data('link');
+        if (link) {
+            window.location.href = link;
+        }
     });
 });

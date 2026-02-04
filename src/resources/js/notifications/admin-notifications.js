@@ -1,26 +1,25 @@
-// resources/js/admin-notifications.js
+import { NotificationsAPI } from '../api/notificationsAPI.js';
+import { NotificationModal } from '../components/NotificationModal.js';
 
-$(document).on('click', '.show-notification-btn', function () {
-    const notificationId = $(this).data('id');
-    const token = localStorage.getItem('adminToken'); // o usa una <meta name="token">
+/**
+ * Manejador de modal para notificaciones de admin
+ * ✅ Refactorizado para usar NotificationsAPI y NotificationModal
+ */
 
-    fetch(`/api/admin/notifications/${notificationId}`, {
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Accept': 'application/json'
+const api = new NotificationsAPI('admin');
+const modal = new NotificationModal('#notificationModal');
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Delegado: mostrar notificación
+    $(document).on('click', '.show-notification-btn', async function () {
+        const notificationId = $(this).data('id');
+
+        try {
+            const response = await api.getById(notificationId);
+            modal.show(response.data);
+        } catch (error) {
+            console.error('Error:', error);
+            alert('No se pudo cargar el detalle de la notificación.');
         }
-    })
-    .then(res => {
-        if (!res.ok) throw new Error('Error en la API');
-        return res.json();
-    })
-    .then(data => {
-        $('#showNotificationModal .modal-title').text(data.title);
-        $('#showNotificationModal .modal-body').html(data.content);
-        $('#showNotificationModal').modal('show');
-    })
-    .catch(error => {
-        console.error('Error loading notification:', error);
-        alert('No se pudo cargar el detalle de la notificación.');
     });
 });

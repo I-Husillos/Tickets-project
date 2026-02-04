@@ -119,9 +119,8 @@ class NotificationService
         }
 
         // Las rutas deben existir en routes/web.php
-        // Ejemplo: route('admin.tickets.show', ['ticket' => $ticketId])
         return match($guard) {
-            'admin' => route('admin.tickets.show', [
+            'admin' => route('admin.view.ticket', [
                 'ticket' => $ticketId,
                 'locale' => $locale,
             ]),

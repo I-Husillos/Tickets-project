@@ -1,71 +1,58 @@
-function getNotificationTableId(guard) {
-    return guard === 'admin'
-        ? 'tabla-notificaciones-admin'
-        : 'tabla-notificaciones-usuario';
+import { NotificationsAPI } from '../api/notificationsAPI.js';
+
+/**
+ * Acciones de notificaciones (marcar como leída/no leída)
+ * ✅ Refactorizado para usar NotificationsAPI
+ */
+
+/**
+ * Helper: obtiene la tabla DataTable según el guard
+ */
+function getNotificationTable(guard) {
+    const tableId = guard === 'admin'
+        ? '#tabla-notificaciones-admin'
+        : '#tabla-notificaciones-usuario';
+    
+    return $(tableId).DataTable();
 }
 
-function getTokenByGuard(guard) {
-    return localStorage.getItem('api_token'); // correcto si usas un único token para todo
+/**
+ * Helper: crea una instancia de API según el guard
+ */
+function getNotificationAPI(guard) {
+    return new NotificationsAPI(guard);
 }
 
-// MARCAR COMO LEÍDA
-$(document).on('click', '.mark-as-read', function () {
+
+$(document).on('click', '.mark-as-read', async function () {
     const notificationId = $(this).data('id');
-    const guard = $(this).data('guard');
-    const token = getTokenByGuard(guard);
+    const guard = $(this).data('guard') || 'user';
 
-    if (!token) {
-        console.error(`No se encontró un token válido para el guard "${guard}".`);
-        return;
+    const api = getNotificationAPI(guard);
+    const table = getNotificationTable(guard);
+
+    try {
+        await api.markAsRead(notificationId);
+        table.ajax.reload(null, false); // Recarga sin resetear página
+    } catch (error) {
+        console.error('Error al marcar como leída:', error);
+        alert('Error al actualizar notificación');
     }
-
-    const locale = document.documentElement.lang || 'es';
-    const tableId = getNotificationTableId(guard);
-
-    $.ajax({
-        url: `/api/${guard}/notifications/${notificationId}/read`,
-        method: 'PATCH',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json',
-            'X-Locale': locale
-        },
-        success: function () {
-            $(`#${tableId}`).DataTable().ajax.reload(null, false);
-        },
-        error: function (xhr) {
-            console.error('Error al marcar como leída:', xhr.responseText);
-        }
-    });
 });
 
-// MARCAR COMO NO LEÍDA
-$(document).on('click', '.mark-as-unread', function () {
+
+$(document).on('click', '.mark-as-unread', async function () {
     const notificationId = $(this).data('id');
-    const guard = $(this).data('guard');
-    const token = getTokenByGuard(guard);
+    const guard = $(this).data('guard') || 'user';
 
-    if (!token) {
-        console.error(`No se encontró un token válido para el guard "${guard}".`);
-        return;
+    const api = getNotificationAPI(guard);
+    const table = getNotificationTable(guard);
+
+    try {
+        await api.markAsUnread(notificationId);
+        table.ajax.reload(null, false);
+    } catch (error) {
+        console.error('Error al marcar como no leída:', error);
+        alert('Error al actualizar notificación');
     }
-
-    const locale = document.documentElement.lang || 'es';
-    const tableId = getNotificationTableId(guard);
-
-    $.ajax({
-        url: `/api/${guard}/notifications/${notificationId}/unread`,
-        method: 'PATCH',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json',
-            'X-Locale': locale
-        },
-        success: function () {
-            $(`#${tableId}`).DataTable().ajax.reload(null, false);
-        },
-        error: function (xhr) {
-            console.error('Error al marcar como no leída:', xhr.responseText);
-        }
-    });
 });

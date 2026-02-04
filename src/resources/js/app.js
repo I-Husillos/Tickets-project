@@ -53,6 +53,7 @@ import { initAdminCommentsTable } from './tables/admin-comments';
 import { initUserTicketsTable } from './tables/user-tickets-table';
 import { initUserNotificationsTable } from './tables/user-notifications-table.js';
 import { initAdminNotificationsTable } from './tables/admin-notifications-table.js';
+
 import { initTicketActionButtons } from './tickets/events.js';
 
 import { getToken, clearTokenAndRedirect } from './api/auth.js';
