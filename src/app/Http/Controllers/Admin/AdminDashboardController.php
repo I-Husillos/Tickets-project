@@ -16,6 +16,7 @@ class AdminDashboardController extends Controller
         $totalUsers = \App\Models\User::count();
         $totalAdmins = \App\Models\Admin::count();
         $totalTickets = \App\Models\Ticket::count();
+        $totalAssignedTickets = Ticket::whereNotNull('admin_id')->count();
         $pendingTickets = \App\Models\Ticket::where('status', 'pending')->count();
         $resolvedTickets = \App\Models\Ticket::where('status', 'resolved')->count();
 
@@ -29,7 +30,7 @@ class AdminDashboardController extends Controller
         $assignedTickets = Ticket::where('admin_id', $admin->id);
 
         return view('admin.management.managedashboard', compact(
-            'totalUsers', 'totalAdmins', 'totalTickets', 'pendingTickets', 'resolvedTickets', 'recentEvents', 'recentNotifications', 'isSuperAdmin', 'assignedTickets'
+            'totalUsers', 'totalAdmins', 'totalTickets', 'totalAssignedTickets', 'pendingTickets', 'resolvedTickets', 'recentEvents', 'recentNotifications', 'isSuperAdmin', 'assignedTickets'
             ,'assignedTickets'
         ));
     }

@@ -172,6 +172,19 @@ return [
         'read'               => 'Leídas',
         'unread'             => 'No leídas',
         'view_button'        => 'Ver',
+        // boton de ver ticket
+        'view_ticket' => 'Ver Ticket',
+        'ticket_created' => 'Se ha creado un nuevo ticket',
+        'ticket_commented' => 'Se ha añadido un comentario',
+        'ticket_status_changed' => 'El estado del ticket ha cambiado',
+        'ticket_closed' => 'El ticket ha sido cerrado',
+        'ticket_reopened' => 'El ticket ha sido reabierto',
+        
+        'content_created' => 'El usuario :user creó un ticket: ":title"',
+        'content_commented' => 'El usuario :author añadió un comentario',
+        'content_status_changed' => 'El estado cambió a: :status',
+        'content_closed' => 'El ticket ha sido cerrado',
+        'content_reopened' => 'El ticket ha sido reabierto',
     ],
 
     'admin_dashboard' => [

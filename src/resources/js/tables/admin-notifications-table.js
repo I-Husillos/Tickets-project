@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 export function initAdminNotificationsTable(apiUrl, token) {
-    const locale = document.documentElement.lang || 'en';
+    const locale = document.documentElement.lang || 'es';
 
     const table = $('#tabla-notificaciones-admin').DataTable({
         processing: true,

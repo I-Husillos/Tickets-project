@@ -38,13 +38,13 @@ class TicketCommented extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $authorName = $this->comment->author->name ?? 'Un usuario';
-
         return (new MailMessage)
-        ->subject('Nuevo comentario en tu ticket')
-        ->line("{$authorName} comentó en tu ticket: {$this->ticket->title}")
-        ->action('Ver ticket', url("/user/tickets/{$this->ticket->id}"))
-        ->line('Gracias por usar nuestra plataforma.');
+            ->subject(__('notifications.ticket_commented'))
+            ->line(__('notifications.content_commented', [
+                'author' => $this->comment->author->name,
+                'title' => $this->ticket->title,
+            ]))
+            ->action(__('notifications.view_ticket'), url('/user/tickets/' . $this->ticket->id));
     }
 
     /**
@@ -57,9 +57,8 @@ class TicketCommented extends Notification
         return [
             'type' => 'comment',
             'ticket_id' => $this->ticket->id,
-            'message' => 'Se ha agregado un nuevo comentario en tu ticket.',
             'comment' => $this->comment->message,
-            'author' => $this->comment->author->name ?? 'Desconocido',
+            'author' => $this->comment->author->name,
             'ticket_title' => $this->ticket->title,
         ];
     }

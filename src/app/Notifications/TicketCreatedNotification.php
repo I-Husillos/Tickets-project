@@ -38,10 +38,12 @@ class TicketCreatedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Nuevo ticket creado.')
-            ->line('Un nuevo ticket a sido creado por ' . $this->ticket->user->name)
-            ->line('Titulo del ticket: ' . $this->ticket->title)
-            ->action('Ver ticket', url('/user/tickets/' . $this->ticket->id));
+            ->subject(__('notifications.ticket_created'))
+            ->line(__('notifications.content_created', [
+                'user' => $this->ticket->author->name,
+                'title' => $this->ticket->title,
+            ]))
+            ->action(__('notifications.view_ticket'), url('/user/tickets/' . $this->ticket->id));
     }
 
 
@@ -56,9 +58,9 @@ class TicketCreatedNotification extends Notification
             'type'        => 'create',
             'ticket_id'   => $this->ticket->id,
             'title'       => $this->ticket->title,
-            'message'     => 'Se ha creado un nuevo ticket con el título: ' . $this->ticket->title . ' por el usuario: ' . $this->ticket->user->name,
-            'created_by'  => $this->ticket->user->name,
-            'author'      => $this->ticket->user->name,
+            'description' => $this->ticket->description,
+            'created_by'  => $this->ticket->author->name,
+            'created_by_id' => $this->ticket->author->id,
             'priority'    => $this->ticket->priority,
             'status'      => $this->ticket->status,
         ];

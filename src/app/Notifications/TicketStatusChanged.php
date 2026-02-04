@@ -39,11 +39,12 @@ class TicketStatusChanged extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('El estado de tu ticket ha cambiado')
-            ->greeting('Hola ' . $notifiable->name . ',')
-            ->line('El estado de tu ticket ha sido actualizado por el admin ' . $this->admin->name)
-            ->action('Ver Ticket', url('/user/tickets/' . $this->ticket->id))
-            ->line('Gracias por usar nuestro sistema de tickets!');
+            ->subject(__('notifications.ticket_status_changed'))
+            ->line(__('notifications.ticket_status_changed', [
+                'admin' => $this->admin->name,
+                'title' => $this->ticket->title,
+            ]))
+            ->action(__('notifications.view_ticket'), url('/user/tickets/' . $this->ticket->id));
     }
 
     /**
@@ -57,7 +58,6 @@ class TicketStatusChanged extends Notification
             'type' => 'status',
             'ticket_id' => $this->ticket->id,
             'title' => $this->ticket->title,
-            'message' => 'El estado de tu ticket ha sido actualizado por el admin ' . $this->admin->name,
             'priority' => $this->ticket->priority,
             'status' => $this->ticket->status,
             'updated_by' => $this->admin,

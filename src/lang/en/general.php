@@ -160,12 +160,25 @@ return [
         'author_label'       => 'Author',
         'comment_label'      => 'Comment',
         'mark_as_read'       => 'Mark as Read',
-        'mark_as_unread'     => 'Marcar como no leída',
-        'mark_all_as_read' => 'Mark All as Read',
+        'mark_as_unread'     => 'Mark as Unread',
+        'mark_all_as_read'   => 'Mark All as Read',
         'modal_title'        => 'Notification Details',
         'read'               => 'Read',
         'unread'             => 'Unread',
         'view_button'        => 'View',
+        // boton de ver ticket
+        'view_ticket' => 'View Ticket',
+        'ticket_created' => 'A new ticket has been created',
+        'ticket_commented' => 'A comment has been added',
+        'ticket_status_changed' => 'The ticket status has changed',
+        'ticket_closed' => 'The ticket has been closed',
+        'ticket_reopened' => 'The ticket has been reopened',
+
+        'content_created' => 'User :user created a ticket: ":title"',
+        'content_commented' => 'User :author added a comment',
+        'content_status_changed' => 'Status changed to: :status',
+        'content_closed' => 'The ticket has been closed',
+        'content_reopened' => 'The ticket has been reopened',
     ],
 
     // Dashboard (Administrator)

@@ -40,7 +40,7 @@ WORKDIR /var/www/html
 # Instala dependencias de NPM y compila los assets con Vite
 RUN npm install && npm run build
 
-EXPOSE 9000
+EXPOSE 9000 5173
 
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 

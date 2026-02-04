@@ -25,9 +25,12 @@ class TicketReopened extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('El ticket ha sido reabierto.')
-                    ->action('Ver Ticket', url('/user/tickets/' . $this->ticket->id))
-                    ->line('Reabierto por: ' . $this->admin->name);
+            ->subject(__('notifications.ticket_reopened'))
+            ->line(__('notifications.ticket_reopened', [
+                'admin' => $this->admin->name,
+                'title' => $this->ticket->title,
+            ]))
+            ->action(__('notifications.view_ticket'), url('/user/tickets/' . $this->ticket->id));
     }
 
     /**
@@ -40,7 +43,6 @@ class TicketReopened extends Notification
         return [
             'type' => 'reopened',
             'ticket_id' => $this->ticket->id,
-            'message' => 'El ticket ha sido reabierto por ' . $this->admin->name,
         ];
     }
 }

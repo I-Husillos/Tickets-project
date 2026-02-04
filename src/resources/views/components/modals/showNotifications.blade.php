@@ -1,7 +1,7 @@
 @push('modals')
 <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content shadow-lg rounded">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="modalLabel">
           <i class="fas fa-bell"></i> {{ __('Notificación') }}

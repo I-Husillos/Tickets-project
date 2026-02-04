@@ -41,10 +41,12 @@ class TicketClosed extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Ticket Cerrado: ' . $this->ticket->title)
-            ->line('El ticket con el título "' . $this->ticket->title . '" ha sido cerrado por el administrador ' . $this->admin->name . '.')
-            ->action('Ver Ticket', url('/user/tickets/' . $this->ticket->id))
-            ->line('Gracias por usar nuestra aplicación.');
+            ->subject(__('notifications.ticket_closed'))
+            ->line(__('notifications.ticket_closed', [
+                'admin' => $this->admin->name,
+                'title' => $this->ticket->title,
+            ]))
+            ->action(__('notifications.view_ticket'), url('/user/tickets/' . $this->ticket->id));
     }
 
     /**
@@ -58,7 +60,6 @@ class TicketClosed extends Notification
             'type' => 'closed',
             'ticket_id' => $this->ticket->id,
             'title' => $this->ticket->title,
-            'message' => 'El ticket ha sido cerrado por el administrador ' . $this->admin->name . '.',
             'created_by' => $this->admin->name,
         ];
     }

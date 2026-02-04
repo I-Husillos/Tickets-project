@@ -55,7 +55,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>{{ $totalTickets }}</h3>
+                        <h3>{{ $totalAssignedTickets }}</h3>
                         <p>Tickets asignados</p>
                     </div>
                     <div class="icon">

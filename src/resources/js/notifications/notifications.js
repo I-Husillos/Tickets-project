@@ -1,3 +1,5 @@
+console.log('inicio');
+
 document.addEventListener('DOMContentLoaded', () => {
     $(document).on('click', '.show-notification', function () {
         const notificationId = $(this).data('id');
@@ -5,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const guard = $(this).data('guard');
         const locale = $(this).data('locale');
         const container = $('#notificationDetails');
-
+alert('test')
         container.html('<div class="text-center text-muted"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
+        console.log(0);
 
         $.ajax({
             url: `/api/${guard}/notifications/${notificationId}`,
@@ -16,10 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             success: function (response) {
                 const data = response.data;
-            
+
                 let html = `
                     <p>${data.message ?? ''}</p>
                 `;
+
+
+                console.log(1);
 
                 // Mostramos datos específicos según el tipo de notificación
                 switch (data.type) {                        
@@ -78,28 +84,33 @@ document.addEventListener('DOMContentLoaded', () => {
                         html += `<p><em>Tipo de notificación no reconocido.</em></p>`;
                         break;
                 }
+
+                console.log(2);
             
                 // Fecha
                 if (data.created_at) {
                     html += `<hr><p class="text-muted"><i class="far fa-clock"></i> ${data.created_at}</p>`;
                 }
+
+                console.log(3);
             
                 // Botón para ir al ticket
                 if (data.link) {
                     html += `
                         <div class="mt-3 text-center">
-                            <button
-                                type="button"
-                                class="btn btn-outline-primary go-to-ticket"
-                                data-link="${data.link}">
+                            <button type="button" class="btn btn-outline-primary go-to-ticket" data-link="${data.link}">
                                 <i class="fas fa-ticket-alt"></i> Ver ticket
                             </button>
                         </div>
                     `;
                 }
 
+                console.log(4);
+
             
                 $('#notificationDetails').html(html);
+
+                console.log(5);
                 $('#notificationModal').modal('show');
             },
             error: function () {
