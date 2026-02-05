@@ -178,11 +178,11 @@
         <div class="card-body">
             <p>Para que tu ticket sea resuelto más rápidamente, incluye:</p>
             <ul>
-                <li>✅ <strong>Título claro:</strong> resume el problema en pocas palabras</li>
-                <li>✅ <strong>Descripción detallada:</strong> explica qué ocurre y en qué contexto</li>
-                <li>✅ <strong>Pasos para reproducir:</strong> si es un error, indica cómo se genera</li>
-                <li>✅ <strong>Tipo correcto:</strong> selecciona la categoría adecuada</li>
-                <li>✅ <strong>Prioridad realista:</strong> sé honesto sobre la urgencia</li>
+                <li><strong>Título claro:</strong> resume el problema en pocas palabras</li>
+                <li><strong>Descripción detallada:</strong> explica qué ocurre y en qué contexto</li>
+                <li><strong>Pasos para reproducir:</strong> si es un error, indica cómo se genera</li>
+                <li><strong>Tipo correcto:</strong> selecciona la categoría adecuada</li>
+                <li><strong>Prioridad realista:</strong> sé honesto sobre la urgencia</li>
             </ul>
         </div>
     </div>

@@ -217,9 +217,9 @@
                             <div class="card-body">
                                 Si cometes un error (ej: asignar a la persona equivocada):
                                 <ul>
-                                    <li>✅ Corrígelo inmediatamente</li>
-                                    <li>✅ Documenta qué pasó en un comentario</li>
-                                    <li>✅ Si es grave, notifica al superadministrador</li>
+                                    <li>Corrígelo inmediatamente</li>
+                                    <li>Documenta qué pasó en un comentario</li>
+                                    <li>Si es grave, notifica al superadministrador</li>
                                 </ul>
                                 Todo queda registrado, así que la transparencia es importante.
                             </div>

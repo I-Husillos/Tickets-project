@@ -3,7 +3,7 @@ import { NotificationModal } from '../components/NotificationModal.js';
 
 /**
  * Manejador de modal para notificaciones de admin
- * ✅ Refactorizado para usar NotificationsAPI y NotificationModal
+ * Refactorizado para usar NotificationsAPI y NotificationModal
  */
 
 const api = new NotificationsAPI('admin');

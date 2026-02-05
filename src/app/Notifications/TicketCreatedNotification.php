@@ -48,7 +48,6 @@ class TicketCreatedNotification extends Notification
             ->action(__('notifications.view_ticket'), url('/user/tickets/' . $this->ticket->id));
     }
 
-
     /**
      * Get the array representation of the notification.
      *
@@ -70,4 +69,3 @@ class TicketCreatedNotification extends Notification
         ];
     }
 }
-

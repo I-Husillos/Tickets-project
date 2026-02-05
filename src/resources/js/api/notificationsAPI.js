@@ -1,7 +1,7 @@
 /**
  * API Service para Notificaciones
- * ✅ Centraliza TODAS las llamadas a notificaciones
- * ✅ Independiente de otras APIs
+ * Centraliza TODAS las llamadas a notificaciones
+ * Independiente de otras APIs
  */
 export class NotificationsAPI {
     constructor(guard = 'user') {

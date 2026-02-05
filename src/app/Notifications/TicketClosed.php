@@ -61,7 +61,6 @@ class TicketClosed extends Notification
             'ticket_id' => $this->ticket->id,
             'title' => $this->ticket->title,
             'created_by' => $this->admin->name,
-            'created_by' => $this->admin->name,
             'closed_by' => $this->admin->name,
             'author' => $this->admin->name
         ];

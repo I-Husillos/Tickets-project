@@ -1,7 +1,7 @@
 /**
  * Componente Modal para mostrar notificaciones
- * ✅ Accede a raw_data del backend
- * ✅ Renderiza contenido según tipo
+ * Accede a raw_data del backend
+ * Renderiza contenido según tipo
  */
 export class NotificationModal {
     constructor(modalSelector = '#notificationModal') {

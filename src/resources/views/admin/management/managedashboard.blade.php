@@ -161,17 +161,66 @@
                             $icon = match($type) {
                                 'comment' => 'fas fa-comment',
                                 'status' => 'fas fa-sync-alt',
-                                'close' => 'fas fa-lock',
-                                'open', 'reopened' => 'fas fa-unlock',
+                                'closed' => 'fas fa-lock',
+                                'created' => 'fas fa-plus',
+                                'reopened' => 'fas fa-unlock',
                                 default => 'fas fa-info-circle'
                             };
                             $badge = match($type) {
                                 'comment' => 'primary',
                                 'status' => 'warning',
-                                'close' => 'danger',
-                                'open', 'reopened' => 'success',
+                                'closed' => 'danger',
+                                'created' => 'success',
+                                'reopened' => 'info',
                                 default => 'secondary'
                             };
+
+                            $message = '';
+                            $data = $notification->data;
+
+                            try {
+                                switch ($type) {
+                                    case 'created':
+                                        $message = __('notifications.content_created_web', [
+                                            'user' => e($data['author_name'] ?? 'N/A'),
+                                            'title' => e($data['title'] ?? 'N/A'),
+                                        ]);
+                                        break;
+                                    case 'comment':
+                                        $message = __('notifications.content_commented_web', [
+                                            'author' => e($data['author'] ?? 'N/A'),
+                                            'title' => e($data['ticket_title'] ?? 'N/A'),
+                                            'comment' => e(Illuminate\Support\Str::limit($data['comment'] ?? '', 50))
+                                        ]);
+                                        break;
+                                    case 'closed':
+                                        $message = __('notifications.content_closed_web', [
+                                            'author' => e($data['author'] ?? 'N/A'),
+                                            'title' => e($data['title'] ?? 'N/A'),
+                                        ]);
+                                        break;
+                                    case 'reopened':
+                                        $message = __('notifications.content_reopened_web', [
+                                            'author' => e($data['reopened_by'] ?? 'N/A'),
+                                            'title' => e($data['title'] ?? 'N/A'),
+                                        ]);
+                                        break;
+                                    case 'status':
+                                        $message = __('notifications.content_status_changed_web', [
+                                            'author' => e($data['updated_by']['name'] ?? 'N/A'),
+                                            'title' => e($data['title'] ?? 'N/A'),
+                                            'status' => e($data['status'] ?? 'N/A'),
+                                        ]);
+                                        break;
+                                    default:
+                                        $message = 'Notificación sin mensaje definido.';
+                                        break;
+                                }
+                            } catch (\Exception $e) {
+                                $message = 'Error al procesar la notificación. Datos incompletos.';
+                                // Opcional: registrar el error
+                                // Log::error('Error en notificación:', ['data' => $data, 'error' => $e->getMessage()]);
+                            }
                         @endphp
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="d-flex align-items-center">
@@ -179,7 +228,7 @@
                                     <i class="{{ $icon }}"></i>
                                 </span>
                                 <div>
-                                    <div>{{ $notification->data['message'] }}</div>
+                                    <div>{!! $message !!}</div>
                                     <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
                                 </div>
                             </div>

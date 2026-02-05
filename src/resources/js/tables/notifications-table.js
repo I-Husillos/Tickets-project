@@ -3,8 +3,8 @@ import { NotificationModal } from '../components/NotificationModal.js';
 
 /**
  * Tabla DataTables para notificaciones
- * ✅ Reutilizable para user y admin
- * ✅ Integrada con NotificationsAPI y NotificationModal
+ * Reutilizable para user y admin
+ * Integrada con NotificationsAPI y NotificationModal
  */
 export class NotificationsTable {
     constructor(tableSelector, guard = 'user') {

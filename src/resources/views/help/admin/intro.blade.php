@@ -194,12 +194,12 @@
         </div>
         <div class="card-body">
             <ul>
-                <li>✅ <strong>Responde rápido:</strong> reduce el tiempo entre comentarios del usuario</li>
-                <li>✅ <strong>Sé claro:</strong> comunica decisiones de forma comprensible</li>
-                <li>✅ <strong>Documenta:</strong> deja un rastro de tu trabajo para auditoría</li>
-                <li>✅ <strong>Revisa el contexto:</strong> lee el historial completo antes de responder</li>
-                <li>✅ <strong>Escala si es necesario:</strong> pide ayuda a colegas o superadmin</li>
-                <li>✅ <strong>Cierra correctamente:</strong> confirma con el usuario antes de cerrar</li>
+                <li><strong>Responde rápido:</strong> reduce el tiempo entre comentarios del usuario</li>
+                <li><strong>Sé claro:</strong> comunica decisiones de forma comprensible</li>
+                <li><strong>Documenta:</strong> deja un rastro de tu trabajo para auditoría</li>
+                <li><strong>Revisa el contexto:</strong> lee el historial completo antes de responder</li>
+                <li><strong>Escala si es necesario:</strong> pide ayuda a colegas o superadmin</li>
+                <li><strong>Cierra correctamente:</strong> confirma con el usuario antes de cerrar</li>
             </ul>
         </div>
     </div>

@@ -8,7 +8,7 @@ Laravel ofrece dos **mecanismos diferentes** que a menudo se usan juntos, pero t
 
 ---
 
-### ✅ 1. **Policies y Gates: CONTROL DE AUTORIZACIÓN**
+### 1. **Policies y Gates: CONTROL DE AUTORIZACIÓN**
 
 Son usados para decidir **si un usuario tiene permiso para hacer algo** (acceso, modificación, eliminación, etc.).
 
@@ -16,7 +16,7 @@ Son usados para decidir **si un usuario tiene permiso para hacer algo** (acceso,
 
 Evalúan **quién puede** hacer **qué acción** sobre un recurso (modelo).
 
-#### ✅ Ejemplo:
+#### Ejemplo:
 
 ```php
 public function update(User $user, Ticket $ticket)
@@ -50,7 +50,7 @@ Son clases que validan **la información enviada en un formulario o API**.
 
 Aseguran que los datos de entrada (como nombre, email, mensaje) **cumplen con reglas** antes de procesarlos.
 
-#### ✅ Ejemplo:
+#### Ejemplo:
 
 ```php
 public function rules()

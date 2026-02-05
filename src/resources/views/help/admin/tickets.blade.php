@@ -115,7 +115,7 @@
                     <ul>
                         <li>💬 Solicitar información adicional</li>
                         <li>📎 Aclarar el estado del ticket</li>
-                        <li>✅ Confirmar la resolución</li>
+                        <li>Confirmar la resolución</li>
                     </ul>
                     <p class="text-muted mt-2">
                         Cada comentario genera una notificación al usuario afectado.

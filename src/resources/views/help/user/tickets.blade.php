@@ -207,7 +207,7 @@
                 <li>⏰ <strong>Incluye detalles técnicos:</strong> navegador, sistema operativo, etc.</li>
                 <li>🔄 <strong>Responde rápido:</strong> si piden información, hazlo en el ticket</li>
                 <li>🚫 <strong>Evita duplicados:</strong> no crees varios tickets por el mismo problema</li>
-                <li>✅ <strong>Confirma la resolución:</strong> avisa cuando tu problema esté solucionado</li>
+                <li><strong>Confirma la resolución:</strong> avisa cuando tu problema esté solucionado</li>
             </ul>
         </div>
     </div>

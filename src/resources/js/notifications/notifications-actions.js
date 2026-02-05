@@ -2,7 +2,7 @@ import { NotificationsAPI } from '../api/notificationsAPI.js';
 
 /**
  * Acciones de notificaciones (marcar como leída/no leída)
- * ✅ Refactorizado para usar NotificationsAPI
+ * Refactorizado para usar NotificationsAPI
  */
 
 /**
