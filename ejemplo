@@ -1,0 +1,387 @@
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     $(document).on('click', '.show-notification', function () {
+//         const notificationId = $(this).data('id');
+//         const modal = $('#notificationModal');
+//         const guard = $(this).data('guard');
+//         const locale = $(this).data('locale');
+//         const container = $('#notificationDetails');
+// alert('test')
+//         container.html('<div class="text-center text-muted"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
+//         console.log(0);
+
+//         $.ajax({
+//             url: `/api/${guard}/notifications/${notificationId}`,
+//             method: 'GET',
+//             headers: {
+//                 'X-Locale': locale
+//             },
+//             success: function (response) {
+//                 const data = response.data;
+
+//                 let html = `
+//                     <p>${data.message ?? ''}</p>
+//                 `;
+
+
+//                 console.log(1);
+
+//                 // Mostramos datos específicos según el tipo de notificación
+//                 switch (data.type) {                        
+//                     case 'comment':
+//                         if (data.author) {
+//                             html += `<p><strong>Autor:</strong> ${data.author}</p>`;
+//                         }
+//                         if (data.comment) {
+//                             html += `<p><strong>Comentario:</strong> "${data.comment}"</p>`;
+//                         }
+//                         break;
+            
+//                     case 'status':
+//                         if (data.status) {
+//                             html += `<p><strong>Estado:</strong> ${data.status}</p>`;
+//                         }
+//                         if (data.priority) {
+//                             html += `<p><strong>Prioridad:</strong> ${data.priority}</p>`;
+//                         }
+//                         if (data.updated_by && data.updated_by.name) {
+//                             html += `<p><strong>Actualizado por:</strong> ${data.updated_by.name}</p>`;
+//                         } else if (data.updated_by && typeof data.updated_by === 'string') {
+//                             html += `<p><strong>Actualizado por:</strong> ${data.updated_by}</p>`;
+//                         }
+//                         break;
+            
+//                     case 'closed':
+//                         if (data.created_by) {
+//                             html += `<p><strong>El ticket:</strong> ${data.ticket} <strong> del usuario </strong> ${data.author} <strong> ha sido cerrado.</strong></p>`;
+//                         }
+
+//                         break;
+
+//                     case 'create':
+//                         if (data.created_by && data.created_by.name) {
+//                             html += `<p><strong>Creado por:</strong> ${data.created_by.name}</p>`;
+//                         } else if (data.created_by && typeof data.created_by === 'string') {
+//                             html += `<p><strong>Creado por:</strong> ${data.created_by}</p>`;
+//                         } else if (data.author) {
+//                             html += `<p><strong>Creado por:</strong> ${data.author}</p>`;
+//                         }
+//                         if (data.ticket) {
+//                             html += `<p><strong>Ticket:</strong> ${data.ticket}</p>`;
+//                         }
+//                         break;
+
+//                     case 'reopened':
+//                         if (data.created_by) {
+//                             html += `<p><strong>Reabierto por:</strong> ${data.created_by}</p>`;
+//                         } else if (data.author) {
+//                             html += `<p><strong>Reabierto por:</strong> ${data.author}</p>`;
+//                         }
+//                         break;
+            
+//                     default:
+//                         html += `<p><em>Tipo de notificación no reconocido.</em></p>`;
+//                         break;
+//                 }
+
+//                 console.log(2);
+            
+//                 // Fecha
+//                 if (data.created_at) {
+//                     html += `<hr><p class="text-muted"><i class="far fa-clock"></i> ${data.created_at}</p>`;
+//                 }
+
+//                 console.log(3);
+            
+//                 // Botón para ir al ticket
+//                 if (data.link) {
+//                     html += `
+//                         <div class="mt-3 text-center">
+//                             <button type="button" class="btn btn-outline-primary go-to-ticket" data-link="${data.link}">
+//                                 <i class="fas fa-ticket-alt"></i> Ver ticket
+//                             </button>
+//                         </div>
+//                     `;
+//                 }
+
+//                 console.log(4);
+
+            
+//                 $('#notificationDetails').html(html);
+
+//                 console.log(5);
+//                 $('#notificationModal').modal('show');
+//             },
+//             error: function () {
+//                 container.html('<div class="alert alert-danger">Error al cargar la notificación.</div>');
+//             }
+//         });
+//     });
+// });
+// resources/js/admin-notifications.js
+
+$(document).on('click', '.show-notification-btn', function () {
+    const notificationId = $(this).data('id');
+    const token = localStorage.getItem('adminToken'); // o usa una <meta name="token">
+
+    fetch(`/api/admin/notifications/${notificationId}`, {
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json'
+        }
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('Error en la API');
+        return res.json();
+    })
+    .then(data => {
+        $('#showNotificationModal .modal-title').text(data.title);
+        $('#showNotificationModal .modal-body').html(data.content);
+        $('#showNotificationModal').modal('show');
+    })
+    .catch(error => {
+        console.error('Error loading notification:', error);
+        alert('No se pudo cargar el detalle de la notificación.');
+    });
+});
+function getNotificationTableId(guard) {
+    return guard === 'admin'
+        ? 'tabla-notificaciones-admin'
+        : 'tabla-notificaciones-usuario';
+}
+
+function getTokenByGuard(guard) {
+    return localStorage.getItem('api_token'); // correcto si usas un único token para todo
+}
+
+// MARCAR COMO LEÍDA
+$(document).on('click', '.mark-as-read', function () {
+    const notificationId = $(this).data('id');
+    const guard = $(this).data('guard');
+    const token = getTokenByGuard(guard);
+
+    if (!token) {
+        console.error(`No se encontró un token válido para el guard "${guard}".`);
+        return;
+    }
+
+    const locale = document.documentElement.lang || 'es';
+    const tableId = getNotificationTableId(guard);
+
+    $.ajax({
+        url: `/api/${guard}/notifications/${notificationId}/read`,
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'X-Locale': locale
+        },
+        success: function () {
+            $(`#${tableId}`).DataTable().ajax.reload(null, false);
+        },
+        error: function (xhr) {
+            console.error('Error al marcar como leída:', xhr.responseText);
+        }
+    });
+});
+
+// MARCAR COMO NO LEÍDA
+$(document).on('click', '.mark-as-unread', function () {
+    const notificationId = $(this).data('id');
+    const guard = $(this).data('guard');
+    const token = getTokenByGuard(guard);
+
+    if (!token) {
+        console.error(`No se encontró un token válido para el guard "${guard}".`);
+        return;
+    }
+
+    const locale = document.documentElement.lang || 'es';
+    const tableId = getNotificationTableId(guard);
+
+    $.ajax({
+        url: `/api/${guard}/notifications/${notificationId}/unread`,
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'X-Locale': locale
+        },
+        success: function () {
+            $(`#${tableId}`).DataTable().ajax.reload(null, false);
+        },
+        error: function (xhr) {
+            console.error('Error al marcar como no leída:', xhr.responseText);
+        }
+    });
+});
+import $ from 'jquery';
+
+export function initUserNotificationsTable(apiUrl, token) {
+    const locale = document.documentElement.lang || 'es';
+
+    const table = $('#tabla-notificaciones-usuario').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json',
+            data: function (d) {
+                d.locale = locale;
+                d.type = $('#filter-type').val(); // filtro
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            },
+            error: function (xhr) {
+                console.error('Error AJAX:', xhr.responseText);
+            }
+        },
+        columns: [
+            { data: 'type', className: 'text-center align-middle' },
+            { data: 'content', className: 'align-middle' },
+            { data: 'date', className: 'text-center align-middle' },
+            { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' },
+        ],
+    });
+}
+
+export function getToken() {
+    return localStorage.getItem('api_token');
+}
+
+export function clearTokenAndRedirect() {
+    localStorage.removeItem('api_token');
+
+    const isAdmin = window.location.pathname.includes('/admin');
+    const locale = window.location.pathname.split('/')[1] || 'es';
+
+    if (isAdmin) {
+        window.location.href = `/${locale}/admin/login`;
+    } else {
+        window.location.href = `/${locale}/login`;
+    }
+}
+// --- Bootstrap básico y AdminLTE ---
+import './bootstrap';
+import 'bootstrap';
+import 'admin-lte/dist/css/adminlte.min.css';
+import 'admin-lte/dist/js/adminlte.min.js';
+import './vendors.js';
+import 'popper.js/dist/umd/popper.min.js';
+
+// --- jQuery global ---
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
+
+// --- DataTables core + responsive ---
+import DataTable from 'datatables.net-bs4';
+import Responsive from 'datatables.net-responsive-bs4';
+import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+import 'datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css';
+
+// --- Scripts propios ---
+import './navbar';
+import './sidebar-toggle.js';
+// import './forms/admin-login.js';
+import './notifications/notifications.js';
+import './notifications/admin-notifications.js';
+import './notifications/notifications-actions.js';
+import './comments/deleteCommentTicket.js';
+import './forms/admin-users-form.js';
+import './forms/admin-admins-form.js';
+import './forms/admin-types-form.js';
+import './forms/admin-tickets-form.js';
+import './admin/users/admin-users-actions';
+import './admin/admins/admin-admins-actions.js';
+import './admin/types/admin-types-actions.js';
+import './user/user-ticket.actions.js';
+import './sync-auth.js'
+import './user/user-ticket-create.js';
+
+// import './admin/tickets/admin-tickets-actions';
+// import './forms/admin-events-form.js';
+// import './admin/events/admin-events-actions';
+// import './forms/admin-comments-form.js';
+// import './admin/comments/admin-comments-actions';
+
+// --- Importación de tablas específicas ---
+import { initAdminUsersTable } from './tables/admin-users-table';
+import { initAdminAdminsTable } from './tables/admin-admins-table';
+import { initAdminTypesTable } from './tables/admin-types-table';
+import { initAdminTicketsTable } from './tables/admin-tickets-table';
+import { initAssignedTicketsTable } from './tables/admin-assigned-tickets-table';
+import { initAdminEventsTable } from './tables/admin-events-table';
+import { initAdminCommentsTable } from './tables/admin-comments';
+import { initUserTicketsTable } from './tables/user-tickets-table';
+import { initUserNotificationsTable } from './tables/user-notifications-table.js';
+import { initAdminNotificationsTable } from './tables/admin-notifications-table.js';
+import { initTicketActionButtons } from './tickets/events.js';
+
+import { getToken, clearTokenAndRedirect } from './api/auth.js';
+
+// --- Bootstrap Alert (necesario si usas JS para cerrarlas manualmente) ---
+import { Alert } from 'bootstrap';
+
+
+// --- TOKEN de autenticación ---
+const token = getToken();
+
+const $locale = document.documentElement.lang || 'en';
+
+
+if (token) {
+    localStorage.setItem('api_token', token); // Persistencia
+    $.ajaxSetup({
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initTicketActionButtons(token);
+    });
+
+} else {
+    console.warn('No se encontró token ni en localStorage ni en la meta-tag');
+}
+
+
+// --- Mapa de tablas y funciones correspondientes ---
+const tablasDataTables = [
+    { id: 'tabla-usuarios', fn: initAdminUsersTable },
+    { id: 'tabla-admins', fn: initAdminAdminsTable },
+    { id: 'tabla-types', fn: initAdminTypesTable },
+    { id: 'tabla-tickets', fn: initAdminTicketsTable },
+    { id: 'tabla-tickets-asignados', fn: initAssignedTicketsTable },
+    { id: 'tabla-comentarios', fn: initAdminCommentsTable },
+    { id: 'tabla-eventos', fn: initAdminEventsTable },
+    { id: 'tabla-comentarios', fn: initAdminCommentsTable },
+    { id: 'tabla-tickets-usuario', fn: initUserTicketsTable },
+    { id: 'tabla-notificaciones-usuario', fn: initUserNotificationsTable },
+    { id: 'tabla-notificaciones-admin', fn: initAdminNotificationsTable },
+];
+
+
+// --- Inicialización automática de DataTables cuando el DOM esté listo ---
+document.addEventListener('DOMContentLoaded', () => {
+    tablasDataTables.forEach(({ id, fn }) => {
+        const tabla = document.getElementById(id);
+        if (!tabla) return;
+
+        const apiUrl = tabla.dataset.apiUrl;
+
+        if (!apiUrl || !token) {
+            console.warn(`Faltan datos para inicializar la tabla con ID "${id}"`);
+            return;
+        }
+
+        console.log(`Token para ${id}:`, token);
+        fn(apiUrl, token);
+    });
+});
+
+

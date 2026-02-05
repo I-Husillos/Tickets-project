@@ -1,7 +1,7 @@
 /**
  * Componente Modal para mostrar notificaciones
+ * ✅ Accede a raw_data del backend
  * ✅ Renderiza contenido según tipo
- * ✅ Maneja abrir/cerrar
  */
 export class NotificationModal {
     constructor(modalSelector = '#notificationModal') {
@@ -20,15 +20,23 @@ export class NotificationModal {
      * @param {Object} notification - Objeto con data de NotificationService
      */
     show(notification) {
-        if (!this.modal) return;
+        if (!this.modal || !this.detailsContainer) {
+            console.error('Modal no configurado');
+            return;
+        }
+
+        console.log('Notificación completa:', notification);
+        console.log('Raw data:', notification.raw_data);
 
         // Establecer título
-        this.titleElement.textContent = notification.message || 'Notificación';
+        if (this.titleElement) {
+            this.titleElement.textContent = notification.message || 'Notificación';
+        }
 
         // Renderizar contenido
         this.detailsContainer.innerHTML = this.renderContent(notification);
 
-        // Mostrar modal con jQuery (compatible con tu setup actual)
+        // Mostrar modal
         $(this.modal).modal('show');
     }
 
@@ -66,62 +74,133 @@ export class NotificationModal {
     }
 
     /**
-     * Renderiza contenido específico según tipo de notificación
+     * RENDERIZA DATOS ESPECÍFICOS SEGÚN TIPO
+     * Accede a raw_data que viene del backend
      */
     renderTypeSpecificContent(notification) {
-        const { type, raw_data } = notification;
-        const data = raw_data || {};
+        const { type } = notification;
+        const data = notification.raw_data || {}; // ACCEDE A raw_data
+
+        console.log(`Tipo: ${type}`, data);
 
         switch (type) {
             case 'created':
-                return `
-                    <div class="alert alert-info mt-3">
-                        <strong>${data.created_by || 'Usuario'}</strong> 
-                        creó el ticket
-                        <br>
-                        <em>"${data.title || 'Sin título'}"</em>
-                    </div>
-                `;
+                return this.renderCreated(data);
 
             case 'comment':
-                return `
-                    <div class="alert alert-info mt-3">
-                        <p><strong>${data.author || 'Usuario'}</strong> comentó:</p>
-                        <blockquote class="blockquote">
-                            ${data.content || data.comment || 'Sin contenido'}
-                        </blockquote>
-                    </div>
-                `;
+                return this.renderComment(data);
 
             case 'status':
-                return `
-                    <div class="alert alert-warning mt-3">
-                        <p><strong>Ticket:</strong> ${data.title || 'Sin título'}</p>
-                        <p><strong>Nuevo estado:</strong> ${data.status || 'Desconocido'}</p>
-                        <p><strong>Prioridad:</strong> ${data.priority || 'Normal'}</p>
-                        <p><strong>Actualizado por:</strong> ${data.updated_by || 'Desconocido'}</p>
-                    </div>
-                `;
+                return this.renderStatus(data);
 
             case 'closed':
-                return `
-                    <div class="alert alert-danger mt-3">
-                        <p><strong>Ticket:</strong> ${data.title || 'Sin título'}</p>
-                        <p><strong>Cerrado por:</strong> ${data.closed_by || 'Desconocido'}</p>
-                    </div>
-                `;
+                return this.renderClosed(data);
 
             case 'reopened':
-                return `
-                    <div class="alert alert-success mt-3">
-                        <p><strong>Ticket:</strong> ${data.title || 'Sin título'}</p>
-                        <p><strong>Reabierto por:</strong> ${data.reopened_by || 'Desconocido'}</p>
-                    </div>
-                `;
+                return this.renderReopened(data);
 
             default:
-                return `<div class="alert alert-secondary mt-3">Notificación</div>`;
+                return `<div class="alert alert-secondary mt-3">Notificación sin detalles adicionales</div>`;
         }
+    }
+
+    /**
+     * Renderiza cuando un ticket es CREADO
+     */
+    renderCreated(data) {
+        return `
+            <div class="alert alert-info mt-3">
+                <p>
+                    <strong>Creado por:</strong> 
+                    ${data.created_by || data.author || 'Usuario desconocido'}
+                </p>
+                <p class="mb-0">
+                    <strong>Ticket:</strong> 
+                    <em>"${data.title || 'Sin título'}"</em>
+                </p>
+            </div>
+        `;
+    }
+
+    /**
+     * Renderiza cuando se COMENTA
+     */
+    renderComment(data) {
+        return `
+            <div class="alert alert-info mt-3">
+                <p>
+                    <strong>Comentario de:</strong> 
+                    ${data.author || 'Usuario desconocido'}
+                </p>
+                <p>
+                    <strong>En ticket:</strong> 
+                    <em>${data.ticket_title || 'Sin título'}</em>
+                </p>
+                <p><strong>Comentario: </strong>${data.comment || 'Sin contenido'}</p>
+            </div>
+        `;
+    }
+
+    /**
+     * Renderiza cuando cambia el ESTADO
+     */
+    renderStatus(data) {
+        return `
+            <div class="alert alert-warning mt-3">
+                <p>
+                    <strong>Ticket:</strong> 
+                    <em>"${data.title || 'Sin título'}"</em>
+                </p>
+                <p>
+                    <strong>Nuevo estado:</strong> 
+                    <span class="badge bg-primary">${data.status || 'Desconocido'}</span>
+                </p>
+                <p>
+                    <strong>Prioridad:</strong> 
+                    ${data.priority || 'Normal'}
+                </p>
+                <p class="mb-0">
+                    <strong>Actualizado por:</strong> 
+                    ${data.updated_by || 'Desconocido'}
+                </p>
+            </div>
+        `;
+    }
+
+    /**
+     * Renderiza cuando un ticket es CERRADO
+     */
+    renderClosed(data) {
+        return `
+            <div class="alert alert-danger mt-3">
+                <p>
+                    <strong>Ticket cerrado:</strong> 
+                    <em>"${data.title || 'Sin título'}"</em>
+                </p>
+                <p class="mb-0">
+                    <strong>Cerrado por:</strong> 
+                    ${data.closed_by || 'Desconocido'}
+                </p>
+            </div>
+        `;
+    }
+
+    /**
+     * Renderiza cuando un ticket es REABIERTO
+     */
+    renderReopened(data) {
+        return `
+            <div class="alert alert-success mt-3">
+                <p>
+                    <strong>Ticket reabierto:</strong> 
+                    <em>"${data.title || 'Sin título'}"</em>
+                </p>
+                <p class="mb-0">
+                    <strong>Reabierto por:</strong> 
+                    ${data.reopened_by || data.author || 'Desconocido'}
+                </p>
+            </div>
+        `;
     }
 
     /**

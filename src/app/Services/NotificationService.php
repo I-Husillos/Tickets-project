@@ -11,7 +11,7 @@ class NotificationService
     public static function format(DatabaseNotification $notification, string $locale, string $guard): array
     {
         App::setLocale($locale);
-        $data = $notification->data ?? [];
+        $data = $notification->data;
         $type = $data['type'] ?? 'unknown';
 
         return [
@@ -19,7 +19,8 @@ class NotificationService
             'type' => $type,
             'message' => self::getMessage($type, $locale),
             'content' => self::getContent($type, $data, $locale),
-            'created_at' => self::formatDate($notification->created_at, $locale),
+            'created_at' => self::formatDate($notification->created_at, $locale)['display'],
+            'actions' => self::generateActions($notification, $locale, $guard),
             'link' => self::generateLink($guard, $data, $locale),
             // Solo datos sin procesar aquí
             'raw_data' => $data,
@@ -38,11 +39,6 @@ class NotificationService
             self::format($notification, $locale, $guard)
         )->all();
     }
-
-    /**
-     * Obtiene el mensaje principal traducido
-     */
-    
 
     /**
      * Obtiene el contenido adicional traducido
@@ -118,18 +114,19 @@ class NotificationService
             return null;
         }
 
-        // Las rutas deben existir en routes/web.php
-        return match($guard) {
-            'admin' => route('admin.view.ticket', [
-                'ticket' => $ticketId,
-                'locale' => $locale,
-            ]),
-            'user' => route('user.tickets.show', [
-                'ticket' => $ticketId,
-                'locale' => $locale,
-            ]),
-            default => null,
-        };
+        $link = null;
+
+        if ($ticketId) {
+            // Obtener la ruta traducida según el locale
+            $routes = trans('routes', [], $locale);
+            
+            $link = match ($guard) {
+                'admin' => self::buildTranslatedRoute('admin.view.ticket', $ticketId, $locale, $routes),
+                'user' => self::buildTranslatedRoute('user.tickets.show', $ticketId, $locale, $routes),
+                default => null,
+            };
+        }
+        return $link;
     }
 
     /**
@@ -177,5 +174,31 @@ class NotificationService
             'relative' => $date->diffForHumans(),
             'timestamp' => $date->timestamp,
         ];
+    }
+
+    private static function buildTranslatedRoute(string $routeName, int $ticketId, string $locale, array $routes): string
+    {
+        // Obtener la ruta traducida
+        $translatedPath = $routes[$routeName] ?? null;
+
+        if (!$translatedPath) {
+            // Si no existe la traducción, construir con ruta por defecto
+            return url("/$locale/admin/tickets/$ticketId");
+        }
+
+        // Reemplazar el parámetro {ticket} con el ID
+        $path = str_replace('{ticket}', $ticketId, $translatedPath);
+
+        return url("/$locale/$path");
+    }
+
+
+    private static function generateActions(DatabaseNotification $notification, string $locale, string $guard): string
+    {
+        return view('components.actions.notification-actions', [
+            'notification' => $notification,
+            'locale' => $locale,
+            'guard' => $guard
+        ])->render();
     }
 }

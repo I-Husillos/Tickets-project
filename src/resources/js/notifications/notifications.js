@@ -3,10 +3,11 @@ import { NotificationModal } from '../components/NotificationModal.js';
 
 /**
  * Manejador de modal para notificaciones de usuario
- * ✅ Refactorizado para usar NotificationsAPI y NotificationModal
+ * Refactorizado para usar NotificationsAPI y NotificationModal
  */
 
-const api = new NotificationsAPI('user');
+const userType = window.location.pathname.includes('/admin') ? 'admin' : 'user';
+const api = new NotificationsAPI(userType);
 const modal = new NotificationModal('#notificationModal');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.show(response.data);
         } catch (error) {
             console.error('Error:', error);
-            alert('Error al cargar la notificación');
+            alert('Error al cargar la notificación si');
         }
     });
 

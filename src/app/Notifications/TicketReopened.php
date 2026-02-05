@@ -43,6 +43,9 @@ class TicketReopened extends Notification
         return [
             'type' => 'reopened',
             'ticket_id' => $this->ticket->id,
+            'title' => $this->ticket->title,
+            'created_by' => $this->admin->name,
+            'reopened_by' => $this->admin->name,
         ];
     }
 }

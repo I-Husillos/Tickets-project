@@ -77,8 +77,6 @@ class SendNotifications implements ShouldQueue
                     $admin->notify(new TicketCreatedNotification($ticket));
                 }
                 break;
-            
-            
 
             case 'commented':
                 if ($ticket->user) {

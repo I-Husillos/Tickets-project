@@ -157,7 +157,6 @@ class TicketApiController extends Controller
             'ticket' => $ticket,
         ], 201);
     }
-    
 
     public function destroy(Ticket $ticket): JsonResponse
     {

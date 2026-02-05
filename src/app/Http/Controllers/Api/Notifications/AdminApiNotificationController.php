@@ -78,14 +78,12 @@ class AdminApiNotificationController extends Controller
         }
 
         $locale = $request->header('X-Locale') ?? 'es';
-        // Validar que el locale sea válido
         if (!in_array($locale, ['es', 'en'])) {
             $locale = 'es';
         }
         app()->setLocale($locale);
 
         $notification = $admin->notifications()->find($notificationId);
-        
 
         if (!$notification) {
             return response()->json(['error' => 'Notification not found'], 404);

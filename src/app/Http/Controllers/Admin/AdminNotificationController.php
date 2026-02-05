@@ -77,7 +77,6 @@ class AdminNotificationController extends Controller
     }
 
 
-
     public function showAdminNotification(string $locale, $notification)
     {
         $admin = Auth::guard('admin')->user();

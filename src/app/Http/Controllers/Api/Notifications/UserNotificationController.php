@@ -25,7 +25,7 @@ class UserNotificationController extends Controller
         // validar locale mediante ValidatesLocale trait
         $locale = $this->getValidatedLocale($request);
 
-        $query = $user->notification();
+        $query = $user->notifications();
 
         $total = $query->count();
 
@@ -76,19 +76,21 @@ class UserNotificationController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        
         $locale = $request->header('X-Locale') ?? 'es';
-        // Validar que el locale sea válido
         if (!in_array($locale, ['es', 'en'])) {
             $locale = 'es';
         }
         app()->setLocale($locale);
 
+        
         $notification = $user->notifications()->find($notificationId);
 
         if (!$notification) {
             return response()->json(['error' => 'Notification not found'], 404);
         }
 
+        
         return response()->json([
             'data' => NotificationService::format($notification, $locale, 'user')
         ]);

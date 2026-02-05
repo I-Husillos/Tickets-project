@@ -70,7 +70,7 @@ $breadcrumbs = [
                 </div>
                 <div class="card-body">
                     @if ($latestTickets->isEmpty())
-                        <p class="text-muted">{{ __('frontoffice.dashboard.no_tickets') }}</p>
+                        <p class="text-muted">{{ __('frontoffice.tickets.no_tickets') }}</p>
                     @else
                         <ul class="list-group">
                             @foreach ($latestTickets as $ticket)
