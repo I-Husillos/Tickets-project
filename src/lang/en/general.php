@@ -5,6 +5,7 @@ return [
     'log_out' => 'Log Out',
     
     'admin_sidebar' => [
+        'app_title'            => 'Management Tickets',
         'title_admin_panel'    => 'Admin Panel',
         'panel_control'        => 'Control Panel',
         'ver_usuarios'         => 'View Users',

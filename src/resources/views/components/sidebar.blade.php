@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand -->
     <a href="{{ route('user.dashboard', ['locale' => app()->getLocale()]) }}" class="brand-link text-center">
-        <span class="brand-text font-weight-light">Gestor de Tickets</span>
+        <span class="brand-text font-weight-light">{{ __('general.admin_sidebar.app_title') }}</span>
     </a>
 
     <!-- Sidebar -->

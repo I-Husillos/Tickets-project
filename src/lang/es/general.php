@@ -5,6 +5,7 @@ return [
     'log_out' => 'Cerrar Sesión',
     
     'admin_sidebar' => [
+        'app_title'            => 'Gestión de Tickets',
         'title_admin_panel'    => 'Admin Panel',
         'panel_control'        => 'Panel de Control',
         'ver_usuarios'         => 'Ver Usuarios',
