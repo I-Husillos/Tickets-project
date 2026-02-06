@@ -52,17 +52,7 @@
             {{-- ESPACIO PARA CAPTURA: DASHBOARD COMPLETO --}}
             <div class="row justify-content-center my-4">
                 <div class="col-md-11 border p-4 bg-light text-center rounded">
-                    <i class="fas fa-chart-pie fa-4x text-gray mb-3"></i>
-                    <h5 class="text-secondary font-weight-bold">[Captura de Pantalla Requerida: Dashboard General]</h5>
-                    <p class="text-muted small">
-                        Inserte aquí una captura panorámica que muestre las 4 tarjetas superiores (Tickets Totales, Abiertos, Cerrados, Usuarios) y las tablas inferiores.
-                    </p>
-                    <div class="text-left mt-3 px-5">
-                        <small><strong>Debe resaltar:</strong><br>
-                        1. Tarjetas de conteo rápido.<br>
-                        2. Lista de "Tickets Recientes".<br>
-                        3. Menú lateral izquierdo desplegado.</small>
-                    </div>
+                    <img src="/img/image%20copy%204.png" class="img-fluid border shadow-sm" alt="Dashboard General">
                 </div>
                 <div class="col-12 text-center mt-2">
                     <small class="text-muted">Fig 1.1 - Visión general del cuadro de mando.</small>

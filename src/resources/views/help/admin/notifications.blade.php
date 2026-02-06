@@ -36,9 +36,7 @@
                     
                     {{-- ESPACIO PARA CAPTURA: MENU NOTIFICACIONES --}}
                     <div class="text-center my-3 p-3 border bg-light rounded">
-                        <i class="fas fa-caret-down mb-1"></i><br>
-                        <i class="fas fa-bell fa-2x text-warning"></i>
-                        <p class="text-muted small mt-2">[Captura: Menú desplegable de notificaciones abierto]</p>
+                        <img src="/img/image%20copy%2010.png" class="img-fluid border shadow-sm" alt="Menú Notificaciones">
                     </div>
 
                     <ul>

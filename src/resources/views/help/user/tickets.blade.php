@@ -65,8 +65,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="text-center border bg-light p-4 h-100 d-flex flex-column justify-content-center">
-                        <i class="fas fa-edit fa-3x text-muted mb-3"></i>
-                        <p class="text-muted small font-italic">[ Captura de pantalla sugerida: Formulario de creación de ticket completo ]</p>
+                        <img src="/img/image.png" class="img-fluid border shadow-sm" alt="Formulario de Ticket">
                     </div>
                 </div>
             </div>
@@ -87,7 +86,7 @@
             <div class="row">
                 <div class="col-12 mb-3">
                      <div class="text-center border bg-light p-3">
-                        <p class="text-muted small font-italic mb-0">[ Captura de pantalla sugerida: Tabla de listado de tickets ]</p>
+                        <img src="/img/image%20copy.png" class="img-fluid border shadow-sm" alt="Tabla de Tickets">
                     </div>
                 </div>
             </div>
@@ -186,7 +185,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="text-center border bg-light p-3 mb-3">
-                        <p class="text-muted small font-italic mb-0">[ Captura de pantalla sugerida: Vista detalle con chat ]</p>
+                        <img src="/img/image%20copy%202.png" class="img-fluid border shadow-sm" alt="Detalle del Ticket">
                     </div>
                 </div>
                 <div class="col-md-6">

@@ -103,9 +103,7 @@
             {{-- ESPACIO PARA CAPTURA: BARRA DE BÚSQUEDA Y FILTROS --}}
             <div class="row justify-content-center my-3">
                 <div class="col-md-10 border border-info rounded p-3 bg-light text-center">
-                    <i class="fas fa-search fa-2x text-info mb-2"></i>
-                    <h6 class="font-weight-bold mb-0">[Captura: Barra de Búsqueda y Filtros de la Tabla]</h6>
-                    <small class="text-muted">Muestre cómo buscar por "Email de usuario" o filtrar por estado "Pendiente".</small>
+                    <img src="/img/image%20copy%205.png" class="img-fluid border shadow-sm" alt="Búsqueda y Filtros">
                 </div>
             </div>
             <ul>
@@ -154,9 +152,7 @@
             {{-- ESPACIO PARA CAPTURA: VISTA DETALLE --}}
             <div class="row justify-content-center my-3">
                 <div class="col-md-12 border p-4 bg-white text-center shadow-sm">
-                    <i class="fas fa-desktop fa-3x text-secondary mb-3"></i>
-                    <h6 class="font-weight-bold text-uppercase">[Captura Panorámica: Vista Detalle del Ticket]</h6>
-                    <p class="text-muted small mb-0">Esta es la imagen más importante. Debe mostrar claramente las dos columnas (Chat y Acciones).</p>
+                    <img src="/img/image%20copy%206.png" class="img-fluid border shadow-sm" alt="Vista Detalle del Ticket">
                 </div>
                 <div class="col-12 text-center">
                    <small class="text-muted">Fig 2.1 - Interfaz de resolución.</small>

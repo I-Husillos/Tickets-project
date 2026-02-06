@@ -139,9 +139,7 @@
             {{-- ESPACIO PARA CAPTURA: FORMULARIO USUARIO --}}
             <div class="row justify-content-center my-4">
                 <div class="col-md-8 border p-3 bg-light text-center rounded">
-                    <i class="fas fa-file-alt fa-2x text-secondary mb-2"></i>
-                    <h6 class="text-muted font-weight-bold">[Captura: Formulario de Creación/Edición de Usuario]</h6>
-                    <small>Muestre los campos Nombre, Email y Password.</small>
+                    <img src="/img/image%20copy%208.png" class="img-fluid border shadow-sm" alt="Formulario Usuario">
                 </div>
             </div>
 

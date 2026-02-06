@@ -82,9 +82,7 @@
             {{-- ESPACIO PARA CAPTURA: TABLA DE EVENTOS --}}
             <div class="row justify-content-center my-3">
                 <div class="col-md-11 border border-secondary p-3 bg-light text-center rounded">
-                    <i class="fas fa-list-ol fa-2x text-dark mb-2"></i>
-                    <h6 class="text-muted font-weight-bold">[Captura: Tabla del Historial de Eventos]</h6>
-                    <small>Muestre columnas: Usuario, Acción, Modelo (Entidad), Fecha.</small>
+                    <img src="/img/image%20copy%209.png" class="img-fluid border shadow-sm" alt="Historial de Eventos">
                 </div>
             </div>
 

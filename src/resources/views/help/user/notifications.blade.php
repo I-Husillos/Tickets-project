@@ -81,8 +81,7 @@
                         Accediendo desde el menú lateral o desde "Ver todas" en la campana, llegarás a la lista completa.
                     </p>
                     <div class="text-center my-4 border bg-light p-3">
-                        <p class="text-muted small font-italic mb-0">[ Captura de pantalla sugerida: Lista de notificaciones completa con botones de acción ]</p>
-                        {{-- <img src="{{ asset('img/help/notifications_list.png') }}" class="img-fluid" alt="Captura Notificaciones"> --}}
+                        <img src="/img/image%20copy%203.png" class="img-fluid border shadow-sm" alt="Lista de Notificaciones">
                     </div>
                     <p>
                         Aquí puedes realizar las siguientes acciones para organizar tu bandeja de entrada:

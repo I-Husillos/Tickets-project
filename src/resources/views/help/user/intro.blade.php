@@ -78,8 +78,7 @@
             </p>
             
             <div class="text-center my-4 border bg-light p-3">
-                <p class="text-muted font-italic mb-0">[ Aquí se mostrará una captura del Dashboard del usuario con los elementos destacados ]</p>
-                {{-- <img src="{{ asset('img/help/dashboard_user.png') }}" class="img-fluid" alt="Captura del Dashboard"> --}}
+                <img src="/img/user-control-panel.png" class="img-fluid border shadow-sm" alt="Captura del Dashboard">
             </div>
 
             <div class="row">
