@@ -124,30 +124,32 @@
                             </a>
                         </li>
 
-                        {{-- Usuarios --}}
-                        <li class="nav-item">
-                            <a href="{{ route('admin.help.users', ['locale' => app()->getLocale()]) }}"
-                            class="nav-link {{ request()->routeIs('admin.help.users') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{ __('faq.faq.admin.users') }}</p>
-                            </a>
-                        </li>
-
                         {{-- Tickets --}}
                         <li class="nav-item">
                             <a href="{{ route('admin.help.tickets', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ request()->routeIs('admin.help.tickets') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tickets</p>
+                                <p>Gestión de Tickets</p>
                             </a>
                         </li>
+
+                        {{-- Usuarios --}}
+                        @if(Auth::guard('admin')->user()->superadmin)
+                        <li class="nav-item">
+                            <a href="{{ route('admin.help.users', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ request()->routeIs('admin.help.users') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Usuarios y Staff</p>
+                            </a>
+                        </li>
+                        @endif
 
                         {{-- Notificaciones --}}
                         <li class="nav-item">
                             <a href="{{ route('admin.help.notifications', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ request()->routeIs('admin.help.notifications') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ __('faq.faq.notifications') }}</p>
+                                <p>Notificaciones</p>
                             </a>
                         </li>
 
@@ -156,7 +158,7 @@
                             <a href="{{ route('admin.help.events', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ request()->routeIs('admin.help.events') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{ __('faq.faq.admin.event_history') }}</p>
+                                <p>Historial</p>
                             </a>
                         </li>
                     </ul>

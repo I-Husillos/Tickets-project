@@ -103,6 +103,24 @@
                                 <p>{{ __('faq.faq.notifications') }}</p>
                             </a>
                         </li>
+
+                        <!-- Perfil -->
+                        <li class="nav-item">
+                            <a href="{{ route('user.help.profile', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ Route::is('user.help.profile') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Mi Perfil</p>
+                            </a>
+                        </li>
+
+                        <!-- FAQ -->
+                        <!-- <li class="nav-item">
+                            <a href="{{ route('user.help.faq', ['locale' => app()->getLocale()]) }}"
+                            class="nav-link {{ Route::is('user.help.faq') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>FAQ</p>
+                            </a>
+                        </li> -->
                     </ul>
                 </li>
 

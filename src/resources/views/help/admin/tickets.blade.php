@@ -1,392 +1,224 @@
 @extends('layouts.admin')
 
-@section('title', 'Ayuda · Gestión de Tickets')
-
-@section('content-header')
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>
-                    <i class="fas fa-ticket-alt"></i>
-                    Guía Completa de Gestión de Tickets
-                </h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('admin.help.index', ['locale' => app()->getLocale()]) }}">
-                            Ayuda
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active">Gestión de Tickets</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-@endsection
+@section('title', 'Manual Operativo · Gestión Avanzada de Tickets')
 
 @section('admincontent')
-    <div class="container-fluid">
-
-        {{-- INTRODUCCIÓN --}}
-        <div class="card card-outline card-primary">
-            <div class="card-body">
-                <h4>
-                    <i class="fas fa-info-circle"></i>
-                    Tu Rol como Gestor de Tickets
-                </h4>
-                <p class="mt-3">
-                    Como administrador, tu responsabilidad principal es gestionar los tickets 
-                    que los usuarios crean. Los tickets representan solicitudes, problemas, 
-                    consultas o tareas que los usuarios necesitan que el equipo resuelva.
-                </p>
-                <p class="mt-3">
-                    Tu trabajo es revisar estos tickets, evaluarlos, asignarlos al equipo adecuado, 
-                    monitorear su progreso, comunicarte con los usuarios y finalmente resolverlos 
-                    de manera satisfactoria. La calidad de tu gestión determina directamente la 
-                    satisfacción del usuario.
-                </p>
-                <p class="mt-3">
-                    <strong>Objetivo fundamental:</strong> Transformar problemas de usuarios en soluciones 
-                    de manera eficiente, clara y profesional.
-                </p>
-            </div>
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-sm-8">
+            <h1 class="m-0 text-dark">Gestión Avanzada de Incidencias</h1>
+            <p class="text-muted">Protocolos de atención, resolución y cierre de tickets.</p>
         </div>
-
-        {{-- CICLO DE VIDA --}}
-        <div class="card card-outline card-info">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-sync-alt"></i>
-                    Ciclo de Vida Completo de un Ticket
-                </h3>
-            </div>
-            <div class="card-body">
-                <p>
-                    Cada ticket pasa por varios estados. Entender este ciclo es fundamental 
-                    para gestionar eficientemente:
-                </p>
-
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <h6><strong>1. 📝 ABIERTO (Nuevo)</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            El usuario acaba de crear el ticket. No ha sido revisado aún.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu acción:</strong> Revisarlo, confirmar que está claro, 
-                            responder al usuario con un reconocimiento.
-                        </p>
-
-                        <h6 class="mt-3"><strong>2. 👀 EN REVISIÓN</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            Estás analizando el ticket, formulando preguntas o recopilando 
-                            información adicional.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu acción:</strong> Comunicarte con el usuario si necesitas 
-                            detalles, pedir documentación, etc.
-                        </p>
-
-                        <h6 class="mt-3"><strong>3. 🔄 EN PROGRESO</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            Ya identificaste la solución y estás trabajando en ella activamente.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu acción:</strong> Ejecutar la solución, mantener comunicado 
-                            al usuario del avance.
-                        </p>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h6><strong>4. ✅ RESUELTO</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            Implementaste la solución y crees que el problema está resuelto.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu acción:</strong> Comunicar la solución claramente al usuario, 
-                            solicitar confirmación de que está satisfecho.
-                        </p>
-
-                        <h6 class="mt-3"><strong>5. ⏸️ PAUSADO</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            Necesitas esperar información del usuario o de terceros antes de continuar.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu acción:</strong> Dejar claro al usuario qué esperas y cuándo 
-                            lo necesitas.
-                        </p>
-
-                        <h6 class="mt-3"><strong>6. 🔒 CERRADO</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            El usuario confirmó que está satisfecho y el problema está totalmente resuelto.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu acción:</strong> Ninguna. El ticket termina aquí (puede reabrirse).
-                        </p>
-                    </div>
-                </div>
-
-                <div class="alert alert-warning mt-3">
-                    <i class="fas fa-exclamation-circle mr-2"></i>
-                    <strong>Importante:</strong> Mantén comunicación constante con el usuario en cada transición 
-                    de estado. No cambies estado sin avisar al usuario.
-                </div>
-            </div>
+        <div class="col-sm-4">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{ route('admin.help.index', ['locale' => app()->getLocale()]) }}">Ayuda</a></li>
+                <li class="breadcrumb-item active">Tickets</li>
+            </ol>
         </div>
-
-        {{-- PRIORIDADES --}}
-        <div class="card card-outline card-success">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Niveles de Prioridad Explicados
-                </h3>
-            </div>
-            <div class="card-body">
-                <p>
-                    Los tickets tienen diferentes prioridades que ayudan a organizar tu trabajo:
-                </p>
-
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <h6><i class="fas fa-arrow-up text-danger"></i> <strong>🔴 CRÍTICA</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Cuándo:</strong> El sistema está caído, datos se pierden o hay 
-                            acceso no autorizado.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tiempo esperado:</strong> Resolución en horas, no días.
-                        </p>
-                        <p class="text-muted text-sm">
-                            <strong>Acción:</strong> Prioriza esto por encima de todo. Dedica 
-                            recursos inmediatamente.
-                        </p>
-
-                        <h6 class="mt-3"><i class="fas fa-arrow-up text-warning"></i> <strong>🟠 ALTA</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Cuándo:</strong> Funcionalidad importante no trabaja, afecta 
-                            muchos usuarios o causa pérdida de productividad.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tiempo esperado:</strong> Resolución en 1-2 días.
-                        </p>
-                        <p class="text-muted text-sm">
-                            <strong>Acción:</strong> Atiende poco después de crítica. Escala 
-                            si es necesario.
-                        </p>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h6><i class="fas fa-minus text-info"></i> <strong>🔵 NORMAL</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Cuándo:</strong> Funcionalidad afectada pero hay workaround, 
-                            impacto limitado.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tiempo esperado:</strong> Resolución en 3-7 días.
-                        </p>
-                        <p class="text-muted text-sm">
-                            <strong>Acción:</strong> Atiende según capacidad disponible.
-                        </p>
-
-                        <h6 class="mt-3"><i class="fas fa-arrow-down text-secondary"></i> <strong>⚪ BAJA</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Cuándo:</strong> Mejoras estéticas, solicitudes de features nuevas, 
-                            soluciones workaround disponibles.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tiempo esperado:</strong> Resolución en 2+ semanas.
-                        </p>
-                        <p class="text-muted text-sm">
-                            <strong>Acción:</strong> Planifica para futuro, no es urgente.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- FLUJO DE TRABAJO --}}
-        <div class="card card-outline card-warning">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-tasks"></i>
-                    Flujo de Trabajo Recomendado
-                </h3>
-            </div>
-            <div class="card-body">
-                <p>
-                    Sigue este proceso para una gestión eficiente:
-                </p>
-
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <h6><strong>Paso 1: Revisar Nuevos Tickets Diariamente</strong></h6>
-                        <p class="text-muted text-sm">
-                            Accede al panel y filtra por estado "Abierto". Revisa cada nuevo 
-                            ticket en el orden que llegó. Esto asegura que ningún usuario queda 
-                            abandonado.
-                        </p>
-
-                        <h6 class="mt-3"><strong>Paso 2: Evaluar Claridad y Completitud</strong></h6>
-                        <p class="text-muted text-sm">
-                            ¿Es claro qué necesita el usuario? ¿Tienen suficiente información? 
-                            Si falta info, cambia estado a "En revisión" e inmediatamente envía 
-                            un comentario pidiendo aclaración.
-                        </p>
-
-                        <h6 class="mt-3"><strong>Paso 3: Clasificar por Prioridad</strong></h6>
-                        <p class="text-muted text-sm">
-                            Asigna la prioridad correcta basándote en impacto y urgencia. 
-                            Usuarios con problemas críticos necesitan respuesta rápida.
-                        </p>
-
-                        <h6 class="mt-3"><strong>Paso 4: Asignar o Tomar Responsabilidad</strong></h6>
-                        <p class="text-muted text-sm">
-                            ¿Lo puedes resolver tú? Tómate la responsabilidad. ¿Necesita 
-                            otro especialista? Asígnalo claramente y notifícalos.
-                        </p>
-
-                        <h6 class="mt-3"><strong>Paso 5: Comunicar Cambios de Estado</strong></h6>
-                        <p class="text-muted text-sm">
-                            Cada vez que cambies estado, deja un comentario explicando por qué. 
-                            "Movido a En Progreso - estamos implementando la solución" es mejor 
-                            que ningún comentario.
-                        </p>
-
-                        <h6 class="mt-3"><strong>Paso 6: Resolver y Validar</strong></h6>
-                        <p class="text-muted text-sm">
-                            Cuando creas haber resuelto, documenta exactamente qué hiciste en 
-                            un comentario. Cambia a "Resuelto" y pide confirmación al usuario.
-                        </p>
-
-                        <h6 class="mt-3"><strong>Paso 7: Cerrar con Confirmación</strong></h6>
-                        <p class="text-muted text-sm">
-                            Solo cierra el ticket si el usuario confirma que está satisfecho. 
-                            Si no confirma en 3-5 días, recontacta.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- BUENAS PRÁCTICAS --}}
-        <div class="card card-outline card-secondary">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-star"></i>
-                    Mejores Prácticas de Gestión
-                </h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6><i class="fas fa-check text-success"></i> <strong>Lo que Deberías Hacer:</strong></h6>
-                        <ul style="font-size: 0.9em;">
-                            <li>✅ Responde en menos de 24h (idealemente menos de 6h)</li>
-                            <li>✅ Sé específico en tus comentarios</li>
-                            <li>✅ Reconoce el problema del usuario</li>
-                            <li>✅ Proporciona actualizaciones regularmente</li>
-                            <li>✅ Explica soluciones en lenguaje simple</li>
-                            <li>✅ Pide confirmación antes de cerrar</li>
-                            <li>✅ Sé profesional y respetuoso siempre</li>
-                            <li>✅ Registra decisiones en el historial</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h6><i class="fas fa-times text-danger"></i> <strong>Lo que NO Deberías Hacer:</strong></h6>
-                        <ul style="font-size: 0.9em;">
-                            <li>❌ Abandonar un ticket sin explicación</li>
-                            <li>❌ Cambiar estado sin avisar al usuario</li>
-                            <li>❌ Ser genérico o vago en respuestas</li>
-                            <li>❌ Cerrar sin confirmación del usuario</li>
-                            <li>❌ Usar jerga técnica innecesaria</li>
-                            <li>❌ Prometer tiempos que no puedes cumplir</li>
-                            <li>❌ Ignorar tickets de baja prioridad</li>
-                            <li>❌ Hacer cambios sin documentar</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- SITUACIONES COMUNES --}}
-        <div class="card card-outline card-danger">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Situaciones Comunes y Cómo Manejarlas
-                </h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6><strong>Situación: Usuario Enojado</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Síntoma:</strong> El usuario se frustra en sus comentarios.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu respuesta:</strong> Reconoce su frustración. "Entiendo que 
-                            esto te causa inconveniente. Aquí es cómo lo resolveremos..."
-                        </p>
-
-                        <h6 class="mt-3"><strong>Situación: Problema Irreproducible</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Síntoma:</strong> El usuario reporta un problema pero tú no 
-                            logras reproducirlo.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu respuesta:</strong> Pide pasos exactos, capturas de pantalla, 
-                            información del navegador. "Necesito replicar exactamente lo que hiciste."
-                        </p>
-
-                        <h6 class="mt-3"><strong>Situación: El Usuario Desaparece</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Síntoma:</strong> Pide la solución pero no responde a seguimientos.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu respuesta:</strong> Espera 3-5 días, recontacta. Si tampoco 
-                            responde, avisa que cerrarás el ticket.
-                        </p>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h6><strong>Situación: Ticket Duplicado</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Síntoma:</strong> Mismo usuario o diferente reporta lo mismo.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu respuesta:</strong> Vincula a la otra ticket. Consolida la 
-                            información y continúa con una sola.
-                        </p>
-
-                        <h6 class="mt-3"><strong>Situación: Solicitud Fuera de Alcance</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Síntoma:</strong> El usuario pide algo que el sistema no puede hacer.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu respuesta:</strong> Explica por qué no es posible. Ofrece 
-                            alternativas. "No podemos hacer X, pero podemos hacer Y que logra lo mismo."
-                        </p>
-
-                        <h6 class="mt-3"><strong>Situación: Error del Usuario, No del Sistema</strong></h6>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Síntoma:</strong> El usuario hace algo mal y cree que es un bug.
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            <strong>Tu respuesta:</strong> No culpes. Guía educadamente: "Los pasos 
-                            correctos son..." Esto convierte un cliente enojado en uno educado.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="alert alert-info mt-4">
-            <i class="fas fa-lightbulb mr-2"></i>
-            <strong>Regla de Oro:</strong> Un cliente bien atendido es más valioso que cualquier 
-            ticket cerrado rápidamente. Invierte en relaciones.
-        </div>
-
     </div>
+
+    {{-- INTRODUCCIÓN AL FLUJO --}}
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-project-diagram mr-2"></i> Ciclo de Vida del Ticket (SLA)</h3>
+        </div>
+        <div class="card-body">
+            <p class="text-justify">
+                Un ticket es una entidad viva que pasa por diferentes estados desde que nace hasta que muere. 
+                Entender este flujo es vital para evitar tickets "estancados" que frustran a los usuarios.
+            </p>
+            
+            <div class="row mt-4 mb-5">
+                <div class="col-12">
+                     <div class="timeline">
+                        <!-- PENDIENTE -->
+                        <div>
+                            <i class="fas fa-envelope bg-blue box-shadow"></i>
+                            <div class="timeline-item shadow-sm">
+                                <span class="time"><i class="fas fa-clock"></i> T = 0</span>
+                                <h3 class="timeline-header bg-light border-bottom">1. Estado: <strong class="text-primary">PENDIENTE</strong></h3>
+                                <div class="timeline-body">
+                                    El usuario ha reportado un problema. El ticket está visible para todos los administradores en la lista general.
+                                    <br><strong>Nadie está trabajando en él todavía.</strong>
+                                    <hr>
+                                    <i class="fas fa-exclamation-triangle text-warning"></i> <em>El reloj del SLA está corriendo. Se requiere una reacción rápida.</em>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- EN PROGRESO -->
+                        <div>
+                            <i class="fas fa-tools bg-yellow box-shadow"></i>
+                            <div class="timeline-item shadow-sm">
+                                <span class="time"><i class="fas fa-clock"></i> T + 10min</span>
+                                <h3 class="timeline-header bg-light border-bottom">2. Estado: <strong class="text-warning">EN PROGRESO</strong></h3>
+                                <div class="timeline-body">
+                                    Un administrador (Tú) ha pulsado <strong>"Asignarme"</strong> o ha sido asignado por un supervisor.
+                                    <br>Ahora eres el dueño del problema. El usuario ve que alguien está "manos a la obra".
+                                    <br>En esta fase ocurre la investigación y el intercambio de mensajes.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- RESUELTO -->
+                        <div>
+                            <i class="fas fa-check bg-success box-shadow"></i>
+                            <div class="timeline-item shadow-sm">
+                                <span class="time"><i class="fas fa-clock"></i> T + 2h</span>
+                                <h3 class="timeline-header bg-light border-bottom">3. Estado: <strong class="text-success">RESUELTO / POR VALIDAR</strong></h3>
+                                <div class="timeline-body">
+                                    El técnico ha aplicado una solución y la ha comunicado.
+                                    <br>El sistema espera que el usuario confirme si funciona o no.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CERRADO -->
+                         <div>
+                            <i class="fas fa-lock bg-secondary box-shadow"></i>
+                            <div class="timeline-item shadow-sm">
+                                <span class="time"><i class="fas fa-clock"></i> T + 24h</span>
+                                <h3 class="timeline-header bg-light border-bottom">4. Estado: <strong class="text-secondary">CERRADO</strong></h3>
+                                <div class="timeline-body">
+                                    El ciclo ha terminado. El ticket se archiva y pasa al historial.
+                                    <br>Solo puede reactivarse mediante una "Reapertura" manual si el problema persiste.
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- SECCIÓN DETALLADA: LA VISTA DE GESTIÓN --}}
+    <div class="card card-outline card-info mt-4">
+        <div class="card-header">
+            <h3 class="card-title text-bold">Guía Paso a Paso: Trabajando un Ticket</h3>
+        </div>
+        <div class="card-body">
+            
+            {{-- PASO 1 --}}
+            <h4 class="text-info mt-3">Paso 1: Localización y Filtrado</h4>
+            <p>
+                Ante cientos de tickets, el orden es poder. Utilice las herramientas de búsqueda en <code>Gestionar Tickets > Todos los Tickets</code>.
+            </p>
+            {{-- ESPACIO PARA CAPTURA: BARRA DE BÚSQUEDA Y FILTROS --}}
+            <div class="row justify-content-center my-3">
+                <div class="col-md-10 border border-info rounded p-3 bg-light text-center">
+                    <i class="fas fa-search fa-2x text-info mb-2"></i>
+                    <h6 class="font-weight-bold mb-0">[Captura: Barra de Búsqueda y Filtros de la Tabla]</h6>
+                    <small class="text-muted">Muestre cómo buscar por "Email de usuario" o filtrar por estado "Pendiente".</small>
+                </div>
+            </div>
+            <ul>
+                <li><strong>Buscar por ID:</strong> Si un usuario le dice "tengo problema con el ticket #45", escriba `45` en el buscador.</li>
+                <li><strong>Estados:</strong> Filtre por "Pendiente" para ver qué trabajo nuevo hay.</li>
+            </ul>
+
+            <hr class="my-4">
+
+            {{-- PASO 2 --}}
+            <h4 class="text-info">Paso 2: La Pantalla de Detalle ("La Mesa de Operaciones")</h4>
+            <p>
+                Al hacer clic en <span class="badge badge-primary"><i class="fas fa-eye"></i> Ver</span>, entras en la sala de operaciones del ticket.
+                Aquí es donde sucede la magia.
+            </p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100 bg-light">
+                        <div class="card-body">
+                            <h5 class="text-dark font-weight-bold">A. Panel Izquierdo (Comunicación)</h5>
+                            <p>Aquí se muestra el historial cronológico de la conversación.</p>
+                            <ul>
+                                <li>Los mensajes del usuario aparecen a la izquierda.</li>
+                                <li>Sus respuestas a la derecha (o diferenciadas por color).</li>
+                                <li><strong>Formulario de Respuesta:</strong> Donde redacta su solución.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 bg-light">
+                        <div class="card-body">
+                            <h5 class="text-dark font-weight-bold">B. Panel Derecho (Control)</h5>
+                            <p>Controles administrativos críticos:</p>
+                            <ul>
+                                <li><strong>Cambiar Estado:</strong> Dropdown para mover el ticket de fase manualmente.</li>
+                                <li><strong>Reasignar:</strong> Si el problema es de Redes y usted es de Hardware, páseselo a otro compañero aquí.</li>
+                                <li><strong>Datos del Solicitante:</strong> Email y nombre para contacto directo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- ESPACIO PARA CAPTURA: VISTA DETALLE --}}
+            <div class="row justify-content-center my-3">
+                <div class="col-md-12 border p-4 bg-white text-center shadow-sm">
+                    <i class="fas fa-desktop fa-3x text-secondary mb-3"></i>
+                    <h6 class="font-weight-bold text-uppercase">[Captura Panorámica: Vista Detalle del Ticket]</h6>
+                    <p class="text-muted small mb-0">Esta es la imagen más importante. Debe mostrar claramente las dos columnas (Chat y Acciones).</p>
+                </div>
+                <div class="col-12 text-center">
+                   <small class="text-muted">Fig 2.1 - Interfaz de resolución.</small>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            {{-- PASO 3 --}}
+            <h4 class="text-info">Paso 3: Redactando una Respuesta Profesional</h4>
+            <div class="alert alert-secondary">
+                <i class="fas fa-pen-fancy mr-2"></i> <strong>Etiqueta Profesional:</strong>
+                Recuerde que el cliente leerá esto. Sea empático pero conciso.
+            </div>
+            <p>
+                Use el editor de texto para:
+            </p>
+            <ol>
+                <li>Saludar al usuario por su nombre.</li>
+                <li>Confirmar que ha entendido el problema ("Entiendo que su impresora no conecta...").</li>
+                <li>Proponer pasos claros (usando listas numeradas).</li>
+                <li>Adjuntar manuales o capturas si es necesario.</li>
+            </ol>
+            <p>
+                Al pulsar <strong>"Enviar Comentario"</strong>, el sistema:
+                1. Guarda el mensaje.
+                2. Envía un email al usuario avisándole.
+                3. (Opcional) Cambia el estado automáticamente si así está configurado.
+            </p>
+
+        </div>
+    </div>
+
+    {{-- SECCIÓN: SOLUCIÓN DE PROBLEMAS --}}
+    <div class="card card-warning collapsed-card">
+        <div class="card-header">
+            <h3 class="card-title">Casos Especiales y Solución de Problemas</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="card-body">
+            <dl>
+                <dt class="text-warning">El usuario no responde hace días.</dt>
+                <dd>
+                    Si un ticket está en "En Progreso" o "Resuelto" y el usuario no confirma:
+                    1. Envíe un último mensaje de aviso ("Cerraremos este ticket por inactividad en 24h").
+                    2. Pasado el tiempo, use el botón <strong>"Forzar Cierre"</strong>.
+                </dd>
+
+                <dt class="text-warning">Me he asignado un ticket por error.</dt>
+                <dd>
+                    Simplemente use el selector de "Asignado a" en el panel derecho y seleccione "Sin asignar" o el nombre de otro compañero.
+                </dd>
+
+                <dt class="text-warning">El usuario reabrió un ticket que estaba cerrado.</dt>
+                <dd>
+                    Esto puede pasar si el problema volvió. El ticket volverá a estado "En Progreso" y aparecerá en su bandeja de entrada. Revise el historial para ver qué falló.
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+</div>
 @endsection

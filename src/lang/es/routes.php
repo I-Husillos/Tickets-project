@@ -33,6 +33,7 @@ return [
 
         // Help usuario
         'user.help.index' => 'ayuda/usuario',
+        'user.help.profile' => 'ayuda/usuario/perfil',
         'user.help.faq' => 'ayuda/usuario/preguntas-frecuentes',
         'user.help.tickets' => 'ayuda/usuario/tickets',
         'user.help.notifications' => 'ayuda/usuario/notificaciones',

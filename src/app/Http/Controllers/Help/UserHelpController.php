@@ -22,5 +22,15 @@ class UserHelpController extends Controller
         return view('help.user.notifications');
     }
 
+    public function profileHelpUser()
+    {
+        return view('help.user.profile');
+    }
+
+    public function faqHelpUser()
+    {
+        return view('help.user.faq');
+    }
+
 
 }

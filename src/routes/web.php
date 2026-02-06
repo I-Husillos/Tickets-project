@@ -84,6 +84,8 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['user.help.index'], [UserHelpController::class, 'indexHelpUser'])->name('user.help.index');
         Route::get($routes['user.help.tickets'], [UserHelpController::class, 'ticketsHelpUser'])->name('user.help.tickets');
         Route::get($routes['user.help.notifications'], [UserHelpController::class, 'notificationsHelpUser'])->name('user.help.notifications');
+        Route::get($routes['user.help.profile'], [UserHelpController::class, 'profileHelpUser'])->name('user.help.profile');
+        Route::get($routes['user.help.faq'], [UserHelpController::class, 'faqHelpUser'])->name('user.help.faq');
     });
 
 
@@ -124,7 +126,6 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['admin.comments.view'], [CommentController::class, 'viewComments'])->name('admin.comments.view');
 
 
-        
         Route::get($routes['admin.dashboard.list.users'], [AdminUserController::class, 'showListUsers'])->name('admin.dashboard.list.users');
         Route::get($routes['admin.filter.users'], [AdminUserController::class, 'filterUsers'])->name('admin.filter.users');
         Route::get($routes['admin.users.add_dashboard'], [AdminUserController::class, 'showAddDashboard'])->name('admin.dashboard.add');

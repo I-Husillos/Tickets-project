@@ -34,6 +34,7 @@ return [
 
         // Help usuario
         'user.help.index' => 'help/user',
+        'user.help.profile' => 'help/user/profile',
         'user.help.faq' => 'help/user/frequently-asked-questions',
         'user.help.tickets' => 'help/user/tickets',
         'user.help.notifications' => 'help/user/notifications',
