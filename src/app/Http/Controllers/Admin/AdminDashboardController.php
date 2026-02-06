@@ -12,8 +12,8 @@ class AdminDashboardController extends Controller
 {
     public function showManageDashboard()
     {
-        
-        $totalUsers = \App\Models\User::count();
+        // total de usuario y de administrador en totalUsers
+        $totalUsers = \App\Models\User::count() + \App\Models\Admin::count();
         $totalAdmins = \App\Models\Admin::count();
         $totalTickets = \App\Models\Ticket::count();
         $totalAssignedTickets = Ticket::whereNotNull('admin_id')->count();

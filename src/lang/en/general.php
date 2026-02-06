@@ -2,6 +2,7 @@
 
 return [
     'home' => 'Home',
+    'log_out' => 'Log Out',
     
     'admin_sidebar' => [
         'title_admin_panel'    => 'Admin Panel',

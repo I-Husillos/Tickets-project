@@ -70,7 +70,7 @@
                     <a href="#" class="nav-link {{ Route::is('user.help.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-question-circle"></i>
                         <p>
-                            Ayuda
+                            {{ __('faq.faq.help') }}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -82,7 +82,7 @@
                             <a href="{{ route('user.help.index', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ Route::is('user.help.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Introducción</p>
+                                <p>{{ __('faq.faq.intoduction_title') }}</p>
                             </a>
                         </li>
 
@@ -100,19 +100,9 @@
                             <a href="{{ route('user.help.notifications', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ Route::is('user.help.notifications') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Notificaciones</p>
+                                <p>{{ __('faq.faq.notifications') }}</p>
                             </a>
                         </li>
-
-                        <!-- FAQ -->
-                        <li class="nav-item">
-                            <a href="{{ route('user.help.faq', ['locale' => app()->getLocale()]) }}"
-                            class="nav-link {{ Route::is('user.help.faq') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Preguntas frecuentes</p>
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
 

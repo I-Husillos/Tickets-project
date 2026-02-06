@@ -109,7 +109,7 @@ export class NotificationModal {
      */
     renderCreated(data) {
         return `
-            <div class="alert alert-info mt-3">
+            <div>
                 <p>
                     <strong>Creado por:</strong> 
                     ${data.created_by || data.author || 'Usuario desconocido'}

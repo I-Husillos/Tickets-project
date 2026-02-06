@@ -104,7 +104,7 @@ class SendNotifications implements ShouldQueue
                     // Si no hay admin asociado, notificar a todos los administradores
                     $admins = Admin::all();
                     foreach ($admins as $admin) {
-                        $admin->notify(new TicketClosed($ticket, $this->extraData));
+                        $admin->notify(new TicketStatusChanged($ticket, $this->extraData));
                     }
                 }
                 break;
@@ -131,7 +131,19 @@ class SendNotifications implements ShouldQueue
                             $admin->notify(new TicketReopened($ticket, $admin));
                         }
                     }
-                    break;                
+                    break;
+                
+                // case 'assigned_to':
+                //     if ($ticket->user && $this->extraData instanceof Admin) {
+                //         $ticket->user->notify(new TicketStatusChanged($ticket, $this->extraData));
+                //     } else {
+                //         Log::warning("No admin found or actor is not Admin for ticket: {$ticket->id}. Notifying all admins.");
+                //         $admins = Admin::all();
+                //         foreach ($admins as $admin) {
+                //             $admin->notify(new TicketStatusChanged($ticket, $this->extraData));
+                //         }
+                //     }
+                //     break;
         
             default:
                 Log::warning("Tipo de notificación desconocido: {$this->type}");

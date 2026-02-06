@@ -2,6 +2,8 @@
 
 return [
     'home' => 'Inicio',
+    'log_out' => 'Cerrar Sesión',
+    
     'admin_sidebar' => [
         'title_admin_panel'    => 'Admin Panel',
         'panel_control'        => 'Panel de Control',

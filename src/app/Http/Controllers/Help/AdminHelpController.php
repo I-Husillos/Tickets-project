@@ -12,11 +12,6 @@ class AdminHelpController extends Controller
         return view('help.admin.intro');
     }
 
-    public function faqHelpAdmin()
-    {
-        return view('help.admin.faq');
-    }
-
     public function usersHelpAdmin()
     {
         return view('help.admin.users');
@@ -36,6 +31,5 @@ class AdminHelpController extends Controller
     {
         return view('help.admin.events');
     }
-
 
 }

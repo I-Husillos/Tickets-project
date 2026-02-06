@@ -17,8 +17,8 @@
             <title>@yield('title', __('general.frontoffice.layout.page_title'))</title>
 
             @vite(['resources/js/app.js', 'resources/css/app.css'])
+            <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
 
-        
 
             <!-- Font Awesome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -48,12 +48,9 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <!-- Breadcrumbs -->
-                                    <!-- Breadcrumbs -->
-                                    <div class="col-sm-6">
-                                        @isset($breadcrumbs)
-                                            @include('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-                                        @endisset
-                                    </div>
+                                    @isset($breadcrumbs)
+                                        @include('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+                                    @endisset
                                 </div>
                             </div>
                         </div>

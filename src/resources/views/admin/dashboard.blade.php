@@ -16,7 +16,7 @@
             @csrf
             <!-- Botón de cierre de sesión con traducción -->
             <button type="submit" class="btn btn-danger">
-                {{ __('general.admin_dashboard.logout') }}
+                {{ __('general..log_outgout') }}
             </button>
         </form>
     </div>

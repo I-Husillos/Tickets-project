@@ -42,7 +42,7 @@ public function update(User $user, Ticket $ticket)
 
 ---
 
-### 📝 2. **Form Requests (Requests): VALIDACIÓN DE DATOS**
+### 2. **Form Requests (Requests): VALIDACIÓN DE DATOS**
 
 Son clases que validan **la información enviada en un formulario o API**.
 

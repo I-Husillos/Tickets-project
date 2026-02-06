@@ -82,7 +82,6 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['user.notifications.show'], [UserNotificationController::class, 'showUserNotification'])->name('user.notifications.show');
 
         Route::get($routes['user.help.index'], [UserHelpController::class, 'indexHelpUser'])->name('user.help.index');
-        Route::get($routes['user.help.faq'], [UserHelpController::class, 'faqHelpUser'])->name('user.help.faq');
         Route::get($routes['user.help.tickets'], [UserHelpController::class, 'ticketsHelpUser'])->name('user.help.tickets');
         Route::get($routes['user.help.notifications'], [UserHelpController::class, 'notificationsHelpUser'])->name('user.help.notifications');
     });
@@ -171,7 +170,6 @@ Route::middleware(['web', \App\Http\Middleware\LanguageMiddleware::class])
         Route::get($routes['admin.history.events'], [EventHistoryController::class, 'indexEventHistory'])->name('admin.history.events');
 
         Route::get($routes['admin.help.index'], [AdminHelpController::class, 'indexHelpAdmin'])->name('admin.help.index');
-        Route::get($routes['admin.help.faq'], [AdminHelpController::class, 'faqHelpAdmin'])->name('admin.help.faq');
         Route::get($routes['admin.help.users'], [AdminHelpController::class, 'usersHelpAdmin'])->name('admin.help.users');
         Route::get($routes['admin.help.tickets'], [AdminHelpController::class, 'ticketsHelpAdmin'])->name('admin.help.tickets');
         Route::get($routes['admin.help.notifications'], [AdminHelpController::class, 'notificationsHelpAdmin'])->name('admin.help.notifications');

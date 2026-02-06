@@ -107,7 +107,7 @@
                     <a href="#" class="nav-link {{ request()->routeIs('admin.help.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-question-circle"></i>
                         <p>
-                            Centro de ayuda
+                            {{ __('faq.faq.help') }}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -119,7 +119,7 @@
                             <a href="{{ route('admin.help.index', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ request()->routeIs('admin.help.index') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Introducción</p>
+                                <p>{{ __('faq.faq.intoduction_title') }}</p>
                             </a>
                         </li>
 
@@ -128,7 +128,7 @@
                             <a href="{{ route('admin.help.users', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ request()->routeIs('admin.help.users') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Usuarios</p>
+                                <p>{{ __('faq.faq.admin.users') }}</p>
                             </a>
                         </li>
 
@@ -146,7 +146,7 @@
                             <a href="{{ route('admin.help.notifications', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ request()->routeIs('admin.help.notifications') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Notificaciones</p>
+                                <p>{{ __('faq.faq.notifications') }}</p>
                             </a>
                         </li>
 
@@ -155,19 +155,9 @@
                             <a href="{{ route('admin.help.events', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ request()->routeIs('admin.help.events') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Historial de eventos</p>
+                                <p>{{ __('faq.faq.admin.event_history') }}</p>
                             </a>
                         </li>
-
-                        {{-- FAQ --}}
-                        <li class="nav-item">
-                            <a href="{{ route('admin.help.faq', ['locale' => app()->getLocale()]) }}"
-                            class="nav-link {{ request()->routeIs('admin.help.faq') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>FAQ</p>
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
 

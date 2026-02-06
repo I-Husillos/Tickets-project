@@ -26,6 +26,8 @@
 
 
         @vite(['resources/js/app.js', 'resources/css/app.css'])
+        <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+
 
         <link rel="canonical" href="{{ url()->current() }}">
 

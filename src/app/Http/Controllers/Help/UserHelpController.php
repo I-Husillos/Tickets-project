@@ -12,11 +12,6 @@ class UserHelpController extends Controller
         return view('help.user.intro');
     }
 
-    public function faqHelpUser()
-    {
-        return view('help.user.faq');
-    }
-
     public function ticketsHelpUser()
     {
         return view('help.user.tickets');
