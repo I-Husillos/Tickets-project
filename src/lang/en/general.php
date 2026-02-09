@@ -18,6 +18,7 @@ return [
         'cerrar_sesion'        => 'Log Out',
         'tickets'              => 'Tickets',
         'types'                => 'Types',
+        'help'                 => 'Help',
         'manage_ticket_types'  => 'Manage Ticket Types',
     ],
 

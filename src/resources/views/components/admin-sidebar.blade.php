@@ -102,7 +102,7 @@
 
 
                 {{-- AYUDA --}}
-                <li class="nav-header">Ayuda</li>
+                <li class="nav-header">{{ __('general.admin_sidebar.help') }}</li>
 
                 <li class="nav-item has-treeview {{ request()->routeIs('admin.help.*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->routeIs('admin.help.*') ? 'active' : '' }}">

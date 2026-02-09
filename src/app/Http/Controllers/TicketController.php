@@ -106,11 +106,13 @@ class TicketController extends Controller
     }
 
 
-    public function validateResolution(Request $request, Ticket $ticket)
+    public function validateResolution(Request $request, string $locale, Ticket $ticket)
     {
         $this->authorize('update', $ticket);
 
-        $status = $request->input('status') === 'resolved' ? 'resolved' : 'pending';
+        $inputStatus = $request->input('status');
+        $status = in_array($inputStatus, ['resolved', 'closed']) ? 'closed' : 'pending';
+
         $user = Auth::guard('user')->user();
     
         $this->ticketService->updateStatus(
@@ -120,7 +122,11 @@ class TicketController extends Controller
             'Ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" actualizado a "' . $status . '"',
         );
 
-        return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', 'Estado del ticket actualizado.');
+        $message = $status === 'closed' 
+            ? 'La solución ha sido validada y el ticket cerrado correctamente.' 
+            : 'El ticket ha sido marcado como pendiente.';
+
+        return redirect()->route('user.tickets.index', ['locale' => app()->getLocale()])->with('success', $message);
     }
 
 

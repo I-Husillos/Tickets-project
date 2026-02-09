@@ -36,9 +36,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 form.reset();
                 // window.location.href = '/es/tickets'; // si quieres redirigir
             } else {
-                let msg = result.message || 'Error en la creación';
+                let msg = '';
                 if (result.errors) {
-                    msg += '\n' + Object.values(result.errors).flat().join('\n');
+                    msg = Object.values(result.errors).flat().join('\n');
+                } else {
+                    msg = result.message || 'Error en la creación';
                 }
                 alert(msg);
             }

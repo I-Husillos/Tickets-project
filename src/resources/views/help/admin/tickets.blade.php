@@ -1,220 +1,154 @@
 @extends('layouts.admin')
 
-@section('title', 'Manual Operativo · Gestión Avanzada de Tickets')
+@section('title', __('help.admin_tickets_page.title'))
 
 @section('admincontent')
 <div class="container-fluid">
-    <div class="row mb-3">
-        <div class="col-sm-8">
-            <h1 class="m-0 text-dark">Gestión Avanzada de Incidencias</h1>
-            <p class="text-muted">Protocolos de atención, resolución y cierre de tickets.</p>
-        </div>
-        <div class="col-sm-4">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('admin.help.index', ['locale' => app()->getLocale()]) }}">Ayuda</a></li>
-                <li class="breadcrumb-item active">Tickets</li>
-            </ol>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-dark border-bottom pb-2">{{ __('help.admin_tickets_page.title') }}</h1>
+            <p class="text-muted lead">{{ __('help.admin_tickets_page.intro') }}</p>
         </div>
     </div>
 
-    {{-- INTRODUCCIÓN AL FLUJO --}}
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-project-diagram mr-2"></i> Ciclo de Vida del Ticket (SLA)</h3>
-        </div>
-        <div class="card-body">
-            <p class="text-justify">
-                Un ticket es una entidad viva que pasa por diferentes estados desde que nace hasta que muere. 
-                Entender este flujo es vital para evitar tickets "estancados" que frustran a los usuarios.
-            </p>
-            
-            <div class="row mt-4 mb-5">
-                <div class="col-12">
-                     <div class="timeline">
-                        <!-- PENDIENTE -->
-                        <div>
-                            <i class="fas fa-envelope bg-blue box-shadow"></i>
-                            <div class="timeline-item shadow-sm">
-                                <span class="time"><i class="fas fa-clock"></i> T = 0</span>
-                                <h3 class="timeline-header bg-light border-bottom">1. Estado: <strong class="text-primary">PENDIENTE</strong></h3>
-                                <div class="timeline-body">
-                                    El usuario ha reportado un problema. El ticket está visible para todos los administradores en la lista general.
-                                    <br><strong>Nadie está trabajando en él todavía.</strong>
-                                    <hr>
-                                    <i class="fas fa-exclamation-triangle text-warning"></i> <em>El reloj del SLA está corriendo. Se requiere una reacción rápida.</em>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- EN PROGRESO -->
-                        <div>
-                            <i class="fas fa-tools bg-yellow box-shadow"></i>
-                            <div class="timeline-item shadow-sm">
-                                <span class="time"><i class="fas fa-clock"></i> T + 10min</span>
-                                <h3 class="timeline-header bg-light border-bottom">2. Estado: <strong class="text-warning">EN PROGRESO</strong></h3>
-                                <div class="timeline-body">
-                                    Un administrador (Tú) ha pulsado <strong>"Asignarme"</strong> o ha sido asignado por un supervisor.
-                                    <br>Ahora eres el dueño del problema. El usuario ve que alguien está "manos a la obra".
-                                    <br>En esta fase ocurre la investigación y el intercambio de mensajes.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- RESUELTO -->
-                        <div>
-                            <i class="fas fa-check bg-success box-shadow"></i>
-                            <div class="timeline-item shadow-sm">
-                                <span class="time"><i class="fas fa-clock"></i> T + 2h</span>
-                                <h3 class="timeline-header bg-light border-bottom">3. Estado: <strong class="text-success">RESUELTO / POR VALIDAR</strong></h3>
-                                <div class="timeline-body">
-                                    El técnico ha aplicado una solución y la ha comunicado.
-                                    <br>El sistema espera que el usuario confirme si funciona o no.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- CERRADO -->
-                         <div>
-                            <i class="fas fa-lock bg-secondary box-shadow"></i>
-                            <div class="timeline-item shadow-sm">
-                                <span class="time"><i class="fas fa-clock"></i> T + 24h</span>
-                                <h3 class="timeline-header bg-light border-bottom">4. Estado: <strong class="text-secondary">CERRADO</strong></h3>
-                                <div class="timeline-body">
-                                    El ciclo ha terminado. El ticket se archiva y pasa al historial.
-                                    <br>Solo puede reactivarse mediante una "Reapertura" manual si el problema persiste.
-                                </div>
-                            </div>
-                        </div>
-                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="row">
+        {{-- COLUMNA IZQUIERDA: CONTENIDO PRINCIPAL --}}
+        <div class="col-lg-9">
 
-    {{-- SECCIÓN DETALLADA: LA VISTA DE GESTIÓN --}}
-    <div class="card card-outline card-info mt-4">
-        <div class="card-header">
-            <h3 class="card-title text-bold">Guía Paso a Paso: Trabajando un Ticket</h3>
-        </div>
-        <div class="card-body">
-            
-            {{-- PASO 1 --}}
-            <h4 class="text-info mt-3">Paso 1: Localización y Filtrado</h4>
-            <p>
-                Ante cientos de tickets, el orden es poder. Utilice las herramientas de búsqueda en <code>Gestionar Tickets > Todos los Tickets</code>.
-            </p>
-            {{-- ESPACIO PARA CAPTURA: BARRA DE BÚSQUEDA Y FILTROS --}}
-            <div class="row justify-content-center my-3">
-                <div class="col-md-10 border border-info rounded p-3 bg-light text-center">
-                    <img src="/img/image%20copy%205.png" class="img-fluid border shadow-sm" alt="Búsqueda y Filtros">
-                </div>
-            </div>
-            <ul>
-                <li><strong>Buscar por ID:</strong> Si un usuario le dice "tengo problema con el ticket #45", escriba `45` en el buscador.</li>
-                <li><strong>Estados:</strong> Filtre por "Pendiente" para ver qué trabajo nuevo hay.</li>
-            </ul>
+            {{-- SECCIÓN 2.1: CICLO DE VIDA --}}
+            <div class="mb-5">
+                <h3 class="text-primary mb-3">{{ __('help.admin_tickets_page.lifecycle.title') }}</h3>
+                <p>{{ __('help.admin_tickets_page.lifecycle.desc') }}</p>
 
-            <hr class="my-4">
-
-            {{-- PASO 2 --}}
-            <h4 class="text-info">Paso 2: La Pantalla de Detalle ("La Mesa de Operaciones")</h4>
-            <p>
-                Al hacer clic en <span class="badge badge-primary"><i class="fas fa-eye"></i> Ver</span>, entras en la sala de operaciones del ticket.
-                Aquí es donde sucede la magia.
-            </p>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card h-100 bg-light">
-                        <div class="card-body">
-                            <h5 class="text-dark font-weight-bold">A. Panel Izquierdo (Comunicación)</h5>
-                            <p>Aquí se muestra el historial cronológico de la conversación.</p>
-                            <ul>
-                                <li>Los mensajes del usuario aparecen a la izquierda.</li>
-                                <li>Sus respuestas a la derecha (o diferenciadas por color).</li>
-                                <li><strong>Formulario de Respuesta:</strong> Donde redacta su solución.</li>
-                            </ul>
-                        </div>
+                <div class="card shadow-sm border-0 mb-3">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge badge-info mr-3 p-2" style="min-width: 80px;">NEW</span>
+                                <div>{!! __('help.admin_tickets_page.lifecycle.status.new') !!}</div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge badge-primary mr-3 p-2" style="min-width: 80px;">OPEN</span>
+                                <div>{!! __('help.admin_tickets_page.lifecycle.status.open') !!}</div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge badge-warning mr-3 p-2" style="min-width: 80px;">PENDING</span>
+                                <div>{!! __('help.admin_tickets_page.lifecycle.status.pending') !!}</div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge badge-success mr-3 p-2" style="min-width: 80px;">SOLVED</span>
+                                <div>{!! __('help.admin_tickets_page.lifecycle.status.solved') !!}</div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge badge-secondary mr-3 p-2" style="min-width: 80px;">CLOSED</span>
+                                <div>{!! __('help.admin_tickets_page.lifecycle.status.closed') !!}</div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card h-100 bg-light">
-                        <div class="card-body">
-                            <h5 class="text-dark font-weight-bold">B. Panel Derecho (Control)</h5>
-                            <p>Controles administrativos críticos:</p>
-                            <ul>
-                                <li><strong>Cambiar Estado:</strong> Dropdown para mover el ticket de fase manualmente.</li>
-                                <li><strong>Reasignar:</strong> Si el problema es de Redes y usted es de Hardware, páseselo a otro compañero aquí.</li>
-                                <li><strong>Datos del Solicitante:</strong> Email y nombre para contacto directo.</li>
-                            </ul>
+            </div>
+
+            {{-- SECCIÓN 2.2: TRIAJE --}}
+            <div class="mb-5">
+                <h3 class="text-primary mb-3">{{ __('help.admin_tickets_page.triage.title') }}</h3>
+                <p>{{ __('help.admin_tickets_page.triage.desc') }}</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-light border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><i class="fas fa-hand-pointer text-primary mr-2"></i>Manual</div>
+                                        <p class="mt-2 mb-0 small">{!! __('help.admin_tickets_page.triage.manual') !!}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card bg-light border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><i class="fas fa-user-check text-success mr-2"></i>Self-Claim</div>
+                                        <p class="mt-2 mb-0 small">{!! __('help.admin_tickets_page.triage.claim') !!}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- ESPACIO PARA CAPTURA: VISTA DETALLE --}}
-            <div class="row justify-content-center my-3">
-                <div class="col-md-12 border p-4 bg-white text-center shadow-sm">
-                    <img src="/img/image%20copy%206.png" class="img-fluid border shadow-sm" alt="Vista Detalle del Ticket">
-                </div>
-                <div class="col-12 text-center">
-                   <small class="text-muted">Fig 2.1 - Interfaz de resolución.</small>
-                </div>
+            {{-- SECCIÓN 2.3: SLA --}}
+            <div class="mb-5">
+                <h3 class="text-primary mb-3">{{ __('help.admin_tickets_page.sla.title') }}</h3>
+                <p>{{ __('help.admin_tickets_page.sla.desc') }}</p>
+                
+                <table class="table table-bordered table-hover shadow-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" style="width: 20%;">Priority</th>
+                            <th scope="col">Definition & SLA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center align-middle"><span class="badge badge-danger p-2">HIGH</span></td>
+                            <td>{!! __('help.admin_tickets_page.sla.high') !!}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle"><span class="badge badge-warning p-2">MEDIUM</span></td>
+                            <td>{!! __('help.admin_tickets_page.sla.medium') !!}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle"><span class="badge badge-success p-2">LOW</span></td>
+                            <td>{!! __('help.admin_tickets_page.sla.low') !!}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <hr class="my-4">
+        </div>
 
-            {{-- PASO 3 --}}
-            <h4 class="text-info">Paso 3: Redactando una Respuesta Profesional</h4>
-            <div class="alert alert-secondary">
-                <i class="fas fa-pen-fancy mr-2"></i> <strong>Etiqueta Profesional:</strong>
-                Recuerde que el cliente leerá esto. Sea empático pero conciso.
+        {{-- COLUMNA DERECHA: TABLA DE CONTENIDOS --}}
+        <div class="col-lg-3">
+            <div class="sticky-top" style="top: 20px; z-index: 1;">
+                <div class="card card-outline card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('help.admin_intro_page.toc.header') }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <a href="{{ route('admin.help.index', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action">
+                                {{ __('help.admin_intro_page.toc.intro') }}
+                            </a>
+                            <a href="{{ route('admin.help.tickets', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action active font-weight-bold">
+                                {{ __('help.admin_intro_page.toc.tickets') }}
+                            </a>
+                            <a href="{{ route('admin.help.users', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action">
+                                {{ __('help.admin_intro_page.toc.users') }}
+                            </a>
+                            <a href="{{ route('admin.help.notifications', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action">
+                                {{ __('help.admin_intro_page.toc.notifications') }}
+                            </a>
+                            <a href="{{ route('admin.help.events', ['locale' => app()->getLocale()]) }}" class="list-group-item list-group-item-action">
+                                {{ __('help.admin_intro_page.toc.events') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <p class="text-muted text-sm text-center">
+                        <i class="far fa-file-pdf mr-1"></i> {{ __('help.admin_intro_page.toc.doc_info') }}<br>
+                        {{ __('Updated') }}: {{ date('Y-m-d') }}
+                    </p>
+                </div>
             </div>
-            <p>
-                Use el editor de texto para:
-            </p>
-            <ol>
-                <li>Saludar al usuario por su nombre.</li>
-                <li>Confirmar que ha entendido el problema ("Entiendo que su impresora no conecta...").</li>
-                <li>Proponer pasos claros (usando listas numeradas).</li>
-                <li>Adjuntar manuales o capturas si es necesario.</li>
-            </ol>
-            <p>
-                Al pulsar <strong>"Enviar Comentario"</strong>, el sistema:
-                1. Guarda el mensaje.
-                2. Envía un email al usuario avisándole.
-                3. (Opcional) Cambia el estado automáticamente si así está configurado.
-            </p>
-
         </div>
     </div>
-
-    {{-- SECCIÓN: SOLUCIÓN DE PROBLEMAS --}}
-    <div class="card card-warning collapsed-card">
-        <div class="card-header">
-            <h3 class="card-title">Casos Especiales y Solución de Problemas</h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
-            </div>
-        </div>
-        <div class="card-body">
-            <dl>
-                <dt class="text-warning">El usuario no responde hace días.</dt>
-                <dd>
-                    Si un ticket está en "En Progreso" o "Resuelto" y el usuario no confirma:
-                    1. Envíe un último mensaje de aviso ("Cerraremos este ticket por inactividad en 24h").
-                    2. Pasado el tiempo, use el botón <strong>"Forzar Cierre"</strong>.
-                </dd>
-
-                <dt class="text-warning">Me he asignado un ticket por error.</dt>
-                <dd>
-                    Simplemente use el selector de "Asignado a" en el panel derecho y seleccione "Sin asignar" o el nombre de otro compañero.
-                </dd>
-
-                <dt class="text-warning">El usuario reabrió un ticket que estaba cerrado.</dt>
-                <dd>
-                    Esto puede pasar si el problema volvió. El ticket volverá a estado "En Progreso" y aparecerá en su bandeja de entrada. Revise el historial para ver qué falló.
-                </dd>
-            </dl>
-        </div>
-    </div>
-
 </div>
 @endsection

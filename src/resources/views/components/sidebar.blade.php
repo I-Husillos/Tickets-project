@@ -109,29 +109,19 @@
                             <a href="{{ route('user.help.profile', ['locale' => app()->getLocale()]) }}"
                             class="nav-link {{ Route::is('user.help.profile') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Mi Perfil</p>
+                                <p>{{ __('faq.faq.user.profile') }}</p>
                             </a>
                         </li>
-
-                        <!-- FAQ -->
-                        <!-- <li class="nav-item">
-                            <a href="{{ route('user.help.faq', ['locale' => app()->getLocale()]) }}"
-                            class="nav-link {{ Route::is('user.help.faq') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>FAQ</p>
-                            </a>
-                        </li> -->
                     </ul>
                 </li>
 
 
 
-                <!-- Cerrar sesión -->
                 <li class="nav-item">
                     <a href="#" class="nav-link"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
-                        <p>Cerrar Sesión</p>
+                        <p>{{ __('frontoffice.logout') }}</p>
                     </a>
                     <form id="logout-form"
                           action="{{ route('user.logout', ['locale' => app()->getLocale()]) }}"

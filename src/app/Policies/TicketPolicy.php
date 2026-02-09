@@ -12,12 +12,12 @@ class TicketPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User|Admin $user): bool
     {
         return true;
     }
 
-    public function index(User $user): bool
+    public function index(User|Admin $user): bool
     {
         return true;
     }
@@ -25,15 +25,18 @@ class TicketPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Ticket $ticket)
+    public function view(User|Admin $user, Ticket $ticket)
     {
-        return $user->id === $ticket->user_id || $user->id === $ticket->admin_id;
+        if ($user instanceof Admin) {
+            return $user->superadmin || $ticket->admin_id === $user->id || $ticket->admin_id === null;
+        }
+        return $user->id === $ticket->user_id;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User|Admin $user): bool
     {
         return true;
     }
@@ -41,28 +44,35 @@ class TicketPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(Admin $admin, Ticket $ticket)
+    public function update(User|Admin $user, Ticket $ticket)
     {
-        return $admin->superadmin || $ticket->admin_id === $admin->id;
+        if ($user instanceof Admin) {
+            return $user->superadmin || $ticket->admin_id === $user->id;
+        }
+        // Users can update their own tickets
+        return $user->id === $ticket->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Ticket $ticket)
+    public function delete(User|Admin $user, Ticket $ticket)
     {
-        return $user->id === $ticket->admin_id;
+        if ($user instanceof Admin) {
+            return $user->superadmin || $ticket->admin_id === $user->id;
+        }
+        return $user->id === $ticket->user_id;
     }
 
     //modificar para que este en la policy de comment
-    public function comment($user, Ticket $ticket)
+    public function comment(User|Admin $user, Ticket $ticket)
     {
         if ($user instanceof Admin) {
             return true;
         }
 
         if ($user instanceof User) {
-            return $user->id === $ticket->user_id || $user->id === $ticket->admin_id;
+            return $user->id === $ticket->user_id;
         }
 
         return false;
@@ -72,7 +82,7 @@ class TicketPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Ticket $ticket): bool
+    public function restore(User|Admin $user, Ticket $ticket): bool
     {
         return false;
     }
@@ -80,7 +90,7 @@ class TicketPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Ticket $ticket): bool
+    public function forceDelete(User|Admin $user, Ticket $ticket): bool
     {
         return false;
     }

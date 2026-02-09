@@ -18,6 +18,7 @@ return [
         'cerrar_sesion'        => 'Cerrar Sesión',
         'tickets'              => 'Tickets',
         'types'                => 'Tipos',
+        'help'                 => 'Ayuda',
         'manage_ticket_types'  => 'Gestionar Tipos de Tickets',
     ],
 

@@ -20,7 +20,7 @@ return [
         'user.tickets.store' => 'usuario/tickets/almacenar',
         'user.tickets.show' => 'usuario/tickets/{ticket}',
         'user.tickets.comment' => 'usuario/tickets/agregar-comentario/{ticket}',
-        'user.tickets.validate' => 'usuario/tickets/validar',
+        'user.tickets.validate' => 'usuario/tickets/validar/{ticket}',
         'user.tickets.destroy' => 'usuario/tickets/eliminar/{ticket}',
         'user.ticket.comment.delete' => 'usuario/tickets/eliminar-comentario/{comment}',
         'user.ticket.comment.edit' => 'usuario/tickets/editar-comentario/{comment}',

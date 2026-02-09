@@ -51,6 +51,7 @@ $breadcrumbs = [
                         <span class="badge 
                             @if($ticket->status === 'new') badge-primary 
                             @elseif($ticket->status === 'resolved') badge-success 
+                            @elseif($ticket->status === 'closed') badge-dark 
                             @elseif($ticket->status === 'pending') badge-warning 
                             @else badge-secondary 
                             @endif">
@@ -62,11 +63,24 @@ $breadcrumbs = [
             </div>
 
             @if ($ticket->status === 'resolved')
+                <div class="alert alert-info">
+                    <h5><i class="icon fas fa-info"></i> {{ __('Validación requerida') }}</h5>
+                    {{ __('Por favor, confirme si la solución aplicada por el administrador ha resuelto su incidencia.') }}
+                </div>
                 <form method="POST" action="{{ route('user.tickets.validate', ['locale' => app()->getLocale(), 'ticket' => $ticket->id]) }}" class="text-center mb-4">
                     @csrf
-                    <button type="submit" name="status" value="resolved" class="btn btn-success">{{ __('frontoffice.tickets.validate') }}</button>
-                    <button type="submit" name="status" value="pending" class="btn btn-danger">{{ __('frontoffice.tickets.unvalidate') }}</button>
+                    <button type="submit" name="status" value="closed" class="btn btn-success btn-lg mx-2">
+                        <i class="fas fa-check"></i> {{ __('frontoffice.tickets.validate') }}
+                    </button>
+                    <button type="submit" name="status" value="pending" class="btn btn-danger btn-lg mx-2">
+                        <i class="fas fa-times"></i> {{ __('frontoffice.tickets.unvalidate') }}
+                    </button>
                 </form>
+            @elseif ($ticket->status === 'closed')
+                <div class="alert alert-success text-center mb-4">
+                    <h5><i class="icon fas fa-check-circle"></i> {{ __('Ticket Validado y Cerrado') }}</h5>
+                    <p>{{ __('Has validado la solución correctamente. El ticket se encuentra cerrado.') }}</p>
+                </div>
             @endif
         </div>
 

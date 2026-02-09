@@ -7,7 +7,8 @@ return [
         'notifications' => 'Notifications',
         'frequent_questions' => 'Frequently Questions',
         'user' => [
-            
+            'tickets' => 'Tickets',
+            'profile' => 'My Profile',
         ],
         'admin' => [
             'users' => 'Users',

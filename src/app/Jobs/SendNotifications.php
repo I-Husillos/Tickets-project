@@ -132,18 +132,6 @@ class SendNotifications implements ShouldQueue
                         }
                     }
                     break;
-                
-                // case 'assigned_to':
-                //     if ($ticket->user && $this->extraData instanceof Admin) {
-                //         $ticket->user->notify(new TicketStatusChanged($ticket, $this->extraData));
-                //     } else {
-                //         Log::warning("No admin found or actor is not Admin for ticket: {$ticket->id}. Notifying all admins.");
-                //         $admins = Admin::all();
-                //         foreach ($admins as $admin) {
-                //             $admin->notify(new TicketStatusChanged($ticket, $this->extraData));
-                //         }
-                //     }
-                //     break;
         
             default:
                 Log::warning("Tipo de notificación desconocido: {$this->type}");

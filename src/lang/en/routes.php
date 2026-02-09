@@ -20,7 +20,7 @@ return [
         'user.tickets.store' => 'user/tickets/store',
         'user.tickets.show' => 'user/tickets/{ticket}',
         'user.tickets.comment' => 'user/tickets/add-comment/{ticket}',
-        'user.tickets.validate' => 'user/tickets/validate',
+        'user.tickets.validate' => 'user/tickets/validate/{ticket}',
         'user.tickets.destroy' => 'user/tickets/destroy/{ticket}',
         'user.ticket.comment.delete' => 'user/tickets/delete-comment/{comment}',
         'user.ticket.comment.edit' => 'user/tickets/edit-comment/{comment}',

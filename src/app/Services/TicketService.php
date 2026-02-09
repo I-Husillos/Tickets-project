@@ -23,13 +23,21 @@ class TicketService
         return $ticket;
     }
 
-    public function updateStatus(Ticket $ticket, string $newStatus, $actor)
+    public function updateStatus(Ticket $ticket, string $newStatus, $actor, ?string $description = null)
     {
-        $ticket->update(['status' => $newStatus]);
+        $updateData = ['status' => $newStatus];
+
+        if ($newStatus === 'resolved') {
+            $updateData['resolved_at'] = now();
+        } elseif (in_array($newStatus, ['new', 'pending'])) {
+            $updateData['resolved_at'] = null;
+        }
+
+        $ticket->update($updateData);
 
         EventHistory::create([
             'event_type' => 'Actualización',
-            'description' => 'Ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" actualizado a "' . $newStatus . '"',
+            'description' => $description ?? 'Ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" actualizado a "' . $newStatus . '"',
             'user' => $actor->name,
         ]);
     }
