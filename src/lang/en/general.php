@@ -336,7 +336,7 @@ return [
     'admin_delete_admin' => [
         'page_title'     => 'Confirm Administrator Deletion',
         'heading'        => 'Confirm Administrator Deletion',
-        'confirmation'   => 'Are you sure you want to delete administrato r',
+        'confirmation'   => 'Are you sure you want to delete administrator ',
         'confirm_button' => 'Yes, delete',
         'cancel_button'  => 'Cancel',
     ],

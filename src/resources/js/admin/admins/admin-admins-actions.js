@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Abrir modal de confirmación de eliminación
     $(document).on('click', '.btn-delete-admin', function () {
         const adminId = $(this).data('id');
+        const adminName = $(this).data('name'); // Capturar nombre
+        
         $('#delete-admin-id').val(adminId);
+        $('#delete-admin-name').text(adminName); // Mostrar nombre en modal
+        
         $('#deleteAdminModal').modal('show');
     });
 
@@ -45,8 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(result.message || 'Error al eliminar');
 
             $('#deleteAdminModal').modal('hide');
-            $('#tabla-administradores').DataTable().ajax.reload(null, false);
             alert(result.message || 'Administrador eliminado correctamente');
+            
+            // FIX: Selector de tabla correcto (#tabla-admins en lugar de #tabla-administradores)
+            if ($.fn.DataTable.isDataTable('#tabla-admins')) {
+                $('#tabla-admins').DataTable().ajax.reload(null, false);
+            }
 
         } catch (error) {
             console.error('Error al eliminar:', error);
@@ -82,8 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 $('#editAdminModal').modal('hide');
-                $('#tabla-administradores').DataTable().ajax.reload(null, false);
                 alert(result.message || 'Administrador actualizado correctamente');
+
+                // FIX: Selector de tabla correcto
+                if ($.fn.DataTable.isDataTable('#tabla-admins')) {
+                    $('#tabla-admins').DataTable().ajax.reload(null, false);
+                }
 
             } catch (error) {
                 console.error('Error al actualizar:', error);

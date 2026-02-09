@@ -10,7 +10,7 @@
 
       <div class="modal-body">
         <input type="hidden" name="id" id="delete-admin-id">
-        <p>{{ __('general.admin_delete_admin.confirmation') }}<strong id="delete-user-name"></strong>?</p>
+        <p>{{ __('general.admin_delete_admin.confirmation') }} <strong id="delete-admin-name"></strong>?</p>
       </div>
 
       <div class="modal-footer">
