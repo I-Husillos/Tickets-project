@@ -58,15 +58,18 @@ export class NotificationModal {
             <div class="notification-content">
                 <div class="lead">${notification.content}</div>
                 
+                <hr>
+                
                 ${typeSpecific}
                 
                 <hr>
                 
                 <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">
+                    <div class="text-muted">
                         <i class="far fa-clock"></i> 
+                        <span class="ms-1">Fecha:</span>
                         <strong>${notification.created_at}</strong>
-                    </small>
+                    </div>
                     ${actionButton}
                 </div>
             </div>
@@ -109,7 +112,7 @@ export class NotificationModal {
      */
     renderCreated(data) {
         return `
-            <div>
+            <div class=">
                 <p>
                     <strong>Creado por:</strong> 
                     ${data.created_by || data.author || 'Usuario desconocido'}
@@ -127,7 +130,7 @@ export class NotificationModal {
      */
     renderComment(data) {
         return `
-            <div class="alert alert-info mt-3">
+            <div>
                 <p>
                     <strong>Comentario de:</strong> 
                     ${data.author || 'Usuario desconocido'}
@@ -146,7 +149,7 @@ export class NotificationModal {
      */
     renderStatus(data) {
         return `
-            <div class="alert alert-warning mt-3">
+            <div>
                 <p>
                     <strong>Ticket:</strong> 
                     <em>"${data.title || 'Sin título'}"</em>
@@ -172,7 +175,7 @@ export class NotificationModal {
      */
     renderClosed(data) {
         return `
-            <div class="alert alert-danger mt-3">
+            <div">
                 <p>
                     <strong>Ticket cerrado:</strong> 
                     <em>"${data.title || 'Sin título'}"</em>
@@ -190,7 +193,7 @@ export class NotificationModal {
      */
     renderReopened(data) {
         return `
-            <div class="alert alert-success mt-3">
+            <div>
                 <p>
                     <strong>Ticket reabierto:</strong> 
                     <em>"${data.title || 'Sin título'}"</em>

@@ -62,13 +62,13 @@
                             <span class="fa-stack fa-2x">
                               <i class="fas fa-circle fa-stack-2x text-light"></i>
                               <i class="far fa-bell fa-stack-1x"></i>
-                              <span class="badge badge-danger" style="position:absolute; top:0; right:0;">3</span>
+                              <span class="badge badge-warning" style="position:absolute; top:0; right:0;">3</span>
                             </span>
                             <p class="small text-muted">Ejemplo de icono con alertas</p>
                         </div>
                         <div class="col-md-8">
                             <ul>
-                                <li>Si tiene un número rojo <span class="badge badge-danger">3</span>, indica cuántas notificaciones <strong>no leídas</strong> tienes.</li>
+                                <li>Si tiene un número rojo <span class="badge badge-warning">3</span>, indica cuántas notificaciones <strong>no leídas</strong> tienes.</li>
                                 <li>Al hacer clic en él, se despliega una vista rápida de las últimas alertas con un resumen breve.</li>
                                 <li>Desde ese desplegable puedes ir a "Ver todas las notificaciones".</li>
                             </ul>
@@ -81,27 +81,35 @@
                         Accediendo desde el menú lateral o desde "Ver todas" en la campana, llegarás a la lista completa.
                     </p>
                     <div class="text-center my-4 border bg-light p-3">
-                        <img src="/img/image%20copy%203.png" class="img-fluid border shadow-sm" alt="Lista de Notificaciones">
+                        <img src="/img/user-notifications-table.png" class="img-fluid border shadow-sm" alt="Lista de Notificaciones">
+                        <p class="small text-muted">Ejemplo de pantalla de "Mis Notificaciones"</p>
                     </div>
                     <p>
                         Aquí puedes realizar las siguientes acciones para organizar tu bandeja de entrada:
                     </p>
                     <dl class="row">
-                        <dt class="col-sm-3"><i class="fas fa-check text-blue"></i> Marcar como Leída</dt>
+                        <dt class="col-sm-3"><i class="fas fa-check text-green"></i> Marcar como Leída</dt>
                         <dd class="col-sm-9">
                             Si ya has visto el aviso, puedes marcarlo como leído. Esto hará que el contador rojo disminuya y la notificación se muestre visualmente como "ya vista" (generalmente con fondo blanco en lugar de gris/azul).
                             <br>Busca el botón <i class="fas fa-check"></i> junto a la notificación.
                         </dd>
 
-                        <dt class="col-sm-3"><i class="fas fa-envelope text-gray"></i> Marcar como No Leída</dt>
+                        <dt class="col-sm-3"><i class="fas fa-times text-yellow"></i> Marcar como No Leída</dt>
                         <dd class="col-sm-9">
                             Si leíste una notificación por error pero quieres dejarla pendiente para revisarla luego con calma, puedes volver a marcarla como "No leída".
                         </dd>
 
-                        <dt class="col-sm-3"><i class="fas fa-external-link-alt"></i> Ir al Ticket</dt>
+                        <dt class="col-sm-3"><i class="fas fa-ticket-alt text-blue"></i> Ir al Ticket</dt>
                         <dd class="col-sm-9">
-                            Esta es la acción más común. Al hacer clic en el texto o enlace de la notificación (ej. "Nuevo comentario en el ticket #123"), el sistema te llevará <strong>directamente</strong> a la pantalla del ticket correspondiente para que veas la novedad y respondas.
+                            Esta es la acción más común. Al hacer clic en el texto o enlace de la notificación (ej. "Nuevo comentario en el ticket #123"), el sistema mostrará un modal, el cual mostrará la información de la notificación en detalle
+                            junto con una opción <strong>"Ver Ticket"</strong>, que te llevará directamente a la pantalla del ticket correspondiente para que veas la novedad y respondas.
                         </dd>
+                        <div class="col-12 text-center my-4">
+                            <div class="d-inline-block border bg-light p-3">
+                                <img src="/img/user-modal-notifications.png" class="img-fluid border shadow-sm my-3" alt="Modal de Notificación">
+                                <p class="small text-muted mb-0">Ejemplo de modal al hacer clic en una notificación</p>
+                            </div>
+                        </div>
                     </dl>
                 </div>
             </div>

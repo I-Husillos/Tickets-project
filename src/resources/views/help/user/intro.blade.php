@@ -69,7 +69,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 <i class="fas fa-tachometer-alt mr-2"></i>
-                Tu Panel de Control (Dashboard)
+                Panel de Control del usuario (Dashboard)
             </h3>
         </div>
         <div class="card-body">
@@ -79,6 +79,7 @@
             
             <div class="text-center my-4 border bg-light p-3">
                 <img src="/img/user-control-panel.png" class="img-fluid border shadow-sm" alt="Captura del Dashboard">
+                <p class="small text-muted">Ejemplo del Panel de Control del Usuario</p>
             </div>
 
             <div class="row">
@@ -140,7 +141,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <p>
-                        Puedes acceder a tu perfil haciendo clic en tu nombre en la esquina superior derecha y seleccionando <strong>"Mi Perfil"</strong>.
+                        Puedes acceder a tu perfil haciendo clic en tu nombre en la esquina superior derecha y seleccionando el icono <strong><i class="fas fa-user fa-2x mb-2"></i></strong> o bien haciendo click sobre <strong>tu nombre  en el menu lateral</strong>.
                     </p>
                     <p>
                         En esta sección podrás visualizar tus datos registrados en el sistema:
@@ -156,10 +157,10 @@
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
-                    <div class="border p-4 bg-light">
-                         <i class="fas fa-user-circle fa-5x text-secondary"></i>
-                         <p class="mt-2 text-muted">Acceso rápido desde la barra superior</p>
-                    </div>
+                    <img src="/img/options-menu-bar.png" class="img-fluid border shadow-sm" alt="Captura del Perfil">
+                    <p class="small text-muted">Ejemplo del menú de opciones</p>
+                    <img src="/img/user-profile-side-menu-option.png" class="img-fluid border shadow-sm mt-3" alt="Captura del Perfil">
+                    <p class="small text-muted">Ejemplo de acceso al perfil desde el menú lateral</p>
                 </div>
             </div>
         </div>
@@ -196,11 +197,6 @@
                 <div class="col-md-2 mb-3">
                     <a href="{{ route('user.help.profile', ['locale' => app()->getLocale()]) }}" class="btn btn-app bg-secondary" style="width: 100%; height: auto; padding: 20px;">
                         <i class="fas fa-user fa-2x mb-2"></i><br> Mi Perfil
-                    </a>
-                </div>
-                <div class="col-md-2 mb-3">
-                    <a href="{{ route('user.help.faq', ['locale' => app()->getLocale()]) }}" class="btn btn-app bg-light" style="width: 100%; height: auto; padding: 20px;">
-                        <i class="fas fa-question-circle fa-2x mb-2"></i><br> FAQs
                     </a>
                 </div>
             </div>

@@ -38,26 +38,36 @@ $breadcrumbs = [
             <!-- Resumen General -->
             <div class="row mb-4">
                 <div class="col-md-4">
-                    <div class="card text-white bg-success h-100">
-                        <div class="card-header">{{ __('frontoffice.dashboard.open_tickets') }}</div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $openTickets }}</h5>
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $openTickets }}</h3>
+                            <p>{{ __('frontoffice.dashboard.open_tickets') }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-ticket-alt"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card text-white bg-primary h-100">
-                        <div class="card-header">{{ __('frontoffice.dashboard.resolved_tickets') }}</div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $resolvedTickets }}</h5>
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>{{ $resolvedTickets }}</h3>
+                            <p>{{ __('frontoffice.dashboard.resolved_tickets') }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-check"></i>
                         </div>
                     </div>
                 </div>
+                <!-- Nota: bg-warning text-white para asegurar contraste si es amarillo AdminLTE -->
                 <div class="col-md-4">
-                    <div class="card text-white bg-warning h-100">
-                        <div class="card-header">{{ __('frontoffice.dashboard.pending_tickets') }}</div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $pendingTickets }}</h5>
+                    <div class="small-box bg-warning">
+                        <div class="inner text-white">
+                            <h3>{{ $pendingTickets }}</h3>
+                            <p class="text-white">{{ __('frontoffice.dashboard.pending_tickets') }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
                         </div>
                     </div>
                 </div>

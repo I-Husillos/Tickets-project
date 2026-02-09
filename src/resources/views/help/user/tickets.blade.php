@@ -65,7 +65,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="text-center border bg-light p-4 h-100 d-flex flex-column justify-content-center">
-                        <img src="/img/image.png" class="img-fluid border shadow-sm" alt="Formulario de Ticket">
+                        <img src="/img/create-ticket-form.png" class="img-fluid border shadow-sm" alt="Formulario de Ticket">
+                        <p class="small text-muted mt-3">Ejemplo del formulario para crear un nuevo ticket</p>
                     </div>
                 </div>
             </div>
@@ -85,8 +86,9 @@
             
             <div class="row">
                 <div class="col-12 mb-3">
-                     <div class="text-center border bg-light p-3">
-                        <img src="/img/image%20copy.png" class="img-fluid border shadow-sm" alt="Tabla de Tickets">
+                    <div class="text-center border bg-light p-3">
+                        <img src="/img/user-table-ticket-list.png" class="img-fluid border shadow-sm" alt="Tabla de Tickets">
+                        <p class="small text-muted">Ejemplo de la tabla donde se listan los tickets</p>
                     </div>
                 </div>
             </div>
@@ -185,7 +187,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="text-center border bg-light p-3 mb-3">
-                        <img src="/img/image%20copy%202.png" class="img-fluid border shadow-sm" alt="Detalle del Ticket">
+                        <img src="/img/user-ticket-details-panel.png" class="img-fluid border shadow-sm" alt="Detalle del Ticket">
+                        <p class="small text-muted">Ejemplo de la vista de detalle de un ticket</p>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -198,7 +201,6 @@
                         <li>Tus comentarios aparecen alineados a la derecha (normalmente), y los del administrador a la izquierda.</li>
                         <li><strong>Nota:</strong> Puedes editar (<i class="fas fa-pencil-alt"></i>) o borrar (<i class="fas fa-trash"></i>) TUS propios comentarios.</li>
                     </ul>
-
                     <h6 class="mt-4"><i class="fas fa-check-circle text-success"></i> Validar Solución</h6>
                     <p>
                         Cuando un administrador marca el ticket como resuelto, o te pide confirmación, verás un botón o formulario para cambiar el estado o validar.
