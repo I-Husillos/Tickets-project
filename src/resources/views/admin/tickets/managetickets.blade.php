@@ -4,10 +4,10 @@
 
 @section('admincontent')
 @php
-    $breadcrumbs = [
-        ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
-        ['label' => __('general.admin_ticket_manage.page_title')]
-    ];
+$breadcrumbs = [
+['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
+['label' => __('general.admin_ticket_manage.page_title')]
+];
 @endphp
 
 <div class="container-fluid mt-3">

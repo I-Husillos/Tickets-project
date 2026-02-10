@@ -39,9 +39,16 @@ class TypeApiController extends Controller
         return response()->json(['success' => true, 'message' => 'Tipo actualizado correctamente.']);
     }
 
-
     public function destroyType(Type $type)
     {
+        // Verificar si hay tickets asociados a este tipo (por nombre)
+        if (\App\Models\Ticket::where('type', $type->name)->exists()) {
+            return response()->json([
+                'success' => false, 
+                'message' => 'No se puede eliminar el tipo "' . $type->name . '" porque está asignado a uno o más tickets.'
+            ], 422);
+        }
+
         $type->delete();
 
         EventHistory::create([
