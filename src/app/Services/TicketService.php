@@ -25,6 +25,7 @@ class TicketService
 
     public function updateStatus(Ticket $ticket, string $newStatus, $actor, ?string $description = null)
     {
+        $oldStatus = $ticket->status;
         $updateData = ['status' => $newStatus];
 
         if ($newStatus === 'resolved') {
@@ -40,6 +41,15 @@ class TicketService
             'description' => $description ?? 'Ticket con id ' . $ticket->id . ' y título "' . $ticket->title . '" actualizado a "' . $newStatus . '"',
             'user' => $actor->name,
         ]);
+
+        // Dispatch notification
+        if ($newStatus === 'closed') {
+            SendNotifications::dispatch($ticket->id, 'closed', $actor);
+        } elseif (($oldStatus === 'closed' || $oldStatus === 'resolved') && ($newStatus === 'pending' || $newStatus === 'in_progress')) {
+            SendNotifications::dispatch($ticket->id, 'reopened', $actor);
+        } else {
+            SendNotifications::dispatch($ticket->id, 'status_changed', $actor);
+        }
     }
 }
 

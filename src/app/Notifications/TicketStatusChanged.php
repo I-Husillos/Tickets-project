@@ -20,7 +20,7 @@ class TicketStatusChanged extends Notification
     public function __construct($ticket, $admin)
     {
         $this->ticket = $ticket;
-        $this->admin = $admin->first();
+        $this->admin = $admin;
     }
 
     /**

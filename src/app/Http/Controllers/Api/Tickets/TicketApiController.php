@@ -38,8 +38,6 @@ class TicketApiController extends Controller
             'Ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' cerrado por ' . $admin->name,
         );
 
-        SendNotifications::dispatch($ticket->id, 'closed', $admin);
-
         return response()->json(['message' => 'Ticket cerrado correctamente.']);
     }
 
@@ -57,9 +55,6 @@ class TicketApiController extends Controller
             $admin,
             'Ticket con id ' . $ticket->id . ' con el título ' . $ticket->title . ' reabierto por ' . $admin->name,
         );
-
-        SendNotifications::dispatch($ticket->id, 'reopened', $admin);
-
 
         return response()->json(['message' => 'Ticket reabierto correctamente.']);
     }
