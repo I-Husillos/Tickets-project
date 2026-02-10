@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Confirmar eliminación
     $(document).on('click', '.btn-delete-type', function () {
         const id = $(this).data('id');
+        const name = $(this).data('name');
         $('#delete-type-id').val(id);
+        $('#delete-type-name').text(name);
         $('#deleteTypeModal').modal('show');
     });
 

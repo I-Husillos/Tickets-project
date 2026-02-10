@@ -14,6 +14,8 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\SearchTicketRequest;
 use App\Http\Requests\UpdateDataTicketRequest;
 
+use App\Models\Type;
+
 class TicketController extends Controller
 {
     protected $ticketService;
@@ -47,7 +49,8 @@ class TicketController extends Controller
 
     public function showCreateForm()
     {
-        return view('user.tickets.create');
+        $types = Type::all();
+        return view('user.tickets.create', compact('types'));
     }
 
     public function create(StoreTicketRequest $request)

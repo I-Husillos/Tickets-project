@@ -6,9 +6,15 @@
 @php
     $breadcrumbs = [
         ['label' => __('general.home'), 'url' => route('admin.dashboard', ['locale' => app()->getLocale()])],
-        ['label' => __('general.admin_ticket_manage.page_title'), 'url' => route('admin.manage.tickets', ['locale' => app()->getLocale()])],
-        ['label' => __('general.admin_ticket_details.page_title')]
     ];
+
+    if (Auth::user()->superadmin) {
+        $breadcrumbs[] = ['label' => __('general.admin_ticket_manage.page_title'), 'url' => route('admin.manage.tickets', ['locale' => app()->getLocale()])];
+    } else {
+        $breadcrumbs[] = ['label' => __('general.admin_assigned_tickets.page_title'), 'url' => route('admin.show.assigned.tickets', ['locale' => app()->getLocale()])];
+    }
+
+    $breadcrumbs[] = ['label' => __('general.admin_ticket_details.page_title')];
 @endphp
 
 

@@ -23,7 +23,14 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users,email',
+                'regex:/(.+)@(.+)\.(.+)/i' // Fuerza a que haya un punto en la parte del dominio
+            ],
             'password' => 'required|string|confirmed|min:3',
         ];
     }
@@ -32,6 +39,7 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'email.unique' => 'Este correo ya está registrado. Por favor, inicia sesión o usa otro correo.',
+            'email.regex' => 'El correo debe contener un dominio válido (ej. .com, .es).',
             'password.confirmed' => 'Las contraseñas no coinciden.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ];

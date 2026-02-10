@@ -75,6 +75,10 @@ class UserAuthController extends Controller
 
         Auth::guard('user')->login($user);
 
+        // Generar token y guardar en sesión (para que el frontend lo guarde en localStorage)
+        $token = $user->createToken('user-session-token')->accessToken;
+        session(['api_token' => $token]);
+
         return redirect()->route('user.dashboard', ['locale' => app()->getLocale()])->with('success', '¡Registro exitoso! Bienvenido/a.');
     }
 

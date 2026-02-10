@@ -25,22 +25,64 @@ class CommentDataController extends Controller
         $locale = $request->header('X-Locale') ?? $request->input('locale') ?? 'en';
         App::setLocale($locale);
 
-        $commentsQuery = $ticket->comments()->with('author');
+        // Obtenemos todos los comentarios para poder ordenar (incluyendo polimórfico 'author') en memoria.
+        // Asumimos que la cantidad de comentarios por ticket no es excesiva.
+        $comments = $ticket->comments()->with('author')->get();
 
-        $total = $commentsQuery->count();
+        $total = $comments->count();
 
-        // Simula paginación manual (puedes adaptarlo si usas filtros)
+        // 1. Filtrado (Search) - Opcional, si quisieras implementarlo:
+        $searchValue = $request->input('search.value');
+        if (!empty($searchValue)) {
+            $comments = $comments->filter(function ($comment) use ($searchValue) {
+                // Ajusta los campos donde quieras buscar
+                return stripos($comment->message, $searchValue) !== false 
+                    || ($comment->author && stripos($comment->author->name, $searchValue) !== false);
+            });
+        }
+        
+        $filteredTotal = $comments->count();
+
+        // 2. Ordenación
+        $order = $request->input('order');
+        $columns = $request->input('columns');
+
+        if ($order && isset($order[0])) {
+            $columnIndex = $order[0]['column'];
+            $columnDir = $order[0]['dir']; // 'asc' or 'desc'
+            $columnName = $columns[$columnIndex]['data']; // 'author', 'message', 'date'
+
+            $isDesc = ($columnDir === 'desc');
+
+            if ($columnName === 'author') {
+                $comments = $comments->sortBy(function ($comment) {
+                    return $comment->author ? strtolower($comment->author->name) : '';
+                }, SORT_NATURAL|SORT_FLAG_CASE, $isDesc);
+            } elseif ($columnName === 'message') {
+                $comments = $comments->sortBy(function ($comment) {
+                    return strtolower($comment->message);
+                }, SORT_NATURAL|SORT_FLAG_CASE, $isDesc);
+            } elseif ($columnName === 'date') {
+                $comments = $comments->sortBy('created_at', SORT_REGULAR, $isDesc);
+            }
+        } else {
+            // Orden por defecto: Fecha descendente (más recientes primero)
+            $comments = $comments->sortByDesc('created_at');
+        }
+
+        // 3. Paginación
         $start = (int) $request->input('start', 0);
         $length = (int) $request->input('length', 10);
         $draw = (int) $request->input('draw', 1);
 
-        $comments = $commentsQuery->skip($start)->take($length)->get();
+        // slice devuelve una nueva colección, values() reindexa el array
+        $pagedComments = $comments->slice($start, $length)->values();
 
-        $data = $comments->map(function ($comment) use ($locale) {
+        $data = $pagedComments->map(function ($comment) use ($locale) {
             $view = View::make('components.actions.comment-actions', compact('comment'))->render();
 
             return [
-                'author' => $comment->author->name,
+                'author' => $comment->author ? $comment->author->name : 'Unknown',
                 'message' => $comment->message,
                 'date' => $comment->created_at->format('d/m/Y H:i'),
                 'actions' => $view,
@@ -50,7 +92,7 @@ class CommentDataController extends Controller
         return response()->json([
             'draw' => $draw,
             'recordsTotal' => $total,
-            'recordsFiltered' => $total, // Aquí podrías usar un filtrado real si lo necesitas
+            'recordsFiltered' => $filteredTotal,
             'data' => $data,
         ]);
     }

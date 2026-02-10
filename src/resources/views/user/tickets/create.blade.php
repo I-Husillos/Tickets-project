@@ -54,9 +54,11 @@ $breadcrumbs = [
                     <div class="form-group mt-3">
                         <label for="type">{{ __('frontoffice.tickets.type') }}</label>
                         <select id="type" name="type" class="form-control">
-                            <option value="bug" {{ old('type') === 'bug' ? 'selected' : '' }}>{{ __('frontoffice.tickets.types_options.bug') }}</option>
-                            <option value="improvement" {{ old('type') === 'improvement' ? 'selected' : '' }}>{{ __('frontoffice.tickets.types_options.improvement') }}</option>
-                            <option value="request" {{ old('type') === 'request' ? 'selected' : '' }}>{{ __('frontoffice.tickets.types_options.request') }}</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->name }}" {{ old('type') === $type->name ? 'selected' : '' }}>
+                                    {{ ucfirst($type->name) }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
 
