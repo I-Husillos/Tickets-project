@@ -82,6 +82,7 @@ class AdminTicketController extends Controller
         $this->authorize('update', $ticket);
         
         $validated = $request->validated();
+        $oldStatus = $ticket->status;
 
         // Asignación del admin
         if (isset($validated['assigned_to'])) {
@@ -102,14 +103,28 @@ class AdminTicketController extends Controller
         }
 
         // Otras actualizaciones
-        $ticket->status = $validated['status'];
+        $newStatus = $validated['status'];
+        $ticket->status = $newStatus;
         $ticket->priority = $validated['priority'] ?? $ticket->priority;
+
+        if ($newStatus === 'resolved') {
+            $ticket->resolved_at = now();
+        } elseif (in_array($newStatus, ['new', 'pending'])) {
+            $ticket->resolved_at = null;
+        }
 
         $ticket->save();
 
         $admin = Auth::guard('admin')->user();
 
-        SendNotifications::dispatch($ticket->id, 'status_changed', $admin);
+        // Notification Logic
+        if ($newStatus === 'closed') {
+            SendNotifications::dispatch($ticket->id, 'closed', $admin);
+        } elseif (($oldStatus === 'closed' || $oldStatus === 'resolved') && ($newStatus === 'pending' || $newStatus === 'in_progress')) {
+            SendNotifications::dispatch($ticket->id, 'reopened', $admin);
+        } else {
+            SendNotifications::dispatch($ticket->id, 'status_changed', $admin);
+        }
 
         EventHistory::create([
             'event_type' => 'Actualización',

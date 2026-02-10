@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Log;
 
 
 
+use Illuminate\Queue\SerializesModels;
+
 class SendNotifications implements ShouldQueue
 {
-    use Queueable;
+    use Queueable, SerializesModels;
 
     protected $ticket;
     protected $type;
@@ -40,7 +42,8 @@ class SendNotifications implements ShouldQueue
             $this->comment = $extraData;
         }
 
-        if ($type === 'status_changed') {
+        // Para status_changed, closed y reopened, extraData es el actor (admin)
+        if (in_array($type, ['status_changed', 'closed', 'reopened'])) {
             $this->actor = $extraData;
         }
     }
@@ -98,13 +101,24 @@ class SendNotifications implements ShouldQueue
             case 'status_changed':
                 // Verificar si el usuario está relacionado con el ticket antes de notificar
                 if ($ticket->user) {
-                    $ticket->user->notify(new TicketStatusChanged($ticket, $this->extraData));
+                    // Usar $this->actor en lugar de $this->extraData para consistencia
+                    $actor = $this->actor instanceof Admin ? $this->actor : Admin::find($this->actor);
+                    // Si falla al resolver el actor, intentar usar extraData si es un modelo
+                    if (!$actor && $this->extraData instanceof Admin) {
+                        $actor = $this->extraData;
+                    }
+                    
+                    if ($actor) {
+                        $ticket->user->notify(new TicketStatusChanged($ticket, $actor));
+                    }
                 } else {
                     Log::warning("No admin found for ticket: {$ticket->id}. Notifying all admins.");
                     // Si no hay admin asociado, notificar a todos los administradores
                     $admins = Admin::all();
                     foreach ($admins as $admin) {
-                        $admin->notify(new TicketStatusChanged($ticket, $this->extraData));
+                        // Usar $this->actor o una instancia válida
+                        $actor = $this->actor instanceof Admin ? $this->actor : $admin; 
+                        $admin->notify(new TicketStatusChanged($ticket, $actor));
                     }
                 }
                 break;

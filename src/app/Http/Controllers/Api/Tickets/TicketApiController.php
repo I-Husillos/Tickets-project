@@ -77,7 +77,8 @@ class TicketApiController extends Controller
         }
 
         $validated = $request->validated();
-
+        $oldStatus = $ticket->status;
+        
         // Aplicar los campos comunes
         $ticket->fill($validated);
 
@@ -86,16 +87,32 @@ class TicketApiController extends Controller
             $ticket->admin_id = $validated['assigned_to'];
         }
 
+        $newStatus = $ticket->status;
+
+        if ($newStatus === 'resolved' && $oldStatus !== 'resolved') {
+            $ticket->resolved_at = now();
+        } elseif (in_array($newStatus, ['new', 'pending'])) {
+            $ticket->resolved_at = null;
+        }
+
         $ticket->save(); // guardar todos los cambios
 
+        // Notification Logic
+        if ($oldStatus !== $newStatus) {
+            if ($newStatus === 'closed') {
+                SendNotifications::dispatch($ticket->id, 'closed', $admin);
+            } elseif (($oldStatus === 'closed' || $oldStatus === 'resolved') && ($newStatus === 'pending' || $newStatus === 'in_progress')) {
+                SendNotifications::dispatch($ticket->id, 'reopened', $admin);
+            } else {
+                SendNotifications::dispatch($ticket->id, 'status_changed', $admin);
+            }
+        }
 
         EventHistory::create([
             'event_type' => 'Actualización',
             'description' => 'Ticket con id ' . $ticket->id . ' actualizado por ' . $admin->name,
             'user' => $admin->name,
         ]);
-
-        SendNotifications::dispatch($ticket->id, 'updated');
 
         return response()->json([
             'success' => true,
