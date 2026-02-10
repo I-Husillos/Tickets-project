@@ -10,7 +10,12 @@ export function initUserTicketsTable(apiUrl, token) {
             url: apiUrl,
             type: 'GET',
             dataType: 'json',
-            data: { locale },
+            data: function (d) {
+                d.locale = locale;
+                d.status = $('#filter-status').val();
+                d.priority = $('#filter-priority').val();
+                d.type = $('#filter-type').val();
+            },
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                 xhr.setRequestHeader('X-Locale', locale);
@@ -18,8 +23,6 @@ export function initUserTicketsTable(apiUrl, token) {
             error: function (xhr) {
                 console.error('Error en respuesta AJAX:', xhr.responseText);
             }
-        },error: function (xhr) {
-            console.error('Error AJAX tabla usuario:', xhr.responseText);
         },
         columns: [
             { data: 'title', className: 'text-center align-middle' },
@@ -29,5 +32,9 @@ export function initUserTicketsTable(apiUrl, token) {
             { data: 'date', className: 'text-center align-middle' },
             { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' },
         ]
+    });
+
+    $('#filter-status, #filter-priority, #filter-type').on('change', function() {
+        $('#tabla-tickets-usuario').DataTable().ajax.reload();
     });
 }

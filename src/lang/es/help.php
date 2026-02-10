@@ -495,89 +495,96 @@ return [
         ]
     ],
     'admin_intro_page' => [
-        'title' => 'Manual Admin · Introducción',
-        'header' => '1. Introducción y Entorno de Trabajo',
-        'subtitle' => 'Manual de referencia técnico y operativo detallado para la administración del sistema Service Desk.',
-        'toc' => [
-            'header' => 'Índice del Manual',
-            'intro' => '1. Introducción',
-            'tickets' => '2. Gestión de Tickets',
-            'users' => '3. Administración de Usuarios',
-            'notifications' => '4. Sistema de Notificaciones',
-            'events' => '5. Auditoría y Eventos',
-            'doc_info' => 'Documentación Técnica v2.2 - Revisión Extendida'
+        'title' => 'Manual Operativo · Introducción y Dashboard',
+        'header' => 'Manual del Administrador: Introducción y Dashboard',
+        'subtitle' => 'Guía completa de familiarización con la interfaz de gestión IT y el cuadro de mando principal.',
+        'welcome' => [
+            'title' => 'Bienvenida al Centro de Resolución',
+            'text' => 'Bienvenido al Panel de Administración del Sistema de Tickets. Esta herramienta ha sido diseñada no solo como un repositorio de problemas, sino como un <strong>Centro de Resolución de Incidencias</strong>.',
+            'role_desc' => 'Como administrador, usted tiene la responsabilidad de orquestar la solución a los problemas reportados por los usuarios finales. El sistema centraliza todas las solicitudes, eliminando el caos de los correos electrónicos dispersos, llamadas telefónicas no registradas y mensajes de pasillo.',
+            'pillars_title' => 'Pilares del Sistema:',
+            'pillars' => [
+                'centralization' => '<strong>Centralización:</strong> Toda la información técnica y comunicación en un solo lugar.',
+                'traceability' => '<strong>Trazabilidad:</strong> Cada acción queda registrada con fecha, hora y autor en el historial.',
+                'efficiency' => '<strong>Eficiencia:</strong> Flujos de trabajo claros para asignar, gestionar y resolver incidencias.'
+            ],
+            'goal_title' => 'Objetivo del Sistema',
+            'goal_text' => 'Minimizar el tiempo de inactividad de los usuarios (Downtime) y maximizar la transparencia en la gestión del departamento de IT.'
         ],
-        'section_1' => [
-            'title' => '1.1. Propósito y Arquitectura de Seguridad (Multi-Auth)',
-            'text' => 'El módulo de administración es el componente central para la gestión ("Backend") del sistema de soporte técnico. A diferencia de los paneles de administración convencionales, este sistema ha sido construido sobre una arquitectura de <strong>Autenticación Dual (Multi-Auth)</strong> y aislamiento de sesiones.',
-            'text_2' => 'Esto implica que el entorno de administración es técnicamente invisible e inaccesible para los usuarios finales. Utiliza un "Guard" de seguridad independiente (admin) y tablas de base de datos segregadas para las credenciales, garantizando que una vulnerabilidad en una cuenta de usuario nunca comprometa el panel de control. El acceso está restringido exclusivamente a personal autorizado y auditado.',
-            'roles_box' => [
-                'title' => 'Políticas RBAC (Role-Based Access Control)',
-                'text' => 'El sistema aplica una política de "Privilegio Mínimo" a través de roles definidos que determinan qué puede ver y hacer cada operador:',
-                'superadmin' => '<strong>Super Admin (Root):</strong> Acceso irrestricto total. Es el único rol capaz de crear otros administradores, modificar la taxonomía del sistema (crear/borrar Tipos de Ticket), purgar registros y acceder a análisis de negocio globales. Este rol debe limitarse a los gerentes de TI.',
-                'admin' => '<strong>Administrador Estándar (Agente):</strong> Rol enfocado puramente en la operatividad diaria. Tiene control total sobre el ciclo de vida de los tickets (responder, cerrar, reabrir) y gestión básica de usuarios (editar perfiles de cliente). No puede alterar la configuración estructural del sistema ni ver el log de auditoría global.',
-                'security_note' => 'Seguridad: Todas las acciones críticas (logins, cambios de estado, borrados) quedan registradas permanentemente con dirección IP y timestamp en el Historial de Eventos para auditoría forense.'
-            ]
+        'dashboard' => [
+            'title' => 'El Dashboard Principal',
+            'intro' => 'Al iniciar sesión, lo primero que verá es el <strong>Dashboard</strong>. Este panel es su centro de mando para supervisar las operaciones del sistema de soporte. Proporciona acceso rápido a métricas clave, eventos recientes y notificaciones pendientes, todo en un vistazo.',
+            'img_caption' => 'Fig 1.1 - Panel de control principal del administrador',
+            'cards_title' => 'Tarjetas de Acceso Rápido',
+            'cards_note' => '<strong>Nota:</strong> Las tarjetas disponibles dependen de su tipo de cuenta. Los <span class="badge badge-danger">Superadministradores</span> ven todas las métricas; los administradores normales tienen una vista simplificada.',
+            'superadmin_note' => '<strong>Para Superadministradores:</strong> El dashboard muestra 4 tarjetas con acceso directo a las secciones principales de gestión.',
+            'users_card' => [
+                'title' => 'Usuarios Registrados',
+                'desc' => 'Suma total de usuarios normales y administradores. Click para gestionar usuarios.'
+            ],
+            'admins_card' => [
+                'title' => 'Administradores',
+                'desc' => 'Personal técnico con acceso administrativo. Click para gestionar admins.'
+            ],
+            'assigned_tickets_card' => [
+                'title' => 'Tickets Asignados',
+                'desc' => 'Tickets con un administrador responsable. Click para ver asignaciones.'
+            ],
+            'total_tickets_card' => [
+                'title' => 'Total de Tickets',
+                'desc' => 'Todos los tickets registrados en el sistema. Click para gestionar tickets.'
+            ],
+            'events_title' => 'Últimos Eventos del Sistema',
+            'events_text' => 'En la parte central encontrará una tabla con los <strong>5 eventos más recientes</strong> del historial. Esto incluye creación de tickets, actualizaciones de estado, comentarios y asignaciones. Cada evento muestra: tipo, descripción, usuario responsable y fecha/hora.',
+            'events_link' => 'Puede acceder al <strong>historial completo</strong> mediante el botón "Ver historial completo" en la esquina superior derecha de la tarjeta.',
+            'events_caption' => 'Ejemplo de tabla de eventos recientes',
+            'notifications_title' => 'Notificaciones Recientes',
+            'notifications_text' => 'En la parte inferior se muestran las <strong>5 notificaciones no leídas más recientes</strong>. Estas alertas le informan de: nuevos tickets creados, comentarios añadidos, cambios de estado y cierres/reaperturas.',
+            'notifications_link' => 'Use el botón "Ver todas" para acceder a su bandeja completa de notificaciones y marcarlas como leídas.',
+            'notifications_caption' => 'Ejemplo de tabla de notificaciones recientes'
         ],
-        'section_2' => [
-            'title' => '1.2. Interfaz de Aterrizaje: El Hub de Navegación',
-            'text' => 'Al autenticarse en el panel, el sistema no dirige al operador a un dashboard lleno de métricas, sino al <strong>Hub de Navegación Operativa</strong>. Esta decisión de diseño (UX) busca minimizar la carga cognitiva inicial y enfocar al agente en la acción inmediata.',
-            'text_2' => 'Desde este punto central, el flujo de trabajo se bifurca en dos caminos principales dependiendo del rol y la intención del usuario:',
-            'img_caption' => 'Interfaz del Hub de Navegación priorizando flujos de trabajo',
-            'buttons' => [
-                'assigned' => '<strong>Tickets Asignados (Mi Cola de Trabajo):</strong> Este es el acceso más frecuente. Dirige al agente directamente a la lista filtrada de tickets donde él es el responsable. Permite retomar el trabajo pendiente inmediatamente sin navegar por menús.',
-                'management' => '<strong>Gestión Global y Métricas (Dashboard):</strong> Reservado para Superadmins. Dirige al cuadro de mando analítico para supervisar la salud del servicio, volumen de carga y rendimiento del equipo.'
-            ]
-        ],
-        'section_3' => [
-            'title' => '1.3. Cuadro de Mando de Gestión (KPI Dashboard)',
-            'subtitle' => 'Exclusivo para Superadmins',
-            'text' => 'El Dashboard proporciona una visión macroscópica ("Helicopter View") del estado del servicio en tiempo real. Es vital para la toma de decisiones basada en datos y la detección temprana de cuellos de botella.',
-            'text_2' => 'Los indicadores se calculan en vivo consultando la base de datos transaccional:',
-            'kpis' => [
-                'users' => [
-                    'title' => 'Usuarios Registrados',
-                    'desc' => 'Métrica de alcance. Indica el tamaño total de la base de clientes con acceso al portal de soporte.'
-                ],
-                'admins' => [
-                    'title' => 'Fuerza Operativa',
-                    'desc' => 'Capacidad de respuesta disponible. Suma de administradores y agentes activos en el sistema.'
-                ],
-                'assigned' => [
-                    'title' => 'Carga Activa',
-                    'desc' => 'Tickets que están actualmente en proceso (No cerrados) y tienen un responsable asignado. Un número alto aquí puede indicar saturación del equipo.'
-                ],
-                'total' => [
-                    'title' => 'Volumen Histórico',
-                    'desc' => 'Total acumulado de incidencias procesadas desde el despliegue del sistema. Útil para medir la demanda a largo plazo.'
+        'navigation' => [
+            'title' => 'Estructura de Navegación',
+            'sidebar_title' => 'Menú Principal (Sidebar)',
+            'sidebar_desc' => 'La barra lateral izquierda es su herramienta de navegación principal. Está dividida en secciones lógicas para facilitar el acceso rápido a las funciones más usadas:',
+            'dashboard' => [
+                'term' => 'Dashboard',
+                'desc' => 'Vuelta al inicio. Resumen gráfico de la situación actual.'
+            ],
+            'tickets' => [
+                'term' => 'Tickets',
+                'desc' => 'El núcleo del trabajo diario.',
+                'list' => [
+                    'manage' => '<strong>Gestionar tickets:</strong> Listado global de incidencias.',
+                    'assigned' => '<strong>Tickets asignados:</strong> Su cola de trabajo personal.'
                 ]
             ],
-            'events_widget' => [
-                'title' => 'Monitor de Seguridad en Vivo',
-                'text' => 'En la zona inferior del dashboard se despliega el widget de <strong>Últimos Eventos del Sistema</strong>. Esta lista se actualiza con cada acción crítica y permite al Superadmin detectar patrones anómalos, como múltiples intentos de login fallidos, creación de administradores no autorizada o cambios masivos en estados de tickets.'
+            'users' => [
+                'term' => 'Usuarios',
+                'desc' => '<em>(Solo Superadmin)</em> Gestión de altas, bajas y modificación de datos de usuarios y personal técnico.'
+            ],
+            'config' => [
+                'term' => 'Config.',
+                'desc' => 'Definición de Tipos de incidencias y ajustes globales del sistema.'
+            ],
+            'icons_title' => 'Guía Rápida de Iconografía',
+            'icons_desc' => 'Para mantener la interfaz limpia, utilizamos iconos estandarizados para las acciones comunes. Familiarícese con ellos:',
+            'table' => [
+                'icon' => 'Icono',
+                'action' => 'Acción',
+                'desc' => 'Descripción',
+                'view' => ['action' => 'Ver / Detalles', 'desc' => 'Accede a la ficha completa para leer y revisar sin editar.'],
+                'edit' => ['action' => 'Editar', 'desc' => 'Modifica los datos del registro (título, estado, prioridad).'],
+                'resolve' => ['action' => 'Resolver', 'desc' => 'Acción rápida para marcar un ticket como solucionado.'],
+                'delete' => ['action' => 'Eliminar', 'desc' => 'Borrado permanente. Requiere confirmación adicional.']
             ]
         ],
-        'section_4' => [
-            'title' => '1.4. Mapa de Navegación (Sidebar)',
-            'text' => 'La barra lateral izquierda es persistente y organiza las herramientas en tres grandes bloques lógicos:',
-            'text_2' => 'Comprender esta estructura es clave para una navegación fluida:',
-            'modules' => [
-                'ops' => [
-                    'title' => 'BLOQUE 1: OPERACIONES (El día a día)',
-                    'dashboard' => '<strong>Dashboard / Inicio:</strong> Retorno rápido al Hub o al Cuadro de Mando.',
-                    'tickets' => '<strong>Gestión de Tickets:</strong> El corazón del sistema. Despliega submenús para filtrar tickets por estado (Abiertos, Cerrados) o ver la lista global.',
-                    'users' => '<strong>Usuarios:</strong> CRM ligero para buscar clientes, ver su historial de peticiones y editar sus datos de contacto.'
-                ],
-                'sys' => [
-                    'title' => 'BLOQUE 2: SISTEMA (Configuración)',
-                    'types' => '<strong>Tipos & Categorías:</strong> Permite definir la taxonomía de los problemas (ej. "Hardware", "Software"). Es fundamental para obtener reportes precisos.',
-                    'events' => '<strong>Logs / Auditoría:</strong> Acceso al registro histórico completo e inmutable de acciones. Permite filtrar por fecha, usuario y tipo de acción.',
-                    'admins' => '<strong>Gestión de Staff:</strong> (Solo Superadmin) Alta, baja y modificación de cuentas de otros administradores.'
-                ],
-                'personal' => [
-                    'title' => 'BLOQUE 3: PERSONAL',
-                    'logout' => '<strong>Perfil y Salida:</strong> En la zona inferior se encuentran los controles de sesión y visualización del perfil actual.'
-                ]
+        'tips' => [
+            'title' => 'Consejos de Productividad',
+            'list' => [
+                'search' => 'Utilice el <strong>buscador global</strong> en la parte superior derecha de las tablas de datos para encontrar usuarios o tickets rápidamente por nombre o ID.',
+                'close' => 'Mantenga el dashboard limpio <strong>cerrando definitivamente</strong> los tickets que han sido resueltos y validados por el usuario.',
+                'notifications' => 'Revise la campana de <strong>Notificaciones</strong> diariamente para no dejar ninguna interacción de usuario sin respuesta.'
             ]
         ]
     ],
@@ -666,364 +673,506 @@ return [
         ]
     ],
     'admin_notifications_page' => [
-        'title' => 'Documentación - Notificaciones de Administrador',
-        'intro' => 'El sistema de notificaciones te mantiene informado automáticamente sobre todos los eventos importantes que ocurren en la plataforma. Como administrador, recibes avisos sobre nuevos tickets creados por usuarios, comentarios añadidos, y cualquier actividad relevante que requiera tu atención o seguimiento.',
-        'intro_more' => 'Esto te permite gestionar el flujo de trabajo de manera eficiente sin tener que revisar manualmente cada sección del sistema.',
+        'title' => 'Documentación - Notificaciones',
+        'header' => 'Notificaciones del Administrador',
+        'subheader' => 'Gestión de alertas y avisos del sistema para mantener el control de las incidencias.',
+        'breadcrumbs' => 'Notificaciones',
+        'what_is' => [
+            'title' => '¿Qué son las notificaciones de administrador?',
+            'text' => 'El sistema de notificaciones es el centro de alerta temprana para el equipo de soporte. Permite a los administradores reaccionar rápidamente ante nuevos incidentes o respuestas de usuarios sin necesidad de monitorizar constantemente la lista de tickets. Cada vez que ocurre un evento relevante en un ticket que te concierne, recibirás un aviso inmediato.'
+        ],
         'access' => [
-            'title' => 'Cómo acceder a las notificaciones',
-            'desc' => 'Hay <strong>dos formas</strong> de acceder a tus notificaciones como administrador:',
-            'op1' => [
-                'title' => 'Opción 1: Desde el icono de la campana',
-                'desc' => 'En la <strong>parte superior derecha</strong> de la pantalla, en la barra de navegación, encontrarás un icono de campana.',
-                'alert' => [
-                    'title' => 'Indicador de notificaciones nuevas:',
-                    'li1' => 'Si tienes notificaciones sin leer, aparece un <strong>círculo amarillo con un número</strong> que indica cuántas notificaciones nuevas tienes.',
-                    'li2' => 'Ejemplo: Si ves un "12" sobre la campana, significa que tienes 12 notificaciones pendientes de revisar.'
-                ],
-                'action' => '<strong>Para acceder:</strong> Haz clic en el icono de la campana y serás redirigido a la página completa de notificaciones.'
+            'title' => 'Cómo acceder a tus notificaciones',
+            'intro' => 'Existen <strong>dos métodos principales</strong> para consultar las novedades:',
+            'option1' => [
+                'title' => 'Opción 1: Desde la Barra Superior (Navbar)',
+                'text' => 'Esta es la forma más rápida de ver las últimas novedades mientras trabajas en otras áreas.',
+                'indicator' => '<strong>Indicador Visual:</strong>',
+                'li1' => 'En la esquina superior derecha, verás un icono de <strong>campana</strong>.',
+                'li2' => 'Si hay un círculo amarillo con un número, indica la cantidad de notificaciones <strong>no leídas</strong>.',
+                'li3' => 'Al hacer clic, verás un resumen rápido de las últimas notificaciones.',
+                'view_all' => 'Para ver el listado completo, haz clic en "Ver todas las notificaciones" al final de ese menú desplegable.'
             ],
-            'op2' => [
-                'title' => 'Opción 2: Desde el menú lateral',
-                'desc' => 'En el menú de navegación del lado izquierdo del panel de administración, busca la opción <strong>"Notificaciones"</strong> (con un icono de campana). Haz clic ahí para acceder directamente.'
+            'option2' => [
+                'title' => 'Opción 2: Listado Completo',
+                'text' => 'Para una gestión más detallada, puedes acceder a la vista de tabla completa donde podrás filtrar, buscar y gestionar alertas antiguas.',
+                'box' => 'Accede pulsando "Ver todas" desde la campana o desde el menú lateral si está habilitado.'
             ]
         ],
         'screen' => [
-            'title' => 'La pantalla de notificaciones',
-            'intro' => 'Cuando accedes a esta sección, verás:',
-            'loc' => [
-                'title' => 'Ubicación en el sistema',
-                'desc' => 'En la parte superior aparece una ruta de navegación que te muestra dónde estás:',
-                'path' => 'Inicio / Notificaciones',
-                'note' => 'Puedes hacer clic en "Inicio" para volver al panel de administración principal.'
+            'title' => 'La Pantalla de Gestión de Notificaciones',
+            'text' => 'La vista principal "Mis Notificaciones" está diseñada para procesar grandes volúmenes de alertas de manera eficiente.',
+            'table_title' => 'Estructura de la Tabla',
+            'table_intro' => 'La información se presenta en 4 columnas clave:',
+            'columns' => [
+                'col1' => 'Columna', 'col2' => 'Descripción', 'col3' => 'Ejemplo',
+                'type' => '<strong>Tipo</strong>',
+                'type_desc' => 'Categoría del evento. Ayuda a distinguir urgencias.',
+                'type_ex' => '<span class="badge badge-info">Comentario</span>, <span class="badge badge-success">Nuevo Ticket</span>',
+                'content' => '<strong>Contenido</strong>',
+                'content_desc' => 'Resumen breve de lo ocurrido. Incluye el ID del ticket y el autor de la acción.',
+                'content_ex' => '"Nuevo ticket creado con ID 45 por Usuario..."',
+                'date' => '<strong>Fecha</strong>',
+                'date_desc' => 'Momento exacto en que se generó la alerta.',
+                'date_ex' => '10/02/2026 09:30',
+                'actions' => '<strong>Acciones</strong>',
+                'actions_desc' => 'Herramientas para interactuar con la notificación.',
+                'actions_ex' => 'Ver, Marcar leída'
+            ]
+        ],
+        'logic' => [
+            'title' => 'Lógica de Envío: ¿Qué notificaciones recibo?',
+            'intro' => 'El sistema utiliza reglas inteligentes para no saturar tu bandeja. Recibirás avisos según tu rol y asignación:',
+            'case1' => [
+                'title' => '1. Nuevo Ticket Creado',
+                'who' => '<strong>¿Quién la recibe?</strong> Todos los administradores.',
+                'desc' => 'Para garantizar que ninguna incidencia nueva pase desapercibida, todo el equipo técnico es alertado cuando entra un ticket nuevo.'
             ],
-            'table' => [
-                'title' => 'La tabla de notificaciones',
-                'desc' => 'Todas las notificaciones se muestran en una <strong>tabla organizada</strong> con <strong>4 columnas</strong>:',
-                'cols' => [
-                    'h1' => 'Columna', 'h2' => 'Qué muestra', 'h3' => 'Ejemplo',
-                    'r1c1' => 'Tipo', 'r1c2' => 'El tipo de evento que ocurrió', 'r1c3' => 'Comentario, Creado, Estado',
-                    'r2c1' => 'Contenido', 'r2c2' => 'Un resumen de lo que pasó', 'r2c3' => '"Se ha creado un nuevo ticket" o "Nuevo comentario en ticket ID 22"',
-                    'r3c1' => 'Fecha', 'r3c2' => 'Cuándo ocurrió el evento', 'r3c3' => '13/06/2025 11:14',
-                    'r4c1' => 'Acciones', 'r4c2' => 'Botones para interactuar', 'r4c3' => 'Ver detalles, Marcar como leída/no leída',
-                ],
-                'warn' => '<strong>Importante:</strong> Las notificaciones se ordenan de la más reciente a la más antigua por defecto, para que siempre veas primero los eventos más actuales.'
+            'case2' => [
+                'title' => '2. Respuesta en Ticket Asignado',
+                'who' => '<strong>¿Quién la recibe?</strong> Solo el admin asignado.',
+                'desc' => 'Si tú eres el responsable de un ticket, solo tú recibirás la notificación cuando el usuario conteste, evitando ruido al resto del equipo.'
+            ],
+            'case3' => [
+                'title' => '3. Respuesta en Ticket NO Asignado',
+                'who' => '<strong>¿Quién la recibe?</strong> Todos los administradores.',
+                'desc' => 'Si un ticket no tiene dueño y el usuario contesta, se avisa a todos para que alguien lo tome.'
             ]
         ],
         'types' => [
-            'title' => 'Tipos de notificaciones que recibes como administrador',
-            'new' => [
-                'title' => 'Nuevo Ticket Creado',
-                'when' => '<strong>Cuándo la recibes:</strong> Cuando un usuario crea un nuevo ticket en el sistema.',
-                'what' => '<strong>Qué dice:</strong> "Se ha creado un nuevo ticket" o "Nuevo ticket creado con ID [número] por [nombre usuario]"',
-                'info' => '<strong>Información adicional que muestra:</strong>',
-                'li1' => 'Nombre del usuario que creó el ticket', 'li2' => 'Título del ticket', 'li3' => 'ID del ticket',
-                'why' => '<strong>Por qué es útil:</strong> Te alerta inmediatamente cuando hay una nueva solicitud que debe ser atendida, permitiéndote asignarla o comenzar a trabajar en ella sin demora.'
-            ],
+            'title' => 'Tipos de Eventos',
             'comment' => [
-                'title' => 'Nuevo Comentario en Ticket',
-                'when' => '<strong>Cuándo la recibes:</strong> Cuando un usuario añade un comentario a un ticket que estás gestionando o que te ha sido asignado.',
-                'what' => '<strong>Qué dice:</strong> "Nuevo comentario en ticket ID [número] por [nombre usuario]"',
-                'info' => '<strong>Información adicional que muestra:</strong>',
-                'li1' => 'Autor del comentario (nombre del usuario)', 'li2' => 'Título del ticket', 'li3' => 'Contenido del comentario', 'li4' => 'ID del ticket',
-                'why' => '<strong>Por qué es útil:</strong> Te mantiene al tanto de las respuestas de los usuarios, información adicional que proporcionan, o seguimiento que hacen a sus tickets. Puedes responder rápidamente sin tener que revisar cada ticket individualmente.'
+                'title' => 'Nuevo Comentario',
+                'text' => 'El usuario ha respondido a una de tus preguntas o ha añadido información extra.',
+                'priority' => 'Prioridad: Alta (El usuario espera feedback).'
             ],
-            'status' => [
-                'title' => 'Cambio de Estado de Ticket',
-                'when' => '<strong>Cuándo la recibes:</strong> Cuando otro administrador cambia el estado de un ticket (especialmente útil en equipos con múltiples administradores).',
-                'what' => '<strong>Qué dice:</strong> "El ticket con ID [número] ha sido actualizado a [nuevo estado]"',
-                'info' => '<strong>Información adicional que muestra:</strong>',
-                'li1' => 'Título del ticket', 'li2' => 'Nuevo estado (Pendiente, En Proceso, Resuelto)', 'li3' => 'Prioridad actual', 'li4' => 'Quién actualizó el ticket',
-                'why' => '<strong>Por qué es útil:</strong> Mantiene la coordinación entre administradores, evitando que dos personas trabajen en el mismo ticket o que se dupliquen esfuerzos.'
-            ],
-            'closed' => [
-                'title' => 'Ticket Cerrado',
-                'when' => '<strong>Cuándo la recibes:</strong> Cuando un ticket es marcado como cerrado (ya sea por ti o por otro administrador).',
-                'what' => '<strong>Qué dice:</strong> "El ticket [título] ha sido cerrado"',
-                'info' => '<strong>Información adicional que muestra:</strong>',
-                'li1' => 'Título del ticket cerrado', 'li2' => 'Quién cerró el ticket',
-                'why' => '<strong>Por qué es útil:</strong> Permite llevar un registro de tickets completados y mantener visibilidad sobre qué casos se están resolviendo.'
+            'new_ticket' => [
+                'title' => 'Ticket Nuevo',
+                'text' => 'Se ha registrado una nueva incidencia en el sistema.',
+                'priority' => 'Prioridad: Crítica (Requiere triaje y asignación).'
             ],
             'reopened' => [
                 'title' => 'Ticket Reabierto',
-                'when' => '<strong>Cuándo la recibes:</strong> Cuando un ticket previamente cerrado se vuelve a abrir porque el problema no fue resuelto completamente o reapareció.',
-                'what' => '<strong>Qué dice:</strong> "El ticket [título] ha sido reabierto"',
-                'info' => '<strong>Información adicional que muestra:</strong>',
-                'li1' => 'Título del ticket reabierto', 'li2' => 'Quién reabrió el ticket (usuario o administrador)',
-                'why' => '<strong>Por qué es útil:</strong> Te alerta sobre problemas recurrentes que necesitan atención adicional.'
+                'text' => 'Un usuario ha reabierto un ticket que estaba cerrado, indicando que la solución no fue efectiva.',
+                'priority' => 'Prioridad: Muy Alta (Reincidencia).'
             ]
         ],
         'tools' => [
-            'title' => 'Herramientas de la tabla',
-            'intro' => 'La tabla de notificaciones incluye varias funciones avanzadas para ayudarte a gestionar y encontrar información rápidamente:',
+            'title' => 'Herramientas de Productividad',
             'search' => [
-                'title' => 'Búsqueda',
-                'desc' => 'En la esquina superior derecha de la tabla hay un campo que dice <strong>"Buscar:"</strong>',
-                'li1' => 'Escribe cualquier palabra clave (por ejemplo, "comentario", un nombre de usuario, o parte del título de un ticket)',
-                'li2' => 'La tabla filtra automáticamente y muestra solo las notificaciones que coinciden con tu búsqueda',
-                'li3' => 'Borra el texto para ver todas las notificaciones nuevamente',
-                'li4' => 'La búsqueda funciona en tiempo real: verás los resultados mientras escribes',
-                'tip' => '<strong>Consejo:</strong> Usa la búsqueda para encontrar rápidamente todas las notificaciones relacionadas con un usuario específico o un ticket concreto.'
+                'title' => 'Buscador Inteligente',
+                'text' => 'Usa la caja de búsqueda para encontrar notificaciones específicas. Puedes buscar por:',
+                'li1' => '<strong>ID del Ticket:</strong> Escribe "45" para ver todo lo relacionado con ese caso.',
+                'li2' => '<strong>Nombre de Usuario:</strong> Encuentra actividad de un cliente concreto.',
+                'li3' => '<strong>Palabras clave:</strong> Como "Error", "Factura", etc.'
             ],
-            'records' => [
-                'title' => 'Cantidad de registros por página',
-                'desc' => 'En la esquina superior izquierda verás <strong>"Mostrar 10 registros"</strong> (con un menú desplegable). Puedes cambiar cuántas notificaciones ver en cada página:',
-                'li1' => '10 registros (valor por defecto)', 'li2' => '25 registros', 'li3' => '50 registros', 'li4' => '100 registros',
-                'note' => 'Esto es especialmente útil cuando tienes muchas notificaciones acumuladas y quieres verlas todas de una vez sin cambiar de página constantemente.'
-            ],
-            'pagination' => [
-                'title' => 'Paginación',
-                'desc' => 'Si tienes más notificaciones de las que caben en una página, verás en la parte inferior de la tabla:',
-                'example' => 'Mostrando 1 a 10 de 45 registros [Anterior] [1] [2] [3] [4] [5] [Siguiente]',
-                'li1' => '<strong>Botón "Anterior":</strong> Retrocede a la página previa',
-                'li2' => '<strong>Botón "Siguiente":</strong> Avanza a la siguiente página',
-                'li3' => '<strong>Números de página:</strong> Salta directamente a una página específica haciendo clic en su número',
-                'li4' => '<strong>Indicador de registros:</strong> Te muestra cuántas notificaciones hay en total y cuáles estás viendo actualmente'
-            ],
-            'sort' => [
-                'title' => 'Ordenar columnas',
-                'desc' => 'Haz clic en el encabezado de cualquier columna ordenable (Tipo, Contenido o Fecha) para cambiar el orden de las notificaciones:',
-                'li1' => '<strong>Primer clic:</strong> Ordena de forma ascendente (A→Z para texto, más antigua→más reciente para fechas)',
-                'li2' => '<strong>Segundo clic:</strong> Ordena de forma descendente (Z→A para texto, más reciente→más antigua para fechas)',
-                'li3' => '<strong>Tercer clic:</strong> Vuelve al orden por defecto',
-                'li4' => '<strong>Indicador visual:</strong> Aparece una flecha (↑ o ↓) en el encabezado que muestra el orden actual',
-                'tip' => '<strong>Sugerencia:</strong> Ordena por fecha de forma descendente para ver siempre las notificaciones más recientes primero, que suelen ser las más importantes.'
+            'org' => [
+                'title' => 'Organización',
+                'text' => 'El sistema ordena automáticamente las notificaciones, mostrando las más recientes primero.',
+                'tip' => 'Consejo: Mantén tu bandeja limpia marcando como leídas las notificaciones antiguas.'
             ]
         ],
         'actions' => [
-            'title' => 'Botones de acciones',
-            'intro' => 'Cada notificación en la tabla tiene <strong>dos botones</strong> en la columna "Acciones" que te permiten interactuar con ella:',
+            'title' => 'Acciones Principales',
+            'intro' => 'En la columna "Acciones" encontrarás tres botones fundamentales para tu flujo de trabajo:',
             'view' => [
-                'title' => 'Ver Detalles (botón azul con ícono de ojo)',
-                'what' => '<strong>Qué hace:</strong> Abre una ventana emergente (modal) con toda la información detallada de la notificación.',
-                'when' => '<strong>Cuándo usarlo:</strong>',
-                'li1' => 'Cuando necesitas conocer todos los detalles del evento', 'li2' => 'Para ver quién realizó la acción', 'li3' => 'Para leer el contenido completo de un comentario', 'li4' => 'Para acceder directamente al ticket relacionado mediante el botón "Ver Ticket"',
-                'look' => '<strong>Apariencia:</strong> Botón pequeño de color azul turquesa con un ícono de ojo blanco.'
+                'title' => 'Ver Detalles',
+                'text' => 'Abre un modal con el mensaje completo sin salir de la página. Incluye un enlace directo al ticket.'
             ],
             'mark' => [
-                'title' => 'Marcar como leída / Marcar como no leída',
-                'intro' => 'Este botón tiene dos estados y cambia según si la notificación ya fue leída o no:',
-                'unread' => [
-                    'title' => 'Notificación NO leída',
-                    'look' => '<strong>Aspecto:</strong> Botón <strong>azul</strong> con un ícono de check (✓)',
-                    'hover' => '<strong>Texto al pasar el mouse:</strong> "Marcar como leída"',
-                    'action' => '<strong>Qué hace al hacer clic:</strong>',
-                    'li1' => 'Marca la notificación como leída', 'li2' => 'El botón cambia a gris (estado leída)', 'li3' => 'El contador en la campana de la barra superior disminuye', 'li4' => 'La tabla se actualiza automáticamente sin recargar la página'
-                ],
-                'read' => [
-                    'title' => 'Notificación YA leída',
-                    'look' => '<strong>Aspecto:</strong> Botón <strong>gris</strong> con un ícono de X (✖)',
-                    'hover' => '<strong>Texto al pasar el mouse:</strong> "Marcar como no leída"',
-                    'action' => '<strong>Qué hace al hacer clic:</strong>',
-                    'li1' => 'Marca la notificación como no leída', 'li2' => 'El botón cambia a azul (estado no leída)', 'li3' => 'El contador en la campana de la barra superior aumenta', 'li4' => 'La tabla se actualiza automáticamente'
-                ],
-                'note' => '<strong>Nota:</strong> Marcar notificaciones como no leídas es útil cuando necesitas recordar revisar algo más tarde o mantener visible un evento importante.'
-            ]
-        ],
-        'modal' => [
-            'title' => 'Ventana de detalles (Modal)',
-            'intro' => 'Esta es la ventana emergente que aparece cuando haces clic en <strong>"Ver Detalles"</strong> en cualquier notificación.',
-            'how' => 'La ventana se superpone sobre la pantalla actual con un <strong>fondo oscurecido</strong> detrás, centrando tu atención en la información de la notificación.',
-            'p1' => [
-                'title' => '1. Parte superior (Título)',
-                'desc' => 'Muestra el <strong>mensaje principal</strong> de la notificación. Ejemplos:',
-                'li1' => '"Notificación"', 'li2' => '"Nuevo comentario en tu ticket"', 'li3' => '"Ticket actualizado"',
-                'note' => 'En la esquina superior derecha hay una <strong>X</strong> que permite cerrar la ventana en cualquier momento.'
-            ],
-            'p2' => [
-                'title' => '2. Parte central (Contenido detallado)',
-                'desc' => 'El contenido de esta sección <strong>varía dinámicamente</strong> según el tipo de notificación. A continuación se muestran ejemplos de cada tipo:'
-            ],
-            'examples' => [ // Accordion content
-                'new' => [
-                    'title' => 'Ejemplo: Nuevo Ticket Creado',
-                    'h' => 'Se ha creado un nuevo ticket',
-                    'p1' => 'Creado por: Luis',
-                    'p2' => 'Ticket: "Error al guardar archivo"',
-                    'why' => '¿Qué ves aquí? El nombre del usuario que creó el ticket y el título de su solicitud. El botón "Ver Ticket" te lleva directamente al ticket completo.'
-                ],
-                'comment' => [
-                    'title' => 'Ejemplo: Nuevo Comentario',
-                    'h' => 'Nuevo comentario en ticket ID 17',
-                    'p1' => 'Comentario de: Iván (Usuario)',
-                    'p2' => 'En ticket: "Ticket de prueba 3"',
-                    'p3' => 'Comentario: "Necesito más información sobre este error. ¿Podrían ayudarme?"',
-                    'why' => '¿Qué ves aquí? Quién escribió el comentario, en qué ticket lo hizo, y el texto completo del mensaje. Puedes responder directamente desde el ticket.'
-                ],
-                'status' => [
-                    'title' => 'Ejemplo: Cambio de Estado',
-                    'h' => 'El ticket con ID 22 ha sido actualizado',
-                    'p1' => 'Ticket: "No se puede iniciar sesión"',
-                    'p2' => 'Nuevo estado: En Proceso',
-                    'p3' => 'Prioridad: Alta',
-                    'p4' => 'Actualizado por: Admin Carlos',
-                    'why' => '¿Qué ves aquí? Información sobre qué administrador cambió el estado, cuál es el nuevo estado, y la prioridad actual del ticket.'
-                ],
-                'closed' => [
-                    'title' => 'Ejemplo: Ticket Cerrado',
-                    'h' => 'El ticket ha sido cerrado',
-                    'p1' => 'Ticket cerrado: "Problema con la base de datos"',
-                    'p2' => 'Cerrado por: Admin María',
-                    'why' => '¿Qué ves aquí? Qué ticket fue cerrado y qué administrador completó la acción.'
-                ],
-                'reopened' => [
-                    'title' => 'Ejemplo: Ticket Reabierto',
-                    'h' => 'El ticket ha sido reabierto',
-                    'p1' => 'Ticket reabierto: "Solicitud de nueva funcionalidad"',
-                    'p2' => 'Reabierto por: Luis (Usuario)',
-                    'why' => '¿Qué ves aquí? Información sobre qué ticket fue reabierto y quién lo reabrió (puede ser un usuario o un administrador).'
-                ]
-            ],
-            'p3' => [
-                'title' => '3. Parte inferior (Botones)',
-                'b1' => '<strong>Botón "Cerrar"</strong> (gris):',
-                'b1_li1' => 'Cierra la ventana emergente', 'b1_li2' => 'Te devuelve a la tabla de notificaciones', 'b1_li3' => 'Ubicado en la esquina inferior derecha',
-                'b2' => '<strong>Botón "Ver Ticket"</strong> (azul con ícono de ticket):',
-                'b2_li1' => 'Aparece solo si la notificación está relacionada con un ticket específico', 'b2_li2' => 'Te redirige directamente a la página completa del ticket', 'b2_li3' => 'Desde ahí puedes ver todos los detalles, comentar, cambiar estado, o asignar el ticket'
+                'title' => 'Marcar Leída',
+                'text' => 'Quita el indicador de "Nueva". Úsalo cuando ya has tomado nota pero quieres mantener el registro.'
             ]
         ],
         'workflow' => [
-            'title' => 'Ejemplo de uso completo: Flujo de trabajo',
-            'intro' => 'Imagina el siguiente escenario de tu día como administrador:',
+            'title' => 'Ejemplo de Flujo de Trabajo Ideal',
             'step1' => [
-                'title' => 'Paso 1: Recibes una notificación',
-                'text' => 'Un usuario llamado "María" crea un nuevo ticket a las 09:15 AM con el título: "No puedo acceder a mi cuenta"',
-                'auto' => 'Qué sucede automáticamente:',
-                'li1' => 'El icono de campana en la barra superior muestra un círculo amarillo con el número 1', 'li2' => 'La notificación se registra en tu lista de notificaciones'
+                'title' => '1. Recepción',
+                'text' => 'Ves el indicador "1" en la campana. Es un cliente respondiendo a un ticket tuyo que estaba en "Pendiente".'
             ],
             'step2' => [
-                'title' => 'Paso 2: Abres las notificaciones',
-                'text' => 'Haces clic en el icono de campana y accedes a la tabla de notificaciones.',
-                'see' => 'Lo que ves en la tabla:',
+                'title' => '2. Revisión Rápida',
+                'text' => 'Pulsas el botón "Ver" (Ojo). Lees la respuesta del cliente en la ventana modal. Ves que adjunta el dato que faltaba.'
             ],
             'step3' => [
-                'title' => 'Paso 3: Ves los detalles completos',
-                'text' => 'Haces clic en el botón azul con el ojo.',
-                'open' => 'Se abre la ventana emergente mostrando:',
+                'title' => '3. Acción',
+                'text' => 'Desde el modal, haces clic en "Ir al Ticket". Respondes al cliente y cambias el estado a "Resuelto".'
             ],
             'step4' => [
-                'title' => 'Paso 4: Accedes al ticket',
-                'text' => 'Haces clic en el botón "Ver Ticket" dentro de la ventana emergente.',
-                'happen' => 'Qué ocurre:',
-                'li1' => 'Te redirige a la página completa del ticket', 'li2' => 'Puedes ver todos los detalles: descripción, prioridad, tipo de incidencia', 'li3' => 'Puedes asignar el ticket a ti mismo o a otro administrador', 'li4' => 'Puedes cambiar el estado o añadir un comentario de respuesta'
+                'title' => '4. Finalización',
+                'text' => 'Vuelves a notificaciones y marcas la alerta como leída (si aún no lo está) para limpiar tu bandeja de pendientes.'
+            ]
+        ]
+    ],    'admin_events_page' => [
+        'title' => 'Documentación - Historial de Eventos',
+        'header_title' => 'Historial de Eventos',
+        'header_subtitle' => 'Sistema de auditoría y seguimiento de actividades del sistema',
+        'index' => [
+            'title' => 'En esta guía aprenderás:',
+            'what_is' => 'Qué es el Historial de Eventos',
+            'access' => 'Cómo acceder al historial',
+            'interface' => 'Entender la interfaz',
+            'types' => 'Tipos de eventos registrados',
+            'filter' => 'Filtrar y buscar eventos',
+            'analyze' => 'Analizar la información',
+            'cases' => 'Casos de uso prácticos',
+        ],
+        'what_is' => [
+            'title' => '¿Qué es el Historial de Eventos?',
+            'description' => 'El Historial de Eventos es un <strong>sistema de auditoría automática</strong> que registra todas las acciones importantes realizadas en la plataforma de gestión de tickets.',
+            'function_title' => 'Función Principal',
+            'function_desc' => 'Proporciona una <strong>trazabilidad completa</strong> de:',
+            'function_list' => [
+                'who' => '<strong>Quién</strong> realizó una acción (usuario o administrador)',
+                'what' => '<strong>Qué</strong> acción se realizó (crear, editar, eliminar, asignar, etc.)',
+                'when' => '<strong>Cuándo</strong> se realizó (fecha y hora exacta)',
+                'target' => '<strong>Sobre qué</strong> se realizó la acción (tickets, usuarios, tipos, etc.)',
             ],
-            'step5' => [
-                'title' => 'Paso 5: Marcas la notificación como leída',
-                'text' => 'Una vez que revisaste el ticket y tomaste acción, vuelves a las notificaciones. Haces clic en el botón azul de check (Marcar como leída).',
-                'res' => 'Resultado:',
-                'li1' => 'El botón cambia a gris con una X', 'li2' => 'El contador en la campana de la barra superior disminuye de 1 a 0', 'li3' => 'La notificación queda registrada como revisada'
+            'purpose_title' => '¿Para qué sirve?',
+            'cards' => [
+                'security' => [
+                    'title' => 'Seguridad',
+                    'list' => [
+                        'suspicious' => 'Detectar actividades sospechosas',
+                        'unauthorized' => 'Identificar accesos no autorizados',
+                        'tracking' => 'Rastrear cambios no deseados',
+                        'accountability' => 'Responsabilizar acciones específicas',
+                    ]
+                ],
+                'audit' => [
+                    'title' => 'Auditoría',
+                    'list' => [
+                        'compliance' => 'Cumplir con requisitos de auditoría',
+                        'reports' => 'Generar informes de actividad',
+                        'history' => 'Revisar el historial de cambios',
+                        'workflow' => 'Documentar el flujo de trabajo',
+                    ]
+                ],
+                'troubleshooting' => [
+                    'title' => 'Resolución de Problemas',
+                    'list' => [
+                        'start' => 'Identificar cuándo empezó un problema',
+                        'preceding' => 'Ver qué cambios precedieron un error',
+                        'sequence' => 'Reconstruir secuencias de eventos',
+                        'context' => 'Entender el contexto de incidencias',
+                    ]
+                ],
+                'analysis' => [
+                    'title' => 'Análisis',
+                    'list' => [
+                        'patterns' => 'Analizar patrones de uso',
+                        'productivity' => 'Medir la productividad del equipo',
+                        'bottlenecks' => 'Identificar cuellos de botella',
+                        'optimize' => 'Optimizar procesos',
+                    ]
+                ]
             ]
         ],
-        'special' => [
-            'title' => 'Funciones especiales del administrador',
-            'intro' => 'Como administrador, tienes acceso a una función adicional que los usuarios normales no tienen:',
-            'mark_all' => [
-                'title' => 'Marcar todas como leídas',
-                'where' => '<strong>¿Dónde se encuentra?</strong> En la cabecera de la tarjeta de notificaciones, junto al título, puede aparecer un botón adicional.',
-                'what' => '<strong>¿Qué hace?</strong> Marca todas tus notificaciones como leídas de una sola vez, sin necesidad de hacerlo una por una.',
-                'when' => '<strong>¿Cuándo es útil?</strong>',
-                'li1' => 'Cuando tienes muchas notificaciones acumuladas y ya las revisaste todas', 'li2' => 'Al finalizar tu jornada y quieres "limpiar" el panel', 'li3' => 'Cuando cambias de turno con otro administrador',
-                'effect' => '<strong>Efecto:</strong> Todas las notificaciones pasan a estado "leída", todos los botones azules cambian a grises, y el contador de la campana vuelve a 0.'
+        'access' => [
+            'title' => 'Acceso al Historial de Eventos',
+            'restricted_alert' => '<strong>Acceso Restringido:</strong> Solo los <strong>Superadministradores</strong> pueden acceder al Historial de Eventos. Los administradores normales no tienen permisos para ver esta sección.',
+            'how_to_title' => 'Cómo acceder',
+            'steps' => [
+                '1' => '<strong>Paso 1:</strong> Inicia sesión como Superadministrador',
+                '2' => '<strong>Paso 2:</strong> En el menú lateral izquierdo, localiza la sección <strong>"Administración"</strong>',
+                '3' => '<strong>Paso 3:</strong> Haz clic en <strong>"Administración"</strong> para expandir el submenú',
+                '4' => '<strong>Paso 4:</strong> Selecciona <strong>"Historial de Eventos"</strong>',
+            ],
+            'route_info' => '<strong>Ruta:</strong> Panel de Administración → Administración → Historial de Eventos',
+            'url' => '<strong>URL:</strong> <code>/admin/eventHistory</code>',
+        ],
+        'interface' => [
+            'title' => 'La Interfaz del Historial',
+            'intro' => 'La pantalla de Historial de Eventos presenta una interfaz simplificada centrada en la tabla de datos:',
+            'table_title' => 'Tabla de Eventos',
+            'table_desc' => 'La tabla muestra todos los eventos registrados en el sistema, ordenados cronológicamente:',
+            'columns' => [
+                'headers' => ['Columna', 'Qué muestra', 'Información adicional'],
+                'event_type' => ['<strong>Tipo de Evento</strong>', 'La acción que se realizó', 'Ej: "ticket_created", "user_login"'],
+                'description' => ['<strong>Descripción</strong>', 'Detalles específicos del evento', 'Describe qué cambió (ej: "Ticket #123 created by Juan")'],
+                'user' => ['<strong>Usuario</strong>', 'Quién realizó la acción', 'Nombre del responsable'],
+                'date' => ['<strong>Fecha</strong>', 'Cuándo ocurrió el evento', 'Formato: dd/mm/yyyy HH:mm'],
+            ],
+            'note' => '<strong>Nota:</strong> Los nombres de los tipos de evento se muestran en su formato técnico (ej: <code>ticket_created</code>) para mayor precisión en las búsquedas.',
+            'functionalities_title' => 'Funcionalidades de la Tabla',
+            'cards' => [
+                'search' => [
+                    'title' => 'Búsqueda Global',
+                    'loc' => '<strong>Ubicación:</strong> Esquina superior derecha de la tabla ("Search:")',
+                    'func' => '<strong>Función:</strong> Filtra dinámicamente los resultados mostrando solo los eventos que contengan el texto ingresado en <strong>cualquiera de sus columnas</strong>.',
+                    'example' => '<strong>Ejemplo:</strong> Escribe "admin" para ver acciones realizadas PÓR admins o SOBRE admins.',
+                ],
+                'sort' => [
+                    'title' => 'Ordenación',
+                    'usage' => '<strong>Cómo usarla:</strong> Haz clic en cualquier encabezado de columna',
+                    'click1' => '<strong>Primer clic:</strong> Ordena ascendente (A→Z, más antiguo→más reciente)',
+                    'click2' => '<strong>Segundo clic:</strong> Ordena descendente (Z→A, más reciente→más antiguo)',
+                ],
+                'pagination' => [
+                    'title' => 'Paginación',
+                    'records' => '<strong>Registros por página:</strong> Selector en la esquina superior izquierda',
+                    'options' => '<strong>Opciones:</strong> 10, 25, 50 o 100 eventos por página',
+                    'nav' => '<strong>Navegación:</strong> Botones "Anterior/Siguiente" en la parte inferior',
+                ],
+                'view' => [
+                    'title' => 'Orden y Visualización',
+                    'default' => '<strong>Orden por defecto:</strong> Cronológico inverso (lo más reciente primero).',
+                    'tip' => '<strong>Consejo:</strong> Usa la paginación para navegar por el historial antiguo.',
+                ]
             ]
         ],
-        'empty' => [
-            'title' => 'Si no tienes notificaciones',
-            'text' => 'Cuando entras a esta sección y no tienes ninguna notificación registrada, verás un mensaje:',
-            'msg' => 'No hay notificaciones disponibles.',
-            'desc' => 'Esto significa que no ha habido actividad reciente en el sistema que requiera tu atención.'
+        'event_types' => [
+            'title' => 'Tipos de Eventos Registrados',
+            'intro' => 'El sistema registra automáticamente los siguientes tipos de eventos:',
+            'headers' => ['Evento', 'Cuándo se registra', 'Ejemplo de Descripción'],
+            'tickets' => [
+                'title' => 'Eventos de Tickets',
+                'rows' => [
+                    ['<code>ticket_created</code>', 'Cuando un usuario crea un nuevo ticket', '"Ticket #45 creado por usuario@example.com con título \'Error de acceso\'"'],
+                    ['<code>ticket_updated</code>', 'Cuando se modifica cualquier campo de un ticket (título, descripción, estado, prioridad, tipo)', '"Ticket #45 actualizado: Estado cambiado de \'Nuevo\' a \'En Proceso\'"'],
+                    ['<code>ticket_assigned</code>', 'Cuando un administrador asigna un ticket a otro administrador', '"Ticket #45 asignado a admin@example.com por superadmin@example.com"'],
+                    ['<code>ticket_closed</code>', 'Cuando se marca un ticket como cerrado', '"Ticket #45 cerrado por admin@example.com"'],
+                    ['<code>comment_added</code>', 'Cuando se añade un comentario a un ticket', '"Comentario añadido al Ticket #45 por admin@example.com"'],
+                ]
+            ],
+            'users' => [
+                'title' => 'Eventos de Usuarios',
+                'rows' => [
+                    ['<code>user_created</code>', 'Cuando se registra un nuevo usuario en el sistema', '"Usuario \'Juan Pérez\' (juan@example.com) registrado"'],
+                    ['<code>user_updated</code>', 'Cuando se modifica el perfil de un usuario', '"Usuario \'Juan Pérez\' actualizado: Email cambiado"'],
+                    ['<code>user_deleted</code>', 'Cuando se elimina una cuenta de usuario', '"Usuario \'Juan Pérez\' (juan@example.com) eliminado por superadmin@example.com"'],
+                    ['<code>user_login</code>', 'Cada vez que un usuario inicia sesión', '"Inicio de sesión: usuario@example.com desde IP 192.168.1.100"'],
+                    ['<code>user_logout</code>', 'Cuando un usuario cierra sesión manualmente', '"Cierre de sesión: usuario@example.com"'],
+                ]
+            ],
+            'admins' => [
+                'title' => 'Eventos de Administradores',
+                'rows' => [
+                    ['<code>admin_created</code>', 'Cuando se crea una nueva cuenta de administrador', '"Administrador \'María López\' (maria@admin.com) creado por superadmin@example.com"'],
+                    ['<code>admin_updated</code>', 'Cuando se modifica el perfil de un administrador', '"Administrador \'María López\' actualizado: Rol cambiado a Superadministrador"'],
+                    ['<code>admin_deleted</code>', 'Cuando se elimina una cuenta de administrador', '"Administrador \'María López\' eliminado por superadmin@example.com"'],
+                    ['<code>admin_login</code>', 'Cada vez que un administrador accede al panel', '"Inicio de sesión admin: admin@example.com desde IP 192.168.1.50"'],
+                ]
+            ],
+            'ticket_types' => [
+                'title' => 'Eventos de Tipos de Tickets',
+                'rows' => [
+                    ['<code>type_created</code>', 'Cuando se crea un nuevo tipo de ticket', '"Tipo \'Problema de Red\' creado por superadmin@example.com"'],
+                    ['<code>type_updated</code>', 'Cuando se modifica un tipo de ticket existente', '"Tipo \'Bug\' actualizado: Descripción modificada"'],
+                    ['<code>type_deleted</code>', 'Cuando se elimina un tipo de ticket', '"Tipo \'Problema de Red\' eliminado por superadmin@example.com"'],
+                ]
+            ],
+            'note' => '<strong>Nota:</strong> Todos estos eventos se registran <strong>automáticamente</strong> por el sistema. No requieren ninguna acción manual para ser guardados.',
         ],
-        'diff' => [
-            'title' => 'Diferencias con las notificaciones de usuario',
-            'intro' => 'Las notificaciones que recibes como administrador son <strong>diferentes</strong> a las que reciben los usuarios normales:',
-            'params' => [
-                'p1' => 'Característica', 'p2' => 'Usuario Normal', 'p3' => 'Administrador',
-                'r1c1' => 'Tipos de eventos', 'r1c2' => 'Solo sus propios tickets', 'r1c3' => 'Todos los tickets del sistema o asignados',
-                'r2c1' => 'Nuevos tickets', 'r2c2' => 'Cuando él crea uno', 'r2c3' => 'Cuando cualquier usuario crea uno',
-                'r3c1' => 'Comentarios', 'r3c2' => 'Solo en sus tickets', 'r3c3' => 'En tickets asignados o según configuración',
-                'r4c1' => 'Volumen', 'r4c2' => 'Bajo (solo actividad propia)', 'r4c3' => 'Alto (actividad de toda la plataforma)',
-                'r5c1' => 'Función adicional', 'r5c2' => 'No disponible', 'r5c3' => '"Marcar todas como leídas"'
+        'filtering' => [
+            'title' => 'Cómo Filtrar y Buscar Eventos',
+            'intro' => 'El historial puede contener miles de eventos. La herramienta principal para encontrar información es la <strong>Búsqueda Global</strong> en la tabla.',
+            'strategies_title' => 'Estrategias de Búsqueda',
+            'pro_tip' => '<strong>Consejo Pro:</strong> La barra de búsqueda global es "inteligente". Puedes escribir cualquier término que aparezca en la fila para encontrarlo.',
+            'by_type' => [
+                'title' => '1. Cómo filtrar por Tipo de Evento',
+                'goal' => '<strong>Objetivo:</strong> Ver todas las acciones de un tipo específico (ej. Creación de Tickets).',
+                'method' => [
+                    '1' => 'Ve a la caja de búsqueda ("Search:") arriba a la derecha de la tabla.',
+                    '2' => 'Escribe el código del evento (ej: <code>ticket_created</code>).',
+                    '3' => 'La tabla mostrará solo las filas que contengan ese texto.',
+                ],
+                'terms_title' => '<strong>Términos útiles para buscar:</strong>',
+                'terms' => [
+                    '<code>ticket_</code>: Muestra todo lo relacionado con tickets.',
+                    '<code>user_</code>: Muestra acciones sobre usuarios.',
+                    '<code>login</code>: Muestra accesos al sistema.',
+                    '<code>comment</code>: Muestra comentarios añadidos.',
+                ]
+            ],
+            'by_user' => [
+                'title' => '2. Cómo filtrar por Usuario',
+                'goal' => '<strong>Objetivo:</strong> Rastrear las acciones de una persona específica.',
+                'method' => [
+                    '1' => 'Escribe el <strong>nombre</strong> o <strong>email</strong> del usuario en la caja de búsqueda.',
+                    '2' => 'El sistema filtrará automáticamente.',
+                ],
+                'examples_title' => '<strong>Ejemplos:</strong>',
+                'examples' => [
+                    'Escribe "admin@example.com" para ver su historial completo.',
+                    'Escribe "Juan" para ver acciones de cualquier usuario llamado Juan.',
+                ]
+            ],
+            'by_date' => [
+                'title' => '3. Cómo filtrar por Fecha o Contenido',
+                'goal' => '<strong>Objetivo:</strong> Encontrar eventos de un día específico o sobre un tema concreto.',
+                'dates_title' => '<strong>Para fechas:</strong>',
+                'dates_list' => [
+                    'Escribe la fecha en formato <code>YYYY-MM-DD</code> o partes de ella.',
+                    '<em>Nota: La búsqueda es textual, así que debe coincidir con el formato mostrado en pantalla.</em>',
+                ],
+                'content_title' => '<strong>Para contenido (Descripción):</strong>',
+                'content_list' => [
+                    'Escribe palabras clave específicas como "cerrado", "asignado", o el número de un ticket (ej: "Ticket #45").',
+                ]
+            ],
+        ],
+        'analysis' => [
+            'title' => 'Analizar la Información',
+            'intro' => 'Una vez que has filtrado los eventos, es momento de analizar la información. Aquí algunas estrategias:',
+            'patterns_title' => 'Patrones a Identificar',
+            'cards' => [
+                'productivity' => [
+                    'title' => 'Análisis de Productividad',
+                    'what' => '<strong>Qué buscar:</strong>',
+                    'list' => [
+                        'Número de tickets procesados por administrador',
+                        'Tiempo promedio entre creación y primera respuesta',
+                        'Cantidad de asignaciones y reasignaciones',
+                        'Horarios de mayor actividad',
+                    ],
+                    'how' => '<strong>Cómo:</strong> Busca <code>ticket_updated</code> o <code>comment_added</code> y observa los nombres de usuario.'
+                ],
+                'anomalies' => [
+                    'title' => 'Detección de Anomalías',
+                    'what' => '<strong>Qué buscar:</strong>',
+                    'list' => [
+                        'Múltiples inicios de sesión fallidos',
+                        'Accesos fuera del horario habitual',
+                        'Cambios masivos en poco tiempo',
+                        'Eliminaciones inusuales',
+                    ],
+                    'how' => '<strong>Cómo:</strong> Busca eventos de <code>login</code>, <code>deleted</code>, y ordena por fecha/hora'
+                ],
+                'tracking' => [
+                    'title' => 'Seguimiento de Tickets',
+                    'what' => '<strong>Qué buscar:</strong>',
+                    'list' => [
+                        'Ciclo de vida completo de un ticket',
+                        'Todos los cambios realizados',
+                        'Quiénes intervinieron',
+                        'Tiempos de resolución',
+                    ],
+                    'how' => '<strong>Cómo:</strong> Usa la búsqueda global escribiendo el ID del ticket (ej: "#123")'
+                ],
+                'audit' => [
+                    'title' => 'Auditoría de Cambios',
+                    'what' => '<strong>Qué buscar:</strong>',
+                    'list' => [
+                        'Quién modificó configuraciones críticas',
+                        'Cambios en tipos de tickets',
+                        'Creación/eliminación de administradores',
+                        'Modificaciones de permisos',
+                    ],
+                    'how' => '<strong>Cómo:</strong> Busca <code>admin_created</code>, <code>type_updated</code>, etc.'
+                ]
+            ],
+            'dates_title' => 'Interpretación de Fechas y Horas',
+            'dates_card' => [
+                'format' => '<strong>Formato de fecha:</strong> dd/mm/yyyy HH:mm (ejemplo: 09/02/2026 14:35)',
+                'elements' => '<strong>Elementos importantes:</strong>',
+                'list' => [
+                    '<strong>Secuencia temporal:</strong> Ordena por fecha para ver el orden cronológico de eventos',
+                    '<strong>Intervalos:</strong> Nota el tiempo entre eventos relacionados (ej: creación y primera respuesta de un ticket)',
+                    '<strong>Patrones horarios:</strong> Identifica picos de actividad en ciertas horas',
+                    '<strong>Consistencia:</strong> Detecta acciones simultáneas o muy rápidas que puedan ser sospechosas',
+                ],
+                'important' => '<strong>Importante:</strong> Las fechas y horas están en el huso horario del servidor. Asegúrate de tener esto en cuenta al analizar eventos.',
             ]
         ],
-        'language' => [
-            'title' => 'Cambio de idioma',
-            'text' => 'Toda la sección de notificaciones del panel de administración está disponible en <strong>Español</strong> e <strong>Inglés</strong>. Para cambiar el idioma, usa el selector <strong>ES</strong> / <strong>EN</strong> en la barra superior de navegación.',
-            'list' => 'Los elementos que se traducen automáticamente incluyen: Encabezados de columnas, Mensajes del sistema, Botones, Controles de paginación, Opciones de registro, Contenido de las notificaciones.'
+        'use_cases' => [
+            'title' => 'Casos de Uso Prácticos',
+            'intro' => 'Aquí algunos escenarios reales donde el Historial de Eventos es fundamental:',
+            'cases' => [
+                '1' => [
+                    'title' => 'Caso 1: "Un ticket desapareció o se modificó sin autorización"',
+                    'situation' => '<strong>Situación:</strong> Un usuario reporta que su ticket fue cerrado o modificado sin que nadie le avisara.',
+                    'solution_title' => '<strong>Solución:</strong>',
+                    'steps' => [
+                        'Obtén el ID del ticket (ej: #123)',
+                        'En la búsqueda rápida global, escribe "#123"',
+                        'Revisa todos los eventos relacionados: creación, actualizaciones, asignaciones',
+                        'Identifica quién hizo el cambio y cuándo',
+                        'Verifica si fue un error humano o un problema técnico',
+                    ],
+                    'result' => '<strong>Resultado:</strong> Trazabilidad completa de quién, cuándo y cómo se modificó el ticket.',
+                ],
+                '2' => [
+                    'title' => 'Caso 2: "Revisar el rendimiento de un administrador"',
+                    'situation' => '<strong>Situación:</strong> Necesitas evaluar cuánto trabajo ha realizado un administrador en el último mes.',
+                    'solution_title' => '<strong>Solución:</strong>',
+                    'steps' => [
+                        'Escribe el <strong>email del administrador</strong> en la caja de búsqueda.',
+                        'La tabla mostrará solo sus acciones.',
+                        'Observa las acciones de tipo <code>ticket_updated</code> o <code>comment_added</code>.',
+                        'Revisa tickets asignados y resueltos por él.',
+                    ],
+                    'result' => '<strong>Resultado:</strong> Visión general del trabajo realizado por ese usuario.',
+                ],
+                '3' => [
+                    'title' => 'Caso 3: "Detectar un posible acceso no autorizado"',
+                    'situation' => '<strong>Situación:</strong> Sospechas que alguien accedió a una cuenta sin autorización.',
+                    'solution_title' => '<strong>Solución:</strong>',
+                    'steps' => [
+                        'Busca la palabra clave <strong>"login"</strong> en la caja de búsqueda.',
+                        'Luego, refina añadiendo el nombre o email del usuario sospechoso.',
+                        'Revisa las fechas y horas para encontrar accesos inusuales (madrugada, fines de semana no laborales).',
+                    ],
+                    'result' => '<strong>Resultado:</strong> Identificación de accesos sospechosos para tomar medidas.',
+                ],
+                '4' => [
+                    'title' => 'Caso 4: "¿Quién eliminó un tipo de ticket importante?"',
+                    'situation' => '<strong>Situación:</strong> Un tipo de ticket que se usaba frecuentemente ha desaparecido.',
+                     'solution_title' => '<strong>Solución:</strong>',
+                    'steps' => [
+                        'Busca la palabra clave <strong>"deleted"</strong> o <strong>"type_deleted"</strong>.',
+                        'Busca el nombre del tipo en las descripciones si lo recuerdas.',
+                        'Identifica quién realizó la eliminación.',
+                        'Contacta al responsable para confirmar si fue intencional.',
+                    ],
+                    'result' => '<strong>Resultado:</strong> Responsable identificado y posibilidad de restaurar si fue un error.',
+                ],
+                '5' => [
+                    'title' => 'Caso 5: "Auditoría de cumplimiento normativo"',
+                    'situation' => '<strong>Situación:</strong> Una auditoría externa requiere demostrar trazabilidad de cambios.',
+                     'solution_title' => '<strong>Solución:</strong>',
+                    'steps' => [
+                        'Define el período de auditoría.',
+                        'Busca la fecha de inicio (ej: "2026-01-01") para situarte en el tiempo.',
+                        'Toma capturas de pantalla o copia los datos relevantes de la tabla.',
+                        'Presenta evidencias de quién autorizó cambios críticos.',
+                    ],
+                    'result' => '<strong>Resultado:</strong> Documentación básica para cumplir con requisitos de auditoría.',
+                ]
+            ]
         ],
         'best_practices' => [
-            'title' => 'Buenas prácticas',
-            'intro' => 'Para aprovechar al máximo el sistema de notificaciones como administrador:',
-            'do' => [
-                'title' => 'Haz esto',
-                'li1' => 'Revisa las notificaciones al inicio de tu jornada', 'li2' => 'Marca como leídas las notificaciones ya atendidas', 'li3' => 'Usa la búsqueda para encontrar notificaciones específicas', 'li4' => 'Haz clic en "Ver Ticket" para gestionar directamente desde la notificación', 'li5' => 'Mantén el contador de la campana bajo'
+            'title' => 'Buenas Prácticas',
+            'recommendations' => [
+                'title' => 'Recomendaciones',
+                'list' => [
+                    'Revisa el historial regularmente (semanalmente) para detectar anomalías temprano',
+                    'Usa filtros combinados para búsquedas más precisas',
+                    'Documenta eventos críticos fuera del sistema si es necesario',
+                    'Capacita al equipo sobre la importancia de la trazabilidad',
+                    'Establece políticas claras sobre quién puede realizar acciones críticas',
+                ]
             ],
-            'dont' => [
-                'title' => 'Evita esto',
-                'li1' => 'Ignorar las notificaciones durante días', 'li2' => 'Marcar como leídas sin revisar el contenido', 'li3' => 'Dejar acumular cientos de notificaciones sin leer', 'li4' => 'No usar la función "Marcar todas como leídas" al final del día', 'li5' => 'Olvidar responder a comentarios urgentes'
+            'errors' => [
+                'title' => 'Errores Comunes',
+                'list' => [
+                    '<strong>No revisar el historial:</strong> Perder oportunidades de detectar problemas',
+                    '<strong>Confiar solo en la memoria:</strong> El historial es la fuente de verdad',
+                    '<strong>No combinar filtros:</strong> Obtener demasiados resultados irrelevantes',
+                    '<strong>Ignorar patrones:</strong> No analizar tendencias puede ocultar problemas mayores',
+                    '<strong>No documentar hallazgos:</strong> Perder evidencias para futuras referencias',
+                ]
             ]
         ],
-        'faq' => [
-            'title' => 'Preguntas frecuentes',
-            'q1' => '¿Puedo eliminar notificaciones?',
-            'a1' => 'No, las notificaciones no se pueden eliminar manualmente. Esto garantiza que haya un registro completo de toda la actividad del sistema. Sin embargo, puedes marcarlas como leídas para "archivarlas" visualmente.',
-            'q2' => '¿Las notificaciones se eliminan automáticamente después de un tiempo?',
-            'a2' => 'No, todas las notificaciones se conservan permanentemente en el sistema. Esto permite mantener un historial completo y auditable de toda la actividad.',
-            'q3' => '¿Puedo filtrar notificaciones por tipo?',
-            'a3' => 'Sí, aunque depende de la configuración del sistema. Si está habilitado, verás un selector desplegable en la cabecera de la tabla que te permite filtrar por "Comentarios", "Tickets creados", "Cambios de estado", etc.',
-            'q4' => '¿Recibo notificaciones de tickets que no me están asignados?',
-            'a4' => 'Depende de tu nivel de permisos: <strong>Administrador normal:</strong> Recibes notificaciones principalmente de tickets asignados a ti. <strong>Superadministrador:</strong> Puedes recibir notificaciones de todos los tickets del sistema.',
-            'q5' => '¿Qué pasa si marco una notificación como leída por error?',
-            'a5' => 'No hay problema. Puedes volver a marcarla como no leída haciendo clic en el botón gris con la X. Esto hará que vuelva a aparecer en tu contador de notificaciones pendientes.'
-        ],
-        'summary' => [
-            'title' => 'Resumen visual de la pantalla',
-            'text' => 'Así se ve la estructura completa de la página de notificaciones:',
-            'pre' => "┌────────────────────────────────────────────────────────────────────────┐\n│  Inicio / Notificaciones                                                │\n├────────────────────────────────────────────────────────────────────────┤\n│                                                                         │\n│  ┌──────────────────────────────────────────────────────────────────┐  │\n│  │ 🔔 Notificaciones                                                │  │\n│  ├──────────────────────────────────────────────────────────────────┤  │\n│  │                                                                  │  │\n│  │  Mostrar [10 ▼] registros         Buscar: [______________]      │  │\n│  │                                                                  │  │\n│  │  ┌──────────┬──────────────────────┬─────────────┬──────────┐  │  │\n│  │  │ Tipo     │ Contenido            │ Fecha       │ Acciones │  │  │
-│  │  ├──────────┼──────────────────────┼─────────────┼──────────┤  │  │\n│  │  │ Creado   │ Nuevo ticket por...  │ 09/02 09:15 │ [👁][✓] │  │  │\n│  │  │ Comment  │ Comentario en ID 17..│ 09/02 10:30 │ [👁][✖] │  │  │\n│  │  │ Status   │ Ticket actualizado...│ 09/02 11:45 │ [👁][✓] │  │  │\n│  │  │ Closed   │ Ticket cerrado...    │ 08/02 16:20 │ [👁][✖] │  │  │\n│  │  └──────────┴──────────────────────┴─────────────┴──────────┘  │  │\n│  │                                                                  │  │\n│  │  Mostrando 1 a 4 de 45 registros     [◀] [1] 2 3 4 5 [▶]       │  │\n│  └──────────────────────────────────────────────────────────────────┘  │\n│                                                                         │\n└────────────────────────────────────────────────────────────────────────┘"
-        ],
-        'manage' => [
-             'title' => 'Gestión eficiente de notificaciones',
-             'intro' => 'Para administrar tu carga de trabajo de forma efectiva:',
-             'strategy' => 'Estrategia por momentos del día',
-             'morning' => 'Inicio de jornada (Mañana)',
-             'm_li1' => 'Revisa todas las notificaciones no leídas', 'm_li2' => 'Prioriza los nuevos tickets según urgencia', 'm_li3' => 'Responde comentarios pendientes', 'm_li4' => 'Marca como leídas las notificaciones procesadas',
-             'day' => 'Durante el día',
-             'd_li1' => 'Mantén el icono de campana visible', 'd_li2' => 'Revisa notificaciones cada 1-2 horas', 'd_li3' => 'Atiende primero las de mayor prioridad',
-             'end' => 'Fin de jornada',
-             'e_li1' => 'Revisa que no queden notificaciones urgentes sin atender', 'e_li2' => 'Usa "Marcar todas como leídas" para limpiar el panel', 'e_li3' => 'Deja notas en tickets que requieran seguimiento al día siguiente'
-        ]
-    ],
-    'admin_events_page' => [
-        'title' => 'Historial de Eventos',
-        'intro' => 'El módulo de auditoría actúa como la "Caja Negra" del sistema. Aquí se registra de forma inmutable cada acción crítica realizada por usuarios y administradores.',
-        'interface' => [
-            'title' => '1. Auditoría en Tiempo Real',
-            'desc' => 'Panel de control forense. Proporciona una lista cronológica detallada de todas las operaciones del sistema.',
-            'screenshot_alt' => 'Captura del historial de eventos mostrando las columnas de auditoría',
-            'table_title' => 'Detalle de Columnas',
-            'table' => [
-                'type' => '<strong>Tipo de Evento:</strong> Código identificador de la acción (ej: <code>TICKET_CREATED</code>, <code>STATUS_CHANGED</code>).',
-                'desc' => '<strong>Descripción:</strong> Resumen legible de lo ocurrido (ej: "Usuario X cambió el estado de Y a Z").',
-                'user' => '<strong>Usuario (Actor):</strong> Identidad de quién ejecutó la acción. Muestra nombre y rol (Admin/User).',
-                'date' => '<strong>Fecha:</strong> Marca de tiempo exacta de la ejecución.'
-            ],
-            'search_title' => 'Filtrado Forense',
-            'search_desc' => 'La barra de búsqueda es capaz de encontrar eventos por ID de ticket (ej: "Ticket #504"), nombre de administrador o tipo de acción. Es vital para investigar incidentes pasados.'
-        ],
-        'concept' => [
-            'title' => '2. Casos de Uso (Forenses)',
-            'desc' => 'Este registro es inalterable (no se puede borrar ni editar), lo que garantiza la trazabilidad total. Ejemplos comunes de uso:',
-            'scenarios' => [
-                'case1' => [
-                    'tit' => 'Investigación de "Ticket Desaparecido"',
-                    'desc' => 'Si un ticket ya no aparece en el listado, busque el evento <code>TICKET_DELETED</code> para identificar qué administrador lo borró y cuándo.'
-                ],
-                'case2' => [
-                    'tit' => 'Auditoría de SLAs',
-                    'desc' => 'Compare la fecha de <code>TICKET_CREATED</code> con la primera <code>COMMENT_ADDED</code> para verificar tiempos reales de respuesta del personal.'
-                ],
-                'case3' => [
-                    'tit' => 'Control de Accesos',
-                    'desc' => 'Detecte picos inusuales de actividad o cambios de configuración no autorizados filtrando por nombre de usuario.'
-                ]
+        'limitations' => [
+            'title' => 'Limitaciones y Consideraciones',
+            'aspects_title' => 'Aspectos a Tener en Cuenta',
+            'list' => [
+                '<strong>Solo Superadministradores:</strong> Los administradores normales no pueden acceder a esta funcionalidad',
+                '<strong>No editable:</strong> Los eventos registrados no se pueden modificar ni eliminar (garantiza integridad)',
+                '<strong>Almacenamiento:</strong> Con el tiempo, la tabla crecerá. Considera políticas de retención de datos',
+                '<strong>Rendimiento:</strong> Con muchos miles de eventos, las búsquedas pueden volverse más lentas',
+                '<strong>Privacidad:</strong> El historial puede contener información sensible. Accede solo cuando sea necesario',
             ]
         ]
     ]

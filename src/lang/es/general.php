@@ -6,7 +6,7 @@ return [
     
     'admin_sidebar' => [
         'app_title'            => 'Gestión de Tickets',
-        'title_admin_panel'    => 'Admin Panel',
+        'title_admin_panel'    => 'Panel de administrador',
         'panel_control'        => 'Panel de Control',
         'ver_usuarios'         => 'Ver Usuarios',
         'ver_admins'           => 'Ver Admins',
@@ -82,7 +82,7 @@ return [
         'updated_at_label'  => 'Fecha de la última Actualización',
         'select_option'     => 'Seleccionar...',
         'save_changes'      => 'Guardar Cambios',
-
+        'without_assignment'   => 'Sin asignación',
         'comments'          => 'Comentarios',
         'no_comments'       => 'No hay comentarios para este ticket.',
         'author'            => 'Autor',

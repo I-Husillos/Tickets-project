@@ -74,6 +74,7 @@ return [
         'updated_at_label'  => 'Last Update Date',
         'select_option'     => 'Select...',
         'save_changes'      => 'Save Changes',
+        'without_assignment'   => 'Without assignment',
 
         'comments'          => 'Comments',
         'no_comments'       => 'There are no comments for this ticket.',

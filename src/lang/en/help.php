@@ -496,88 +496,95 @@ return [
     ],
     'admin_intro_page' => [
         'title' => 'Admin Manual · Introduction',
-        'header' => '1. Introduction and Work Environment',
-        'subtitle' => 'Detailed technical and operational reference manual for Service Desk system administration.',
-        'toc' => [
-            'header' => 'Manual Index',
-            'intro' => '1. Introduction',
-            'tickets' => '2. Ticket Management',
-            'users' => '3. User Administration',
-            'notifications' => '4. Notification System',
-            'events' => '5. Auditing and Events',
-            'doc_info' => 'Technical Documentation v2.2 - Extended Revision'
+        'header' => 'Administrator Manual: Introduction and Dashboard',
+        'subtitle' => 'Complete guide to familiarization with the IT management interface and main dashboard.',
+        'welcome' => [
+            'title' => 'Welcome to the Resolution Center',
+            'text' => 'Welcome to the Ticket System Administration Panel. This tool has been designed not only as a problem repository, but as a <strong>Ticket Resolution Center</strong>.',
+            'role_desc' => 'As an administrator, you have the responsibility to orchestrate the solution to problems reported by end users. The system centralizes all requests, eliminating the chaos of scattered emails, unregistered phone calls, and hallway messages.',
+            'pillars_title' => 'System Pillars:',
+            'pillars' => [
+                'centralization' => '<strong>Centralization:</strong> All technical information and communication in one place.',
+                'traceability' => '<strong>Traceability:</strong> Every action is recorded with date, time, and author in the history.',
+                'efficiency' => '<strong>Efficiency:</strong> Clear workflows to assign, manage, and resolve incidents.'
+            ],
+            'goal_title' => 'System Goal',
+            'goal_text' => 'Minimize user downtime and maximize transparency in IT department management.'
         ],
-        'section_1' => [
-            'title' => '1.1. Purpose and Security Architecture (Multi-Auth)',
-            'text' => 'The administration module is the central component for technical support management ("Backend"). Unlike conventional admin panels, this system is built on a <strong>Dual Authentication (Multi-Auth)</strong> architecture and session isolation.',
-            'text_2' => 'This implies that the administration environment is technically invisible and inaccessible to end users. It uses an independent security "Guard" (admin) and segregated database tables for credentials, ensuring that a user account vulnerability never compromises the control panel. Access is restricted exclusively to authorized and audited personnel.',
-            'roles_box' => [
-                'title' => 'RBAC Policies (Role-Based Access Control)',
-                'text' => 'The system applies a "Least Privilege" policy through defined roles that determine what each operator can see and do:',
-                'superadmin' => '<strong>Super Admin (Root):</strong> Total unrestricted access. It is the only role capable of creating other administrators, modifying system taxonomy (create/delete Ticket Types), purging records, and accessing global business analytics. This role should be limited to IT managers.',
-                'admin' => '<strong>Standard Administrator (Agent):</strong> Role focused purely on daily operations. Has full control over ticket lifecycle (reply, close, reopen) and basic user management (edit client profiles). Cannot alter system structural configuration or view the global audit log.',
-                'security_note' => 'Security: All critical actions (logins, status changes, deletions) are permanently logged with IP address and timestamp in the Event History for forensic auditing.'
-            ]
+        'dashboard' => [
+            'title' => 'The Main Dashboard',
+            'intro' => 'Upon logging in, the first thing you will see is the <strong>Dashboard</strong>. This panel is your command center for overseeing support system operations. It provides quick access to key metrics, recent events, and pending notifications, all at a glance.',
+            'img_caption' => 'Fig 1.1 - Main administrator control panel',
+            'cards_title' => 'Quick Access Cards',
+            'cards_note' => '<strong>Note:</strong> Available cards depend on your account type. <span class="badge badge-danger">Superadministrators</span> see all metrics; standard administrators have a simplified view.',
+            'superadmin_note' => '<strong>For Superadministrators:</strong> The dashboard displays 4 cards with direct access to main management sections.',
+            'users_card' => [
+                'title' => 'Registered Users',
+                'desc' => 'Total sum of regular users and administrators. Click to manage users.'
+            ],
+            'admins_card' => [
+                'title' => 'Administrators',
+                'desc' => 'Technical staff with administrative access. Click to manage admins.'
+            ],
+            'assigned_tickets_card' => [
+                'title' => 'Assigned Tickets',
+                'desc' => 'Tickets with a responsible administrator. Click to view assignments.'
+            ],
+            'total_tickets_card' => [
+                'title' => 'Total Tickets',
+                'desc' => 'All tickets registered in the system. Click to manage tickets.'
+            ],
+            'events_title' => 'Latest System Events',
+            'events_text' => 'In the central part you will find a table with the <strong>5 most recent events</strong> from the history. This includes ticket creation, status updates, comments, and assignments. Each event shows: type, description, responsible user, and date/time.',
+            'events_link' => 'You can access the <strong>full history</strong> using the "View full history" button in the top right corner of the card.',
+            'events_caption' => 'Example of recent events table',
+            'notifications_title' => 'Recent Notifications',
+            'notifications_text' => 'At the bottom, the <strong>5 most recent unread notifications</strong> are shown. These alerts inform you of: newly created tickets, added comments, status changes, and closures/reopenings.',
+            'notifications_link' => 'Use the "View all" button to access your full notifications inbox and mark them as read.',
+            'notifications_caption' => 'Example of recent notifications table'
         ],
-        'section_2' => [
-            'title' => '1.2. Landing Interface: The Navigation Hub',
-            'text' => 'Upon authentication, the system does not direct the operator to a dashboard full of metrics, but to the <strong>Operational Navigation Hub</strong>. This design decision (UX) seeks to minimize initial cognitive load and focus the agent on immediate action.',
-            'text_2' => 'From this central point, the workflow forks into two main paths depending on the user\'s role and intent:',
-            'img_caption' => 'Navigation Hub Interface prioritizing workflows',
-            'buttons' => [
-                'assigned' => '<strong>Assigned Tickets (My Work Queue):</strong> This is the most frequent access. Directs the agent directly to the filtered list of tickets where they are responsible. Allows resuming pending work immediately without navigating menus.',
-                'management' => '<strong>Global Management & Metrics (Dashboard):</strong> Reserved for Superadmins. Directs to the analytical dashboard to oversee service health, load volume, and team performance.'
-            ]
-        ],
-        'section_3' => [
-            'title' => '1.3. Management Dashboard (KPI Dashboard)',
-            'subtitle' => 'Exclusive for Superadmins',
-            'text' => 'The Dashboard provides a macroscopic view ("Helicopter View") of the service status in real-time. It is vital for data-driven decision making and early bottleneck detection.',
-            'text_2' => 'Indicators are calculated live by querying the transactional database:',
-            'kpis' => [
-                'users' => [
-                    'title' => 'Registered Users',
-                    'desc' => 'Reach metric. Indicates the total size of the client base with access to the support portal.'
-                ],
-                'admins' => [
-                    'title' => 'Operational Force',
-                    'desc' => 'Available response capacity. Sum of active administrators and agents in the system.'
-                ],
-                'assigned' => [
-                    'title' => 'Active Load',
-                    'desc' => 'Tickets currently in process (Not closed) and having an assigned owner. A high number here may indicate team saturation.'
-                ],
-                'total' => [
-                    'title' => 'Historical Volume',
-                    'desc' => 'Accumulated total of incidents processed since system deployment. Useful for measuring long-term demand.'
+        'navigation' => [
+            'title' => 'Navigation Structure',
+            'sidebar_title' => 'Main Menu (Sidebar)',
+            'sidebar_desc' => 'The left sidebar is your main navigation tool. It is divided into logical sections for quick access to most used functions:',
+            'dashboard' => [
+                'term' => 'Dashboard',
+                'desc' => 'Return to start. Graphic summary of current situation.'
+            ],
+            'tickets' => [
+                'term' => 'Tickets',
+                'desc' => 'The core of daily work.',
+                'list' => [
+                    'manage' => '<strong>Manage tickets:</strong> Global list of incidents.',
+                    'assigned' => '<strong>Assigned tickets:</strong> Your personal work queue.'
                 ]
             ],
-            'events_widget' => [
-                'title' => 'Live Security Monitor',
-                'text' => 'In the lower area of the dashboard, the <strong>Latest System Events</strong> widget is displayed. This list updates with every critical action and allows the Superadmin to detect anomalous patterns, such as multiple failed login attempts, unauthorized admin creation, or massive ticket status changes.'
+            'users' => [
+                'term' => 'Users',
+                'desc' => '<em>(Superadmin only)</em> Management of registrations, cancellations, and data modification for users and technical staff.'
+            ],
+            'config' => [
+                'term' => 'Config.',
+                'desc' => 'Definition of Incident Types and global system settings.'
+            ],
+            'icons_title' => 'Quick Iconography Guide',
+            'icons_desc' => 'To keep the interface clean, we use standardized icons for common actions. Familiarize yourself with them:',
+            'table' => [
+                'icon' => 'Icon',
+                'action' => 'Action',
+                'desc' => 'Description',
+                'view' => ['action' => 'View / Details', 'desc' => 'Access the full card to read and review without editing.'],
+                'edit' => ['action' => 'Edit', 'desc' => 'Modifies record data (title, status, priority).'],
+                'resolve' => ['action' => 'Resolve', 'desc' => 'Quick action to mark a ticket as solved.'],
+                'delete' => ['action' => 'Delete', 'desc' => 'Permanent deletion. Requires additional confirmation.']
             ]
         ],
-        'section_4' => [
-            'title' => '1.4. Navigation Map (Sidebar)',
-            'text' => 'The left sidebar is persistent and organizes tools into three large logical blocks:',
-            'text_2' => 'Understanding this structure is key for fluid navigation:',
-            'modules' => [
-                'ops' => [
-                    'title' => 'BLOCK 1: OPERATIONS (Day to Day)',
-                    'dashboard' => '<strong>Dashboard / Home:</strong> Quick return to the Hub or Dashboard.',
-                    'tickets' => '<strong>Ticket Management:</strong> The heart of the system. Unfolds submenus to filter tickets by status (Open, Closed) or view the global list.',
-                    'users' => '<strong>Users:</strong> Light CRM to search clients, view their request history, and edit their contact data.'
-                ],
-                'sys' => [
-                    'title' => 'BLOCK 2: SYSTEM (Configuration)',
-                    'types' => '<strong>Types & Categories:</strong> Allows defining problem taxonomy (e.g., "Hardware", "Software"). Fundamental for accurate reporting.',
-                    'events' => '<strong>Logs / Audit:</strong> Access to the complete and immutable historical record of actions. Allows filtering by date, user, and action type.',
-                    'admins' => '<strong>Staff Management:</strong> (Superadmin Only) Creation, removal, and modification of other administrator accounts.'
-                ],
-                'personal' => [
-                    'title' => 'BLOCK 3: PERSONAL',
-                    'logout' => '<strong>Profile and Exit:</strong> In the lower area are the session controls and current profile display.'
-                ]
+        'tips' => [
+            'title' => 'Productivity Tips',
+            'list' => [
+                'search' => 'Use the global search in the top right of data tables to find users or tickets quickly by name or ID.',
+                'close' => 'Keep the dashboard clean by <strong>permanently closing</strong> tickets that have been resolved and validated by the user.',
+                'notifications' => 'Check the <strong>Notifications</strong> bell daily so no user interaction goes unanswered.'
             ]
         ]
     ],
@@ -666,92 +673,208 @@ return [
         ]
     ],
     'admin_notifications_page' => [
-        'title' => 'Notification Center',
-        'intro' => 'User manual for the alert management panel, interface, and distribution logic.',
-        'interface' => [
-            'title' => '1. Main Dashboard',
-            'desc' => 'The notifications module features a tabular view (DataTables) allowing bulk filtering, searching, and management of alerts.',
-            'table' => [
-                'type' => '<strong>Type:</strong> Icon and event category (Ticket, Comment, System).',
-                'content' => '<strong>Content:</strong> Brief summary of the message or alert.',
-                'date' => '<strong>Date:</strong> Exact timestamp of generation (local format).',
-                'actions' => '<strong>Actions:</strong> Interactive buttons to process the alert.'
+        'title' => 'Documentation - Notifications',
+        'header' => 'Administrator Notifications',
+        'subheader' => 'System alerts and notifications management to keep control of incidents.',
+        'breadcrumbs' => 'Notifications',
+        'what_is' => [
+            'title' => 'What are administrator notifications?',
+            'text' => 'The notification system is the early warning center for the support team. It allows administrators to react quickly to new incidents or user responses without needing to constantly monitor the ticket list. Whenever a relevant event occurs on a ticket that concerns you, you will receive an immediate alert.'
+        ],
+        'access' => [
+            'title' => 'How to access your notifications',
+            'intro' => 'There are <strong>two main methods</strong> to check for updates:',
+            'option1' => [
+                'title' => 'Option 1: From the Top Bar (Navbar)',
+                'text' => 'This is the fastest way to view the latest updates while working in other areas.',
+                'indicator' => '<strong>Visual Indicator:</strong>',
+                'li1' => 'In the top right corner, you will see a <strong>bell</strong> icon.',
+                'li2' => 'If there is a yellow circle with a number, it indicates the amount of <strong>unread</strong> notifications.',
+                'li3' => 'Clicking it will show a quick summary of the latest notifications.',
+                'view_all' => 'To view the full list, click on "View all notifications" at the bottom of that dropdown menu.'
             ],
-            'actions' => [
-                'view' => '<strong>View Detail (Eye):</strong> Opens a modal window with full information without leaving the page.',
-                'read' => '<strong>Mark Read (Check):</strong> Archives the notification and reduces updates the bell counter.',
-                'delete' => '<strong>Delete (Trash):</strong> Permanently removes the notice from the system.'
+            'option2' => [
+                'title' => 'Option 2: Full List',
+                'text' => 'For more detailed management, you can access the full table view where you can filter, search, and manage old alerts.',
+                'box' => 'Access by clicking "View all" from the bell or from the sidebar menu if enabled.'
             ]
         ],
-        'modal' => [
-            'title' => '2. Detail Viewer (Modal)',
-            'desc' => 'Clicking "View Detail" displays a floating window with full context. From here, you can navigate directly to the affected resource (e.g., go to Ticket) via embedded links.'
+        'screen' => [
+            'title' => 'The Notification Management Screen',
+            'text' => 'The main view "My Notifications" is designed to process large volumes of alerts efficiently.',
+            'table_title' => 'Table Structure',
+            'table_intro' => 'Information is presented in 4 key columns:',
+            'columns' => [
+                'col1' => 'Column', 'col2' => 'Description', 'col3' => 'Example',
+                'type' => '<strong>Type</strong>',
+                'type_desc' => 'Event category. Helps distinguish urgencies.',
+                'type_ex' => '<span class="badge badge-info">Comment</span>, <span class="badge badge-success">New Ticket</span>',
+                'content' => '<strong>Content</strong>',
+                'content_desc' => 'Brief summary of what happened. Includes ticket ID and author of the action.',
+                'content_ex' => '"New ticket created with ID 45 by User..."',
+                'date' => '<strong>Date</strong>',
+                'date_desc' => 'Exact moment the alert was generated.',
+                'date_ex' => '10/02/2026 09:30',
+                'actions' => '<strong>Actions</strong>',
+                'actions_desc' => 'Tools to interact with the notification.',
+                'actions_ex' => 'View, Mark read'
+            ]
         ],
         'logic' => [
-            'title' => '3. Distribution Logic (Backend)',
-            'desc' => 'Technical reference on how the system decides who to notify:',
-            'scenarios' => [
-                'new_ticket' => [
-                    'tit' => 'New Ticket Created',
-                    'who' => 'Superadmins (Priority) or All Staff.',
-                    'why' => 'Triage. notifies those responsible for assigning the ticket.'
-                ],
-                'client_reply_assigned' => [
-                    'tit' => 'Client Reply (Assigned Ticket)',
-                    'who' => 'Responsible Agent.',
-                    'why' => 'Continuity. Only the agent handling the case is disturbed.'
-                ],
-                'client_reply_unassigned' => [
-                    'tit' => 'Client Reply (Unassigned Ticket)',
-                    'who' => 'All Administrators.',
-                    'why' => 'General Alert. Requires immediate attention from anyone available.'
-                ]
-            ]
-        ],
-        'channels' => [
-            'title' => 'Channels',
-            'db' => 'Web Interface (Control Panel)',
-            'mail' => 'Email (Asynchronous)'
-        ],
-        'tips' => [
-            'title' => 'Operational Tip',
-            'desc' => 'Keep your inbox clean by using the "Mark all as read" button after reviewing your daily tasks to avoid visual fatigue.'
-        ]
-    ],
-    'admin_events_page' => [
-        'title' => 'Event History',
-        'intro' => 'The audit module acts as the system\'s "Black Box". Every critical action performed by users and administrators is permanently recorded here.',
-        'interface' => [
-            'title' => '1. Real-Time Audit',
-            'desc' => 'Forensic control panel. Provides a detailed chronological list of all system operations.',
-            'screenshot_alt' => 'Event history screenshot showing audit columns',
-            'table_title' => 'Column Details',
-            'table' => [
-                'type' => '<strong>Event Type:</strong> Action identifier code (e.g., <code>TICKET_CREATED</code>, <code>STATUS_CHANGED</code>).',
-                'desc' => '<strong>Description:</strong> Human-readable summary of what happened (e.g., "User X changed status of Y to Z").',
-                'user' => '<strong>User (Actor):</strong> Identity of who executed the action. Shows name and role (Admin/User).',
-                'date' => '<strong>Date:</strong> Exact timestamp of execution.'
+            'title' => 'Sending Logic: What notifications do I receive?',
+            'intro' => 'The system uses smart rules to not saturate your inbox. You will receive alerts based on your role and assignment:',
+            'case1' => [
+                'title' => '1. New Ticket Created',
+                'who' => '<strong>Who receives it?</strong> All administrators.',
+                'desc' => 'To ensure no new incident goes unnoticed, the entire technical team is alerted when a new ticket comes in.'
             ],
-            'search_title' => 'Forensic Filtering',
-            'search_desc' => 'The search bar can find events by Ticket ID (e.g., "Ticket #504"), administrator name, or action type. Vital for investigating past incidents.'
+            'case2' => [
+                'title' => '2. Reply on Assigned Ticket',
+                'who' => '<strong>Who receives it?</strong> Only the assigned admin.',
+                'desc' => 'If you are responsible for a ticket, only you will receive the notification when the user replies, avoiding noise for the rest of the team.'
+            ],
+            'case3' => [
+                'title' => '3. Reply on Unassigned Ticket',
+                'who' => '<strong>Who receives it?</strong> All administrators.',
+                'desc' => 'If a ticket has no owner and the user replies, everyone is alerted so someone can take it.'
+            ]
         ],
-        'concept' => [
-            'title' => '2. Use Cases (Forensics)',
-            'desc' => 'This record is immutable (cannot be deleted or edited), ensuring total traceability. Common use cases:',
-            'scenarios' => [
-                'case1' => [
-                    'tit' => '"Missing Ticket" Investigation',
-                    'desc' => 'If a ticket no longer appears in the list, search for the <code>TICKET_DELETED</code> event to identify which administrator deleted it and when.'
-                ],
-                'case2' => [
-                    'tit' => 'SLA Audit',
-                    'desc' => 'Compare the <code>TICKET_CREATED</code> date with the first <code>COMMENT_ADDED</code> to verify actual staff response times.'
-                ],
-                'case3' => [
-                    'tit' => 'Access Control',
-                    'desc' => 'Detect unusual activity spikes or unauthorized configuration changes by filtering by username.'
-                ]
+        'types' => [
+            'title' => 'Event Types',
+            'comment' => [
+                'title' => 'New Comment',
+                'text' => 'The user has replied to one of your questions or has added extra information.',
+                'priority' => 'Priority: High (User expects feedback).'
+            ],
+            'new_ticket' => [
+                'title' => 'New Ticket',
+                'text' => 'A new incident has been registered in the system.',
+                'priority' => 'Priority: Critical (Requires triage and assignment).'
+            ],
+            'reopened' => [
+                'title' => 'Ticket Reopened',
+                'text' => 'A user has reopened a closed ticket, indicating the solution was not effective.',
+                'priority' => 'Priority: Very High (Recurrence).'
+            ]
+        ],
+        'tools' => [
+            'title' => 'Productivity Tools',
+            'search' => [
+                'title' => 'Smart Search',
+                'text' => 'Use the search box to find specific notifications. You can search by:',
+                'li1' => '<strong>Ticket ID:</strong> Type "45" to see everything related to that case.',
+                'li2' => '<strong>Username:</strong> Find activity of a specific client.',
+                'li3' => '<strong>Keywords:</strong> Like "Error", "Invoice", etc.'
+            ],
+            'org' => [
+                'title' => 'Organization',
+                'text' => 'The system automatically sorts notifications, showing the most recent ones first.',
+                'tip' => 'Tip: Keep your inbox clean by marking old notifications as read.'
+            ]
+        ],
+        'actions' => [
+            'title' => 'Main Actions',
+            'intro' => 'In the "Actions" column you will find three fundamental buttons for your workflow:',
+            'view' => [
+                'title' => 'View Details',
+                'text' => 'Opens a modal with the full message without leaving the page. Includes a direct link to the ticket.'
+            ],
+            'mark' => [
+                'title' => 'Mark Read',
+                'text' => 'Removes the "New" indicator. Use it when you have taken note but want to keep the record.'
+            ]
+        ],
+        'workflow' => [
+            'title' => 'Ideal Workflow Example',
+            'step1' => [
+                'title' => '1. Reception',
+                'text' => 'You see the "1" indicator on the bell. It\'s a client replying to your ticket that was "Pending".'
+            ],
+            'step2' => [
+                'title' => '2. Quick Review',
+                'text' => 'Click the "View" button (Eye). Read the client\'s response in the modal window. You see they attached the missing data.'
+            ],
+            'step3' => [
+                'title' => '3. Action',
+                'text' => 'From the modal, click "Go to Ticket". Reply to the client and change status to "Resolved".'
+            ],
+            'step4' => [
+                'title' => '4. Completion',
+                'text' => 'Return to notifications and mark the alert as read (if not already) to clear your pending tray.'
             ]
         ]
-    ]
+    ],        'title' => 'Documentation - Event History',
+        'header_title' => 'Event History',
+        'header_subtitle' => 'Guide to auditing actions, changes, and system activity',
+        'index' => [
+            'title' => 'In this guide you will learn:',
+            'view' => 'Understand the main view',
+            'table' => 'Read columns and details',
+            'filters' => 'Search and filter events',
+            'cases' => 'Frequent use cases',
+            'practices' => 'Auditing best practices',
+        ],
+        'view' => [
+            'title' => 'Main View',
+            'text' => 'The event history logs everything important: status changes, reassignments, comments, and administrative actions.',
+            'img_caption' => 'Example table with recent events',
+        ],
+        'columns' => [
+            'title' => 'Table Columns',
+            'intro' => 'The table shows each event with its key context:',
+            'main_fields' => [
+                'title' => 'Main Fields',
+                'type' => '<strong>Type:</strong> action performed (create, close, reassign, comment).',
+                'desc' => '<strong>Description:</strong> short summary of the change.',
+                'user' => '<strong>User:</strong> who executed the action.',
+                'date' => '<strong>Date:</strong> exact moment of the event.',
+            ],
+            'details' => [
+                'title' => 'Useful Details',
+                'text1' => 'Some events include references to tickets, admins or users.',
+                'text2' => 'Use this information to reconstruct the history of changes.',
+            ],
+        ],
+        'filters' => [
+            'title' => 'Search and Filters',
+            'intro' => 'The view allows you to find events quickly:',
+            'general' => [
+                'title' => 'General Search',
+                'li1' => 'Type keywords: ticket, reassigned, closed, admin.',
+                'li2' => 'Filter by user or event type.',
+            ],
+        ],
+        'cases' => [
+            'title' => 'Frequent Use Cases',
+            'audit' => [
+                'title' => 'Auditing Critical Changes',
+                'text' => 'Review closures or reopenings to validate that the correct flow was followed.',
+            ],
+            'assignments' => [
+                'title' => 'Assignment Tracking',
+                'text' => 'Detect frequent reassignments and workload distribution.',
+            ],
+            'verification' => [
+                'title' => 'Activity Verification',
+                'text' => 'Check if an admin or user performed actions on specific dates.',
+            ],
+        ],
+        'practices' => [
+            'title' => 'Best Practices',
+            'recommended' => [
+                'title' => 'Recommended',
+                'li1' => 'Review daily events on critical tickets.',
+                'li2' => 'Document sensitive actions with clear comments.',
+                'li3' => 'Use filters for monthly audits.',
+            ],
+            'avoid' => [
+                'title' => 'Avoid',
+                'li1' => 'Reassigning tickets without justifying the reason.',
+                'li2' => 'Ignoring repetitive events that indicate failures.',
+                'li3' => 'Using shared users for critical actions.',
+            ],
+            'tip_title' => 'Quick Tip',
+            'tip_text' => 'If a ticket changes status multiple times in a short period, check the history and add a note with the reason.',
+        ],
+    
 ];

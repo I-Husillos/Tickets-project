@@ -25,7 +25,7 @@ class StoreAdminRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:3|confirmed',
-            'superadmin' => 'required|boolean',
+            'superadmin' => 'nullable|boolean',
         ];
     }
 
@@ -43,8 +43,6 @@ class StoreAdminRequest extends FormRequest
             'password.required' => 'La contraseña es obligatoria.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'password.confirmed' => 'Las contraseñas no coinciden.',
-            
-            'superadmin.required' => 'El campo "Superadministrador" es obligatorio.',
         ];
     }
 }

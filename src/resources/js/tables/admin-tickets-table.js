@@ -10,8 +10,11 @@ export function initAdminTicketsTable(apiUrl, token) {
             url: apiUrl,
             type: 'GET',
             dataType: 'json',
-            data: {
-                locale: locale
+            data: function(d) {
+                d.locale = locale;
+                d.status = $('#filter-status').val();
+                d.priority = $('#filter-priority').val();
+                d.type = $('#filter-type').val();
             },
             responsive: true,
             beforeSend: function (xhr) {
@@ -27,6 +30,7 @@ export function initAdminTicketsTable(apiUrl, token) {
         columns: [
             { data: 'id', className: 'text-center align-middle' },
             { data: 'title', className: 'text-center align-middle' },
+            { data: 'description', className: 'text-center align-middle' },
             { data: 'status', className: 'text-center align-middle' },
             { data: 'priority', className: 'text-center align-middle' },
             { data: 'type', className: 'text-center align-middle' },
@@ -34,5 +38,9 @@ export function initAdminTicketsTable(apiUrl, token) {
             { data: 'assigned_to', className: 'text-center align-middle' },
             { data: 'actions', orderable: false, searchable: false, className: 'text-center align-middle' },
         ]
+    });
+
+    $('#filter-status, #filter-priority, #filter-type').on('change', function() {
+        $('#tabla-tickets').DataTable().ajax.reload();
     });
 }

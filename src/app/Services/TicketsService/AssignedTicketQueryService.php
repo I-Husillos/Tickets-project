@@ -28,8 +28,24 @@ class AssignedTicketQueryService
             });
         }
 
+        if ($request->has('order')) {
+            $order = $request->input('order');
+            if (isset($order[0])) {
+                $columnIdx = $order[0]['column'];
+                $dir = $order[0]['dir'];
+                $columnName = $request->input("columns.$columnIdx.data");
+
+                if (in_array($columnName, ['id', 'title', 'status', 'priority', 'type'])) {
+                    $query->orderBy($columnName, $dir);
+                } else {
+                    $query->orderBy('created_at', 'desc');
+                }
+            }
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
         return $query;
     }
 }
-
 

@@ -60,10 +60,9 @@
 
                             <div class="text-center mt-4">
                                 <!-- Placeholder for access screenshot -->
-                                <div class="border p-4 bg-light text-muted">
-                                    <i class="fas fa-image fa-3x mb-2"></i><br>
-                                    Screenshot Access
-                                </div>
+                                <img src="/img/sidemenu-notification-section.png" 
+                                     alt="{{ __('help.notifications_page.access.option2.screenshot_alt') }}" 
+                                     class="img-fluid border shadow-sm rounded">
                             </div>
                         </div>
                     </div>

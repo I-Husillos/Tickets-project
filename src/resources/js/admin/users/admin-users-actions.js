@@ -2,9 +2,6 @@ import $ from 'jquery';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --------------------------------------------------------------------------
-    // EDITAR USUARIO (Abrir Modal)
-    // --------------------------------------------------------------------------
     $(document).on('click', '.btn-edit-user', function () {
         const userId = $(this).data('id');
         const name = $(this).data('name');
@@ -23,9 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#editUserModal').modal('show');
     });
 
-    // --------------------------------------------------------------------------
-    // EDITAR USUARIO (Submit del Formulario)
-    // --------------------------------------------------------------------------
     $('#edit-user-form').on('submit', async function (e) {
         e.preventDefault();
 
@@ -80,9 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --------------------------------------------------------------------------
-    // ELIMINAR USUARIO (Abrir Modal)
-    // --------------------------------------------------------------------------
     $(document).on('click', '.btn-delete-user', function () {
         const userId = $(this).data('id');
         const name = $(this).data('name');
@@ -93,9 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#deleteUserModal').modal('show');
     });
 
-    // --------------------------------------------------------------------------
-    // ELIMINAR USUARIO (Submit del Formulario)
-    // --------------------------------------------------------------------------
+
     $('#delete-user-form').on('submit', async function (e) {
         e.preventDefault();
 

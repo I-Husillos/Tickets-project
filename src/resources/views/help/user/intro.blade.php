@@ -164,43 +164,5 @@
             </div>
         </div>
     </div>
-
-    {{-- 4. Soporte y Ayuda --}}
-    <div class="card card-outline card-success">
-        <div class="card-header">
-            <h3 class="card-title">
-                <i class="fas fa-life-ring mr-2"></i>
-                {{ __('help.introduction_page.support.title') }}
-            </h3>
-        </div>
-        <div class="card-body">
-            <p>
-                {{ __('help.introduction_page.support.text') }}
-            </p>
-            <div class="row text-center">
-                <div class="col-md-2 mb-3 offset-md-1">
-                     <a href="{{ route('user.help.index', ['locale' => app()->getLocale()]) }}" class="btn btn-app bg-primary disabled" style="width: 100%; height: auto; padding: 20px;">
-                        <i class="fas fa-book fa-2x mb-2"></i><br> {{ __('help.introduction_page.support.buttons.intro') }}
-                    </a>
-                </div>
-                <div class="col-md-2 mb-3">
-                    <a href="{{ route('user.help.tickets', ['locale' => app()->getLocale()]) }}" class="btn btn-app bg-info" style="width: 100%; height: auto; padding: 20px;">
-                        <i class="fas fa-ticket-alt fa-2x mb-2"></i><br> {{ __('help.introduction_page.support.buttons.tickets') }}
-                    </a>
-                </div>
-                <div class="col-md-2 mb-3">
-                    <a href="{{ route('user.help.notifications', ['locale' => app()->getLocale()]) }}" class="btn btn-app bg-warning" style="width: 100%; height: auto; padding: 20px;">
-                        <i class="fas fa-bell fa-2x mb-2"></i><br> {{ __('help.introduction_page.support.buttons.notifications') }}
-                    </a>
-                </div>
-                <div class="col-md-2 mb-3">
-                    <a href="{{ route('user.help.profile', ['locale' => app()->getLocale()]) }}" class="btn btn-app bg-secondary" style="width: 100%; height: auto; padding: 20px;">
-                        <i class="fas fa-user fa-2x mb-2"></i><br> {{ __('help.introduction_page.support.buttons.profile') }}
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 @endsection

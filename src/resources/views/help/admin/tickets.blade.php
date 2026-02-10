@@ -132,6 +132,11 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <div class="text-center mb-5 p-3 bg-light border rounded">
+                            <img src="/img/admin-ticketsintro o -table.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                            <p class="text-muted small mt-2">Ejemplo de tabla de tickets.</p>
+                    </div>
                 </div>
 
                 {{-- Herramientas de la tabla --}}
@@ -318,35 +323,25 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Prioridad</th>
-                                <th>Color</th>
                                 <th>Cuándo usarla</th>
-                                <th>Tiempo de respuesta sugerido</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><span class="badge bg-secondary">Baja</span></td>
-                                <td>Gris</td>
                                 <td>Consultas generales, mejoras no urgentes</td>
-                                <td>3-5 días hábiles</td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-info">Media</span></td>
-                                <td>Azul</td>
                                 <td>Problemas que afectan pero tienen solución temporal</td>
-                                <td>1-2 días hábiles</td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-warning text-dark">Alta</span></td>
-                                <td>Amarillo/Naranja</td>
                                 <td>Problemas que impiden trabajar normalmente</td>
-                                <td>4-8 horas</td>
                             </tr>
                             <tr>
                                 <td><span class="badge bg-danger">Crítica</span></td>
-                                <td>Rojo</td>
                                 <td>Sistema completamente caído o problema de seguridad</td>
-                                <td>Inmediato (menos de 1 hora)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -420,18 +415,10 @@
                                 <strong><i class="fas fa-info-circle"></i> Columna Izquierda: Información del Ticket</strong>
                             </div>
                             <div class="card-body">
-                                <p><strong>Tarjeta azul con todos los datos:</strong></p>
-                                <ul>
-                                    <li><strong>Título:</strong> Nombre del ticket</li>
-                                    <li><strong>Descripción:</strong> Explicación completa del problema</li>
-                                    <li><strong>Estado:</strong> Estado actual</li>
-                                    <li><strong>Prioridad:</strong> Nivel de urgencia</li>
-                                    <li><strong>Tipo:</strong> Categoría</li>
-                                    <li><strong>Asignado a:</strong> Nombre del administrador responsable (o "Sin asignar")</li>
-                                    <li><strong>Creado el:</strong> Fecha de creación</li>
-                                    <li><strong>Actualizado el:</strong> Fecha de última modificación</li>
-                                </ul>
-                                <p class="mb-0"><strong>Esta sección es de solo lectura</strong> - muestra información pero no se puede editar directamente desde aquí.</p>
+                                <div class="text-center mb-5 p-3 bg-light border rounded">
+                                        <img src="/img/admin-ticket-details.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                                        <p class="text-muted small mt-2">Ejemplo de panel de información de un ticket.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -442,28 +429,10 @@
                                 <strong><i class="fas fa-edit"></i> Columna Derecha: Edición y Comentarios</strong>
                             </div>
                             <div class="card-body">
-                                <p><strong>Tarjeta con pestañas (tabs):</strong></p>
-                                
-                                <ul class="nav nav-pills mb-3">
-                                    <li class="nav-item">
-                                        <span class="nav-link active">Editar Ticket</span>
-                                    </li>
-                                    <li class="nav-item">
-                                        <span class="nav-link">Comentarios</span>
-                                    </li>
-                                </ul>
-
-                                <p><strong>Pestaña 1: "Editar Ticket"</strong></p>
-                                <ul>
-                                    <li>Formulario para modificar el ticket</li>
-                                    <li>Campos editables (ver sección siguiente)</li>
-                                </ul>
-
-                                <p class="mb-0"><strong>Pestaña 2: "Comentarios"</strong></p>
-                                <ul class="mb-0">
-                                    <li>Tabla con todos los comentarios</li>
-                                    <li>Formulario para añadir nuevos comentarios</li>
-                                </ul>
+                                <div class="text-center mb-5 p-3 bg-light border rounded">
+                                    <img src="/img/admin-ticket-edit-form.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                                    <p class="text-muted small mt-2">Ejemplo de formulario de edición.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -535,10 +504,6 @@
                             </select>
                             <small class="text-muted">Asigna o reasigna el ticket a otro administrador (solo superadministradores)</small>
                         </div>
-
-                        <button class="btn btn-success" disabled>
-                            <i class="fas fa-save"></i> Guardar Cambios
-                        </button>
                     </div>
                 </div>
 
@@ -624,12 +589,10 @@
                         <strong>Añadir un comentario</strong>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="4" placeholder="Escribe tu comentario aquí..." disabled></textarea>
+                        <div class="text-center mb-5 p-3 bg-light border rounded">
+                            <img src="/img/admin-add-comment-form.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                            <p class="text-muted small mt-2">Ejemplo de formulario para añadir comentarios.</p>
                         </div>
-                        <button class="btn btn-primary" disabled>
-                            <i class="fas fa-comment"></i> Añadir Comentario
-                        </button>
                     </div>
                 </div>
 
@@ -730,10 +693,9 @@
                 <p>Todos los administradores (tanto normales como superadministradores) tienen acceso a una vista filtrada con <strong>solo sus tickets asignados</strong>.</p>
 
                 <h4 class="mt-4">Cómo acceder</h4>
-                <ol>
-                    <li>Menú lateral izquierdo → <strong>"Tickets"</strong></li>
-                    <li>Haz clic en <strong>"Ver Mis Tickets"</strong></li>
-                </ol>
+                <p>Mediante el menú lateral izquierdo en la opción <strong>{{ __('general.admin_sidebar.gestionar_tickets') }}</strong>, en la opción 
+                    de <strong>{{ __('general.admin_sidebar.tickets_asignados') }} </strong>
+                </p>
 
                 <h4 class="mt-4">Qué muestra esta vista</h4>
                 <p>Esta pantalla es idéntica a la lista general de tickets, pero <strong>filtrada automáticamente</strong> para mostrar solo los tickets donde tú apareces en el campo "Asignado a".</p>

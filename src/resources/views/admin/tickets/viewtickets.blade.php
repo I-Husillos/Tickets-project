@@ -42,7 +42,7 @@
                         </li>
                         <li class="list-group-item">
                             <b>{{ __('general.admin_ticket_details.assigned_to_label') }}:</b>
-                            {{ $ticket->admin ? $ticket->admin->name : __('general.admin_ticket_details.sin_asignar') }}
+                            {{ $ticket->admin ? $ticket->admin->name : __('general.admin_ticket_details.without_assignment') }}
                         </li>
                         <li class="list-group-item">
                             <b>{{ __('general.admin_ticket_details.created_at_label') }}:</b> {{ $ticket->created_at->format('d/m/Y') }}

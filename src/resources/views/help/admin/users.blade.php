@@ -161,9 +161,10 @@
                 <h5 class="mt-3">Paso 1: Acceder al formulario de creación</h5>
                 <p>En la pantalla de lista de usuarios, en la parte superior derecha, encontrarás un botón verde:</p>
                 <div class="text-center my-3">
-                    <button class="btn btn-success btn-lg" disabled>
-                        <i class="fas fa-plus-circle"></i> Crear Nuevo Usuario
-                    </button>
+                    <div class="text-center mb-5 p-3 bg-light border rounded">
+                            <img src="/img/create-user-button.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                            <p class="text-muted small mt-2">Boton para crear un usuario.</p>
+                    </div>
                 </div>
                 <p>Haz clic en él para abrir el formulario de creación.</p>
 
@@ -259,12 +260,10 @@
                 </ol>
 
                 <div class="text-center my-3">
-                    <button class="btn btn-warning btn-sm me-2" disabled>
-                        <i class="fas fa-edit"></i> Editar
-                    </button>
-                    <button class="btn btn-danger btn-sm" disabled>
-                        <i class="fas fa-trash"></i> Eliminar
-                    </button>
+                    <div class="text-center mb-5 p-3 bg-light border rounded">
+                            <img src="/img/admin-users-action-buttons.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                            <p class="text-muted small mt-2">Sección de botones de acción para usuarios, <strong>editar (amarillo)</strong> y eliminar(rojo).</p>
+                    </div>
                 </div>
 
                 <h5 class="mt-4">Paso 2: Modificar los datos</h5>
@@ -346,34 +345,19 @@
                 </ol>
 
                 <div class="text-center my-3">
-                    <button class="btn btn-danger btn-sm" disabled>
-                        <i class="fas fa-trash"></i> Eliminar
-                    </button>
+                    <div class="text-center mb-5 p-3 bg-light border rounded">
+                        <img src="/img/admin-users-action-buttons.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                        <p class="text-muted small mt-2">Sección de botones de acción para usuarios, editar (amarillo) y <strong>eliminar(rojo)</strong>.</p>
+                    </div>
                 </div>
 
                 <h5 class="mt-4">Paso 2: Pantalla de confirmación</h5>
                 <p>Se abrirá una nueva pantalla con un mensaje de advertencia claro:</p>
 
                 <div class="card border-danger">
-                    <div class="card-header bg-danger text-white">
-                        <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Confirmar Eliminación</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>¿Estás seguro de que deseas eliminar este usuario?</strong></p>
-                        <p>Esta acción no se puede deshacer.</p>
-                        <p><strong>Datos del usuario a eliminar:</strong></p>
-                        <ul class="mb-3">
-                            <li><strong>Nombre:</strong> Juan Pérez García</li>
-                            <li><strong>Email:</strong> juan.perez@empresa.com</li>
-                        </ul>
-                        <div class="d-flex gap-2 justify-content-center">
-                            <button class="btn btn-secondary" disabled>
-                                <i class="fas fa-times"></i> Cancelar
-                            </button>
-                            <button class="btn btn-danger" disabled>
-                                <i class="fas fa-trash"></i> Sí, eliminar usuario
-                            </button>
-                        </div>
+                    <div class="text-center mb-5 p-3 bg-light border rounded">
+                            <img src="/img/confirm-deleteluser-modal.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                            <p class="text-muted small mt-2">Modal de confirmación de eliminación de usuario.</p>
                     </div>
                 </div>
 
@@ -406,6 +390,12 @@
                     <li>Haz clic en <strong>"Administrar admins"</strong></li>
                     <li>Se abrirá la pantalla con la lista de administradores</li>
                 </ol>
+
+                <div class="card-body">
+                    <div class="text-center mb-5 p-3 bg-light border rounded">
+                    <img src="/img/admins-table.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                    <p class="text-muted small mt-2">Ejemplo de tabla de administradores.</p>
+                </div>
 
                 {{-- Diferencias con usuarios normales --}}
                 <h4 class="mt-4"><i class="fas fa-not-equal"></i> Diferencias con la Gestión de Usuarios</h4>
@@ -456,14 +446,11 @@
 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="isSuperadmin" disabled>
-                            <label class="form-check-label" for="isSuperadmin">
-                                <strong>¿Es superadministrador?</strong>
-                            </label>
-                        </div>
-                        <small class="text-muted d-block mt-2">Marca esta casilla si quieres que este administrador tenga permisos completos sobre el sistema</small>
+                        <div class="text-center mb-5 p-3 bg-light border rounded">
+                            <img src="/img/superAdmin-option.png" class="img-fluid mt-3 border shadow-sm" alt="Tarjeta de eventos recientes">
+                            <p class="text-muted small mt-2">Opción de "¿Es superadministrador?" en el formulario de administrador.</p>
                     </div>
+                        
                 </div>
 
                 <div class="row">
@@ -728,7 +715,7 @@
                 </div>
 
                 <div class="alert alert-info mt-3">
-                    <h5><i class="fas fa-lightbulb"></i> Consejo profesional</h5>
+                    <h5><i class="fas fa-lightbulb"></i> Consejo</h5>
                     <p class="mb-0">Mantén actualizada una lista externa (documento o hoja de cálculo) con todos los administradores activos, sus roles, y la fecha en que fueron creados. Esto te ayudará en auditorías de seguridad.</p>
                 </div>
             </section>

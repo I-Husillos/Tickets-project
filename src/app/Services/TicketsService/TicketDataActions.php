@@ -4,6 +4,7 @@ namespace App\Services\TicketsService;
 
 use App\Models\Ticket;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 
 class TicketDataActions
@@ -29,7 +30,7 @@ class TicketDataActions
         return [
             'id' => $ticket->id,
             'title' => $ticket->title,
-            'description' => $ticket->description,
+            'description' => Str::limit($ticket->description, 100),
             'status' => ucfirst($ticket->status),
             'priority' => ucfirst($ticket->priority),
             'type' => ucfirst($ticket->type),
