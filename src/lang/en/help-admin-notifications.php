@@ -4,11 +4,6 @@ return [
     'header' => [
         'title' => 'Admin Notifications',
         'subtitle' => 'Management of system alerts and notices to maintain control of incidents.',
-        'breadcrumbs' => [
-            'home' => 'Home',
-            'help' => 'Help',
-            'notifications' => 'Notifications',
-        ],
     ],
     'section_intro' => [
         'title' => 'What are admin notifications?',

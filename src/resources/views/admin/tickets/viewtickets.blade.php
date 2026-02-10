@@ -183,16 +183,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Botón de volver -->
-            <!-- <div class="text-center">
-                <a href="{{ Auth::guard('admin')->user()->superadmin 
-                            ? route('admin.manage.tickets', ['locale' => app()->getLocale()])
-                            : route('admin.show.assigned.tickets', ['locale' => app()->getLocale()]) }}"
-                   class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> {{ __('general.admin_ticket_details.back_to_menu') }}
-                </a>
-            </div> -->
         </div>
     </div>
 </div>

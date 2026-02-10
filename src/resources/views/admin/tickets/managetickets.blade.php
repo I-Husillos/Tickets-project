@@ -62,53 +62,6 @@
                 </div>
             </div>
 
-            <!-- Filtros -->
-            <div class="card mb-3">
-                <div class="card-header bg-primary text-white">
-                    <i class="fas fa-filter"></i> {{ __('Filtros Específicos') }}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>{{ __('Estado') }}:</label>
-                                <select class="form-control" id="filter-status">
-                                    <option value="Todos">{{ __('Todos') }}</option>
-                                    <option value="new">{{ __('Nuevo') }}</option>
-                                    <option value="pending">{{ __('Pendiente') }}</option>
-                                    <option value="in_progress">{{ __('En Proceso') }}</option>
-                                    <option value="resolved">{{ __('Resuelto') }}</option>
-                                    <option value="closed">{{ __('Cerrado') }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>{{ __('Prioridad') }}:</label>
-                                <select class="form-control" id="filter-priority">
-                                    <option value="Todas">{{ __('Todas') }}</option>
-                                    <option value="low">{{ __('Baja') }}</option>
-                                    <option value="medium">{{ __('Media') }}</option>
-                                    <option value="high">{{ __('Alta') }}</option>
-                                    <option value="critical">{{ __('Crítica') }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>{{ __('Tipo') }}:</label>
-                                <select class="form-control" id="filter-type">
-                                    <option value="Todos">{{ __('Todos') }}</option>
-                                    <option value="bug">{{ __('Bug') }}</option>
-                                    <option value="improvement">{{ __('Mejora') }}</option>
-                                    <option value="request">{{ __('Solicitud') }}</option>
-                                    <option value="question">{{ __('Consulta') }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Tabla de tickets -->
             <div class="table-responsive">

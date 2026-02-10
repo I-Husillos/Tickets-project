@@ -631,7 +631,7 @@
 
             {{-- SECCIÓN: BUENAS PRÁCTICAS --}}
             <section class="mb-5">
-                <h3 class="text-primary border-bottom pb-2"><i class="fas fa-star"></i> {{ __('help-admin-events.section_practices.title') }}</h3>
+                <h3 class="text-primary border-bottom pb-2">{{ __('help-admin-events.section_practices.title') }}</h3>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -663,20 +663,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {{-- SECCIÓN: LIMITACIONES --}}
-            <section class="mb-5">
-                <h3 class="text-primary border-bottom pb-2"><i class="fas fa-info-circle"></i> {{ __('help-admin-events.section_limitations.title') }}</h3>
-
-                <div class="alert alert-warning">
-                    <h5><i class="fas fa-exclamation-circle"></i> {{ __('help-admin-events.section_limitations.alert_title') }}</h5>
-                    <ul class="mb-0">
-                        @foreach(__('help-admin-events.section_limitations.items') as $item)
-                            <li>{!! $item !!}</li>
-                        @endforeach
-                    </ul>
                 </div>
             </section>
         </div>

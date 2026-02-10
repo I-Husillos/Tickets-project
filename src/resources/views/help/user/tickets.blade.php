@@ -93,7 +93,7 @@
         </div>
         <div class="card-body" style="display: none;">
             <p>{{ __('help.list.intro') }}</p>
-            
+
             <div class="row">
                 <div class="col-12 mb-3">
                     <div class="text-center border bg-light p-3">
@@ -124,13 +124,13 @@
     <div class="card card-warning card-outline collapsed-card">
         <div class="card-header">
             <h3 class="card-title">{{ __('help.states.title') }}</h3>
-                        <div class="card-tools">
+            <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
             </div>
         </div>
         <div class="card-body">
             <p>{{ __('help.states.intro') }}</p>
-            
+
             <div class="timeline">
                 <div>
                     <i class="fas fa-envelope bg-blue"></i>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div>
                     <i class="fas fa-tools bg-yellow"></i>
                     <div class="timeline-item">
@@ -191,11 +191,11 @@
         </div>
         <div class="card-body" style="display: none;">
             <p>{{ __('help.detail.intro') }}</p>
-            
+
             <div class="row mb-4">
                 <div class="col-md-12 text-center">
-                     <img src="/img/ticket-details-view.png" class="img-fluid border shadow-sm mb-3" alt="Vista General del Detalle">
-                     <p class="text-muted small">{!! __('help.detail.img_caption') !!}</p>
+                    <img src="/img/ticket-details-view.png" class="img-fluid border shadow-sm mb-3" alt="Vista General del Detalle">
+                    <p class="text-muted small">{!! __('help.detail.img_caption') !!}</p>
                 </div>
             </div>
 
@@ -211,11 +211,11 @@
                         <li>{!! __('help.detail.zone_a.list.2') !!}</li>
                         <li>{!! __('help.detail.zone_a.list.3') !!}</li>
                     </ul>
-                    
+
                     <div class="alert alert-info border mt-3">
                         <h6 class="font-weight-bold"><i class="fas fa-check-circle"></i> {{ __('help.detail.zone_a.validation.title') }}</h6>
                         <p class="small mb-2">
-                             {!! __('help.detail.zone_a.validation.text') !!}
+                            {!! __('help.detail.zone_a.validation.text') !!}
                         </p>
                         <ul class="pl-3 small">
                             <li>{!! __('help.detail.zone_a.validation.validate') !!}</li>
@@ -255,27 +255,27 @@
             <!-- ZONA INFERIOR -->
             <div class="row mt-4">
                 <div class="col-12">
-                     <h5 class="text-primary"><i class="fas fa-history"></i> {{ __('help.detail.zone_c.title') }}</h5>
-                     <p>
+                    <h5 class="text-primary"><i class="fas fa-history"></i> {{ __('help.detail.zone_c.title') }}</h5>
+                    <p>
                         {{ __('help.detail.zone_c.text') }}
-                     </p>
-                     <div class="row align-items-center">
-                         <div class="col-md-7">
-                             <ul class="small">
-                                 <li>{!! __('help.detail.zone_c.list.1') !!}</li>
-                                 <li>{!! __('help.detail.zone_c.list.2') !!}
+                    </p>
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <ul class="small">
+                                <li>{!! __('help.detail.zone_c.list.1') !!}</li>
+                                <li>{!! __('help.detail.zone_c.list.2') !!}
                                     <ul>
                                         <li>{!! __('help.detail.zone_c.list.sublist.1') !!}</li>
                                         <li>{!! __('help.detail.zone_c.list.sublist.2') !!}</li>
                                     </ul>
-                                 </li>
-                             </ul>
-                         </div>
-                         <div class="col-md-5">
-                             <img src="/img/user-comments-list.png" class="img-fluid border shadow-sm" alt="Ejemplo de Historial">
-                             <p class="text-center small text-muted mt-1">{{ __('help.detail.zone_c.img_caption') }}</p>
-                         </div>
-                     </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5">
+                            <img src="/img/user-comments-list.png" class="img-fluid border shadow-sm" alt="Ejemplo de Historial">
+                            <p class="text-center small text-muted mt-1">{{ __('help.detail.zone_c.img_caption') }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,10 +297,10 @@
                 <div class="col-md-6 border-right">
                     <h5 class="text-warning"><i class="fas fa-edit"></i> {{ __('help.advanced.edit.title') }}</h5>
                     <p class="small">{!! __('help.advanced.edit.subtitle') !!}</p>
-                    
+
                     <ol>
                         <li class="mb-2">
-                             {!! __('help.advanced.edit.step1') !!}
+                            {!! __('help.advanced.edit.step1') !!}
                         </li>
                         <li class="mb-2">
                             {{ __('help.advanced.edit.step2') }}
@@ -309,7 +309,7 @@
                             </ul>
                         </li>
                         <li class="mb-2">
-                             {!! __('help.advanced.edit.step3') !!}
+                            {!! __('help.advanced.edit.step3') !!}
                         </li>
                     </ol>
 
@@ -329,15 +329,15 @@
                 <div class="col-md-6 pl-md-4">
                     <h5 class="text-danger"><i class="fas fa-trash-alt"></i> {{ __('help.advanced.delete.title') }}</h5>
                     <div class="alert alert-danger small">
-                         {!! __('help.advanced.delete.warning') !!}
+                        {!! __('help.advanced.delete.warning') !!}
                     </div>
 
                     <ol>
                         <li class="mb-2">
-                             {!! __('help.advanced.delete.step1') !!}
+                            {!! __('help.advanced.delete.step1') !!}
                         </li>
                         <li class="mb-2">
-                             {!! __('help.advanced.delete.step2') !!}
+                            {!! __('help.advanced.delete.step2') !!}
                         </li>
                         <li class="mb-2">
                             {{ __('help.advanced.delete.step3') }}
@@ -349,8 +349,8 @@
                     </ol>
 
                     <div class="text-center mt-3">
-                         <img src="/img/user-succesfull-delete-ticket-alert.png" class="img-fluid border shadow-sm" alt="Confirmación de navegador">
-                         <p class="text-muted small">{{ __('help.advanced.delete.img_caption') }}</p>
+                        <img src="/img/user-succesfull-delete-ticket-alert.png" class="img-fluid border shadow-sm" alt="Confirmación de navegador">
+                        <p class="text-muted small">{{ __('help.advanced.delete.img_caption') }}</p>
                     </div>
                 </div>
             </div>

@@ -4,11 +4,6 @@ return [
     'header' => [
         'title' => 'Notificaciones del Administrador',
         'subtitle' => 'Gestión de alertas y avisos del sistema para mantener el control de las incidencias.',
-        'breadcrumbs' => [
-            'home' => 'Inicio',
-            'help' => 'Ayuda',
-            'notifications' => 'Notificaciones',
-        ],
     ],
     'section_intro' => [
         'title' => '¿Qué son las notificaciones de administrador?',
